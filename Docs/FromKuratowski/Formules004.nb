@@ -1,0 +1,6689 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[    171206,       6681]
+NotebookOptionsPosition[    168826,       6618]
+NotebookOutlinePosition[    169169,       6633]
+CellTagsIndexPosition[    169126,       6630]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FileNameForTuple", "[", "primes_", "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "fileName", ",", " ", "temp", ",", " ", "sep", ",", " ", "p", ",", " ", 
+      "pPos"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"sep", " ", "=", " ", "\"\<\\\\\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"temp", " ", "=", "\"\<d:\\\\triangle\\DataSrc\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"pPos", " ", "=", "1"}], ",", " ", 
+       RowBox[{"pPos", " ", "<=", " ", 
+        RowBox[{"Length", "[", "primes", "]"}]}], ",", " ", 
+       RowBox[{"pPos", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"temp", " ", "=", " ", 
+         RowBox[{"StringJoin", "[", 
+          RowBox[{"temp", ",", " ", "sep", ",", " ", 
+           RowBox[{"ToString", "[", 
+            RowBox[{"primes", "[", 
+             RowBox[{"[", "pPos", "]"}], "]"}], "]"}]}], "]"}]}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"temp", " ", "=", " ", 
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"temp", ",", " ", "\"\<\\\\Solutions.txt\>\""}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"fileName", " ", "=", " ", "temp"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "fileName", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Distance", "[", 
+   RowBox[{"n_", ",", "p_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", " ", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "threshold", ",", " ", "digits", ",", " ", "position", ",", " ", "found",
+       ",", " ", "nextPower", ",", " ", "result"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", " ", "[", 
+      RowBox[{
+       RowBox[{"n", " ", "\[Equal]", "0"}], ",", " ", 
+       RowBox[{"Return", "[", "0", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Initialize", " ", "some", " ", "precomputed", " ", "local", " ", 
+       "varables"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"threshold", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"p", "-", "1"}], ")"}], "/", "2"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"digits", " ", "=", " ", 
+      RowBox[{"IntegerDigits", "[", 
+       RowBox[{"n", ",", "p"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "find", " ", "the", " ", "first", " ", "digit", " ", "above", " ", 
+       "the", " ", "threshold"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"found", " ", "=", " ", 
+      RowBox[{"-", "1"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", " ", 
+      RowBox[{
+       RowBox[{"position", " ", "=", " ", "1"}], ",", " ", 
+       RowBox[{"position", " ", "<=", 
+        RowBox[{"Length", "[", "digits", "]"}]}], ",", " ", 
+       RowBox[{"position", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"If", " ", "[", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"digits", " ", "[", 
+           RowBox[{"[", "position", "]"}], "]"}], " ", ">", " ", 
+          "threshold"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"found", " ", "=", " ", "position"}], ";", " ", 
+          RowBox[{"Break", "[", "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"if", " ", "we", " ", 
+        RowBox[{"didn", "'"}], "t", " ", "find", " ", "a", " ", "digit"}], 
+       ",", " ", 
+       RowBox[{
+       "then", " ", "the", " ", "distance", " ", "is", " ", "zero"}]}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"If", " ", "[", 
+      RowBox[{
+       RowBox[{"found", " ", "==", 
+        RowBox[{"-", "1"}]}], ",", " ", 
+       RowBox[{"Return", "[", "0", "]"}]}], "]"}], ";", "\[IndentingNewLine]",
+      "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"we", " ", "did", " ", "find", " ", "a", " ", "faulty", " ", 
+        RowBox[{"digit", ".", "  ", "Now"}], " ", "we", " ", "need", " ", 
+        "to", " ", "look", " ", "before", " ", "it", " ", "for", " ", 
+        "digits", " ", "that", " ", "equal", " ", "the", " ", 
+        RowBox[{"threshold", ".", "\[IndentingNewLine]", "If"}], " ", "we", 
+        " ", "would", " ", "not", " ", "count", " ", "these", " ", "then", 
+        " ", "we", " ", "would", " ", "end", " ", "up", " ", "with", " ", "a",
+         " ", "new", " ", "value", " ", "which", " ", "is", " ", "still", " ",
+         "not", " ", "p"}], "-", 
+       RowBox[{"good", " ", 
+        RowBox[{"(", 
+         RowBox[{
+         "due", "\[IndentingNewLine]", "to", " ", "the", " ", "carrying"}], 
+         ")"}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"While", "[", " ", 
+      RowBox[{
+       RowBox[{"found", " ", ">", "1"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"If", " ", "[", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"digits", " ", "[", 
+           RowBox[{"[", 
+            RowBox[{"found", "-", "1"}], "]"}], "]"}], " ", "==", " ", 
+          "threshold"}], ",", 
+         RowBox[{"found", " ", "--"}], ",", 
+         RowBox[{"Break", "[", "]"}]}], "]"}]}], "\[IndentingNewLine]", "]"}],
+      ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "if", " ", "we", " ", "have", " ", "gone", " ", "all", " ", "the", " ", 
+       "way", " ", "to", " ", "the", " ", "start"}], "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"found", " ", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Block", "[", 
+        RowBox[{
+         RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"nextPower", "=", " ", 
+           RowBox[{"p", "^", 
+            RowBox[{"(", 
+             RowBox[{"Length", "[", "digits", "]"}], ")"}]}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Return", "[", 
+           RowBox[{"nextPower", "-", "n"}], "]"}]}]}], "\[IndentingNewLine]", 
+        "]"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"nextPower", "=", " ", 
+      RowBox[{"p", "^", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Length", "[", "digits", "]"}], "+", "1", "-", "found"}], 
+        ")"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", 
+      RowBox[{"nextPower", "-", 
+       RowBox[{"FromDigits", "[", 
+        RowBox[{
+         RowBox[{"Take", "[", 
+          RowBox[{"digits", ",", 
+           RowBox[{"-", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"Length", "[", "digits", "]"}], "+", "1", "-", 
+              "found"}], ")"}]}]}], "]"}], ",", "p"}], "]"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.500213342917338*^9, 3.5002133693968525`*^9}, 
+   3.5003943351060085`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"IsGoodForTuple", "[", 
+   RowBox[{"n_", ",", " ", "tuple_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"distance", ",", " ", "index", ",", " ", "result"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"result", " ", "=", " ", "True"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"index", "=", "1"}], ",", " ", 
+       RowBox[{"index", " ", "<=", " ", 
+        RowBox[{"Length", "[", "tuple", "]"}]}], ",", " ", 
+       RowBox[{"index", " ", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"distance", " ", "=", " ", 
+         RowBox[{"Distance", "[", 
+          RowBox[{"n", ",", " ", 
+           RowBox[{"tuple", "[", 
+            RowBox[{"[", "index", "]"}], "]"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"distance", " ", "\[NotEqual]", " ", "0"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"result", "=", " ", "False"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"index", "=", " ", 
+            RowBox[{
+             RowBox[{"Length", "[", "tuple", "]"}], "+", "2"}]}], ";", 
+           "\[IndentingNewLine]", "Break", ";"}]}], "\[IndentingNewLine]", 
+         "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "result", "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.501939705917967*^9, 3.5019397371337523`*^9}, {
+   3.501939775845967*^9, 3.5019398302580786`*^9}, {3.5025477818279457`*^9, 
+   3.502547897836581*^9}, 3.5025508477443066`*^9, {3.502550887386574*^9, 
+   3.5025508941819625`*^9}, 3.502550925538756*^9}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.5019397882726774`*^9, 3.5019397969261723`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FileNameForVotes", "[", "primes_", "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "fileName", ",", " ", "temp", ",", " ", "sep", ",", " ", "p", ",", " ", 
+      "pPos"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"sep", " ", "=", " ", "\"\<\\\\\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"temp", " ", "=", "\"\<d:\\\\triangle\\Votes\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"pPos", " ", "=", "1"}], ",", " ", 
+       RowBox[{"pPos", " ", "<=", " ", 
+        RowBox[{"Length", "[", "primes", "]"}]}], ",", " ", 
+       RowBox[{"pPos", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"temp", " ", "=", " ", 
+         RowBox[{"StringJoin", "[", 
+          RowBox[{"temp", ",", " ", "sep", ",", " ", 
+           RowBox[{"ToString", "[", 
+            RowBox[{"primes", "[", 
+             RowBox[{"[", "pPos", "]"}], "]"}], "]"}]}], "]"}]}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", " ", "[", 
+      RowBox[{
+       RowBox[{"Not", "[", 
+        RowBox[{"DirectoryQ", "[", "temp", "]"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"PrintTemporary", "[", 
+          RowBox[{"\"\<Creating directory \>\"", " ", "<>", " ", "temp"}], 
+          "]"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"CreateDirectory", "[", "temp", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"temp", " ", "=", " ", 
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"temp", ",", " ", "\"\<\\\\Votes.txt\>\""}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"fileName", " ", "=", " ", "temp"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "fileName", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.500211414243024*^9, 3.5002114160271263`*^9}, {
+  3.5002114680821037`*^9, 3.5002114694961843`*^9}, {3.500211603218833*^9, 
+  3.5002116045069065`*^9}, {3.5003705189011455`*^9, 3.5003705750703583`*^9}, {
+  3.500370610300373*^9, 3.5003706172327695`*^9}, {3.501348213318189*^9, 
+  3.501348220113578*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FileNameForVotedValues", "[", "primes_", "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "fileName", ",", " ", "temp", ",", " ", "sep", ",", " ", "p", ",", " ", 
+      "pPos"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"sep", " ", "=", " ", "\"\<\\\\\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"temp", " ", "=", "\"\<d:\\\\triangle\\Votes\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"pPos", " ", "=", "1"}], ",", " ", 
+       RowBox[{"pPos", " ", "<=", " ", 
+        RowBox[{"Length", "[", "primes", "]"}]}], ",", " ", 
+       RowBox[{"pPos", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"temp", " ", "=", " ", 
+         RowBox[{"StringJoin", "[", 
+          RowBox[{"temp", ",", " ", "sep", ",", " ", 
+           RowBox[{"ToString", "[", 
+            RowBox[{"primes", "[", 
+             RowBox[{"[", "pPos", "]"}], "]"}], "]"}]}], "]"}]}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", " ", "[", 
+      RowBox[{
+       RowBox[{"Not", "[", 
+        RowBox[{"DirectoryQ", "[", "temp", "]"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"PrintTemporary", "[", 
+          RowBox[{"\"\<Creating directory \>\"", " ", "<>", " ", "temp"}], 
+          "]"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"CreateDirectory", "[", "temp", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"temp", " ", "=", " ", 
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"temp", ",", " ", "\"\<\\\\VotedValues.txt\>\""}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"fileName", " ", "=", " ", "temp"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "fileName", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.501234185437208*^9, 3.5012341967738566`*^9}, {
+  3.501348225414881*^9, 3.5013482304741707`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FileNameForVotesPositions", "[", "primes_", "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "fileName", ",", " ", "temp", ",", " ", "sep", ",", " ", "p", ",", " ", 
+      "pPos"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"sep", " ", "=", " ", "\"\<\\\\\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"temp", " ", "=", "\"\<d:\\\\triangle\\Votes\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"pPos", " ", "=", "1"}], ",", " ", 
+       RowBox[{"pPos", " ", "<=", " ", 
+        RowBox[{"Length", "[", "primes", "]"}]}], ",", " ", 
+       RowBox[{"pPos", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"temp", " ", "=", " ", 
+         RowBox[{"StringJoin", "[", 
+          RowBox[{"temp", ",", " ", "sep", ",", " ", 
+           RowBox[{"ToString", "[", 
+            RowBox[{"primes", "[", 
+             RowBox[{"[", "pPos", "]"}], "]"}], "]"}]}], "]"}]}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", " ", "[", 
+      RowBox[{
+       RowBox[{"Not", "[", 
+        RowBox[{"DirectoryQ", "[", "temp", "]"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"PrintTemporary", "[", 
+          RowBox[{"\"\<Creating directory \>\"", " ", "<>", " ", "temp"}], 
+          "]"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"CreateDirectory", "[", "temp", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"temp", " ", "=", " ", 
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"temp", ",", " ", "\"\<\\\\VoteOffsets.txt\>\""}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"fileName", " ", "=", " ", "temp"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "fileName", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.50087976804764*^9, 3.5008797798253136`*^9}, {
+  3.5013482352814455`*^9, 3.501348239924711*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GoodForTuple", "[", "primes_", "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"fileName", ",", " ", "result", ",", " ", "f"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"fileName", " ", "=", " ", 
+      RowBox[{"FileNameForTuple", "[", "primes", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"Not", "[", 
+        RowBox[{"FileExistsQ", "[", "fileName", "]"}], "]"}], ",", " ", 
+       RowBox[{"Return", "[", 
+        RowBox[{"{", "}"}], "]"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f", "=", 
+         RowBox[{"OpenRead", "[", "fileName", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"result", " ", "=", "  ", 
+         RowBox[{"ReadList", "[", 
+          RowBox[{"f", ",", "Number"}], "]"}]}], " ", ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Close", " ", "[", "f", "]"}], ";"}], "\[IndentingNewLine]", 
+       ",", " ", 
+       RowBox[{
+       "\"\<Reading \>\"", " ", "<>", " ", "fileName", " ", "<>", " ", 
+        "\"\< ... \>\""}]}], " ", "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "result", "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.499168829426326*^9, 3.499168955246522*^9}, {
+   3.499169006278441*^9, 3.4991690065324554`*^9}, {3.499171764561206*^9, 
+   3.4991717844133415`*^9}, {3.4991718169422016`*^9, 3.499171819589353*^9}, {
+   3.499172352096811*^9, 3.4991723527698493`*^9}, {3.499174104348034*^9, 
+   3.4991741053550916`*^9}, {3.49917909337139*^9, 3.4991791160786886`*^9}, 
+   3.499179166822591*^9, {3.4991792636131268`*^9, 3.4991792640251503`*^9}, {
+   3.499180045486848*^9, 3.499180055470419*^9}, {3.499180118944049*^9, 
+   3.4991801240673423`*^9}, {3.499197949072874*^9, 3.4991979499449244`*^9}, {
+   3.4993710812556686`*^9, 3.499371114234555*^9}, {3.4993711637553873`*^9, 
+   3.499371183085493*^9}, {3.4993722044169097`*^9, 3.499372209735214*^9}, {
+   3.4993768555099373`*^9, 3.499376877651203*^9}, 3.4993988314048862`*^9, {
+   3.4994031706040745`*^9, 3.4994031725081835`*^9}, {3.4994045465027714`*^9, 
+   3.499404548736899*^9}, {3.499411145883234*^9, 3.4994111482833714`*^9}, {
+   3.4997825879725065`*^9, 3.499782603108372*^9}, {3.5002114064575787`*^9, 
+   3.500211407859659*^9}, {3.500211565955702*^9, 3.500211567370783*^9}, {
+   3.501257608919545*^9, 3.501257688635685*^9}, 3.501257784029853*^9, {
+   3.502142482324915*^9, 3.502142502047043*^9}, {3.502142542418352*^9, 
+   3.502142542870378*^9}, {3.5021426135784225`*^9, 3.5021426304963903`*^9}, {
+   3.5022719488397636`*^9, 3.5022719620217867`*^9}, 3.502493807776807*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"VotesForTuple", "[", "primes_", "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"fileName", ",", " ", "result", ",", " ", "f"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"PrintTemporary", "[", "primes", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"fileName", " ", "=", " ", 
+      RowBox[{"FileNameForVotes", "[", "primes", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", "fileName", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"Not", "[", 
+        RowBox[{"FileExistsQ", "[", "fileName", "]"}], "]"}], ",", " ", 
+       RowBox[{"Return", "[", 
+        RowBox[{"{", "}"}], "]"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f", "=", " ", 
+         RowBox[{"OpenRead", "[", "fileName", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"result", " ", "=", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "&"}], ",", 
+           RowBox[{"Flatten", "[", 
+            RowBox[{
+             RowBox[{"ReadList", "[", "f", "]"}], ",", "1"}], "]"}]}], " ", 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Close", "[", "f", "]"}], ";"}], "\[IndentingNewLine]", ",", 
+       " ", 
+       RowBox[{"\"\<Reading \>\"", " ", "<>", " ", 
+        RowBox[{"ToString", "[", "fileName", "]"}]}]}], "\[IndentingNewLine]",
+       "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "result", "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.500211394473893*^9, 3.5002113957969694`*^9}, {
+   3.5002115298926387`*^9, 3.5002115898860703`*^9}, {3.500211625738121*^9, 
+   3.5002116656424036`*^9}, {3.501257703642912*^9, 3.501257740848977*^9}, 
+   3.5012577805042467`*^9, {3.501801695359648*^9, 3.501801722651209*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"VotedValuesForTuple", "[", 
+   RowBox[{"primes_", ",", " ", "stopAt_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"fileName", ",", " ", "result", ",", " ", "f"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"fileName", " ", "=", " ", 
+      RowBox[{"FileNameForVotedValues", "[", "primes", "]"}]}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"Not", "[", 
+        RowBox[{"FileExistsQ", "[", "fileName", "]"}], "]"}], ",", " ", 
+       RowBox[{"Return", "[", 
+        RowBox[{"{", "}"}], "]"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f", "=", 
+         RowBox[{"OpenRead", "[", "fileName", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"result", "=", 
+         RowBox[{"ReadList", "[", 
+          RowBox[{"f", ",", "Expression", ",", "  ", "stopAt"}], "]"}]}], " ",
+         ";", "\[IndentingNewLine]", 
+        RowBox[{"Close", "[", "f", "]"}], ";"}], "\[IndentingNewLine]", ",", 
+       " ", 
+       RowBox[{"\"\<Reading \>\"", " ", "<>", " ", 
+        RowBox[{"ToString", "[", "fileName", "]"}]}]}], "\[IndentingNewLine]",
+       "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", " ", "[", "result", "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.501234158385661*^9, 3.5012341726264753`*^9}, {
+  3.5012344724736257`*^9, 3.501234475409794*^9}, {3.5012575181585855`*^9, 
+  3.501257548282239*^9}, {3.501938627813303*^9, 3.5019386371528373`*^9}, {
+  3.502386696843388*^9, 3.5023867011177955`*^9}}],
+
+Cell[RawData["\<\
+*)
+
+Notebook[{
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"FileNameForTuple\", \"[\", \"primes_\", \"]\"}], \" \", \":=\", \
+\" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"fileName\", \",\", \" \", \"temp\", \",\", \" \", \"sep\", \",\", \" \
+\", \"p\", \",\", \" \", 
+
+      \"pPos\"}], \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"sep\", \" \", \"=\", \" \", \"\\\"\\<\\\\\\\\\\>\\\"\"}], \
+\";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \
+\"\\\"\\<d:\\\\\\\\triangle\\\\DataSrc\\>\\\"\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"pPos\", \" \", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"primes\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+         RowBox[{\"StringJoin\", \"[\", 
+
+          RowBox[{\"temp\", \",\", \" \", \"sep\", \",\", \" \", 
+
+           RowBox[{\"ToString\", \"[\", 
+
+            RowBox[{\"primes\", \"[\", 
+
+             RowBox[{\"[\", \"pPos\", \"]\"}], \"]\"}], \"]\"}]}], \"]\"}]}], \
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \
+\"\\\"\\<\\\\\\\\Solutions.txt\\>\\\"\"}], \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"th\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+ \"[\", \"primes_\", \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"fileName\", \",\", \" \", \"temp\", \",\", \" \", \"sep\", \",\", \" \
+\", \"p\", \",\", \" \", 
+
+      \"pPos\"}], \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"sep\", \" \", \"=\", \" \", \"\\\"\\<\\\\\\\\\\>\\\"\"}], \
+\";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \
+\"\\\"\\<d:\\\\\\\\triangle\\\\DataSrc\\>\\\"\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"pPos\", \" \", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"primes\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+         RowBox[{\"StringJoin\", \"[\", 
+
+          RowBox[{\"temp\", \",\", \" \", \"sep\", \",\", \" \", 
+
+           RowBox[{\"ToString\", \"[\", 
+
+            RowBox[{\"primes\", \"[\", 
+
+             RowBox[{\"[\", \"pPos\", \"]\"}], \"]\"}], \"]\"}]}], \"]\"}]}], \
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \
+\"\\\"\\<\\\\\\\\Solutions.txt\\>\\\"\"}], \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\"\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+
+
+     \"fileName\", \",\", \" \", \"temp\", \",\", \" \", \"sep\", \",\", \" \
+\", \"p\", \",\", \" \", 
+
+      \"pPos\"}], \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"sep\", \" \", \"=\", \" \", \"\\\"\\<\\\\\\\\\\>\\\"\"}], \
+\";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \
+\"\\\"\\<d:\\\\\\\\triangle\\\\DataSrc\\>\\\"\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"pPos\", \" \", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"primes\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+         RowBox[{\"StringJoin\", \"[\", 
+
+          RowBox[{\"temp\", \",\", \" \", \"sep\", \",\", \" \", 
+
+           RowBox[{\"ToString\", \"[\", 
+
+            RowBox[{\"primes\", \"[\", 
+
+             RowBox[{\"[\", \"pPos\", \"]\"}], \"]\"}], \"]\"}]}], \"]\"}]}], \
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \
+\"\\\"\\<\\\\\\\\Solutions.txt\\>\\\"\"}], \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}], 
+
+         \")\"}]}]}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"While\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \">\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", 
+
+            RowBox[{\"found\", \"-\", \"1\"}], \"]\"}], \"]\"}], \" \", \
+\"==\", \" \", 
+
+          \"threshold\"}], \",\", 
+
+         RowBox[{\"found\", \" \", \"--\"}], \",\", 
+
+         RowBox[{\"Break\", \"[\", \"]\"}]}], \"]\"}]}], \
+\"\\[IndentingNewLine]\", \"]\"}],
+
+      \";\", \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"if\", \" \", \"we\", \" \", \"have\", \" \", \"gone\", \" \", \
+\"all\", \" \", \"the\", \" \", 
+
+       \"way\", \" \", \"to\", \" \", \"the\", \" \", \"start\"}], \"*)\"}], 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"\\[Equal]\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"Block\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"{\", \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"nextPower\", \"=\", \" \", 
+
+           RowBox[{\"p\", \"^\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \")\"}]}]}], \";\
+\", 
+
+          \"\\[IndentingNewLine]\", 
+
+          RowBox[{\"Return\", \"[\", 
+
+           RowBox[{\"nextPower\", \"-\", \"n\"}], \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+        \"]\"}]}], \"\\[IndentingNewLine]\", \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"nextPower\", \"=\", \" \", 
+
+      RowBox[{\"p\", \"^\", 
+
+       RowBox[{\"(\", 
+
+        RowBox[{
+
+         RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \"-\", \
+\"found\"}], 
+
+        \")\"}]}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", 
+
+      RowBox[{\"nextPower\", \"-\", 
+
+       RowBox[{\"FromDigits\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"Take\", \"[\", 
+
+          RowBox[{\"digits\", \",\", 
+
+           RowBox[{\"-\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{
+
+              RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \
+\"-\", 
+
+              \"found\"}], \")\"}]}]}], \"]\"}], \",\", \"p\"}], \"]\"}]}], \
+\"]\"}]}]}], 
+
+   \"\\[IndentingNewLine]\", \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.500213342917338*^9, 3.5002133693968525`*^9}, 
+
+   3.5003943351060085`*^9}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"IsGoodForTuple\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \" \", \"tuple_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{\"distance\", \",\", \" \", \"index\", \",\", \" \", \
+\"result\"}], \"}\"}], \",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"result\", \" \", \"=\", \" \", \"True\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"index\", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"index\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"tuple\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"index\", \" \", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"distance\", \" \", \"=\", \" \", 
+
+      \
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+ox[{\"sep\", \" \", \"=\", \" \", \"\\\"\\<\\\\\\\\\\>\\\"\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \
+\"\\\"\\<d:\\\\\\\\triangle\\\\DataSrc\\>\\\"\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"pPos\", \" \", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"primes\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+         RowBox[{\"StringJoin\", \"[\", 
+
+          RowBox[{\"temp\", \",\", \" \", \"sep\", \",\", \" \", 
+
+           RowBox[{\"ToString\", \"[\", 
+
+            RowBox[{\"primes\", \"[\", 
+
+             RowBox[{\"[\", \"pPos\", \"]\"}], \"]\"}], \"]\"}]}], \"]\"}]}], \
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \
+\"\\\"\\<\\\\\\\\Solutions.txt\\>\\\"\"}], \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}], 
+
+         \")\"}]}]}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"While\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \">\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", 
+
+            RowBox[{\"found\", \"-\", \"1\"}], \"]\"}], \"]\"}], \" \", \
+\"==\", \" \", 
+
+          \"threshold\"}], \",\", 
+
+         RowBox[{\"found\", \" \", \"--\"}], \",\", 
+
+         RowBox[{\"Break\", \"[\", \"]\"}]}], \"]\"}]}], \
+\"\\[IndentingNewLine]\", \"]\"}],
+
+      \";\", \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"if\", \" \", \"we\", \" \", \"have\", \" \", \"gone\", \" \", \
+\"all\", \" \", \"the\", \" \", 
+
+       \"way\", \" \", \"to\", \" \", \"the\", \" \", \"start\"}], \"*)\"}], 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"\\[Equal]\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"Block\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"{\", \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"nextPower\", \"=\", \" \", 
+
+           RowBox[{\"p\", \"^\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \")\"}]}]}], \";\
+\", 
+
+          \"\\[IndentingNewLine]\", 
+
+          RowBox[{\"Return\", \"[\", 
+
+           RowBox[{\"nextPower\", \"-\", \"n\"}], \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+        \"]\"}]}], \"\\[IndentingNewLine]\", \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"nextPower\", \"=\", \" \", 
+
+      RowBox[{\"p\", \"^\", 
+
+       RowBox[{\"(\", 
+
+        RowBox[{
+
+         RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \"-\", \
+\"found\"}], 
+
+        \")\"}]}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", 
+
+      RowBox[{\"nextPower\", \"-\", 
+
+       RowBox[{\"FromDigits\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"Take\", \"[\", 
+
+          RowBox[{\"digits\", \",\", 
+
+           RowBox[{\"-\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{
+
+              RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \
+\"-\", 
+
+              \"found\"}], \")\"}]}]}], \"]\"}], \",\", \"p\"}], \"]\"}]}], \
+\"]\"}]}]}], 
+
+   \"\\[IndentingNewLine]\", \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.500213342917338*^9, 3.5002133693968525`*^9}, 
+
+   3.5003943351060085`*^9}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"IsGoodForTuple\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \" \", \"tuple_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{\"distance\", \",\", \" \", \"index\", \",\", \" \", \
+\"result\"}], \"}\"}], \",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"result\", \" \", \"=\", \" \", \"True\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"index\", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"index\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"tuple\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"index\", \" \", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"distance\", \" \", \"=\", \" \", 
+
+         RowBox[{\"Distance\", \"[\", 
+
+          RowBox[{\"n\", \",\", \" \", 
+
+           RowBox[{\"tuple\", \"[\", 
+
+            RowBox[{\"[\", \"index\", \"]\"}], \"]\"}]}], \"]\"}]}], \";\", 
+
+        \"\\[IndentingNewLine]\", 
+
+        RowBox[{\"If\", \"[\", 
+
+         RowBox[{
+
+          RowBox[{\"distance\", \" \", \"\\[NotEqual]\", \" \", \"0\"}], \
+\",\", 
+
+          \"\\[IndentingNewLine]\", 
+
+          RowBox[{
+
+           RowBox[{\"result\", \"=\", \" \", \"False\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+           RowBox[{\"index\", \"=\", \" \", 
+
+  \
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+ingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"pPos\", \" \", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"primes\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+         RowBox[{\"StringJoin\", \"[\", 
+
+          RowBox[{\"temp\", \",\", \" \", \"sep\", \",\", \" \", 
+
+           RowBox[{\"ToString\", \"[\", 
+
+            RowBox[{\"primes\", \"[\", 
+
+             RowBox[{\"[\", \"pPos\", \"]\"}], \"]\"}], \"]\"}]}], \"]\"}]}], \
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \
+\"\\\"\\<\\\\\\\\Solutions.txt\\>\\\"\"}], \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}], 
+
+         \")\"}]}]}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"While\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \">\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", 
+
+            RowBox[{\"found\", \"-\", \"1\"}], \"]\"}], \"]\"}], \" \", \
+\"==\", \" \", 
+
+          \"threshold\"}], \",\", 
+
+         RowBox[{\"found\", \" \", \"--\"}], \",\", 
+
+         RowBox[{\"Break\", \"[\", \"]\"}]}], \"]\"}]}], \
+\"\\[IndentingNewLine]\", \"]\"}],
+
+      \";\", \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"if\", \" \", \"we\", \" \", \"have\", \" \", \"gone\", \" \", \
+\"all\", \" \", \"the\", \" \", 
+
+       \"way\", \" \", \"to\", \" \", \"the\", \" \", \"start\"}], \"*)\"}], 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"\\[Equal]\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"Block\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"{\", \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"nextPower\", \"=\", \" \", 
+
+           RowBox[{\"p\", \"^\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \")\"}]}]}], \";\
+\", 
+
+          \"\\[IndentingNewLine]\", 
+
+          RowBox[{\"Return\", \"[\", 
+
+           RowBox[{\"nextPower\", \"-\", \"n\"}], \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+        \"]\"}]}], \"\\[IndentingNewLine]\", \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"nextPower\", \"=\", \" \", 
+
+      RowBox[{\"p\", \"^\", 
+
+       RowBox[{\"(\", 
+
+        RowBox[{
+
+         RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \"-\", \
+\"found\"}], 
+
+        \")\"}]}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", 
+
+      RowBox[{\"nextPower\", \"-\", 
+
+       RowBox[{\"FromDigits\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"Take\", \"[\", 
+
+          RowBox[{\"digits\", \",\", 
+
+           RowBox[{\"-\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{
+
+              RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \
+\"-\", 
+
+              \"found\"}], \")\"}]}]}], \"]\"}], \",\", \"p\"}], \"]\"}]}], \
+\"]\"}]}]}], 
+
+   \"\\[IndentingNewLine]\", \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.500213342917338*^9, 3.5002133693968525`*^9}, 
+
+   3.5003943351060085`*^9}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"IsGoodForTuple\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \" \", \"tuple_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{\"distance\", \",\", \" \", \"index\", \",\", \" \", \
+\"result\"}], \"}\"}], \",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"result\", \" \", \"=\", \" \", \"True\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"index\", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"index\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"tuple\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"index\", \" \", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"distance\", \" \", \"=\", \" \", 
+
+         RowBox[{\"Distance\", \"[\", 
+
+          RowBox[{\"n\", \",\", \" \", 
+
+           RowBox[{\"tuple\", \"[\", 
+
+            RowBox[{\"[\", \"index\", \"]\"}], \"]\"}]}], \"]\"}]}], \";\", 
+
+        \"\\[IndentingNewLine]\", 
+
+        RowBox[{\"If\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+[{\"Length\", \"[\", \"primes\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+         RowBox[{\"StringJoin\", \"[\", 
+
+          RowBox[{\"temp\", \",\", \" \", \"sep\", \",\", \" \", 
+
+           RowBox[{\"ToString\", \"[\", 
+
+            RowBox[{\"primes\", \"[\", 
+
+             RowBox[{\"[\", \"pPos\", \"]\"}], \"]\"}], \"]\"}]}], \"]\"}]}], \
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \
+\"\\\"\\<\\\\\\\\Solutions.txt\\>\\\"\"}], \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Retur\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+\", \"primes\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+         RowBox[{\"StringJoin\", \"[\", 
+
+          RowBox[{\"temp\", \",\", \" \", \"sep\", \",\", \" \", 
+
+           RowBox[{\"ToString\", \"[\", 
+
+            RowBox[{\"primes\", \"[\", 
+
+             RowBox[{\"[\", \"pPos\", \"]\"}], \"]\"}], \"]\"}]}], \"]\"}]}], \
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \
+\"\\\"\\<\\\\\\\\Solutions.txt\\>\\\"\"}], \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}], 
+
+         \")\"}]}]}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"While\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \">\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", 
+
+            RowBox[{\"found\", \"-\", \"1\"}], \"]\"}], \"]\"}], \" \", \
+\"==\", \" \", 
+
+          \"threshold\"}], \",\", 
+
+         RowBox[{\"found\", \" \", \"--\"}], \",\", 
+
+         RowBox[{\"Break\", \"[\", \"]\"}]}], \"]\"}]}], \
+\"\\[IndentingNewLine]\", \"]\"}],
+
+      \";\", \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"if\", \" \", \"we\", \" \", \"have\", \" \", \"gone\", \" \", \
+\"all\", \" \", \"the\", \" \", 
+
+       \"way\", \" \", \"to\", \" \", \"the\", \" \", \"start\"}], \"*)\"}], 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"\\[Equal]\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"Block\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"{\", \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"nextPower\", \"=\", \" \", 
+
+           RowBox[{\"p\", \"^\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \")\"}]}]}], \";\
+\", 
+
+          \"\\[IndentingNewLine]\", 
+
+          RowBox[{\"Return\", \"[\", 
+
+           RowBox[{\"nextPower\", \"-\", \"n\"}], \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+        \"]\"}]}], \"\\[IndentingNewLine]\", \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"nextPower\", \"=\", \" \", 
+
+      RowBox[{\"p\", \"^\", 
+
+       RowBox[{\"(\", 
+
+        RowBox[{
+
+         RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \"-\", \
+\"found\"}], 
+
+        \")\"}]}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", 
+
+      RowBox[{\"nextPower\", \"-\", 
+
+       RowBox[{\"FromDigits\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"Take\", \"[\", 
+
+          RowBox[{\"digits\", \",\", 
+
+           RowBox[{\"-\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{
+
+              RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \
+\"-\", 
+
+              \"found\"}], \")\"}]}]}], \"]\"}], \",\", \"p\"}], \"]\"}]}], \
+\"]\"}]}]}], 
+
+   \"\\[IndentingNewLine]\", \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.500213342917338*^9, 3.5002133693968525`*^9}, 
+
+   3.5003943351060085`*^9}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"IsGoodForTuple\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \" \", \"tuple_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{\"distance\", \",\", \" \", \"index\", \",\", \" \", \
+\"result\"}], \"}\"}], \",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"result\", \" \", \"=\", \" \", \"True\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"index\", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"index\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"tuple\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"index\", \" \", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"distance\", \" \", \"=\", \" \", 
+
+         RowBox[{\"Distance\", \"[\", 
+
+          RowBox[{\"n\", \",\", \" \", 
+
+           RowBox[{\"tuple\", \"[\", 
+
+            RowBox[{\"[\", \"index\", \"]\"}], \"]\"}]}], \"]\"}]}], \";\", 
+
+        \"\\[IndentingNewLine]\", 
+
+        RowBox[{\"If\", \"[\", 
+
+         RowBox[{
+
+          RowBox[{\"distance\", \" \", \"\\[NotEqual]\", \" \", \"0\"}], \
+\",\", 
+
+          \"\\[IndentingNewLine]\", 
+
+          RowBox[{
+
+           RowBox[{\"result\", \"=\", \" \", \"False\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+           RowBox[{\"index\", \"=\", \" \", 
+
+            RowBox[{
+
+             RowBox[{\"Length\", \"[\", \"tuple\", \"]\"}], \"+\", \"2\"}]}], \
+\";\", 
+
+           \"\\[IndentingNewLine]\", \"Break\", \";\"}]}], \
+\"\\[IndentingNewLine]\", 
+
+         \"]\"}], \";\"}]}], \"\\[IndentingNewLine]\", \"]\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"result\", \"]\"}], \";\"}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.501939705917967*^9, 3.5019397371337523`*^9}, {
+
+   3.501939775845967*^9, 3.5019398302580786`*^9}, {3.5025477818279457`*^9, 
+
+   3.502547897836581*^9}, 3.5025508477443066`*^9, {3.502550887386574*^9, 
+
+   3.5025508941819625`*^9}, 3.502550925538756*^9}],
+
+
+
+Cell[BoxData[\"\"], \"Input\",
+
+ CellChangeTimes->{{3.5019397882726774`*^9, 3.5019397969261723`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"FileNameForVotes\", \"[\", \"primes_\", \"]\"}], \" \", \":=\", \
+\" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"fileName\", \",\", \" \", \"temp\", \",\", \" \", \"sep\", \",\", \" \
+\", \"p\", \",\", \" \", 
+
+      \"pPos\"}], \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"sep\", \" \", \"=\", \" \", \"\\\"\\<\\\\\\\\\\>\\\"\"}], \
+\";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \
+\"\\\"\\<d:\\\\\\\\triangle\\\\Votes\\>\\\"\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"pPos\", \" \", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"primes\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+         RowBox[{\"StringJoin\", \"[\", 
+
+          RowBox[{\"temp\", \",\", \" \", \"sep\", \",\", \" \", 
+
+           RowBox[{\"ToString\", \"[\", 
+
+            RowBox[{\"primes\", \"[\", 
+
+             RowBox[{\"[\", \"pPos\", \"]\"}], \"]\"}], \"]\"}]}], \"]\"}]}], \
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"Not\", \"[\", 
+
+        RowBox[{\"DirectoryQ\", \"[\", \"temp\", \"]\"}], \"]\"}], \",\", 
+
+       \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"(*\", 
+
+        RowBox[{
+
+         RowBox[{\"PrintTemporary\", \"[\", 
+
+          RowBox[{\"\\\"\\<Creating directory \\>\\\"\", \" \", \"<>\", \" \
+\", \"temp\"}], 
+
+          \"]\"}], \";\"}], \"*)\"}], \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"CreateDirectory\", \"[\", \"temp\", \"]\"}], \";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", \"]\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \"\\\"\\<\\\\\\\\Votes.txt\\>\\\"\"}], \
+\"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.500211414243024*^9, 3.5002114160271263`*^9}, {
+
+  3.5002114680821037`*^9, 3.5002114694961843`*^9}, {3.500211603218833*^9, 
+
+  3.5002116045069065`*^9}, {3.5003705189011455`*^9, 3.5003705750703583`*^9}, {
+
+  3.500370610300373*^9, 3.5003706172327695`*^9}, {3.501348213318189*^9, 
+
+  3.501348220113578*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"FileNameForVotedValues\", \"[\", \"primes_\", \"]\"}], \" \", \
+\":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"fileName\", \",\", \" \", \"temp\", \",\", \" \", \"sep\", \",\", \" \
+\", \"p\", \",\", \" \", 
+
+      \"pPos\"}], \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"sep\", \" \", \"=\", \" \", \"\\\"\\<\\\\\\\\\\>\\\"\"}], \
+\";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \
+\"\\\"\\<d:\\\\\\\\triangle\\\\Votes\\>\\\"\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"pPos\", \" \", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"primes\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+         RowBox[{\"StringJoin\", \"[\", 
+
+          RowBox[{\"temp\", \",\", \" \", \"sep\", \",\", \" \", 
+
+           RowBox[{\"ToString\", \"[\", 
+
+            RowBox[{\"primes\", \"[\", 
+
+             RowBox[{\"[\", \"pPos\", \"]\"}], \"]\"}], \"]\"}]}], \"]\"}]}], \
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"Not\", \"[\", 
+
+        RowBox[{\"DirectoryQ\", \"[\", \"temp\", \"]\"}], \"]\"}], \",\", 
+
+       \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"(*\", 
+
+        RowBox[{
+
+         RowBox[{\"PrintTemporary\", \"[\", 
+
+          RowBox[{\"\\\"\\<Creating directory \\>\\\"\", \" \", \"<>\", \" \
+\", \"temp\"}], 
+
+          \"]\"}], \";\"}], \"*)\"}], \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"CreateDirectory\", \"[\", \"temp\", \"]\"}], \";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", \"]\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \
+\"\\\"\\<\\\\\\\\VotedValues.txt\\>\\\"\"}], \"]\"}]}], 
+
+     \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.501234185437208*^9, 3.5012341967738566`*^9}, {
+
+  3.501348225414881*^9, 3.5013482304741707`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"FileNameForVotesPositions\", \"[\", \"primes_\", \"]\"}], \" \", \
+\":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"fileName\", \",\", \" \", \"temp\", \",\", \" \", \"sep\", \",\", \" \
+\", \"p\", \",\", \" \", 
+
+      \"pPos\"}], \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"sep\", \" \", \"=\", \" \", \"\\\"\\<\\\\\\\\\\>\\\"\"}], \
+\";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \
+\"\\\"\\<d:\\\\\\\\triangle\\\\Votes\\>\\\"\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"pPos\", \" \", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"primes\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+         RowBox[{\"StringJoin\", \"[\", 
+
+          RowBox[{\"temp\", \",\", \" \", \"sep\", \",\", \" \", 
+
+           RowBox[{\"ToString\", \"[\", 
+
+            RowBox[{\"primes\", \"[\", 
+
+             RowBox[{\"[\", \"pPos\", \"]\"}], \"]\"}], \"]\"}]}], \"]\"}]}], \
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"Not\", \"[\", 
+
+        RowBox[{\"DirectoryQ\", \"[\", \"temp\", \"]\"}], \"]\"}], \",\", 
+
+       \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"(*\", 
+
+        RowBox[{
+
+         RowBox[{\"PrintTemporary\", \"[\", 
+
+          RowBox[{\"\\\"\\<Creating directory \\>\\\"\", \" \", \"<>\", \" \
+\", \"temp\"}], 
+
+          \"]\"}], \";\"}], \"*)\"}], \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"CreateDirectory\", \"[\", \"temp\", \"]\"}], \";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", \"]\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \
+\"\\\"\\<\\\\\\\\VoteOffsets.txt\\>\\\"\"}], \"]\"}]}], 
+
+     \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.50087976804764*^9, 3.5008797798253136`*^9}, {
+
+  3.5013482352814455`*^9, 3.501348239924711*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"GoodForTuple\", \"[\", \"primes_\", \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{\"fileName\", \",\", \" \", \"result\", \",\", \" \", \"f\"}], \
+\"}\"}], \",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", 
+
+      RowBox[{\"FileNameForTuple\", \"[\", \"primes\", \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"Not\", \"[\", 
+
+        RowBox[{\"FileExistsQ\", \"[\", \"fileName\", \"]\"}], \"]\"}], \
+\",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", 
+
+        RowBox[{\"{\", \"}\"}], \"]\"}]}], \"\\[IndentingNewLine]\", \"]\"}], \
+\";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Monitor\", \"[\", \"\\[IndentingNewLine]\", 
+
+      RowBox[{
+
+       RowBox[{
+
+        RowBox[{\"f\", \"=\", 
+
+         RowBox[{\"OpenRead\", \"[\", \"fileName\", \"]\"}]}], \";\", 
+
+        \"\\[IndentingNewLine]\", 
+
+        RowBox[{\"result\", \" \", \"=\", \"  \", 
+
+         RowBox[{\"ReadList\", \"[\", 
+
+          RowBox[{\"f\", \",\", \"Number\"}], \"]\"}]}], \" \", \";\", 
+
+        \"\\[IndentingNewLine]\", 
+
+        RowBox[{\"Close\", \" \", \"[\", \"f\", \"]\"}], \";\"}], \
+\"\\[IndentingNewLine]\", 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"\\\"\\<Reading \\>\\\"\", \" \", \"<>\", \" \", \"fileName\", \" \", \
+\"<>\", \" \", 
+
+        \"\\\"\\< ... \\>\\\"\"}]}], \" \", \"\\[IndentingNewLine]\", \
+\"]\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"result\", \"]\"}], \";\"}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.499168829426326*^9, 3.499168955246522*^9}, {
+
+   3.499169006278441*^9, 3.4991690065324554`*^9}, {3.499171764561206*^9, 
+
+   3.4991717844133415`*^9}, {3.4991718169422016`*^9, 3.499171819589353*^9}, {
+
+   3.499172352096811*^9, 3.4991723527698493`*^9}, {3.499174104348034*^9, 
+
+   3.4991741053550916`*^9}, {3.49917909337139*^9, 3.4991791160786886`*^9}, 
+
+   3.499179166822591*^9, {3.4991792636131268`*^9, 3.4991792640251503`*^9}, {
+
+   3.499180045486848*^9, 3.499180055470419*^9}, {3.499180118944049*^9, 
+
+   3.4991801240673423`*^9}, {3.499197949072874*^9, 3.4991979499449244`*^9}, {
+
+   3.4993710812556686`*^9, 3.499371114234555*^9}, {3.4993711637553873`*^9, 
+
+   3.499371183085493*^9}, {3.4993722044169097`*^9, 3.499372209735214*^9}, {
+
+   3.4993768555099373`*^9, 3.499376877651203*^9}, 3.4993988314048862`*^9, {
+
+   3.4994031706040745`*^9, 3.4994031725081835`*^9}, {3.4994045465027714`*^9, 
+
+   3.499404548736899*^9}, {3.499411145883234*^9, 3.4994111482833714`*^9}, {
+
+   3.4997825879725065`*^9, 3.499782603108372*^9}, {3.5002114064575787`*^9, 
+
+   3.500211407859659*^9}, {3.500211565955702*^9, 3.500211567370783*^9}, {
+
+   3.501257608919545*^9, 3.501257688635685*^9}, 3.501257784029853*^9, {
+
+   3.502142482324915*^9, 3.502142502047043*^9}, {3.502142542418352*^9, 
+
+   3.502142542870378*^9}, {3.5021426135784225`*^9, 3.5021426304963903`*^9}, {
+
+   3.5022719488397636`*^9, 3.5022719620217867`*^9}, 3.502493807776807*^9}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"VotesForTuple\", \"[\", \"prim,
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"VotesForTuple\", \"[\", \"primes_\", \"]\"}], \" \", \":=\", \" \
+\", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{\"fileName\", \",\", \" \", \"result\", \",\", \" \", \"f\"}], \
+\"}\"}], \",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"PrintTemporary\", \"[\", \"primes\", \"]\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", 
+
+      RowBox[{\"FileNameForVotes\", \"[\", \"primes\", \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Print\", \"[\", \"fileName\", \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"Not\", \"[\", 
+
+        RowBox[{\"FileExistsQ\", \"[\", \"fileName\", \"]\"\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \
+\"\\\"\\<\\\\\\\\Solutions.txt\\>\\\"\"}], \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}], 
+
+         \")\"}]}]}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"While\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \">\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", 
+
+            RowBox[{\"found\", \"-\", \"1\"}], \"]\"}], \"]\"}], \" \", \
+\"==\", \" \", 
+
+          \"threshold\"}], \",\", 
+
+         RowBox[{\"found\", \" \", \"--\"}], \",\", 
+
+         RowBox[{\"Break\", \"[\", \"]\"}]}], \"]\"}]}], \
+\"\\[IndentingNewLine]\", \"]\"}],
+
+      \";\", \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"if\", \" \", \"we\", \" \", \"have\", \" \", \"gone\", \" \", \
+\"all\", \" \", \"the\", \" \", 
+
+       \"way\", \" \", \"to\", \" \", \"the\", \" \", \"start\"}], \"*)\"}], 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"\\[Equal]\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"Block\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"{\", \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"nextPower\", \"=\", \" \", 
+
+           RowBox[{\"p\", \"^\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \")\"}]}]}], \";\
+\", 
+
+          \"\\[IndentingNewLine]\", 
+
+          RowBox[{\"Return\", \"[\", 
+
+           RowBox[{\"nextPower\", \"-\", \"n\"}], \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+        \"]\"}]}], \"\\[IndentingNewLine]\", \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"nextPower\", \"=\", \" \", 
+
+      RowBox[{\"p\", \"^\", 
+
+       RowBox[{\"(\", 
+
+        RowBox[{
+
+         RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \"-\", \
+\"found\"}], 
+
+        \")\"}]}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", 
+
+      RowBox[{\"nextPower\", \"-\", 
+
+       RowBox[{\"FromDigits\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"Take\", \"[\", 
+
+          RowBox[{\"digits\", \",\", 
+
+           RowBox[{\"-\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{
+
+              RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \
+\"-\", 
+
+              \"found\"}], \")\"}]}]}], \"]\"}], \",\", \"p\"}], \"]\"}]}], \
+\"]\"}]}]}], 
+
+   \"\\[IndentingNewLine]\", \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.500213342917338*^9, 3.5002133693968525`*^9}, 
+
+   3.5003943351060085`*^9}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"IsGoodForTuple\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \" \", \"tuple_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{\"distance\", \",\", \" \", \"index\", \",\", \" \", \
+\"result\"}], \"}\"}], \",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"result\", \" \", \"=\", \" \", \"True\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"index\", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"index\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"tuple\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"index\", \" \", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"distance\", \" \", \"=\", \" \", 
+
+         RowBox[{\"Distance\", \"[\", 
+
+          RowBox[{\"n\", \",\", \" \", 
+
+           RowBox[{\"tuple\", \"[\", 
+
+            RowBox[{\"[\", \"index\", \"]\"}], \"]\"}]}], \"]\"}]}], \";\", 
+
+        \"\\[IndentingNewLine]\", 
+
+        RowBox[{\"If\", \"[\", 
+
+         RowBox[{
+
+          RowBox[{\"distance\", \" \", \"\\[NotEqual]\", \" \", \"0\"}], \
+\",\", 
+
+          \"\\[IndentingNewLine]\", 
+
+          RowBox[{
+
+           RowBox[{\"result\", \"=\", \" \", \"False\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+           RowBox[{\"index\", \"=\", \" \", 
+
+            RowBox[{
+
+             RowBox[{\"Length\", \"[\", \"tuple\", \"]\"}], \"+\", \"2\"}]}], \
+\";\", 
+
+           \"\\[IndentingNewLine]\", \"Break\", \";\"}]}], \
+\"\\[IndentingNewLine]\", 
+
+         \"]\"}], \";\"}]}], \"\\[IndentingNewLine]\", \"]\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"result\", \"]\"}], \";\"}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.501939705917967*^9, 3.5019397371337523`*^9}, {
+
+   3.501939775845967*^9, 3.5019398302580786`*^9}, {3.5025477818279457`*^9, 
+
+   3.502547897836581*^9}, 3.5025508477443066`*^9, {3.502550887386574*^9, 
+
+   3.5025508941819625`*^9}, 3.502550925538756*^9}],
+
+
+
+Cell[BoxData[\"\"], \"Input\",
+
+ CellChangeTimes->{{3.5019397882726774`*^9, 3.5019397969261723`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"FileNameForVotes\", \"[\", \"primes_\", \"]\"}], \" \", \":=\", \
+\" \", 
+
+  RowBox[{\"Module\", \"[\", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"fileName\", \",\", \" \", \"temp\", \",\", \" \", \"sep\", \",\", \" \
+\", \"p\", \",\", \" \", 
+
+      \"pPos\"}], \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"sep\", \" \", \"=\", \" \", \"\\\"\\<\\\\\\\\\\>\\\"\"}], \
+\";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \
+\"\\\"\\<d:\\\\\\\\triangle\\\\Votes\\>\\\"\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"pPos\", \" \", \"=\", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \" \", \"<=\", \" \", 
+
+        RowBox[{\"Length\", \"[\", \"primes\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"pPos\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+         RowBox[{\"StringJoin\", \"[\", 
+
+          RowBox[{\"temp\", \",\", \" \", \"sep\", \",\", \" \", 
+
+           RowBox[{\"ToString\", \"[\", 
+
+            RowBox[{\"primes\", \"[\", 
+
+             RowBox[{\"[\", \"pPos\", \"]\"}], \"]\"}], \"]\"}]}], \"]\"}]}], \
+\";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"Not\", \"[\", 
+
+        RowBox[{\"DirectoryQ\", \"[\", \"temp\", \"]\"}], \"]\"}], \",\", 
+
+       \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"(*\", 
+
+        RowBox[{
+
+         RowBox[{\"PrintTemporary\", \"[\", 
+
+          RowBox[{\"\\\"\\<Creating directory \\>\\\"\", \" \", \"<>\", \" \
+\", \"temp\"}], 
+
+          \"]\"}], \";\"}], \"*)\"}], \"\\[IndentingNewLine]\", 
+
+       RowBox[{
+
+        RowBox[{\"CreateDirectory\", \"[\", \"temp\", \"]\"}], \";\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", \"]\"}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"temp\", \" \", \"=\", \" \", 
+
+      RowBox[{\"StringJoin\", \"[\", 
+
+       RowBox[{\"temp\", \",\", \" \", \"\\\"\\<\\\\\\\\Votes.txt\\>\\\"\"}], \
+\"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.500211414243024*^9, 3.5002114160271263`*^9}, {
+
+  3.5002114680821037`*^9, 3.5002114694961843`*^9}, {3.500211603218833*^9, 
+
+  3.5002116045069065`*^9}, {3.5003705189011455`*^9, 3.5003705750703583`*^9}, {
+
+  3.500370610300373*^9, 3.5003706172327695`*^9}, {3.501348213318189*^9, 
+
+  3.501348220113578*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"FileN\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+\"}], \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\
+\>"], "Item"],
+
+Cell[RawData["\<\
+, \"]\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \"\
+\>"], "Item"],
+
+Cell[RawData["\<\
+ \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+e]\", 
+
+     RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \
+\>"], "Text"],
+
+Cell[RawData["\<\
+    RowBox[{\"fileName\", \" \", \"=\", \" \", \"temp\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowB\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+, \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Mo\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+entingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", \"fileName\", \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}], 
+
+         \")\"}]}]}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"While\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \">\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", 
+
+            RowBox[{\"found\", \"-\", \"1\"}], \"]\"}], \"]\"}], \" \", \
+\"==\", \" \", 
+
+          \"threshold\"}], \",\", 
+
+         RowBox[{\"found\", \" \", \"--\"}], \",\", 
+
+         RowBox[{\"Break\", \"[\", \"]\"}]}], \"]\"}]}], \
+\"\\[IndentingNewLine]\", \"]\"}],
+
+      \";\", \"\\[Inden\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+ne]\", 
+
+   \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.4991686792777376`*^9, 3.4991687372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}], 
+
+         \")\"}]}]}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"While\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \">\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", 
+
+            RowBox[{\"found\", \"-\", \"1\"}], \"]\"}], \"]\"}], \" \", \
+\"==\", \" \", 
+
+          \"threshold\"\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+7372450533`*^9}}],
+
+
+
+Cell[BoxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+oxData[
+
+ RowBox[{
+
+  RowBox[{\"Distance\", \"[\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \"\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+\", 
+
+   RowBox[{\"n_\", \",\", \"p_\"}], \"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"dig\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+\"]\"}], \" \", \":=\", \" \", 
+
+  RowBox[{\"Module\", \"[\", \" \", 
+
+   RowBox[{
+
+    RowBox[{\"{\", 
+
+     RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}], 
+
+         \")\"}]}]}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"While\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \">\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", 
+
+            RowBox[{\"found\", \"-\", \"1\"}], \"]\"}], \"]\"}], \" \", \
+\"==\", \" \", 
+
+          \"threshold\"}], \",\", 
+
+         RowBox[{\"found\", \" \", \"--\"}], \",\", 
+
+         RowBox[{\"Break\", \"[\", \"]\"}]}], \"]\"}]}], \
+\"\\[IndentingNewLine]\", \"]\"}],
+
+      \";\", \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"if\", \" \", \"we\", \" \", \"have\", \" \", \"gone\", \" \", \
+\"all\", \" \", \"the\", \" \", 
+
+       \"way\", \" \", \"to\", \" \", \"the\", \" \", \"start\"}], \"*)\"}], 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \"[\", 
+
+      RowBo\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+  RowBox[{
+
+     \"threshold\", \",\", \" \", \"digits\", \",\", \" \", \"position\", \",\
+\", \" \", \"found\",
+
+       \",\", \" \", \"nextPower\", \",\", \" \", \"result\"}], \"}\"}], \
+\",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}], 
+
+         \")\"}]}]}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"While\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \">\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", 
+
+            RowBox[{\"found\", \"-\", \"1\"}], \"]\"}], \"]\"}], \" \", \
+\"==\", \" \", 
+
+          \"threshold\"}], \",\", 
+
+         RowBox[{\"found\", \" \", \"--\"}], \",\", 
+
+         RowBox[{\"Break\", \"[\", \"]\"}]}], \"]\"}]}], \
+\"\\[IndentingNewLine]\", \"]\"}],
+
+      \";\", \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"if\", \" \", \"we\", \" \", \"have\", \" \", \"gone\", \" \", \
+\"all\", \" \", \"the\", \" \", 
+
+       \"way\", \" \", \"to\", \" \", \"the\", \" \", \"start\"}], \"*)\"}], 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"\\[Equal]\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"Block\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"{\", \"}\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"nextPower\", \"=\", \" \", 
+
+           RowBox[{\"p\", \"^\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \")\"}]}]}], \";\
+\", 
+
+          \"\\[IndentingNewLine]\", 
+
+          RowBox[{\"Return\", \"[\", 
+
+           RowBox[{\"nextPower\", \"-\", \"n\"}], \"]\"}]}]}], \
+\"\\[IndentingNewLine]\", 
+
+        \"]\"}]}], \"\\[IndentingNewLine]\", \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"nextPower\", \"=\", \" \", 
+
+      RowBox[{\"p\", \"^\", 
+
+       RowBox[{\"(\", 
+
+        RowBox[{
+
+         RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \"-\", \
+\"found\"}], 
+
+        \")\"}]}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"Return\", \"[\", 
+
+      RowBox[{\"nextPower\", \"-\", 
+
+       RowBox[{\"FromDigits\", \"[\", 
+
+        RowBox[{
+
+         RowBox[{\"Take\", \"[\", 
+
+          RowBox[{\"digits\", \",\", 
+
+           RowBox[{\"-\", 
+
+            RowBox[{\"(\", 
+
+             RowBox[{
+
+              RowBox[{\"Length\", \"[\", \"digits\", \"]\"}], \"+\", \"1\", \
+\"-\", 
+
+              \"found\"}], \")\"}]}]}], \"]\"}], \",\", \"p\"}], \"]\"}]}], \
+\"]\"}]}]}], 
+
+   \"\\[IndentingNewLine]\", \"]\"}]}]], \"Input\",
+
+ CellChangeTimes->{{3.500213342917338*^9, 3.5002133693968525`*^9}, 
+
+   3.5003943351060085`*^9}],
+
+
+
+Cell[BoxDa\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+Power\", \",\", \" \", \"result\"}], \"}\"}], \",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"pr\
+\>"], "Text"],
+
+Cell[RawData["\<\
+\",\", \" \", \"result\"}], \"}\"}], \",\", 
+
+    \"\\[IndentingNewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Retur\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+NewLine]\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \"\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+\", 
+
+    RowBox[{
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}], 
+
+         \")\"}]}]}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"While\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \">\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+Box[{\"n\", \" \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+ \", \"\\[Equal]\", \"0\"}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}], 
+
+         \")\"}]}]}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"While\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \">\", \"1\"}], \",\", \
+\"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", 
+
+            RowBox[{\"found\", \"-\", \"1\"}], \"]\"}], \"]\"}], \" \", \
+\"==\", \" \", 
+
+          \"threshold\"}], \",\", 
+
+  \
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+}], \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       Ro\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+x[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+ \" \", 
+
+      RowBox[{
+
+      \"Initialize\", \" \", \"some\", \" \", \"precomputed\", \" \", \"local\
+\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"stil\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[RawData["\<\
+ \"precomputed\", \" \", \"local\", \" \", 
+
+       \"varables\"}], \" \", \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"threshold\", \" \", \"=\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"(\", 
+
+        RowBox[{\"p\", \"-\", \"1\"}], \")\"}], \"/\", \"2\"}]}], \";\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"digits\", \" \", \"=\", \" \", 
+
+      RowBox[{\"IntegerDigits\", \"[\", 
+
+       RowBox[{\"n\", \",\", \"p\"}], \"]\"}]}], \";\", \
+\"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+      \"find\", \" \", \"the\", \" \", \"first\", \" \", \"digit\", \" \", \
+\"above\", \" \", 
+
+       \"the\", \" \", \"threshold\"}], \" \", \"*)\"}], \
+\"\\[IndentingNewLine]\", 
+
+     RowBox[{\"found\", \" \", \"=\", \" \", 
+
+      RowBox[{\"-\", \"1\"}]}], \";\", \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"For\", \"[\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"position\", \" \", \"=\", \" \", \"1\"}], \",\", \" \", 
+
+       RowBox[{\"position\", \" \", \"<=\", 
+
+        RowBox[{\"Length\", \"[\", \"digits\", \"]\"}]}], \",\", \" \", 
+
+       RowBox[{\"position\", \"++\"}], \",\", \"\\[IndentingNewLine]\", 
+
+       RowBox[{\"If\", \" \", \"[\", \" \", 
+
+        RowBox[{
+
+         RowBox[{
+
+          RowBox[{\"digits\", \" \", \"[\", 
+
+           RowBox[{\"[\", \"position\", \"]\"}], \"]\"}], \" \", \">\", \" \", 
+
+          \"threshold\"}], \",\", \"\\[IndentingNewLine]\", 
+
+         RowBox[{
+
+          RowBox[{\"found\", \" \", \"=\", \" \", \"position\"}], \";\", \" \
+\", 
+
+          RowBox[{\"Break\", \"[\", \"]\"}]}]}], \"\\[IndentingNewLine]\", \
+\"]\"}]}], 
+
+      \"\\[IndentingNewLine]\", \"]\"}], \";\", \"\\[IndentingNewLine]\", 
+
+     \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"if\", \" \", \"we\", \" \", 
+
+        RowBox[{\"didn\", \"'\"}], \"t\", \" \", \"find\", \" \", \"a\", \" \
+\", \"digit\"}], 
+
+       \",\", \" \", 
+
+       RowBox[{
+
+       \"then\", \" \", \"the\", \" \", \"distance\", \" \", \"is\", \" \", \
+\"zero\"}]}], \" \", 
+
+      \"*)\"}], \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"If\", \" \", \"[\", 
+
+      RowBox[{
+
+       RowBox[{\"found\", \" \", \"==\", 
+
+        RowBox[{\"-\", \"1\"}]}], \",\", \" \", 
+
+       RowBox[{\"Return\", \"[\", \"0\", \"]\"}]}], \"]\"}], \";\", \
+\"\\[IndentingNewLine]\",
+
+      \"\\[IndentingNewLine]\", 
+
+     RowBox[{\"(*\", \" \", 
+
+      RowBox[{
+
+       RowBox[{\"we\", \" \", \"did\", \" \", \"find\", \" \", \"a\", \" \", \
+\"faulty\", \" \", 
+
+        RowBox[{\"digit\", \".\", \"  \", \"Now\"}], \" \", \"we\", \" \", \
+\"need\", \" \", 
+
+        \"to\", \" \", \"look\", \" \", \"before\", \" \", \"it\", \" \", \
+\"for\", \" \", 
+
+        \"digits\", \" \", \"that\", \" \", \"equal\", \" \", \"the\", \" \", 
+
+        RowBox[{\"threshold\", \".\", \"\\[IndentingNewLine]\", \"If\"}], \" \
+\", \"we\", 
+
+        \" \", \"would\", \" \", \"not\", \" \", \"count\", \" \", \"these\", \
+\" \", \"then\", 
+
+        \" \", \"we\", \" \", \"would\", \" \", \"end\", \" \", \"up\", \" \
+\", \"with\", \" \", \"a\",
+
+         \" \", \"new\", \" \", \"value\", \" \", \"which\", \" \", \"is\", \
+\" \", \"still\", \" \",
+
+         \"not\", \" \", \"p\"}], \"-\", 
+
+       RowBox[{\"good\", \" \", 
+
+        RowBox[{\"(\", 
+
+         RowBox[{
+
+         \"due\", \"\\[IndentingNewLine]\", \"to\", \" \", \"the\", \" \", \
+\"carrying\"}\
+\>"], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[BoxData[
+ FormBox[
+  StyleBox[
+   RowBox[{
+    RowBox[{"magicGraham", "(", "primeList_", ")"}], ":=", 
+    RowBox[{
+     RowBox[{
+      UnderoverscriptBox["\[Sum]", "p", "primeList"], 
+      FractionBox[
+       RowBox[{"log", "(", 
+        FractionBox[
+         RowBox[{"p", "+", "1"}], 
+         RowBox[{"2", " ", "p"}]], ")"}], 
+       RowBox[{"log", "(", "p", ")"}]]}], "+", "1"}]}],
+   FontFamily->"Consolas",
+   FontSize->24], TraditionalForm]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"magicGraham2", "[", "tuple_", "]"}], " ", ":=", " ", 
+  RowBox[{"N", "[", 
+   RowBox[{
+    RowBox[{"magicGraham", "[", "tuple", "]"}], "/", 
+    RowBox[{"Length", "[", "tuple", "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.501705321283863*^9, 3.5017053564258733`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FileNameForVotedValuesSummary", "[", "range_", "]"}], " ", ":=", 
+  " ", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", "result", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+     "result", " ", "=", " ", "\"\<d:\\\\Triangle\\\\Votes\\\\Summary\>\""}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"Not", "[", 
+        RowBox[{"DirectoryQ", "[", "result", "]"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"CreateDirectory", "[", "result", "]"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"result", " ", "=", " ", 
+      RowBox[{
+      "result", " ", "<>", " ", "\"\<\\\\VotedValuesAtHeight-\>\"", " ", "<>",
+        " ", 
+       RowBox[{"ToString", "[", "range", "]"}], " ", "<>", " ", 
+       "\"\<.txt\>\""}]}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.501236879907323*^9, 3.5012370187382636`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CalcVotedValuesSummaryForRange", "[", 
+   RowBox[{"tupleList_", ",", " ", "range_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "tuplePos", ",", " ", "tuple", ",", " ", "fileName", ",", " ", "values", 
+      ",", " ", "found", ",", " ", "doneTuples", ",", " ", "votesVector", ",",
+       "f", ",", " ", "result"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "first", " ", "read", " ", "whatever", " ", "has", " ", "been", " ", 
+      "written", " ", "before"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"fileName", " ", "=", " ", 
+      RowBox[{"FileNameForVotedValuesSummary", "[", "range", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"FileExistsQ", "[", "fileName", "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"f", " ", "=", 
+         RowBox[{"OpenRead", "[", "fileName", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"values", " ", "=", " ", 
+         RowBox[{"ReadList", "[", 
+          RowBox[{"f", ",", " ", "Expression"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Close", "[", "f", "]"}], ";"}], "\[IndentingNewLine]", ",", 
+       " ", 
+       RowBox[{"(*", " ", "else", " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"values", " ", "=", 
+        RowBox[{"{", "}"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "retrieve", " ", "a", " ", "list", " ", "of", " ", "just", " ", "the", 
+       " ", "tuples"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"doneTuples", " ", "=", " ", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "&"}], ",", " ", "values"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"now", " ", "loop", " ", "over", " ", "all", " ", "tuples"}], 
+      " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"tuplePos", " ", "=", " ", "1"}], ",", " ", 
+         RowBox[{"tuplePos", " ", "\[LessEqual]", " ", 
+          RowBox[{"Length", "[", "tupleList", "]"}]}], ",", " ", 
+         RowBox[{"tuplePos", " ", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"tuple", " ", "=", " ", 
+           RowBox[{"Sort", "[", 
+            RowBox[{"tupleList", "[", 
+             RowBox[{"[", "tuplePos", "]"}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"found", " ", "=", " ", "False"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"ArrayDepth", "[", 
+              RowBox[{"Position", "[", 
+               RowBox[{"doneTuples", ",", " ", "tuple"}], "]"}], "]"}], 
+             "\[Equal]", "2"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", "found", " ", "*)"}], "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{"(*", "else", " ", "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"votesVector", " ", "=", " ", 
+              RowBox[{"DynamicVoteList", "[", 
+               RowBox[{"tuple", ",", " ", "range"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"doneTuples", " ", "=", " ", 
+              RowBox[{"Append", "[", 
+               RowBox[{"doneTuples", ",", " ", "tuple"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{"Print", " ", "[", 
+                RowBox[{"\"\<Writing : \>\"", " ", "<>", " ", "fileName"}], 
+                "]"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"f", "=", " ", 
+              RowBox[{"OpenAppend", "[", 
+               RowBox[{"fileName", ",", " ", 
+                RowBox[{"PageWidth", "\[Rule]", "40000"}]}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Write", "[", 
+              RowBox[{"f", ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"tuple", ",", " ", 
+                 RowBox[{
+                  RowBox[{"Last", "[", "votesVector", "]"}], "[", 
+                  RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Close", "[", "f", "]"}], ";"}]}], "\[IndentingNewLine]",
+            "]"}]}]}], "\[IndentingNewLine]", "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"ToString", "[", "tuplePos", "]"}], " ", "<>", " ", 
+        "\"\< - \>\"", " ", "<>", " ", 
+        RowBox[{"ToString", "[", "tuple", "]"}], " ", "<>", " ", 
+        "\"\< - \>\"", " ", "<>", " ", 
+        RowBox[{"ToString", "[", 
+         RowBox[{"Length", "[", "tupleList", "]"}], "]"}]}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"f", " ", "=", " ", 
+      RowBox[{"OpenRead", "[", "fileName", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"result", "=", " ", 
+      RowBox[{"ReadList", "[", 
+       RowBox[{"f", ",", " ", "Expression"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Close", "[", "f", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "result", "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.501239329288267*^9, 3.501239338585884*^9}, {
+  3.501249294655529*^9, 3.5012493014559183`*^9}, {3.501249704543974*^9, 
+  3.5012497061260643`*^9}, {3.501257891966442*^9, 3.5012579170200863`*^9}, {
+  3.5012579539921513`*^9, 3.5012580399951024`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MultiplyDigits", "[", "l_", "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"result", "=", "1"}], ",", " ", "pos"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"pos", "=", "1"}], ",", " ", 
+       RowBox[{"pos", " ", "\[LessEqual]", 
+        RowBox[{"Length", "[", "l", "]"}]}], ",", " ", 
+       RowBox[{"pos", " ", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"result", " ", "*=", " ", 
+        RowBox[{"l", "[", 
+         RowBox[{"[", "pos", "]"}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", " ", "[", "result", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.5013384187239704`*^9, 3.501338495155342*^9}, {
+  3.5013385576289153`*^9, 3.5013385910798283`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CalcVotedValuesSummaryForRangePure", "[", 
+   RowBox[{"tupleList_", ",", " ", "range_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "tuplePos", ",", " ", "tuple", ",", " ", "fileName", ",", " ", "values", 
+      ",", " ", "found", ",", " ", "doneTuples", ",", " ", "f", ",", " ", 
+      "result", ",", " ", "key"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "first", " ", "read", " ", "whatever", " ", "has", " ", "been", " ", 
+      "written", " ", "before"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"fileName", " ", "=", " ", 
+      RowBox[{"FileNameForVotedValuesSummary", "[", "range", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"FileExistsQ", "[", "fileName", "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"f", " ", "=", 
+         RowBox[{"OpenRead", "[", "fileName", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"values", " ", "=", " ", 
+         RowBox[{"ReadList", "[", 
+          RowBox[{"f", ",", " ", "Expression"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Close", "[", "f", "]"}], ";"}], "\[IndentingNewLine]", ",", 
+       " ", 
+       RowBox[{"(*", " ", "else", " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"values", " ", "=", 
+        RowBox[{"{", "}"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "retrieve", " ", "a", " ", "list", " ", "of", " ", "just", " ", "the", 
+       " ", "tuples"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"doneTuples", " ", "=", " ", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "&"}], ",", " ", "values"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"doneTuples", " ", "=", " ", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"MultiplyDigits", "[", "#", "]"}], "&"}], ",", " ", 
+        "doneTuples"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"now", " ", "loop", " ", "over", " ", "all", " ", "tuples"}], 
+      " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"tuplePos", " ", "=", " ", "1"}], ",", " ", 
+         RowBox[{"tuplePos", " ", "\[LessEqual]", " ", 
+          RowBox[{"Length", "[", "tupleList", "]"}]}], ",", " ", 
+         RowBox[{"tuplePos", " ", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"tuple", " ", "=", " ", 
+           RowBox[{"Sort", "[", 
+            RowBox[{"tupleList", "[", 
+             RowBox[{"[", "tuplePos", "]"}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"key", " ", "=", " ", 
+           RowBox[{"MultiplyDigits", "[", "tuple", "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"found", " ", "=", " ", "False"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"MemberQ", "[", 
+             RowBox[{"doneTuples", ",", " ", "key"}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", "found", " ", "*)"}], "\[IndentingNewLine]", 
+            ",", 
+            RowBox[{"(*", "else", " ", "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"result", " ", "=", " ", 
+              RowBox[{"VotedValueAt", "[", 
+               RowBox[{"tuple", ",", " ", "range"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"doneTuples", " ", "=", " ", 
+              RowBox[{"Append", "[", 
+               RowBox[{"doneTuples", ",", " ", "key"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{"Print", " ", "[", 
+                RowBox[{"\"\<Writing : \>\"", " ", "<>", " ", "fileName"}], 
+                "]"}], ";"}], "*)"}], "\[IndentingNewLine]", 
+             RowBox[{"f", "=", " ", 
+              RowBox[{"OpenAppend", "[", 
+               RowBox[{"fileName", ",", " ", 
+                RowBox[{"PageWidth", "\[Rule]", "40000"}]}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Write", "[", 
+              RowBox[{"f", ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"tuple", ",", " ", "result"}], "}"}]}], "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Close", "[", "f", "]"}], ";"}]}], "\[IndentingNewLine]",
+            "]"}]}]}], "\[IndentingNewLine]", "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"ToString", "[", "tuplePos", "]"}], " ", "<>", " ", 
+        "\"\< - \>\"", " ", "<>", " ", 
+        RowBox[{"ToString", "[", "tuple", "]"}], " ", "<>", " ", 
+        "\"\< - \>\"", " ", "<>", " ", 
+        RowBox[{"ToString", "[", 
+         RowBox[{"Length", "[", "tupleList", "]"}], "]"}]}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"f", " ", "=", " ", 
+      RowBox[{"OpenRead", "[", "fileName", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"result", "=", " ", 
+      RowBox[{"ReadList", "[", 
+       RowBox[{"f", ",", " ", "Expression"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Close", "[", "f", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "result", "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.501271383319179*^9, 3.501271393108739*^9}, {
+  3.5012714533021817`*^9, 3.501271467644002*^9}, {3.501338122434024*^9, 
+  3.5013381426041775`*^9}, {3.5013386114649944`*^9, 3.5013386929466553`*^9}, {
+  3.5014193567789516`*^9, 3.5014193807513227`*^9}, {3.5019384805758815`*^9, 
+  3.501938542174405*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RandomTuple", "[", 
+   RowBox[{"range_", ",", " ", "length_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"result", ",", " ", "i", ",", ",", " ", "candidate"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"result", "=", " ", 
+      RowBox[{"Range", "[", "length", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "<=", " ", "length"}], ",", " ", 
+       RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"candidate", " ", "=", 
+         RowBox[{"Prime", "[", " ", 
+          RowBox[{"RandomInteger", "   ", "[", 
+           RowBox[{"{", 
+            RowBox[{"2", ",", " ", "range"}], "}"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"While", "[", 
+         RowBox[{
+          RowBox[{"MemberQ", "[", 
+           RowBox[{
+            RowBox[{"Take", "[", 
+             RowBox[{"result", ",", 
+              RowBox[{"i", "-", "1"}]}], "]"}], ",", "candidate"}], "]"}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"candidate", " ", "=", " ", 
+            RowBox[{"Prime", "[", " ", 
+             RowBox[{"RandomInteger", "   ", "[", 
+              RowBox[{"{", 
+               RowBox[{"2", ",", " ", "range"}], "}"}], "]"}], "]"}]}], 
+           ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"result", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], " ", "=", " ", "candidate"}], 
+        ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", 
+      RowBox[{"Sort", "[", "result", "]"}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.502389001428395*^9, 3.502389301097535*^9}, {
+  3.502389339710743*^9, 3.502389433680118*^9}, {3.502389975909132*^9, 
+  3.5023901721773577`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RandomSuccesiveTuple", "[", 
+   RowBox[{"range_", ",", " ", "length_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"result", ",", " ", "i", ",", ",", " ", "candidate"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"result", "=", " ", 
+      RowBox[{"Range", "[", "length", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"candidate", " ", "=", " ", 
+      RowBox[{"RandomInteger", "   ", "[", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", " ", 
+         RowBox[{"range", "-", "length"}]}], "}"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", " ", "length"}], ",", " ", 
+       RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"result", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], " ", "=", " ", 
+        RowBox[{"Prime", "[", 
+         RowBox[{"candidate", "+", "i", "-", "1"}], "]"}]}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", 
+      RowBox[{"Sort", "[", "result", "]"}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.5024827451640615`*^9, 3.5024828660609765`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SuccesiveTuple", "[", 
+   RowBox[{"first_", ",", " ", "length_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"result", ",", " ", "i", ",", ",", " ", "candidate"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"result", "=", " ", 
+      RowBox[{"Range", "[", "length", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"candidate", " ", "=", " ", "first"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", " ", "length"}], ",", " ", 
+       RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"result", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], " ", "=", " ", 
+        RowBox[{"Prime", "[", 
+         RowBox[{"candidate", "+", "i", "-", "1"}], "]"}]}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", 
+      RowBox[{"Sort", "[", "result", "]"}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.502482911600581*^9, 3.5024829290705805`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MagicWvdd", "[", "tuple_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Product", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1", "+", 
+         RowBox[{"1", "/", "p"}]}], ")"}], "^", 
+       RowBox[{"Log", "[", "p", "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", "tuple"}], "}"}]}], "]"}], " ", "/", " ", 
+    RowBox[{"(", 
+     RowBox[{"2", " ", "^", 
+      RowBox[{"(", 
+       RowBox[{"Sum", "[", 
+        RowBox[{
+         RowBox[{"1", "/", 
+          RowBox[{"Log", "[", "p", "]"}]}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"p", ",", " ", "tuple"}], "}"}]}], "]"}], ")"}]}], ")"}]}], 
+   "-", 
+   RowBox[{"1", "/", "E"}]}]}]], "Input",
+ CellChangeTimes->{{3.50249845162342*^9, 3.502498459719883*^9}, {
+  3.5024985057135134`*^9, 3.502498584640028*^9}, {3.5024986636985497`*^9, 
+  3.5024986656506615`*^9}}]
+},
+WindowSize->{1912, 953},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (January 30, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 1536, 35, 212, "Input"],
+Cell[2084, 57, 5698, 135, 732, "Input"],
+Cell[7785, 194, 1802, 41, 252, "Input"],
+Cell[9590, 237, 96, 1, 31, "Input"],
+Cell[9689, 240, 2336, 53, 312, "Input"],
+Cell[12028, 295, 2145, 50, 312, "Input"],
+Cell[14176, 347, 2147, 50, 312, "Input"],
+Cell[16326, 399, 2851, 55, 252, "Input"],
+Cell[19180, 456, 2078, 48, 292, "Input"],
+Cell[21261, 506, 1767, 40, 272, "Input"],
+Cell[23031, 548, 4115, 188, 23, "Input"],
+Cell[27149, 738, 5487, 239, 23, "Input"],
+Cell[32639, 979, 9434, 417, 23, "Input"],
+Cell[42076, 1398, 9805, 433, 23, "Input"],
+Cell[51884, 1833, 9267, 410, 23, "Input"],
+Cell[61154, 2245, 960, 36, 23, "Input"],
+Cell[62117, 2283, 22122, 962, 23, "Input"],
+Cell[84242, 3247, 12538, 555, 23, "Input"],
+Cell[96783, 3804, 202, 9, 23, "Item"],
+Cell[96988, 3815, 496, 24, 23, "Item"],
+Cell[97487, 3841, 1549, 75, 23, "Input"],
+Cell[99039, 3918, 435, 22, 23, "Text"],
+Cell[99477, 3942, 2603, 118, 23, "Input"],
+Cell[102083, 4062, 426, 22, 23, "Input"],
+Cell[102512, 4086, 5147, 225, 23, "Input"],
+Cell[107662, 4313, 4862, 215, 23, "Input"],
+Cell[112527, 4530, 1179, 61, 23, "Input"],
+Cell[113709, 4593, 585, 33, 23, "Input"],
+Cell[114297, 4628, 265, 15, 23, "Input"],
+Cell[114565, 4645, 5191, 223, 23, "Input"],
+Cell[119759, 4870, 6736, 294, 23, "Input"],
+Cell[126498, 5166, 450, 21, 23, "Text"],
+Cell[126951, 5189, 2774, 122, 23, "Input"],
+Cell[129728, 5313, 443, 21, 23, "Input"],
+Cell[130174, 5336, 4133, 176, 23, "Input"],
+Cell[134310, 5514, 566, 23, 23, "Input"],
+Cell[134879, 5539, 4243, 179, 23, "Input"],
+Cell[139125, 5720, 2404, 105, 23, "Input"],
+Cell[141532, 5827, 453, 20, 23, "Input"],
+Cell[141988, 5849, 3356, 137, 23, "Input"],
+Cell[145347, 5988, 3507, 143, 23, "Input"],
+Cell[148857, 6133, 464, 15, 100, "Input"],
+Cell[149324, 6150, 307, 7, 31, "Input"],
+Cell[149634, 6159, 1013, 24, 172, "Input"],
+Cell[150650, 6185, 5790, 128, 732, "Input"],
+Cell[156443, 6315, 917, 23, 132, "Input"],
+Cell[157363, 6340, 5980, 133, 772, "Input"],
+Cell[163346, 6475, 2024, 48, 252, "Input"],
+Cell[165373, 6525, 1347, 32, 192, "Input"],
+Cell[166723, 6559, 1191, 28, 192, "Input"],
+Cell[167917, 6589, 905, 27, 31, "Input"]
+}
+]
+*)
+

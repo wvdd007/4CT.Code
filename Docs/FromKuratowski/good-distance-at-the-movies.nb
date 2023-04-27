@@ -1,0 +1,756 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     31612,        747]
+NotebookOptionsPosition[     30993,        724]
+NotebookOutlinePosition[     31336,        739]
+CellTagsIndexPosition[     31293,        736]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Distance", "[", 
+   RowBox[{"n_", ",", " ", "p_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", " ", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "threshold", ",", " ", "digits", ",", " ", "position", ",", " ", "found",
+       ",", " ", "nextPower", ",", " ", "result"}], "}"}], ",", "\n", "  ", 
+    RowBox[{
+     RowBox[{"If", " ", "[", 
+      RowBox[{
+       RowBox[{"n", " ", "==", " ", "0"}], ",", " ", 
+       RowBox[{"Return", "[", "0", "]"}]}], "]"}], ";", "\n", "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Initialize", " ", "some", " ", "precomputed", " ", "local", " ", 
+       "varables"}], " ", "*)"}], "\n", "  ", 
+     RowBox[{"threshold", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"p", " ", "-", " ", "1"}], ")"}], "/", "2"}]}], ";", "\n", 
+     "  ", 
+     RowBox[{"digits", " ", "=", " ", 
+      RowBox[{"IntegerDigits", "[", 
+       RowBox[{"n", ",", " ", "p"}], "]"}]}], ";", "\n", "  ", "\n", "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "find", " ", "the", " ", "first", " ", "digit", " ", "above", " ", 
+       "the", " ", "threshold"}], " ", "*)"}], "\n", "  ", 
+     RowBox[{"found", " ", "=", " ", 
+      RowBox[{"-", "1"}]}], ";", "\n", "  ", 
+     RowBox[{"For", "[", " ", 
+      RowBox[{
+       RowBox[{"position", " ", "=", " ", "1"}], ",", " ", 
+       RowBox[{"position", " ", "<=", " ", 
+        RowBox[{"Length", "[", "digits", "]"}]}], ",", " ", 
+       RowBox[{"position", "++"}], ",", "\n", "   ", 
+       RowBox[{"If", " ", "[", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"digits", " ", "[", 
+           RowBox[{"[", "position", "]"}], "]"}], " ", ">", " ", 
+          "threshold"}], ",", "\n", "    ", 
+         RowBox[{
+          RowBox[{"found", " ", "=", " ", "position"}], ";", " ", 
+          RowBox[{"Break", "[", "]"}]}]}], "\n", "    ", "]"}]}], "\n", "   ",
+       "]"}], ";", "\n", "  ", "\n", "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"if", " ", "we", " ", 
+        RowBox[{"didn", "'"}], "t", " ", "find", " ", "a", " ", "digit"}], 
+       ",", " ", 
+       RowBox[{
+       "then", " ", "the", " ", "distance", " ", "is", " ", "zero"}]}], " ", 
+      "*)"}], "\n", "  ", 
+     RowBox[{"If", " ", "[", 
+      RowBox[{
+       RowBox[{"found", " ", "==", " ", 
+        RowBox[{"-", "1"}]}], ",", " ", 
+       RowBox[{"Return", "[", "0", "]"}]}], "]"}], ";", "\n", "  ", "\n", 
+     "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"we", " ", "did", " ", "find", " ", "a", " ", "faulty", " ", 
+        RowBox[{"digit", ".", "  ", "Now"}], " ", "we", " ", "need", " ", 
+        "to", " ", "look", " ", "before", " ", "it", " ", "for", " ", 
+        "digits", " ", "that", " ", "equal", " ", "the", " ", 
+        RowBox[{"threshold", ".", "\n", "  ", "If"}], " ", "we", " ", "would",
+         " ", "not", " ", "count", " ", "these", " ", "then", " ", "we", " ", 
+        "would", " ", "end", " ", "up", " ", "with", " ", "a", " ", "new", 
+        " ", "value", " ", "which", " ", "is", " ", "still", " ", "not", " ", 
+        "p"}], "-", 
+       RowBox[{"good", " ", 
+        RowBox[{"(", 
+         RowBox[{"due", "\n", "  ", "to", " ", "the", " ", "carrying"}], 
+         ")"}]}]}], " ", "*)"}], "\n", "  ", 
+     RowBox[{"While", "[", " ", 
+      RowBox[{
+       RowBox[{"found", " ", ">", " ", "1"}], ",", "\n", "   ", 
+       RowBox[{"If", " ", "[", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"digits", " ", "[", 
+           RowBox[{"[", 
+            RowBox[{"found", " ", "-", " ", "1"}], "]"}], "]"}], " ", "==", 
+          " ", "threshold"}], ",", " ", 
+         RowBox[{"found", " ", "--"}], ",", " ", 
+         RowBox[{"Break", "[", "]"}]}], "]"}]}], "\n", "   ", "]"}], ";", 
+     "\n", "  ", "\n", "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "if", " ", "we", " ", "have", " ", "gone", " ", "all", " ", "the", " ", 
+       "way", " ", "to", " ", "the", " ", "start"}], "*)"}], "\n", "  ", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"found", " ", "==", " ", "1"}], ",", "\n", "   ", 
+       RowBox[{"Block", "[", 
+        RowBox[{
+         RowBox[{"{", "}"}], ",", "\n", "    ", 
+         RowBox[{
+          RowBox[{"nextPower", " ", "=", " ", 
+           RowBox[{"p", "^", 
+            RowBox[{"(", 
+             RowBox[{"Length", "[", "digits", "]"}], ")"}]}]}], ";", "\n", 
+          "    ", 
+          RowBox[{"Return", "[", 
+           RowBox[{"nextPower", " ", "-", " ", "n"}], "]"}]}]}], "\n", "    ",
+         "]"}]}], "\n", "   ", "]"}], ";", "\n", "  ", "\n", "  ", "\n", "  ", 
+     RowBox[{"nextPower", " ", "=", " ", 
+      RowBox[{"p", "^", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Length", "[", "digits", "]"}], " ", "+", " ", "1", " ", "-",
+          " ", "found"}], ")"}]}]}], ";", "\n", "  ", 
+     RowBox[{"Return", "[", 
+      RowBox[{"nextPower", " ", "-", " ", 
+       RowBox[{"FromDigits", "[", 
+        RowBox[{
+         RowBox[{"Take", "[", 
+          RowBox[{"digits", ",", " ", 
+           RowBox[{"-", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"Length", "[", "digits", "]"}], " ", "+", " ", "1", " ",
+               "-", " ", "found"}], ")"}]}]}], "]"}], ",", " ", "p"}], 
+        "]"}]}], "]"}]}]}], "\n", "  ", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PreviousDistance", "[", 
+   RowBox[{"n_", ",", "p_", ",", "dist_"}], "]"}], ":=", " ", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"next", ",", " ", "index", ",", "base"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"base", "=", 
+      RowBox[{"Quotient", "[", 
+       RowBox[{
+        RowBox[{"p", "+", "1"}], ",", "2"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"dist", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "0", "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"next", " ", "=", " ", 
+         RowBox[{"n", " ", "+", " ", "dist"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"index", " ", "=", " ", 
+         RowBox[{"FromDigits", "[", 
+          RowBox[{
+           RowBox[{"IntegerDigits", "[", 
+            RowBox[{"next", ",", "p"}], "]"}], ",", "base"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", 
+         RowBox[{"n", "-", 
+          RowBox[{"FromDigits", "[", 
+           RowBox[{
+            RowBox[{"IntegerDigits", "[", 
+             RowBox[{
+              RowBox[{"index", "-", "1"}], ",", "base"}], "]"}], ",", "p"}], 
+           "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.526139852037765*^9, 3.5261398919426355`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"DistributeDefinitions", "[", 
+  RowBox[{"PreviousDistance", ",", "Distance"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5261402019463797`*^9, 3.5261402192312098`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"min", "=", "1"}], ",", 
+     RowBox[{"max", "=", "20"}], ",", 
+     RowBox[{"step", "=", 
+      RowBox[{"1", "/", "100"}]}], ",", " ", 
+     RowBox[{"stepj", "=", 
+      RowBox[{"1", "/", "2"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Table", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Export", "[", 
+      RowBox[{
+       RowBox[{"\"\<c:\\\\temp\\\\TopViewGood-\>\"", "<>", " ", 
+        RowBox[{"ToString", "[", 
+         RowBox[{"N", "[", 
+          RowBox[{"j", ",", "4"}], "]"}], "]"}], "<>", "\"\<.avi\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Monitor", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Framed", "[", "\[IndentingNewLine]", 
+            RowBox[{"ListPlot3D", "[", 
+             RowBox[{
+              RowBox[{"With", "[", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"tuple", "=", 
+                  RowBox[{"Range", "[", 
+                   RowBox[{"3", ",", "200"}], "]"}]}], "}"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"Flatten", "[", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"Table", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"p", ",", "q", ",", "\[IndentingNewLine]", 
+                    RowBox[{"With", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"pow", "=", 
+                    RowBox[{"IntegerPart", "[", 
+                    RowBox[{"p", "^", "i"}], "]"}]}], "}"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"With", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"d", "=", 
+                    RowBox[{"Distance", "[", 
+                    RowBox[{
+                    RowBox[{"IntegerPart", "[", "pow", "]"}], ",", "q"}], 
+                    "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Log", "[", 
+                    RowBox[{
+                    RowBox[{"Min", "[", 
+                    RowBox[{
+                    RowBox[{"PreviousDistance", "[", 
+                    RowBox[{"pow", ",", "q", ",", "d"}], "]"}], ",", "d"}], 
+                    "]"}], "+", "1"}], "]"}]}], "\[IndentingNewLine]", 
+                    "]"}]}], "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"q", ",", "tuple"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"p", ",", "tuple"}], "}"}]}], "]"}], ",", "1"}], 
+                 "]"}]}], "\[IndentingNewLine]", "]"}], ",", 
+              RowBox[{"PlotRange", "\[Rule]", "All"}], ",", " ", 
+              RowBox[{"AxesLabel", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{"p", ",", "q"}], "}"}]}], ",", 
+              RowBox[{"PlotLabel", "->", 
+               RowBox[{"\"\<Log good-distance (p^\>\"", " ", "<>", 
+                RowBox[{"ToString", "[", 
+                 RowBox[{"N", "[", 
+                  RowBox[{"i", ",", "4"}], "]"}], "]"}], " ", "<>", " ", 
+                "\"\<,q)\>\""}]}], ",", " ", 
+              RowBox[{"ViewPoint", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{"Top", ",", "Left", ",", "Back"}], "}"}]}], ",", " ", 
+              RowBox[{"ColorFunction", "\[Rule]", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{"#3", "\[Equal]", "0"}], ",", "Red", ",", 
+                   RowBox[{
+                    RowBox[{"ColorData", "[", "\"\<DarkRainbow\>\"", "]"}], 
+                    "[", "#3", "]"}]}], "]"}], "&"}], ")"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"LabelStyle", "\[Rule]", 
+               RowBox[{"Directive", "[", 
+                RowBox[{"FontFamily", "\[Rule]", "\"\<Consolas\>\""}], 
+                "]"}]}], ",", 
+              RowBox[{"PlotStyle", "\[Rule]", 
+               RowBox[{"Opacity", "[", "0.95", "]"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"ImageSize", "\[Rule]", "1000"}], ",", 
+              RowBox[{"ImageMargins", "\[Rule]", "100"}], ",", 
+              RowBox[{"AspectRatio", "\[Rule]", 
+               RowBox[{"9", "/", "16"}]}]}], "]"}], "\[IndentingNewLine]", 
+            "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", 
+             RowBox[{"j", "+", "step"}], ",", 
+             RowBox[{"j", "+", "stepj"}], ",", "step"}], "}"}]}], 
+          "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"p", ",", "q", ",", 
+           RowBox[{"N", "[", "i", "]"}]}], "}"}]}], "\[IndentingNewLine]", 
+        "]"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"j", ",", "min", ",", "max", ",", "stepj"}], "}"}]}], 
+    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.5261398291213245`*^9, 3.526139832756131*^9}, {
+   3.526139920194285*^9, 3.5261400826061697`*^9}, {3.5261401164114294`*^9, 
+   3.526140189310357*^9}, {3.526140234472437*^9, 3.526140237108841*^9}, {
+   3.526140510673922*^9, 3.5261405338127627`*^9}, {3.5261406403971505`*^9, 
+   3.526140641504752*^9}, 3.5261407059172654`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"min", "=", "1"}], ",", 
+     RowBox[{"max", "=", "20"}], ",", 
+     RowBox[{"step", "=", 
+      RowBox[{"1", "/", "100"}]}], ",", " ", 
+     RowBox[{"stepj", "=", 
+      RowBox[{"1", "/", "2"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Table", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Export", "[", 
+      RowBox[{
+       RowBox[{"\"\<c:\\\\temp\\\\Good-\>\"", "<>", " ", 
+        RowBox[{"ToString", "[", 
+         RowBox[{"N", "[", 
+          RowBox[{"j", ",", "4"}], "]"}], "]"}], "<>", "\"\<.avi\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Monitor", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Framed", "[", "\[IndentingNewLine]", 
+            RowBox[{"ListPlot", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"Map", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "&"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"Select", "[", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"With", "[", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"tuple", "=", 
+                    RowBox[{"Range", "[", 
+                    RowBox[{"3", ",", "200"}], "]"}]}], "}"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Flatten", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"p", ",", "q", ",", "\[IndentingNewLine]", 
+                    RowBox[{"With", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"pow", "=", 
+                    RowBox[{"IntegerPart", "[", 
+                    RowBox[{"p", "^", "i"}], "]"}]}], "}"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"With", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"d", "=", 
+                    RowBox[{"Distance", "[", 
+                    RowBox[{
+                    RowBox[{"IntegerPart", "[", "pow", "]"}], ",", "q"}], 
+                    "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Min", "[", 
+                    RowBox[{
+                    RowBox[{"PreviousDistance", "[", 
+                    RowBox[{"pow", ",", "q", ",", "d"}], "]"}], ",", "d"}], 
+                    "]"}]}], "\[IndentingNewLine]", "]"}]}], "]"}]}], "}"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"q", ",", "tuple"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"p", ",", "tuple"}], "}"}]}], "]"}], ",", "1"}], 
+                    "]"}]}], "\[IndentingNewLine]", "]"}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "3", "]"}], "]"}], "\[Equal]", "0"}], 
+                   "&"}]}], "\[IndentingNewLine]", "]"}]}], 
+               "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+              RowBox[{"PlotRange", "\[Rule]", "All"}], ",", " ", 
+              RowBox[{"AxesLabel", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{"p", ",", "q"}], "}"}]}], ",", 
+              RowBox[{"PlotLabel", "->", 
+               RowBox[{"\"\<Log good-distance (p^\>\"", " ", "<>", 
+                RowBox[{"ToString", "[", 
+                 RowBox[{"N", "[", 
+                  RowBox[{"i", ",", "4"}], "]"}], "]"}], " ", "<>", " ", 
+                "\"\<,q)\>\""}]}], ",", "  ", "\[IndentingNewLine]", 
+              RowBox[{"LabelStyle", "\[Rule]", 
+               RowBox[{"Directive", "[", 
+                RowBox[{"FontFamily", "\[Rule]", "\"\<Consolas\>\""}], 
+                "]"}]}], ",", 
+              RowBox[{"PlotStyle", "\[Rule]", 
+               RowBox[{"Opacity", "[", "0.95", "]"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"ImageSize", "\[Rule]", "1000"}], ",", 
+              RowBox[{"ImageMargins", "\[Rule]", "100"}], ",", 
+              RowBox[{"AspectRatio", "\[Rule]", 
+               RowBox[{"9", "/", "16"}]}]}], "]"}], "\[IndentingNewLine]", 
+            "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", 
+             RowBox[{"j", "+", "step"}], ",", 
+             RowBox[{"j", "+", "stepj"}], ",", "step"}], "}"}]}], 
+          "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"p", ",", "q", ",", 
+           RowBox[{"N", "[", "i", "]"}]}], "}"}]}], "\[IndentingNewLine]", 
+        "]"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"j", ",", "min", ",", "max", ",", "stepj"}], "}"}]}], 
+    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.526144797208731*^9, 3.526144883857854*^9}, {
+  3.5261449422719393`*^9, 3.526144943396941*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"min", "=", "1"}], ",", 
+     RowBox[{"max", "=", "20"}], ",", 
+     RowBox[{"step", "=", 
+      RowBox[{"1", "/", "100"}]}], ",", " ", 
+     RowBox[{"stepj", "=", 
+      RowBox[{"1", "/", "2"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Table", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Export", "[", 
+      RowBox[{
+       RowBox[{"\"\<c:\\\\temp\\\\OneGood-\>\"", "<>", " ", 
+        RowBox[{"ToString", "[", 
+         RowBox[{"N", "[", 
+          RowBox[{"j", ",", "4"}], "]"}], "]"}], "<>", "\"\<.avi\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Monitor", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Framed", "[", "\[IndentingNewLine]", 
+            RowBox[{"ListPlot", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"Map", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "&"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"Select", "[", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"With", "[", "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"tuple", "=", 
+                    RowBox[{"Range", "[", 
+                    RowBox[{"3", ",", "200"}], "]"}]}], "}"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Flatten", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"p", ",", "q", ",", "\[IndentingNewLine]", 
+                    RowBox[{"With", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"pow", "=", 
+                    RowBox[{"IntegerPart", "[", 
+                    RowBox[{"p", "^", "i"}], "]"}]}], "}"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"With", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"d", "=", 
+                    RowBox[{"Distance1", "[", 
+                    RowBox[{
+                    RowBox[{"IntegerPart", "[", "pow", "]"}], ",", "q"}], 
+                    "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Min", "[", 
+                    RowBox[{
+                    RowBox[{"PreviousDistance1", "[", 
+                    RowBox[{"pow", ",", "q", ",", "d"}], "]"}], ",", "d"}], 
+                    "]"}]}], "\[IndentingNewLine]", "]"}]}], "]"}]}], "}"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"q", ",", "tuple"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"p", ",", "tuple"}], "}"}]}], "]"}], ",", "1"}], 
+                    "]"}]}], "\[IndentingNewLine]", "]"}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "3", "]"}], "]"}], "\[Equal]", "0"}], 
+                   "&"}]}], "\[IndentingNewLine]", "]"}]}], 
+               "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+              RowBox[{"PlotRange", "\[Rule]", "All"}], ",", " ", 
+              RowBox[{"AxesLabel", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{"p", ",", "q"}], "}"}]}], ",", 
+              RowBox[{"PlotLabel", "->", 
+               RowBox[{"\"\<Log good-distance (p^\>\"", " ", "<>", 
+                RowBox[{"ToString", "[", 
+                 RowBox[{"N", "[", 
+                  RowBox[{"i", ",", "4"}], "]"}], "]"}], " ", "<>", " ", 
+                "\"\<,q)\>\""}]}], ",", "  ", "\[IndentingNewLine]", 
+              RowBox[{"LabelStyle", "\[Rule]", 
+               RowBox[{"Directive", "[", 
+                RowBox[{"FontFamily", "\[Rule]", "\"\<Consolas\>\""}], 
+                "]"}]}], ",", 
+              RowBox[{"PlotStyle", "\[Rule]", 
+               RowBox[{"Opacity", "[", "0.95", "]"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"ImageSize", "\[Rule]", "1000"}], ",", 
+              RowBox[{"ImageMargins", "\[Rule]", "100"}], ",", 
+              RowBox[{"AspectRatio", "\[Rule]", 
+               RowBox[{"9", "/", "16"}]}]}], "]"}], "\[IndentingNewLine]", 
+            "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", 
+             RowBox[{"j", "+", "step"}], ",", 
+             RowBox[{"j", "+", "stepj"}], ",", "step"}], "}"}]}], 
+          "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"p", ",", "q", ",", 
+           RowBox[{"N", "[", "i", "]"}]}], "}"}]}], "\[IndentingNewLine]", 
+        "]"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"j", ",", "min", ",", "max", ",", "stepj"}], "}"}]}], 
+    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.5261458279813313`*^9, 3.526145830601335*^9}, {
+  3.5261459106494527`*^9, 3.5261459126794558`*^9}}],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellChangeTimes->{3.5261473862585735`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Distance1", "[", 
+   RowBox[{"n_", ",", " ", "p_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", " ", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "threshold", ",", " ", "digits", ",", " ", "position", ",", " ", "found",
+       ",", " ", "nextPower", ",", " ", "result"}], "}"}], ",", "\n", "  ", 
+    RowBox[{
+     RowBox[{"If", " ", "[", 
+      RowBox[{
+       RowBox[{"n", " ", "==", " ", "0"}], ",", " ", 
+       RowBox[{"Return", "[", "0", "]"}]}], "]"}], ";", "\n", "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Initialize", " ", "some", " ", "precomputed", " ", "local", " ", 
+       "varables"}], " ", "*)"}], "\n", "  ", 
+     RowBox[{"threshold", " ", "=", " ", "1"}], ";", "\n", "  ", 
+     RowBox[{"digits", " ", "=", " ", 
+      RowBox[{"IntegerDigits", "[", 
+       RowBox[{"n", ",", " ", "p"}], "]"}]}], ";", "\n", "  ", "\n", "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "find", " ", "the", " ", "first", " ", "digit", " ", "above", " ", 
+       "the", " ", "threshold"}], " ", "*)"}], "\n", "  ", 
+     RowBox[{"found", " ", "=", " ", 
+      RowBox[{"-", "1"}]}], ";", "\n", "  ", 
+     RowBox[{"For", "[", " ", 
+      RowBox[{
+       RowBox[{"position", " ", "=", " ", "1"}], ",", " ", 
+       RowBox[{"position", " ", "<=", " ", 
+        RowBox[{"Length", "[", "digits", "]"}]}], ",", " ", 
+       RowBox[{"position", "++"}], ",", "\n", "   ", 
+       RowBox[{"If", " ", "[", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"digits", " ", "[", 
+           RowBox[{"[", "position", "]"}], "]"}], " ", ">", " ", 
+          "threshold"}], ",", "\n", "    ", 
+         RowBox[{
+          RowBox[{"found", " ", "=", " ", "position"}], ";", " ", 
+          RowBox[{"Break", "[", "]"}]}]}], "\n", "    ", "]"}]}], "\n", "   ",
+       "]"}], ";", "\n", "  ", "\n", "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"if", " ", "we", " ", 
+        RowBox[{"didn", "'"}], "t", " ", "find", " ", "a", " ", "digit"}], 
+       ",", " ", 
+       RowBox[{
+       "then", " ", "the", " ", "distance", " ", "is", " ", "zero"}]}], " ", 
+      "*)"}], "\n", "  ", 
+     RowBox[{"If", " ", "[", 
+      RowBox[{
+       RowBox[{"found", " ", "==", " ", 
+        RowBox[{"-", "1"}]}], ",", " ", 
+       RowBox[{"Return", "[", "0", "]"}]}], "]"}], ";", "\n", "  ", "\n", 
+     "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"we", " ", "did", " ", "find", " ", "a", " ", "faulty", " ", 
+        RowBox[{"digit", ".", "  ", "Now"}], " ", "we", " ", "need", " ", 
+        "to", " ", "look", " ", "before", " ", "it", " ", "for", " ", 
+        "digits", " ", "that", " ", "equal", " ", "the", " ", 
+        RowBox[{"threshold", ".", "\n", "  ", "If"}], " ", "we", " ", "would",
+         " ", "not", " ", "count", " ", "these", " ", "then", " ", "we", " ", 
+        "would", " ", "end", " ", "up", " ", "with", " ", "a", " ", "new", 
+        " ", "value", " ", "which", " ", "is", " ", "still", " ", "not", " ", 
+        "p"}], "-", 
+       RowBox[{"good", " ", 
+        RowBox[{"(", 
+         RowBox[{"due", "\n", "  ", "to", " ", "the", " ", "carrying"}], 
+         ")"}]}]}], " ", "*)"}], "\n", "  ", 
+     RowBox[{"While", "[", " ", 
+      RowBox[{
+       RowBox[{"found", " ", ">", " ", "1"}], ",", "\n", "   ", 
+       RowBox[{"If", " ", "[", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"digits", " ", "[", 
+           RowBox[{"[", 
+            RowBox[{"found", " ", "-", " ", "1"}], "]"}], "]"}], " ", "==", 
+          " ", "threshold"}], ",", " ", 
+         RowBox[{"found", " ", "--"}], ",", " ", 
+         RowBox[{"Break", "[", "]"}]}], "]"}]}], "\n", "   ", "]"}], ";", 
+     "\n", "  ", "\n", "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "if", " ", "we", " ", "have", " ", "gone", " ", "all", " ", "the", " ", 
+       "way", " ", "to", " ", "the", " ", "start"}], "*)"}], "\n", "  ", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"found", " ", "==", " ", "1"}], ",", "\n", "   ", 
+       RowBox[{"Block", "[", 
+        RowBox[{
+         RowBox[{"{", "}"}], ",", "\n", "    ", 
+         RowBox[{
+          RowBox[{"nextPower", " ", "=", " ", 
+           RowBox[{"p", "^", 
+            RowBox[{"(", 
+             RowBox[{"Length", "[", "digits", "]"}], ")"}]}]}], ";", "\n", 
+          "    ", 
+          RowBox[{"Return", "[", 
+           RowBox[{"nextPower", " ", "-", " ", "n"}], "]"}]}]}], "\n", "    ",
+         "]"}]}], "\n", "   ", "]"}], ";", "\n", "  ", "\n", "  ", "\n", "  ", 
+     RowBox[{"nextPower", " ", "=", " ", 
+      RowBox[{"p", "^", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Length", "[", "digits", "]"}], " ", "+", " ", "1", " ", "-",
+          " ", "found"}], ")"}]}]}], ";", "\n", "  ", 
+     RowBox[{"Return", "[", 
+      RowBox[{"nextPower", " ", "-", " ", 
+       RowBox[{"FromDigits", "[", 
+        RowBox[{
+         RowBox[{"Take", "[", 
+          RowBox[{"digits", ",", " ", 
+           RowBox[{"-", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"Length", "[", "digits", "]"}], " ", "+", " ", "1", " ",
+               "-", " ", "found"}], ")"}]}]}], "]"}], ",", " ", "p"}], 
+        "]"}]}], "]"}]}]}], "\n", "  ", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PreviousDistance1", "[", 
+   RowBox[{"n_", ",", "p_", ",", " ", "dist_"}], "]"}], ":=", " ", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"next", ",", " ", "index"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"dist", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", "0", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"next", " ", "=", " ", 
+        RowBox[{"n", " ", "+", " ", "dist"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"index", " ", "=", " ", 
+        RowBox[{"FromDigits", "[", 
+         RowBox[{
+          RowBox[{"IntegerDigits", "[", 
+           RowBox[{"next", ",", "p"}], "]"}], ",", "2"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", 
+        RowBox[{"n", "-", 
+         RowBox[{"FromDigits", "[", 
+          RowBox[{
+           RowBox[{"IntegerDigits", "[", 
+            RowBox[{
+             RowBox[{"index", "-", "1"}], ",", "2"}], "]"}], ",", "p"}], 
+          "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.526145725240181*^9, 3.5261457381932*^9}}]
+},
+WindowSize->{1264, 889},
+WindowMargins->{{0, Automatic}, {Automatic, 3}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (January 30, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 5333, 127, 732, "Input"],
+Cell[5881, 149, 1478, 37, 212, "Input"],
+Cell[7362, 188, 189, 3, 31, "Input"],
+Cell[7554, 193, 5622, 120, 612, "Input"],
+Cell[13179, 315, 5593, 121, 732, "Input"],
+Cell[CellGroupData[{
+Cell[18797, 440, 5602, 121, 732, "Input"],
+Cell[24402, 563, 79, 1, 30, "Output"]
+}, Open  ]],
+Cell[24496, 567, 5234, 123, 732, "Input"],
+Cell[29733, 692, 1256, 30, 192, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

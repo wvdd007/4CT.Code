@@ -1,0 +1,3700 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     82771,       3691]
+NotebookOptionsPosition[     80548,       3610]
+NotebookOutlinePosition[     80923,       3626]
+CellTagsIndexPosition[     80880,       3623]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Venn Diagram", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["Author", "Subsection"],
+
+Cell["\<\
+Eric W. Weisstein
+January 10, 2009\
+\>", "Text"],
+
+Cell[TextData[{
+ "This notebook downloaded from ",
+ ButtonBox["http://mathworld.wolfram.com/notebooks/Logic/VennDiagram.nb",
+  BaseStyle->"Hyperlink",
+  ButtonData:>{
+    URL["http://mathworld.wolfram.com/notebooks/Logic/VennDiagram.nb"], None}],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "For more information, see Eric's ",
+ StyleBox["MathWorld",
+  FontSlant->"Italic"],
+ " entry ",
+ ButtonBox["http://mathworld.wolfram.com/VennDiagram.html",
+  BaseStyle->"Hyperlink",
+  ButtonData:>{
+    URL["http://mathworld.wolfram.com/VennDiagram.html"], None}],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "For a list of Eric's math packages that may be needed to evaluate this \
+notebook, see ",
+ StyleBox["Mathematica Information Center",
+  FontSlant->Italic],
+ "'s ",
+ ButtonBox["MathSource item 4775",
+  BaseStyle->"Hyperlink",
+  ButtonData:>{
+    URL["http://library.wolfram.com/infocenter/MathSource/4775/"], None}],
+ ".  A list of Eric's utility packages that may be needed to evaluate this \
+notebook may be downloaded from ",
+ ButtonBox["MathSource item 5087",
+  BaseStyle->"Hyperlink",
+  ButtonData:>{
+    URL["http://library.wolfram.com/infocenter/MathSource/5087/"], None}],
+ "."
+}], "Text"],
+
+Cell["\<\
+\[Copyright]2009 Wolfram Research, Inc. except for portions noted otherwise\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Initialization", "Subsection"],
+
+Cell[BoxData[{
+ RowBox[{"<<", "Graphics`InequalityGraphics`"}], "\n", 
+ RowBox[{"<<", "DiscreteMath`Combinatorica`"}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Code", "Subsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"VennDiagram", "[", 
+   RowBox[{"n_", ",", 
+    RowBox[{"ineqs_:", 
+     RowBox[{"{", "}"}]}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"i", ",", 
+      RowBox[{"r", "=", ".6"}], ",", 
+      RowBox[{"R", "=", "1"}], ",", "v"}], "}"}], ",", "\[IndentingNewLine]", 
+    
+    RowBox[{
+     RowBox[{"v", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Circle", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"r", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Cos", "[", "#", "]"}], ",", 
+               RowBox[{"Sin", "[", "#", "]"}]}], "}"}]}], "&"}], "[", 
+           RowBox[{"2", "Pi", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"i", "-", "1"}], ")"}], "/", "n"}]}], "]"}], ",", "R"}],
+          "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "n"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"ineqs", "==", 
+          RowBox[{"{", "}"}]}], ",", 
+         RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"InequalityPlot", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"v", "/.", 
+               RowBox[{
+                RowBox[{"Circle", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"xx_", ",", "yy_"}], "}"}], ",", "rr_"}], "]"}], 
+                "\[RuleDelayed]", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"x", "-", "xx"}], ")"}], "^", "2"}], "+", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"y", "-", "yy"}], ")"}], "^", "2"}]}], "<", 
+                 RowBox[{"rr", "^", "2"}]}]}]}], ")"}], "[", 
+             RowBox[{"[", "ineqs", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"{", "x", "}"}], ",", 
+            RowBox[{"{", "y", "}"}], ",", 
+            RowBox[{"Axes", "\[Rule]", "False"}], ",", "\[IndentingNewLine]", 
+            
+            RowBox[{"Curves", "\[Rule]", "None"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"DisplayFunction", "\[Rule]", "Identity"}]}], "]"}], "[", 
+          
+          RowBox[{"[", "1", "]"}], "]"}]}], "\[IndentingNewLine]", "]"}], ",",
+        "\[IndentingNewLine]", "v"}], "\[IndentingNewLine]", "}"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ InitializationCell->True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Diagrams", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ StyleBox["n",
+  FontSlant->"Italic"],
+ " = 2"
+}], "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Sort", "@", 
+  RowBox[{"Subsets", "[", "2", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", "}"}], ",", 
+   RowBox[{"{", "1", "}"}], ",", 
+   RowBox[{"{", "2", "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"GraphicsArray", "[", 
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Graphics", "[", 
+        RowBox[{
+         RowBox[{"VennDiagram", "[", 
+          RowBox[{"2", ",", "#"}], "]"}], ",", 
+         RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+         RowBox[{
+          RowBox[{"PlotLabel", "\[Rule]", 
+           RowBox[{"TraditionalForm", "[", 
+            RowBox[{"And", "@@", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"A", ",", "#"}], "]"}], "&"}], "/@", "#"}], ")"}]}], 
+            "]"}]}], "/.", 
+          RowBox[{"True", "\[Rule]", "\[EmptySet]"}]}]}], "]"}], "&"}], "/@", 
+      
+      RowBox[{"Sort", "@", 
+       RowBox[{"Subsets", "[", "2", "]"}]}]}], ",", "2"}], "]"}], 
+   "\[IndentingNewLine]", "]"}], "]"}]], "Input"],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .625 
+MathPictureStart
+/Mabs {
+Mgmatrix idtransform
+Mtmatrix dtransform
+} bind def
+/Mabsadd { Mabs
+3 -1 roll add
+3 1 roll add
+exch } bind def
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0238095 0.47619 0.014881 0.47619 [
+[ 0 0 0 0 ]
+[ 1 .625 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 0 m
+1 0 L
+1 .625 L
+0 .625 L
+closepath
+clip
+newpath
+% Start of sub-graphic
+p
+0.0238095 0.014881 0.477324 0.298328 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.297619 0.3125 0.297619 [
+[.5 .6375 -7.4375 0 ]
+[.5 .6375 7.4375 12 ]
+[ 0 0 0 0 ]
+[ 1 .625 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 .6375 -68.4375 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.250 13.000 moveto
+%%IncludeResource: font Times-Italic
+%%IncludeFont: Times-Italic
+%%BeginResource: font Times-Italic-MISO
+%%BeginFont: Times-Italic-MISO
+/Times-Italic /Times-Italic-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+69.312 14.562 moveto
+%%IncludeResource: font Times-Roman
+%%IncludeFont: Times-Roman
+%%BeginResource: font Times-Roman-MISO
+%%BeginFont: Times-Roman-MISO
+/Times-Roman /Times-Roman-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(2) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 .625 L
+0 .625 L
+closepath
+clip
+newpath
+0 1 1 r
+.02381 .31238 m
+.02454 .2916 L
+.02521 .28363 L
+.02671 .27102 L
+.02942 .25499 L
+.03258 .24079 L
+.03556 .22968 L
+.04796 .19507 L
+.06058 .16919 L
+.07429 .14667 L
+.09983 .11382 L
+.12443 .08941 L
+.14807 .07058 L
+.17325 .05439 L
+.19749 .04192 L
+.22325 .03154 L
+.23612 .02737 L
+.24807 .02406 L
+.26036 .02121 L
+.27194 .01902 L
+.28477 .01715 L
+.2964 .01594 L
+.3025 .01548 L
+.30583 .01529 L
+.30894 .01514 L
+.3116 .01504 L
+.31445 .01496 L
+.31607 .01493 L
+.31687 .01492 L
+.31761 .01491 L
+.31826 .0149 L
+.31899 .01489 L
+.31972 .01489 L
+.32049 .01488 L
+.32125 .01488 L
+.32196 .01488 L
+.32273 .01488 L
+.32317 .01489 L
+.32356 .01489 L
+.32436 .0149 L
+.32523 .01491 L
+.3268 .01493 L
+.32826 .01496 L
+.32981 .015 L
+.33258 .01509 L
+.33579 .01523 L
+.33879 .01539 L
+.34562 .01587 L
+.35212 .01647 L
+.3583 .01717 L
+.36988 .01885 L
+.38229 .02117 L
+.39379 .02381 L
+.41827 .03108 L
+.4443 .04143 L
+.46937 .05425 L
+.4935 .06966 L
+.51916 .09006 L
+.54387 .11477 L
+.56763 .14529 L
+.58087 .16667 L
+.59293 .19058 L
+.59893 .20493 L
+.60544 .22355 L
+.60843 .23371 L
+.6116 .24632 L
+.6143 .25956 L
+.61574 .26823 L
+.61728 .28012 L
+.61773 .28453 L
+.6182 .2901 L
+.61861 .29631 L
+.61905 .31238 L
+.61905 .31262 L
+.61861 .32869 L
+.6182 .3349 L
+.61773 .34047 L
+.61728 .34488 L
+.61574 .35677 L
+.6143 .36544 L
+.6116 .37868 L
+.60843 .39129 L
+.60544 .40145 L
+.59893 .42007 L
+.59293 .43442 L
+.58087 .45833 L
+.56763 .47971 L
+.54387 .51023 L
+.51916 .53494 L
+.4935 .55534 L
+.46937 .57075 L
+.4443 .58357 L
+.41827 .59392 L
+.39379 .60119 L
+.38229 .60383 L
+.36988 .60615 L
+.3583 .60783 L
+.35212 .60853 L
+.34562 .60913 L
+.33879 .60961 L
+.33579 .60977 L
+.33258 .60991 L
+.32981 .61 L
+.32826 .61004 L
+.3268 .61007 L
+.32523 .61009 L
+.32436 .6101 L
+.32356 .61011 L
+.32317 .61011 L
+.32273 .61012 L
+.32196 .61012 L
+.32125 .61012 L
+.32049 .61012 L
+.31972 .61011 L
+.31899 .61011 L
+.31826 .6101 L
+.31761 .61009 L
+.31687 .61008 L
+.31607 .61007 L
+.31445 .61004 L
+.3116 .60996 L
+.30894 .60986 L
+.30583 .60971 L
+.3025 .60952 L
+.2964 .60906 L
+.28477 .60785 L
+.27194 .60598 L
+.26036 .60379 L
+.24807 .60094 L
+.23612 .59763 L
+.22325 .59346 L
+.19749 .58308 L
+.17325 .57061 L
+.14807 .55442 L
+.12443 .53559 L
+.09983 .51118 L
+.07429 .47833 L
+.06058 .45581 L
+.04796 .42993 L
+.03556 .39532 L
+.03258 .38421 L
+.02942 .37001 L
+.02671 .35398 L
+.02521 .34137 L
+.02454 .3334 L
+.02381 .31262 L
+F
+0 g
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.67857 .3125 .29762 0 365.73 arc
+s
+newpath
+.32143 .3125 .29762 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% Start of sub-graphic
+p
+0.522676 0.014881 0.97619 0.298328 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.297619 0.3125 0.297619 [
+[.5 .6375 -17.9062 0 ]
+[.5 .6375 17.9062 12 ]
+[ 0 0 0 0 ]
+[ 1 .625 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 .6375 -78.9062 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.250 13.000 moveto
+%%IncludeResource: font Times-Italic
+%%IncludeFont: Times-Italic
+%%BeginResource: font Times-Italic-MISO
+%%BeginFont: Times-Italic-MISO
+/Times-Italic /Times-Italic-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+69.312 14.562 moveto
+%%IncludeResource: font Times-Roman
+%%IncludeFont: Times-Roman
+%%BeginResource: font Times-Roman-MISO
+%%BeginFont: Times-Roman-MISO
+/Times-Roman /Times-Roman-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(1) show
+%%IncludeResource: font Mathematica2
+%%IncludeFont: Mathematica2
+/Mathematica2 findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+75.875 13.000 moveto
+(\\337) show
+84.188 13.000 moveto
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+90.250 14.562 moveto
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(2) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 .625 L
+0 .625 L
+closepath
+clip
+newpath
+0 1 1 r
+.38095 .31245 m
+.3811 .30315 L
+.38123 .29958 L
+.38153 .29391 L
+.38207 .28668 L
+.38271 .28024 L
+.3833 .27517 L
+.38578 .2591 L
+.38831 .24674 L
+.39105 .23564 L
+.39616 .21859 L
+.40108 .20492 L
+.40581 .19344 L
+.41084 .18251 L
+.41569 .17297 L
+.42084 .16366 L
+.4258 .15538 L
+.43058 .14795 L
+.43566 .14054 L
+.44055 .13383 L
+.44575 .12711 L
+.45076 .12099 L
+.45558 .1154 L
+.4607 .10975 L
+.46564 .10457 L
+.47038 .09982 L
+.47544 .09498 L
+.4803 .09054 L
+.48547 .08603 L
+.49045 .08188 L
+.49524 .07805 L
+.5 .0744 L
+.5 .5506 L
+.49524 .54695 L
+.49045 .54312 L
+.48547 .53897 L
+.4803 .53446 L
+.47544 .53002 L
+.47038 .52518 L
+.46564 .52043 L
+.4607 .51525 L
+.45558 .5096 L
+.45076 .50401 L
+.44575 .49789 L
+.44055 .49117 L
+.43566 .48446 L
+.43058 .47705 L
+.4258 .46962 L
+.42084 .46134 L
+.41569 .45203 L
+.41084 .44249 L
+.40581 .43156 L
+.40108 .42008 L
+.39616 .40641 L
+.39105 .38936 L
+.38831 .37826 L
+.38578 .3659 L
+.3833 .34983 L
+.38271 .34476 L
+.38207 .33832 L
+.38153 .33109 L
+.38123 .32542 L
+.3811 .32185 L
+.38095 .31255 L
+F
+.5 .0744 m
+.50483 .0781 L
+.5101 .08232 L
+.51504 .08647 L
+.5198 .09063 L
+.52486 .09526 L
+.52974 .09993 L
+.53492 .10514 L
+.53991 .1104 L
+.54471 .11572 L
+.54982 .12167 L
+.55474 .12772 L
+.55947 .13385 L
+.5645 .14077 L
+.56935 .14784 L
+.5745 .15588 L
+.57947 .1642 L
+.58424 .17283 L
+.58932 .18285 L
+.59421 .19348 L
+.59941 .20618 L
+.60442 .22034 L
+.60924 .23672 L
+.61168 .24669 L
+.61436 .2599 L
+.61553 .26689 L
+.61679 .27588 L
+.61739 .28116 L
+.61797 .28718 L
+.61849 .29422 L
+.61863 .29669 L
+.61878 .29982 L
+.61891 .30332 L
+.61905 .31245 L
+.61905 .31255 L
+.61891 .32168 L
+.61878 .32518 L
+.61863 .32831 L
+.61849 .33078 L
+.61797 .33782 L
+.61739 .34384 L
+.61679 .34912 L
+.61553 .35811 L
+.61436 .3651 L
+.61168 .37831 L
+.60924 .38828 L
+.60442 .40466 L
+.59941 .41882 L
+.59421 .43152 L
+.58932 .44215 L
+.58424 .45217 L
+.57947 .4608 L
+.5745 .46912 L
+.56935 .47716 L
+.5645 .48423 L
+.55947 .49115 L
+.55474 .49728 L
+.54982 .50333 L
+.54471 .50928 L
+.53991 .5146 L
+.53492 .51986 L
+.52974 .52507 L
+.52486 .52974 L
+.5198 .53437 L
+.51504 .53853 L
+.5101 .54268 L
+.50483 .5469 L
+.5 .5506 L
+F
+0 g
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.67857 .3125 .29762 0 365.73 arc
+s
+newpath
+.32143 .3125 .29762 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% Start of sub-graphic
+p
+0.0238095 0.326672 0.477324 0.610119 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.297619 0.3125 0.297619 [
+[.5 .6375 -5.59375 0 ]
+[.5 .6375 5.59375 12 ]
+[ 0 0 0 0 ]
+[ 1 .625 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 .6375 -66.5938 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.000 13.000 moveto
+%%IncludeResource: font Mathematica1
+%%IncludeFont: Mathematica1
+/Mathematica1 findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(\\306) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 .625 L
+0 .625 L
+closepath
+clip
+newpath
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.67857 .3125 .29762 0 365.73 arc
+s
+newpath
+.32143 .3125 .29762 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% Start of sub-graphic
+p
+0.522676 0.326672 0.97619 0.610119 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.297619 0.3125 0.297619 [
+[.5 .6375 -7.4375 0 ]
+[.5 .6375 7.4375 12 ]
+[ 0 0 0 0 ]
+[ 1 .625 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 .6375 -68.4375 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.250 13.000 moveto
+%%IncludeResource: font Times-Italic
+%%IncludeFont: Times-Italic
+%%BeginResource: font Times-Italic-MISO
+%%BeginFont: Times-Italic-MISO
+/Times-Italic /Times-Italic-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+69.312 14.562 moveto
+%%IncludeResource: font Times-Roman
+%%IncludeFont: Times-Roman
+%%BeginResource: font Times-Roman-MISO
+%%BeginFont: Times-Roman-MISO
+/Times-Roman /Times-Roman-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(1) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 .625 L
+0 .625 L
+closepath
+clip
+newpath
+0 1 1 r
+.38095 .31238 m
+.38169 .2916 L
+.38236 .28363 L
+.38386 .27102 L
+.38656 .25499 L
+.38972 .24079 L
+.39271 .22968 L
+.4051 .19507 L
+.41773 .16919 L
+.43143 .14667 L
+.45698 .11382 L
+.48157 .08941 L
+.50522 .07058 L
+.5304 .05439 L
+.55463 .04192 L
+.58039 .03154 L
+.59326 .02737 L
+.60521 .02406 L
+.6175 .02121 L
+.62908 .01902 L
+.64191 .01715 L
+.65354 .01594 L
+.65964 .01548 L
+.66297 .01529 L
+.66609 .01514 L
+.66874 .01504 L
+.67159 .01496 L
+.67321 .01493 L
+.67401 .01492 L
+.67475 .01491 L
+.67541 .0149 L
+.67613 .01489 L
+.67686 .01489 L
+.67763 .01488 L
+.67839 .01488 L
+.6791 .01488 L
+.67988 .01488 L
+.68031 .01489 L
+.68071 .01489 L
+.6815 .0149 L
+.68237 .01491 L
+.68394 .01493 L
+.6854 .01496 L
+.68695 .015 L
+.68972 .01509 L
+.69293 .01523 L
+.69593 .01539 L
+.70276 .01587 L
+.70926 .01647 L
+.71544 .01717 L
+.72702 .01885 L
+.73943 .02117 L
+.75093 .02381 L
+.77542 .03108 L
+.80144 .04143 L
+.82651 .05425 L
+.85064 .06966 L
+.8763 .09006 L
+.90101 .11477 L
+.92478 .14529 L
+.93802 .16667 L
+.95007 .19058 L
+.95607 .20493 L
+.96259 .22355 L
+.96557 .23371 L
+.96874 .24632 L
+.97144 .25956 L
+.97288 .26823 L
+.97442 .28012 L
+.97487 .28453 L
+.97535 .2901 L
+.97575 .29631 L
+.97619 .31238 L
+.97619 .31262 L
+.97575 .32869 L
+.97535 .3349 L
+.97487 .34047 L
+.97442 .34488 L
+.97288 .35677 L
+.97144 .36544 L
+.96874 .37868 L
+.96557 .39129 L
+.96259 .40145 L
+.95607 .42007 L
+.95007 .43442 L
+.93802 .45833 L
+.92478 .47971 L
+.90101 .51023 L
+.8763 .53494 L
+.85064 .55534 L
+.82651 .57075 L
+.80144 .58357 L
+.77542 .59392 L
+.75093 .60119 L
+.73943 .60383 L
+.72702 .60615 L
+.71544 .60783 L
+.70926 .60853 L
+.70276 .60913 L
+.69593 .60961 L
+.69293 .60977 L
+.68972 .60991 L
+.68695 .61 L
+.6854 .61004 L
+.68394 .61007 L
+.68237 .61009 L
+.6815 .6101 L
+.68071 .61011 L
+.68031 .61011 L
+.67988 .61012 L
+.6791 .61012 L
+.67839 .61012 L
+.67763 .61012 L
+.67686 .61011 L
+.67613 .61011 L
+.67541 .6101 L
+.67475 .61009 L
+.67401 .61008 L
+.67321 .61007 L
+.67159 .61004 L
+.66874 .60996 L
+.66609 .60986 L
+.66297 .60971 L
+.65964 .60952 L
+.65354 .60906 L
+.64191 .60785 L
+.62908 .60598 L
+.6175 .60379 L
+.60521 .60094 L
+.59326 .59763 L
+.58039 .59346 L
+.55463 .58308 L
+.5304 .57061 L
+.50522 .55442 L
+.48157 .53559 L
+.45698 .51118 L
+.43143 .47833 L
+.41773 .45581 L
+.4051 .42993 L
+.39271 .39532 L
+.38972 .38421 L
+.38656 .37001 L
+.38386 .35398 L
+.38236 .34137 L
+.38169 .3334 L
+.38095 .31262 L
+F
+0 g
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.67857 .3125 .29762 0 365.73 arc
+s
+newpath
+.32143 .3125 .29762 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+ ImageSize->{288, 180},
+ ImageMargins->{{43, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ ImageCache->GraphicsData["CompressedBitmap", "\<\
+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\
+\>"],
+ ImageRangeCache->{{{0, 287}, {179, 0}} -> {0, 0, 0, 0}, {{7.0625, 137}, \
+{174.688, 93.5}} -> {-2, -1, 0, 0}, {{149.938, 279.875}, {174.688, 93.5}} -> \
+{-6, -1, 0, 0}, {{7.0625, 137}, {85.4375, 4.25}} -> {-2, -3, 0, 0}, \
+{{149.938, 279.875}, {85.4375, 4.25}} -> {-6, -3, 0, 0}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"\[SkeletonIndicator]", "GraphicsArray", "\[SkeletonIndicator]"}],
+  False,
+  Editable->False]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ StyleBox["n",
+  FontSlant->"Italic"],
+ " = 3"
+}], "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Sort", "@", 
+  RowBox[{"Subsets", "[", "3", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", "}"}], ",", 
+   RowBox[{"{", "1", "}"}], ",", 
+   RowBox[{"{", "2", "}"}], ",", 
+   RowBox[{"{", "3", "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3"}], "}"}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"GraphicsArray", "[", 
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Graphics", "[", 
+        RowBox[{
+         RowBox[{"VennDiagram", "[", 
+          RowBox[{"3", ",", "#"}], "]"}], ",", 
+         RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+         RowBox[{
+          RowBox[{"PlotLabel", "\[Rule]", 
+           RowBox[{"TraditionalForm", "[", 
+            RowBox[{"And", "@@", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"A", ",", "#"}], "]"}], "&"}], "/@", "#"}], ")"}]}], 
+            "]"}]}], "/.", 
+          RowBox[{"True", "\[Rule]", "\[EmptySet]"}]}]}], "]"}], "&"}], "/@", 
+      
+      RowBox[{"Sort", "@", 
+       RowBox[{"Subsets", "[", "3", "]"}]}]}], ",", "4"}], "]"}], 
+   "\[IndentingNewLine]", "]"}], "]"}]], "Input"],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .51182 
+MathPictureStart
+/Mabs {
+Mgmatrix idtransform
+Mtmatrix dtransform
+} bind def
+/Mabsadd { Mabs
+3 -1 roll add
+3 1 roll add
+exch } bind def
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0238095 0.238095 0.0121862 0.238095 [
+[ 0 0 0 0 ]
+[ 1 .51182 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 0 m
+1 0 L
+1 .51182 L
+0 .51182 L
+closepath
+clip
+newpath
+% Start of sub-graphic
+p
+0.0238095 0.0121862 0.245293 0.244304 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.450739 0.328407 0.524005 0.328407 [
+[.5 1.06051 -17.9062 0 ]
+[.5 1.06051 17.9062 12 ]
+[ 0 0 0 0 ]
+[ 1 1.04801 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 1.06051 -78.9062 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.250 13.000 moveto
+%%IncludeResource: font Times-Italic
+%%IncludeFont: Times-Italic
+%%BeginResource: font Times-Italic-MISO
+%%BeginFont: Times-Italic-MISO
+/Times-Italic /Times-Italic-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+69.312 14.562 moveto
+%%IncludeResource: font Times-Roman
+%%IncludeFont: Times-Roman
+%%BeginResource: font Times-Roman-MISO
+%%BeginFont: Times-Roman-MISO
+/Times-Roman /Times-Roman-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(1) show
+%%IncludeResource: font Mathematica2
+%%IncludeFont: Mathematica2
+/Mathematica2 findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+75.875 13.000 moveto
+(\\337) show
+84.188 13.000 moveto
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+90.250 14.562 moveto
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(2) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 1.04801 L
+0 1.04801 L
+closepath
+clip
+newpath
+0 1 1 r
+.31938 .52397 m
+.31943 .51829 L
+.31947 .5161 L
+.31957 .51264 L
+.31976 .50821 L
+.31997 .50426 L
+.32017 .50115 L
+.32101 .49127 L
+.32187 .48363 L
+.3228 .47673 L
+.32453 .46607 L
+.32619 .45744 L
+.3278 .45012 L
+.3295 .44309 L
+.33114 .43688 L
+.33289 .43077 L
+.33457 .42527 L
+.33619 .42028 L
+.33791 .41524 L
+.33957 .41063 L
+.34133 .40596 L
+.34302 .40164 L
+.34466 .39765 L
+.34639 .39357 L
+.34806 .38977 L
+.34967 .38624 L
+.35138 .38259 L
+.35303 .37919 L
+.35478 .37568 L
+.35647 .37239 L
+.35809 .36931 L
+.3597 .36633 L
+.3597 .68168 L
+.35809 .6787 L
+.35647 .67562 L
+.35478 .67233 L
+.35303 .66882 L
+.35138 .66542 L
+.34967 .66178 L
+.34806 .65824 L
+.34639 .65444 L
+.34466 .65036 L
+.34302 .64637 L
+.34133 .64205 L
+.33957 .63738 L
+.33791 .63277 L
+.33619 .62773 L
+.33457 .62274 L
+.33289 .61724 L
+.33114 .61113 L
+.3295 .60492 L
+.3278 .59789 L
+.32619 .59057 L
+.32453 .58194 L
+.3228 .57128 L
+.32187 .56438 L
+.32101 .55674 L
+.32017 .54686 L
+.31997 .54375 L
+.31976 .5398 L
+.31957 .53537 L
+.31947 .53191 L
+.31943 .52972 L
+.31938 .52404 L
+F
+.3597 .36633 m
+.36235 .3664 L
+.36525 .3665 L
+.37109 .36679 L
+.37751 .36722 L
+.3835 .36774 L
+.39499 .36904 L
+.4072 .37088 L
+.41896 .3731 L
+.43028 .37566 L
+.44232 .37885 L
+.45392 .38239 L
+.46506 .38624 L
+.47693 .39085 L
+.48835 .39579 L
+.5005 .40163 L
+.5122 .40785 L
+.52345 .41442 L
+.53543 .4221 L
+.54696 .43021 L
+.55921 .43969 L
+.57101 .44974 L
+.58237 .46038 L
+.59445 .4729 L
+.60608 .48632 L
+.61727 .50075 L
+.62918 .51818 L
+.6403 .53697 L
+.6403 .85233 L
+.63496 .85216 L
+.63201 .85203 L
+.62925 .85189 L
+.62305 .85148 L
+.61717 .85098 L
+.60582 .84972 L
+.59401 .84798 L
+.58176 .84571 L
+.57023 .84312 L
+.55826 .83997 L
+.54701 .83657 L
+.53531 .83255 L
+.52316 .82785 L
+.51174 .82291 L
+.49987 .81722 L
+.48872 .81132 L
+.47713 .80459 L
+.46509 .7969 L
+.45377 .78898 L
+.44201 .77995 L
+.42979 .76963 L
+.41831 .75893 L
+.40637 .74665 L
+.39516 .73384 L
+.3835 .71896 L
+.37109 .7009 L
+.3597 .68168 L
+F
+.6403 .53697 m
+.64193 .54 L
+.64372 .54339 L
+.64539 .54666 L
+.647 .5499 L
+.64872 .55345 L
+.65037 .55697 L
+.65212 .56083 L
+.65382 .56469 L
+.65544 .56853 L
+.65717 .57278 L
+.65884 .57703 L
+.66044 .5813 L
+.66215 .58605 L
+.66379 .59085 L
+.66553 .59625 L
+.66722 .60177 L
+.66883 .60744 L
+.67055 .61395 L
+.67221 .62079 L
+.67397 .62889 L
+.67567 .63781 L
+.6773 .64805 L
+.67813 .65424 L
+.67904 .6624 L
+.67943 .66671 L
+.67986 .67223 L
+.68006 .67547 L
+.68026 .67916 L
+.68043 .68347 L
+.68048 .68498 L
+.68053 .6869 L
+.68058 .68904 L
+.68062 .69462 L
+.68062 .69468 L
+.68058 .70027 L
+.68053 .7024 L
+.68048 .70432 L
+.68043 .70583 L
+.68026 .71014 L
+.68006 .71383 L
+.67986 .71707 L
+.67943 .72259 L
+.67904 .7269 L
+.67813 .73506 L
+.6773 .74125 L
+.67567 .75149 L
+.67397 .76042 L
+.67221 .76851 L
+.67055 .77535 L
+.66883 .78186 L
+.66722 .78753 L
+.66553 .79306 L
+.66379 .79845 L
+.66215 .80325 L
+.66044 .80801 L
+.65884 .81227 L
+.65717 .81653 L
+.65544 .82077 L
+.65382 .82461 L
+.65212 .82847 L
+.65037 .83233 L
+.64872 .83585 L
+.647 .8394 L
+.64539 .84264 L
+.64372 .84591 L
+.64193 .8493 L
+.6403 .85233 L
+F
+0 g
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.64778 .52401 .32841 0 365.73 arc
+s
+newpath
+.35222 .69465 .32841 0 365.73 arc
+s
+newpath
+.35222 .35336 .32841 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% Start of sub-graphic
+p
+0.267442 0.0121862 0.488926 0.244304 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.450739 0.328407 0.524005 0.328407 [
+[.5 1.06051 -17.9062 0 ]
+[.5 1.06051 17.9062 12 ]
+[ 0 0 0 0 ]
+[ 1 1.04801 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 1.06051 -78.9062 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.250 13.000 moveto
+%%IncludeResource: font Times-Italic
+%%IncludeFont: Times-Italic
+%%BeginResource: font Times-Italic-MISO
+%%BeginFont: Times-Italic-MISO
+/Times-Italic /Times-Italic-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+69.312 14.562 moveto
+%%IncludeResource: font Times-Roman
+%%IncludeFont: Times-Roman
+%%BeginResource: font Times-Roman-MISO
+%%BeginFont: Times-Roman-MISO
+/Times-Roman /Times-Roman-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(1) show
+%%IncludeResource: font Mathematica2
+%%IncludeFont: Mathematica2
+/Mathematica2 findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+75.875 13.000 moveto
+(\\337) show
+84.188 13.000 moveto
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+90.250 14.562 moveto
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(3) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 1.04801 L
+0 1.04801 L
+closepath
+clip
+newpath
+0 1 1 r
+.31938 .52397 m
+.31943 .51829 L
+.31947 .5161 L
+.31957 .51264 L
+.31976 .50821 L
+.31997 .50426 L
+.32017 .50115 L
+.32101 .49127 L
+.32187 .48363 L
+.3228 .47673 L
+.32453 .46607 L
+.32619 .45744 L
+.3278 .45012 L
+.3295 .44309 L
+.33114 .43688 L
+.33289 .43077 L
+.33457 .42527 L
+.33619 .42028 L
+.33791 .41524 L
+.33957 .41063 L
+.34133 .40596 L
+.34302 .40164 L
+.34466 .39765 L
+.34639 .39357 L
+.34806 .38977 L
+.34967 .38624 L
+.35138 .38259 L
+.35303 .37919 L
+.35478 .37568 L
+.35647 .37239 L
+.35809 .36931 L
+.3597 .36633 L
+.3597 .68168 L
+.35809 .6787 L
+.35647 .67562 L
+.35478 .67233 L
+.35303 .66882 L
+.35138 .66542 L
+.34967 .66178 L
+.34806 .65824 L
+.34639 .65444 L
+.34466 .65036 L
+.34302 .64637 L
+.34133 .64205 L
+.33957 .63738 L
+.33791 .63277 L
+.33619 .62773 L
+.33457 .62274 L
+.33289 .61724 L
+.33114 .61113 L
+.3295 .60492 L
+.3278 .59789 L
+.32619 .59057 L
+.32453 .58194 L
+.3228 .57128 L
+.32187 .56438 L
+.32101 .55674 L
+.32017 .54686 L
+.31997 .54375 L
+.31976 .5398 L
+.31957 .53537 L
+.31947 .53191 L
+.31943 .52972 L
+.31938 .52404 L
+F
+.3597 .36633 m
+.37109 .34711 L
+.3835 .32905 L
+.39516 .31417 L
+.40637 .30136 L
+.41831 .28908 L
+.42979 .27838 L
+.44201 .26806 L
+.45377 .25903 L
+.46509 .25111 L
+.47713 .24342 L
+.48872 .23669 L
+.49987 .23079 L
+.51174 .2251 L
+.52316 .22016 L
+.53531 .21546 L
+.54701 .21144 L
+.55826 .20804 L
+.57023 .20489 L
+.58176 .2023 L
+.59401 .20003 L
+.60582 .19829 L
+.61717 .19703 L
+.62305 .19653 L
+.62925 .19612 L
+.63201 .19598 L
+.63496 .19585 L
+.6403 .19568 L
+.6403 .51104 L
+.62918 .52983 L
+.61727 .54726 L
+.60608 .56169 L
+.59445 .57511 L
+.58237 .58763 L
+.57101 .59827 L
+.55921 .60832 L
+.54696 .6178 L
+.53543 .62591 L
+.52345 .63359 L
+.5122 .64016 L
+.5005 .64638 L
+.48835 .65222 L
+.47693 .65716 L
+.46506 .66177 L
+.45392 .66562 L
+.44232 .66916 L
+.43028 .67235 L
+.41896 .67491 L
+.4072 .67713 L
+.39499 .67897 L
+.3835 .68027 L
+.37751 .68079 L
+.37109 .68122 L
+.36525 .68151 L
+.36235 .68161 L
+.3597 .68168 L
+F
+.6403 .19568 m
+.64193 .19871 L
+.64372 .2021 L
+.64539 .20537 L
+.647 .20861 L
+.64872 .21216 L
+.65037 .21568 L
+.65212 .21954 L
+.65382 .2234 L
+.65544 .22724 L
+.65717 .23149 L
+.65884 .23574 L
+.66044 .24001 L
+.66215 .24476 L
+.66379 .24956 L
+.66553 .25496 L
+.66722 .26048 L
+.66883 .26615 L
+.67055 .27266 L
+.67221 .2795 L
+.67397 .2876 L
+.67567 .29652 L
+.6773 .30676 L
+.67813 .31295 L
+.67904 .32111 L
+.67943 .32542 L
+.67986 .33094 L
+.68006 .33418 L
+.68026 .33787 L
+.68043 .34218 L
+.68048 .34369 L
+.68053 .34561 L
+.68058 .34774 L
+.68062 .35333 L
+.68062 .35339 L
+.68058 .35898 L
+.68053 .36111 L
+.68048 .36303 L
+.68043 .36454 L
+.68026 .36885 L
+.68006 .37254 L
+.67986 .37578 L
+.67943 .3813 L
+.67904 .38561 L
+.67813 .39377 L
+.6773 .39996 L
+.67567 .4102 L
+.67397 .41912 L
+.67221 .42722 L
+.67055 .43406 L
+.66883 .44057 L
+.66722 .44624 L
+.66553 .45176 L
+.66379 .45716 L
+.66215 .46196 L
+.66044 .46671 L
+.65884 .47098 L
+.65717 .47523 L
+.65544 .47948 L
+.65382 .48332 L
+.65212 .48718 L
+.65037 .49104 L
+.64872 .49456 L
+.647 .49811 L
+.64539 .50135 L
+.64372 .50462 L
+.64193 .50801 L
+.6403 .51104 L
+F
+0 g
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.64778 .52401 .32841 0 365.73 arc
+s
+newpath
+.35222 .69465 .32841 0 365.73 arc
+s
+newpath
+.35222 .35336 .32841 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% Start of sub-graphic
+p
+0.511074 0.0121862 0.732558 0.244304 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.589143 0.434872 0.69388 0.434872 [
+[.5 1.40026 -17.9062 0 ]
+[.5 1.40026 17.9062 12 ]
+[ 0 0 0 0 ]
+[ 1 1.38776 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 1.40026 -78.9062 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.250 13.000 moveto
+%%IncludeResource: font Times-Italic
+%%IncludeFont: Times-Italic
+%%BeginResource: font Times-Italic-MISO
+%%BeginFont: Times-Italic-MISO
+/Times-Italic /Times-Italic-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+69.312 14.562 moveto
+%%IncludeResource: font Times-Roman
+%%IncludeFont: Times-Roman
+%%BeginResource: font Times-Roman-MISO
+%%BeginFont: Times-Roman-MISO
+/Times-Roman /Times-Roman-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(2) show
+%%IncludeResource: font Mathematica2
+%%IncludeFont: Mathematica2
+/Mathematica2 findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+75.875 13.000 moveto
+(\\337) show
+84.188 13.000 moveto
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+90.250 14.562 moveto
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(3) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 1.38776 L
+0 1.38776 L
+closepath
+clip
+newpath
+0 1 1 r
+.08713 .69388 m
+.11727 .65049 L
+.15015 .61338 L
+.18103 .58515 L
+.21072 .56259 L
+.24233 .54261 L
+.27275 .52673 L
+.30509 .513 L
+.33625 .50257 L
+.36622 .49492 L
+.3817 .49184 L
+.39811 .48921 L
+.41335 .48734 L
+.42763 .48608 L
+.43573 .48558 L
+.43972 .48539 L
+.44343 .48524 L
+.44677 .48514 L
+.45034 .48505 L
+.45237 .48502 L
+.45337 .48501 L
+.45429 .485 L
+.45511 .48499 L
+.45602 .48498 L
+.45692 .48498 L
+.45788 .48497 L
+.4589 .48497 L
+.45984 .48498 L
+.46033 .48498 L
+.46087 .48498 L
+.46144 .48498 L
+.46197 .48499 L
+.46383 .485 L
+.46488 .48502 L
+.46584 .48503 L
+.46938 .48511 L
+.4731 .48521 L
+.47714 .48537 L
+.4809 .48554 L
+.48942 .48606 L
+.49763 .48672 L
+.50538 .48749 L
+.51989 .4893 L
+.5355 .49181 L
+.5499 .49465 L
+.58065 .50243 L
+.61021 .51223 L
+.64168 .52535 L
+.67198 .54088 L
+.70418 .5609 L
+.73521 .58422 L
+.76505 .61122 L
+.7968 .64637 L
+.82738 .68924 L
+.83024 .69388 L
+.83024 .69388 L
+.82738 .69852 L
+.7968 .74139 L
+.76505 .77654 L
+.73521 .80354 L
+.70418 .82686 L
+.67198 .84688 L
+.64168 .86241 L
+.61021 .87553 L
+.58065 .88533 L
+.5499 .89311 L
+.5355 .89595 L
+.51989 .89846 L
+.50538 .90027 L
+.49763 .90104 L
+.48942 .9017 L
+.4809 .90222 L
+.47714 .90239 L
+.4731 .90255 L
+.46938 .90265 L
+.46584 .90273 L
+.46488 .90274 L
+.46383 .90276 L
+.46197 .90277 L
+.46144 .90278 L
+.46087 .90278 L
+.46033 .90278 L
+.45984 .90278 L
+.4589 .90279 L
+.45788 .90278 L
+.45692 .90278 L
+.45602 .90278 L
+.45511 .90277 L
+.45429 .90276 L
+.45337 .90275 L
+.45237 .90274 L
+.45034 .90271 L
+.44677 .90262 L
+.44343 .90252 L
+.43972 .90237 L
+.43573 .90218 L
+.42763 .90168 L
+.41335 .90042 L
+.39811 .89855 L
+.3817 .89592 L
+.36622 .89284 L
+.33625 .88519 L
+.30509 .87476 L
+.27275 .86103 L
+.24233 .84515 L
+.21072 .82516 L
+.18103 .80261 L
+.15015 .77438 L
+.11727 .73727 L
+.08713 .69388 L
+F
+0 g
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.85007 .69388 .43487 0 365.73 arc
+s
+newpath
+.45868 .91985 .43487 0 365.73 arc
+s
+newpath
+.45868 .46791 .43487 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% Start of sub-graphic
+p
+0.754707 0.0121862 0.97619 0.244304 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.450739 0.328407 0.524005 0.328407 [
+[.5 1.06051 -28.375 0 ]
+[.5 1.06051 28.375 12 ]
+[ 0 0 0 0 ]
+[ 1 1.04801 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 1.06051 -89.375 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.250 13.000 moveto
+%%IncludeResource: font Times-Italic
+%%IncludeFont: Times-Italic
+%%BeginResource: font Times-Italic-MISO
+%%BeginFont: Times-Italic-MISO
+/Times-Italic /Times-Italic-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+69.312 14.562 moveto
+%%IncludeResource: font Times-Roman
+%%IncludeFont: Times-Roman
+%%BeginResource: font Times-Roman-MISO
+%%BeginFont: Times-Roman-MISO
+/Times-Roman /Times-Roman-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(1) show
+%%IncludeResource: font Mathematica2
+%%IncludeFont: Mathematica2
+/Mathematica2 findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+75.875 13.000 moveto
+(\\337) show
+84.188 13.000 moveto
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+90.250 14.562 moveto
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(2) show
+%%IncludeResource: font Mathematica2
+%%IncludeFont: Mathematica2
+/Mathematica2 findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+96.812 13.000 moveto
+(\\337) show
+105.125 13.000 moveto
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+111.188 14.562 moveto
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(3) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 1.04801 L
+0 1.04801 L
+closepath
+clip
+newpath
+0 1 1 r
+.31938 .52397 m
+.31943 .51829 L
+.31947 .5161 L
+.31957 .51264 L
+.31976 .50821 L
+.31997 .50426 L
+.32017 .50115 L
+.32101 .49127 L
+.32187 .48363 L
+.3228 .47673 L
+.32453 .46607 L
+.32619 .45744 L
+.3278 .45012 L
+.3295 .44309 L
+.33114 .43688 L
+.33289 .43077 L
+.33457 .42527 L
+.33619 .42028 L
+.33791 .41524 L
+.33957 .41063 L
+.34133 .40596 L
+.34302 .40164 L
+.34466 .39765 L
+.34639 .39357 L
+.34806 .38977 L
+.34967 .38624 L
+.35138 .38259 L
+.35303 .37919 L
+.35478 .37568 L
+.35647 .37239 L
+.35809 .36931 L
+.3597 .36633 L
+.3597 .68168 L
+.35809 .6787 L
+.35647 .67562 L
+.35478 .67233 L
+.35303 .66882 L
+.35138 .66542 L
+.34967 .66178 L
+.34806 .65824 L
+.34639 .65444 L
+.34466 .65036 L
+.34302 .64637 L
+.34133 .64205 L
+.33957 .63738 L
+.33791 .63277 L
+.33619 .62773 L
+.33457 .62274 L
+.33289 .61724 L
+.33114 .61113 L
+.3295 .60492 L
+.3278 .59789 L
+.32619 .59057 L
+.32453 .58194 L
+.3228 .57128 L
+.32187 .56438 L
+.32101 .55674 L
+.32017 .54686 L
+.31997 .54375 L
+.31976 .5398 L
+.31957 .53537 L
+.31947 .53191 L
+.31943 .52972 L
+.31938 .52404 L
+F
+.3597 .36633 m
+.36228 .3664 L
+.3651 .3665 L
+.37078 .36677 L
+.37704 .36718 L
+.38287 .36768 L
+.39405 .36892 L
+.40593 .37067 L
+.41738 .37277 L
+.4284 .3752 L
+.44012 .37823 L
+.4514 .38158 L
+.46225 .38523 L
+.4738 .38958 L
+.48492 .39425 L
+.49674 .39976 L
+.50813 .40561 L
+.51908 .4118 L
+.53074 .419 L
+.54196 .4266 L
+.55388 .43546 L
+.56537 .44482 L
+.57643 .45469 L
+.58818 .46624 L
+.59951 .47855 L
+.6104 .49169 L
+.62199 .50737 L
+.63281 .52401 L
+.63281 .52401 L
+.62199 .54064 L
+.6104 .55632 L
+.59951 .56946 L
+.58818 .58177 L
+.57643 .59332 L
+.56537 .60319 L
+.55388 .61256 L
+.54196 .62141 L
+.53074 .62901 L
+.51908 .63622 L
+.50813 .6424 L
+.49674 .64826 L
+.48492 .65376 L
+.4738 .65843 L
+.46225 .66278 L
+.4514 .66643 L
+.44012 .66978 L
+.4284 .67281 L
+.41738 .67524 L
+.40593 .67734 L
+.39405 .67909 L
+.38287 .68033 L
+.37704 .68083 L
+.37078 .68124 L
+.3651 .68151 L
+.36228 .68161 L
+.3597 .68168 L
+F
+0 g
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.64778 .52401 .32841 0 365.73 arc
+s
+newpath
+.35222 .69465 .32841 0 365.73 arc
+s
+newpath
+.35222 .35336 .32841 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% Start of sub-graphic
+p
+0.0238095 0.267515 0.245293 0.499633 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.450739 0.328407 0.524005 0.328407 [
+[.5 1.06051 -5.59375 0 ]
+[.5 1.06051 5.59375 12 ]
+[ 0 0 0 0 ]
+[ 1 1.04801 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 1.06051 -66.5938 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.000 13.000 moveto
+%%IncludeResource: font Mathematica1
+%%IncludeFont: Mathematica1
+/Mathematica1 findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(\\306) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 1.04801 L
+0 1.04801 L
+closepath
+clip
+newpath
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.64778 .52401 .32841 0 365.73 arc
+s
+newpath
+.35222 .69465 .32841 0 365.73 arc
+s
+newpath
+.35222 .35336 .32841 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% Start of sub-graphic
+p
+0.267442 0.267515 0.488926 0.499633 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.450739 0.328407 0.524005 0.328407 [
+[.5 1.06051 -7.4375 0 ]
+[.5 1.06051 7.4375 12 ]
+[ 0 0 0 0 ]
+[ 1 1.04801 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 1.06051 -68.4375 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.250 13.000 moveto
+%%IncludeResource: font Times-Italic
+%%IncludeFont: Times-Italic
+%%BeginResource: font Times-Italic-MISO
+%%BeginFont: Times-Italic-MISO
+/Times-Italic /Times-Italic-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+69.312 14.562 moveto
+%%IncludeResource: font Times-Roman
+%%IncludeFont: Times-Roman
+%%BeginResource: font Times-Roman-MISO
+%%BeginFont: Times-Roman-MISO
+/Times-Roman /Times-Roman-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(1) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 1.04801 L
+0 1.04801 L
+closepath
+clip
+newpath
+0 1 1 r
+.31938 .52387 m
+.32019 .50094 L
+.32092 .49215 L
+.32258 .47824 L
+.32557 .46054 L
+.32905 .44487 L
+.33235 .43262 L
+.34602 .39443 L
+.35995 .36587 L
+.37508 .34102 L
+.40326 .30478 L
+.4304 .27784 L
+.4565 .25706 L
+.48428 .23919 L
+.51102 .22543 L
+.53945 .21398 L
+.55365 .20938 L
+.56683 .20573 L
+.5804 .20259 L
+.59317 .20017 L
+.60733 .1981 L
+.62016 .19676 L
+.62689 .19626 L
+.63057 .19605 L
+.63401 .19589 L
+.63694 .19578 L
+.64008 .19569 L
+.64187 .19565 L
+.64275 .19564 L
+.64357 .19563 L
+.64429 .19562 L
+.64509 .19561 L
+.64589 .1956 L
+.64675 .1956 L
+.64759 .1956 L
+.64837 .1956 L
+.64922 .1956 L
+.6497 .1956 L
+.65014 .19561 L
+.65102 .19561 L
+.65197 .19562 L
+.65371 .19565 L
+.65532 .19568 L
+.65703 .19573 L
+.66009 .19583 L
+.66363 .19598 L
+.66694 .19616 L
+.67447 .19668 L
+.68165 .19735 L
+.68846 .19813 L
+.70125 .19998 L
+.71494 .20254 L
+.72762 .20545 L
+.75465 .21347 L
+.78336 .22489 L
+.81103 .23904 L
+.83765 .25605 L
+.86597 .27855 L
+.89323 .30582 L
+.91946 .33949 L
+.93407 .36309 L
+.94737 .38948 L
+.95399 .40531 L
+.96118 .42585 L
+.96447 .43706 L
+.96797 .45098 L
+.97095 .46558 L
+.97254 .47515 L
+.97424 .48828 L
+.97474 .49315 L
+.97526 .49929 L
+.9757 .50614 L
+.97619 .52387 L
+.97619 .52414 L
+.9757 .54187 L
+.97526 .54872 L
+.97474 .55486 L
+.97424 .55973 L
+.97254 .57286 L
+.97095 .58243 L
+.96797 .59703 L
+.96447 .61095 L
+.96118 .62216 L
+.95399 .6427 L
+.94737 .65853 L
+.93407 .68492 L
+.91946 .70852 L
+.89323 .74219 L
+.86597 .76946 L
+.83765 .79196 L
+.81103 .80897 L
+.78336 .82312 L
+.75465 .83454 L
+.72762 .84256 L
+.71494 .84547 L
+.70125 .84803 L
+.68846 .84988 L
+.68165 .85066 L
+.67447 .85133 L
+.66694 .85185 L
+.66363 .85203 L
+.66009 .85218 L
+.65703 .85228 L
+.65532 .85233 L
+.65371 .85236 L
+.65197 .85239 L
+.65102 .8524 L
+.65014 .8524 L
+.6497 .85241 L
+.64922 .85241 L
+.64837 .85241 L
+.64759 .85241 L
+.64675 .85241 L
+.64589 .85241 L
+.64509 .8524 L
+.64429 .85239 L
+.64357 .85239 L
+.64275 .85237 L
+.64187 .85236 L
+.64008 .85232 L
+.63694 .85223 L
+.63401 .85212 L
+.63057 .85196 L
+.62689 .85175 L
+.62016 .85125 L
+.60733 .84991 L
+.59317 .84784 L
+.5804 .84542 L
+.56683 .84228 L
+.55365 .83863 L
+.53945 .83403 L
+.51102 .82258 L
+.48428 .80882 L
+.4565 .79095 L
+.4304 .77017 L
+.40326 .74323 L
+.37508 .70699 L
+.35995 .68214 L
+.34602 .65358 L
+.33235 .61539 L
+.32905 .60314 L
+.32557 .58747 L
+.32258 .56977 L
+.32092 .55586 L
+.32019 .54707 L
+.31938 .52414 L
+F
+0 g
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.64778 .52401 .32841 0 365.73 arc
+s
+newpath
+.35222 .69465 .32841 0 365.73 arc
+s
+newpath
+.35222 .35336 .32841 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% Start of sub-graphic
+p
+0.511074 0.267515 0.732558 0.499633 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.450739 0.328407 0.524005 0.328407 [
+[.5 1.06051 -7.4375 0 ]
+[.5 1.06051 7.4375 12 ]
+[ 0 0 0 0 ]
+[ 1 1.04801 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 1.06051 -68.4375 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.250 13.000 moveto
+%%IncludeResource: font Times-Italic
+%%IncludeFont: Times-Italic
+%%BeginResource: font Times-Italic-MISO
+%%BeginFont: Times-Italic-MISO
+/Times-Italic /Times-Italic-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+69.312 14.562 moveto
+%%IncludeResource: font Times-Roman
+%%IncludeFont: Times-Roman
+%%BeginResource: font Times-Roman-MISO
+%%BeginFont: Times-Roman-MISO
+/Times-Roman /Times-Roman-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(2) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 1.04801 L
+0 1.04801 L
+closepath
+clip
+newpath
+0 1 1 r
+.02381 .69452 m
+.02462 .67159 L
+.02536 .6628 L
+.02701 .64888 L
+.03 .63119 L
+.03349 .61552 L
+.03678 .60327 L
+.05045 .56507 L
+.06439 .53652 L
+.07951 .51166 L
+.1077 .47542 L
+.13484 .44849 L
+.16093 .4277 L
+.18871 .40984 L
+.21545 .39608 L
+.24388 .38463 L
+.25808 .38002 L
+.27127 .37638 L
+.28483 .37323 L
+.29761 .37082 L
+.31176 .36874 L
+.32459 .36741 L
+.33133 .36691 L
+.33501 .36669 L
+.33844 .36653 L
+.34137 .36642 L
+.34451 .36633 L
+.34631 .3663 L
+.34719 .36628 L
+.348 .36627 L
+.34873 .36626 L
+.34952 .36625 L
+.35033 .36625 L
+.35118 .36625 L
+.35202 .36624 L
+.3528 .36624 L
+.35366 .36625 L
+.35414 .36625 L
+.35457 .36625 L
+.35545 .36626 L
+.35641 .36627 L
+.35814 .3663 L
+.35975 .36633 L
+.36146 .36637 L
+.36452 .36647 L
+.36806 .36663 L
+.37137 .3668 L
+.37891 .36733 L
+.38608 .36799 L
+.3929 .36877 L
+.40568 .37062 L
+.41937 .37318 L
+.43206 .3761 L
+.45908 .38412 L
+.48779 .39553 L
+.51546 .40969 L
+.54208 .42669 L
+.5704 .4492 L
+.59767 .47646 L
+.62389 .51014 L
+.6385 .53374 L
+.65181 .56012 L
+.65842 .57595 L
+.66561 .5965 L
+.66891 .60771 L
+.6724 .62162 L
+.67539 .63623 L
+.67697 .6458 L
+.67868 .65893 L
+.67917 .66379 L
+.67969 .66993 L
+.68014 .67678 L
+.68062 .69452 L
+.68062 .69478 L
+.68014 .71252 L
+.67969 .71937 L
+.67917 .72551 L
+.67868 .73038 L
+.67697 .74351 L
+.67539 .75307 L
+.6724 .76768 L
+.66891 .78159 L
+.66561 .79281 L
+.65842 .81335 L
+.65181 .82918 L
+.6385 .85556 L
+.62389 .87916 L
+.59767 .91284 L
+.5704 .94011 L
+.54208 .96261 L
+.51546 .97961 L
+.48779 .99377 L
+.45908 1.00518 L
+.43206 1.0132 L
+.41937 1.01612 L
+.40568 1.01868 L
+.3929 1.02053 L
+.38608 1.02131 L
+.37891 1.02197 L
+.37137 1.0225 L
+.36806 1.02268 L
+.36452 1.02283 L
+.36146 1.02293 L
+.35975 1.02297 L
+.35814 1.023 L
+.35641 1.02303 L
+.35545 1.02304 L
+.35457 1.02305 L
+.35414 1.02305 L
+.35366 1.02305 L
+.3528 1.02306 L
+.35202 1.02306 L
+.35118 1.02306 L
+.35033 1.02305 L
+.34952 1.02305 L
+.34873 1.02304 L
+.348 1.02303 L
+.34719 1.02302 L
+.34631 1.023 L
+.34451 1.02297 L
+.34137 1.02288 L
+.33844 1.02277 L
+.33501 1.02261 L
+.33133 1.02239 L
+.32459 1.02189 L
+.31176 1.02056 L
+.29761 1.01849 L
+.28483 1.01607 L
+.27127 1.01293 L
+.25808 1.00928 L
+.24388 1.00468 L
+.21545 .99323 L
+.18871 .97946 L
+.16093 .9616 L
+.13484 .94081 L
+.1077 .91388 L
+.07951 .87764 L
+.06439 .85278 L
+.05045 .82423 L
+.03678 .78604 L
+.03349 .77378 L
+.03 .75811 L
+.02701 .74042 L
+.02536 .7265 L
+.02462 .71771 L
+.02381 .69478 L
+F
+0 g
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.64778 .52401 .32841 0 365.73 arc
+s
+newpath
+.35222 .69465 .32841 0 365.73 arc
+s
+newpath
+.35222 .35336 .32841 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% Start of sub-graphic
+p
+0.754707 0.267515 0.97619 0.499633 MathSubStart
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.450739 0.328407 0.524005 0.328407 [
+[.5 1.06051 -7.4375 0 ]
+[.5 1.06051 7.4375 12 ]
+[ 0 0 0 0 ]
+[ 1 1.04801 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+gsave
+.5 1.06051 -68.4375 -4 Mabsadd m
+1 1 Mabs scale
+currentpoint translate
+0 20 translate 1 -1 scale
+/g { setgray} bind def
+/k { setcmykcolor} bind def
+/p { gsave} bind def
+/r { setrgbcolor} bind def
+/w { setlinewidth} bind def
+/C { curveto} bind def
+/F { fill} bind def
+/L { lineto} bind def
+/rL { rlineto} bind def
+/P { grestore} bind def
+/s { stroke} bind def
+/S { show} bind def
+/N {currentpoint 3 -1 roll show moveto} bind def
+/Msf { findfont exch scalefont [1 0 0 -1 0 0 ] makefont setfont} bind def
+/m { moveto} bind def
+/Mr { rmoveto} bind def
+/Mx {currentpoint exch pop moveto} bind def
+/My {currentpoint pop exch moveto} bind def
+/X {0 rmoveto} bind def
+/Y {0 exch rmoveto} bind def
+/MISOfy
+{
+    /newfontname exch def
+    /oldfontname exch def
+
+    oldfontname findfont
+    dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding MacintoshRomanEncoding def
+        currentdict
+    end
+
+    newfontname exch definefont pop
+} def
+63.250 13.000 moveto
+%%IncludeResource: font Times-Italic
+%%IncludeFont: Times-Italic
+%%BeginResource: font Times-Italic-MISO
+%%BeginFont: Times-Italic-MISO
+/Times-Italic /Times-Italic-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Italic-MISO
+%%IncludeFont: Times-Italic-MISO
+/Times-Italic-MISO findfont 10.000 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(A) show
+69.312 14.562 moveto
+%%IncludeResource: font Times-Roman
+%%IncludeFont: Times-Roman
+%%BeginResource: font Times-Roman-MISO
+%%BeginFont: Times-Roman-MISO
+/Times-Roman /Times-Roman-MISO MISOfy
+%%EndFont
+%%EndResource
+%%IncludeResource: font Times-Roman-MISO
+%%IncludeFont: Times-Roman-MISO
+/Times-Roman-MISO findfont 7.125 scalefont
+[1 0 0 -1 0 0 ] makefont setfont
+0.000 0.000 0.000 setrgbcolor
+(3) show
+1.000 setlinewidth
+grestore
+0 0 m
+1 0 L
+1 1.04801 L
+0 1.04801 L
+closepath
+clip
+newpath
+0 1 1 r
+.02381 .35323 m
+.02462 .3303 L
+.02536 .32151 L
+.02701 .30759 L
+.03 .2899 L
+.03349 .27423 L
+.03678 .26197 L
+.05045 .22378 L
+.06439 .19523 L
+.07951 .17037 L
+.1077 .13413 L
+.13484 .1072 L
+.16093 .08641 L
+.18871 .06855 L
+.21545 .05479 L
+.24388 .04334 L
+.25808 .03873 L
+.27127 .03509 L
+.28483 .03194 L
+.29761 .02952 L
+.31176 .02745 L
+.32459 .02612 L
+.33133 .02562 L
+.33501 .0254 L
+.33844 .02524 L
+.34137 .02513 L
+.34451 .02504 L
+.34631 .02501 L
+.34719 .02499 L
+.348 .02498 L
+.34873 .02497 L
+.34952 .02496 L
+.35033 .02496 L
+.35118 .02495 L
+.35202 .02495 L
+.3528 .02495 L
+.35366 .02496 L
+.35414 .02496 L
+.35457 .02496 L
+.35545 .02497 L
+.35641 .02498 L
+.35814 .02501 L
+.35975 .02504 L
+.36146 .02508 L
+.36452 .02518 L
+.36806 .02534 L
+.37137 .02551 L
+.37891 .02604 L
+.38608 .0267 L
+.3929 .02748 L
+.40568 .02933 L
+.41937 .03189 L
+.43206 .03481 L
+.45908 .04283 L
+.48779 .05424 L
+.51546 .0684 L
+.54208 .0854 L
+.5704 .10791 L
+.59767 .13517 L
+.62389 .16885 L
+.6385 .19245 L
+.65181 .21883 L
+.65842 .23466 L
+.66561 .25521 L
+.66891 .26642 L
+.6724 .28033 L
+.67539 .29494 L
+.67697 .30451 L
+.67868 .31764 L
+.67917 .3225 L
+.67969 .32864 L
+.68014 .33549 L
+.68062 .35323 L
+.68062 .35349 L
+.68014 .37123 L
+.67969 .37808 L
+.67917 .38422 L
+.67868 .38908 L
+.67697 .40221 L
+.67539 .41178 L
+.6724 .42639 L
+.66891 .4403 L
+.66561 .45151 L
+.65842 .47206 L
+.65181 .48789 L
+.6385 .51427 L
+.62389 .53787 L
+.59767 .57155 L
+.5704 .59881 L
+.54208 .62132 L
+.51546 .63832 L
+.48779 .65248 L
+.45908 .66389 L
+.43206 .67191 L
+.41937 .67483 L
+.40568 .67739 L
+.3929 .67924 L
+.38608 .68002 L
+.37891 .68068 L
+.37137 .68121 L
+.36806 .68138 L
+.36452 .68154 L
+.36146 .68164 L
+.35975 .68168 L
+.35814 .68171 L
+.35641 .68174 L
+.35545 .68175 L
+.35457 .68176 L
+.35414 .68176 L
+.35366 .68176 L
+.3528 .68177 L
+.35202 .68177 L
+.35118 .68177 L
+.35033 .68176 L
+.34952 .68176 L
+.34873 .68175 L
+.348 .68174 L
+.34719 .68173 L
+.34631 .68171 L
+.34451 .68168 L
+.34137 .68159 L
+.33844 .68148 L
+.33501 .68132 L
+.33133 .6811 L
+.32459 .6806 L
+.31176 .67927 L
+.29761 .6772 L
+.28483 .67478 L
+.27127 .67163 L
+.25808 .66799 L
+.24388 .66338 L
+.21545 .65193 L
+.18871 .63817 L
+.16093 .62031 L
+.13484 .59952 L
+.1077 .57259 L
+.07951 .53635 L
+.06439 .51149 L
+.05045 .48294 L
+.03678 .44474 L
+.03349 .43249 L
+.03 .41682 L
+.02701 .39913 L
+.02536 .38521 L
+.02462 .37642 L
+.02381 .35349 L
+F
+0 g
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.64778 .52401 .32841 0 365.73 arc
+s
+newpath
+.35222 .69465 .32841 0 365.73 arc
+s
+newpath
+.35222 .35336 .32841 0 365.73 arc
+s
+MathSubEnd
+P
+% End of sub-graphic
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+ ImageSize->{379, 193.938},
+ ImageMargins->{{43, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ ImageCache->GraphicsData["CompressedBitmap", "\<\
+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\
+\>"],
+ ImageRangeCache->{{{0, 378}, {192.938, 0}} -> {0, 0, 0, 0}, {{9.4375, \
+92.9375}, {188.312, 100.812}} -> {-2, -1, 0, 0}, {{101.312, 184.812}, \
+{188.312, 100.812}} -> {-5, -1, 0, 0}, {{193.125, 276.625}, {188.312, \
+100.812}} -> {-10, -1, 0, 0}, {{285, 368.5}, {188.312, 100.812}} -> {-13, -1, \
+0, 0}, {{9.4375, 92.9375}, {92.0625, 4.5625}} -> {-2, -5, 0, 0}, {{101.312, \
+184.812}, {92.0625, 4.5625}} -> {-5, -5, 0, 0}, {{193.125, 276.625}, \
+{92.0625, 4.5625}} -> {-9, -5, 0, 0}, {{285, 368.5}, {92.0625, 4.5625}} -> \
+{-13, -5, 0, 0}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"\[SkeletonIndicator]", "GraphicsArray", "\[SkeletonIndicator]"}],
+  False,
+  Editable->False]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Doesn't work for ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ " = 4"
+}], "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"Graphics", "[", 
+   RowBox[{
+    RowBox[{"VennDiagram", "[", "4", "]"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}]}], "]"}], "]"}]], "Input"],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: 1 
+MathPictureStart
+/Mabs {
+Mgmatrix idtransform
+Mtmatrix dtransform
+} bind def
+/Mabsadd { Mabs
+3 -1 roll add
+3 1 roll add
+exch } bind def
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.21645 0.5 0.21645 [
+[ 0 0 0 0 ]
+[ 1 1 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 0 m
+1 0 L
+1 1 L
+0 1 L
+closepath
+clip
+newpath
+0 g
+.5 Mabswid
+[ ] 0 setdash
+newpath
+.67316 .5 .30303 0 365.73 arc
+s
+newpath
+.5 .67316 .30303 0 365.73 arc
+s
+newpath
+.32684 .5 .30303 0 365.73 arc
+s
+newpath
+.5 .32684 .30303 0 365.73 arc
+s
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+ ImageSize->{288, 288},
+ ImageMargins->{{43, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ ImageCache->GraphicsData["CompressedBitmap", "\<\
+eJztnYdvXEUQh19c48Tpdgoh8aX33qud3nuHFExI740oQUkUIoQIIIQQQvy1
+IW/nZebu9O1j997ZZyOQ8E1mZuc3t7dvd3a2vCP9T29eu9f/9NbV/tK+x/0P
+b966+qS098Hjj6zmEUkyopT+X0pS+kOSfPrj/puV/sn+UQf6ffrRmdp/L4y3
+6UdHyuhMqZEp9b2IXqUfLSljhlKvRfRCGfNSqjWlXojoqTKWq9IzET1OP5pS
+xgalnojovupuUeqBiO6q7i6l7onotjL2KXVHRDeVcUipWyK6roxjSt0Q0TX3
+0fxBq//jv06okkiTq8o4C+pfi1K/Kl1QKhNdUcYlpb4S0WUweAV4l0T9Eoj6
+gXdR1C+CyL5MpvSFMm6C+gVRugCiW8A7L+rnQXQHeOdE/ay68ECpTHQGSj0C
+3uma1E8p3DOlMtFJKPUceCdqUj+ucN8plYmOQalXwDtak/oRhXurVCY6DKXe
+Ae9QTeqHQPQD8A7WpH4QRD8C74CoHwDRT8DbL+r7QfQz8PaJ+j4Q/Qq8vTWp
+7wXRb8DbU5P6HhD9DrzdNanvBtEfwNtVk/ouEP0JvJ01qe8E0V/A21GT+g4Q
+jU//dum41Z1SE0Cvz2+iI/3bnrK6lHKetaVUt1Kj/Wb7QNSW/nVj9mylNqWU
+iwNmKW8klO31m23SgouVWgW8Fr9Z+WgpF6X/uX5utVLLgNcMRreXGXU21ys1
+D3hZjW1Tm9uVmgW8zPoWZYgPnzwQWCeYoVRf1fdLJHjcKvQm1WuCb7NDpdOU
+oofACTaLRQvcqNItQOtWirqEJpVuFLPrlNEG6ntUOkEp6iVbVLpezK5RBrU8
+ixnHKEUjQZtK14rZVcroAPWDlVJH0eDYrtLVYnaFMujxO5xbRQRg8CsFwJp5
+J6gfy+qQHpXjoD9KpcvF/FJQIiBnzLEoSqISSwRgCYjG+ADKeIkHisoulgKL
+QTTWW2mt1ZXmIE8E2lgkBRZqfY4HpaMqbVWKfpWxKs3MzlfGRFA/Arz2QL3x
+anmBQM0DJQL1NtYAPbI3Nw6eYkl64kgvB36OVkdXoDFqf15QZzmDmg1KBEph
+8LhAPbI3Kw6eOlMKWEgvB76k1TEFlKxXtzGIAEyame0BJQKgCLqI3swhAW8h
+xbRAYxY0kHSqSjOAz30mcOJRyaOyNBkge9Pj4MnsjOLw00H0GfAo/uoJ1CN7
+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
+fw==\
+\>"],
+ ImageRangeCache->{{{0, 287}, {287, 0}} -> {-2, -2, 0, 0}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"\[SkeletonIndicator]", "Graphics", "\[SkeletonIndicator]"}],
+  False,
+  Editable->False]], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Sums", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"k", "=", "0"}], "n"], 
+    TemplateBox[{"n","k"},
+     "Binomial"]}], "\[LongEqual]", 
+   SuperscriptBox["2", "n"]}], TraditionalForm]], "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Sum", "[", 
+  RowBox[{
+   RowBox[{"Binomial", "[", 
+    RowBox[{"n", ",", "k"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", "0", ",", "n"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ SuperscriptBox["2", "n"]], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->Automatic,
+WindowSize->{977, 878},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (January 30, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 29, 0, 83, "Title"],
+Cell[CellGroupData[{
+Cell[621, 26, 28, 0, 36, "Subsection"],
+Cell[652, 28, 58, 3, 47, "Text"],
+Cell[713, 33, 263, 7, 29, "Text"],
+Cell[979, 42, 297, 10, 29, "Text"],
+Cell[1279, 54, 614, 17, 47, "Text"],
+Cell[1896, 73, 99, 2, 29, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2032, 80, 36, 0, 36, "Subsection"],
+Cell[2071, 82, 129, 2, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2237, 89, 26, 0, 36, "Subsection"],
+Cell[2266, 91, 2660, 73, 252, "Input",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4963, 169, 27, 0, 71, "Section"],
+Cell[CellGroupData[{
+Cell[5015, 173, 80, 4, 36, "Subsection"],
+Cell[CellGroupData[{
+Cell[5120, 181, 86, 2, 31, "Input"],
+Cell[5209, 185, 209, 7, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5455, 197, 935, 26, 132, "Input"],
+Cell[6393, 225, 19887, 945, 188, 16915, 894, "GraphicsData", "PostScript", \
+"Graphics"],
+Cell[26283, 1172, 139, 4, 27, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26471, 1182, 80, 4, 34, "Subsection"],
+Cell[CellGroupData[{
+Cell[26576, 1190, 86, 2, 27, "Input"],
+Cell[26665, 1194, 430, 14, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27132, 1213, 935, 26, 103, "Input"],
+Cell[28070, 1241, 46322, 2176, 202, 39472, 2062, "GraphicsData", \
+"PostScript", "Graphics"],
+Cell[74395, 3419, 139, 4, 27, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[74583, 3429, 102, 5, 34, "Subsection"],
+Cell[CellGroupData[{
+Cell[74710, 3438, 205, 5, 27, "Input"],
+Cell[74918, 3445, 4809, 121, 296, 753, 51, "GraphicsData", "PostScript", \
+"Graphics"],
+Cell[79730, 3568, 134, 4, 27, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[79925, 3579, 23, 0, 67, "Section"],
+Cell[CellGroupData[{
+Cell[79973, 3583, 245, 8, 68, "Subsection"],
+Cell[CellGroupData[{
+Cell[80243, 3595, 199, 6, 27, "Input"],
+Cell[80445, 3603, 51, 1, 29, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

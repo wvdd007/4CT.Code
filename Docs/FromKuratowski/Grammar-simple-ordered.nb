@@ -1,0 +1,344 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     13496,        335]
+NotebookOptionsPosition[     12964,        313]
+NotebookOutlinePosition[     13307,        328]
+CellTagsIndexPosition[     13264,        325]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MyGraph2", "[", "start_", "]"}], ":=", " ", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"result", " ", "=", " ", "start"}], ",", 
+      RowBox[{"i", "=", "1"}], ",", " ", 
+      RowBox[{"count", "=", "1"}], ",", "previous", ",", 
+      RowBox[{"route", "=", 
+       RowBox[{"{", "}"}]}], ",", 
+      RowBox[{"node", "=", "\"\<start\>\""}], ",", "before", ",", " ", 
+      "matchFound", ",", "pattern", ",", "replace", ",", 
+      RowBox[{"subst", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\"\<S0\>\"", "->", "\"\<0S\>\""}], ",", 
+         RowBox[{"\"\<S1\>\"", "\[Rule]", "\"\<2S\>\""}], ",", " ", 
+         RowBox[{"\"\<S2\>\"", "\[Rule]", "\"\<4S\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"\"\<SE\>\"", "\[Rule]", "\"\<B\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"\"\<0B\>\"", "\[Rule]", "\"\<B0\>\""}], ",", " ", 
+         RowBox[{"\"\<1B\>\"", "\[Rule]", "\"\<B1\>\""}], ",", " ", 
+         RowBox[{"\"\<2B\>\"", "\[Rule]", "\"\<B2\>\""}], ",", 
+         "\[IndentingNewLine]", " ", 
+         RowBox[{"\"\<04B\>\"", "\[Rule]", "\"\<B11\>\""}], ",", " ", 
+         RowBox[{"\"\<14B\>\"", "\[Rule]", "\"\<B21\>\""}], ",", " ", 
+         RowBox[{"\"\<24B\>\"", "\[Rule]", "\"\<3B1\>\""}], ",", " ", 
+         RowBox[{"\"\<34B\>\"", "\[Rule]", "\"\<4B1\>\""}], ",", " ", 
+         RowBox[{"\"\<44B\>\"", "\[Rule]", "\"\<5B1\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"\"\<05B\>\"", "\[Rule]", "\"\<B12\>\""}], ",", " ", 
+         RowBox[{"\"\<15B\>\"", "\[Rule]", "\"\<B22\>\""}], ",", " ", 
+         RowBox[{"\"\<25B\>\"", "\[Rule]", "\"\<3B2\>\""}], ",", " ", 
+         RowBox[{"\"\<35B\>\"", "\[Rule]", "\"\<4B2\>\""}], ",", " ", 
+         RowBox[{"\"\<45B\>\"", "\[Rule]", "\"\<5B2\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"\"\<03B\>\"", "\[Rule]", "\"\<B10\>\""}], ",", " ", 
+         RowBox[{"\"\<13B\>\"", "\[Rule]", "\"\<B20\>\""}], ",", " ", 
+         RowBox[{"\"\<23B\>\"", "\[Rule]", "\"\<3B0\>\""}], ",", " ", 
+         RowBox[{"\"\<33B\>\"", "\[Rule]", "\"\<4B0\>\""}], ",", " ", 
+         RowBox[{"\"\<43B\>\"", "\[Rule]", "\"\<5B0\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"\"\<T1B\>\"", "\[Rule]", "\"\<1\>\""}], ",", " ", 
+         RowBox[{"\"\<T2B\>\"", "\[Rule]", "\"\<2\>\""}], ",", " ", 
+         RowBox[{"\"\<T3B\>\"", "\[Rule]", "\"\<10\>\""}], ",", " ", 
+         RowBox[{"\"\<T4B\>\"", "\[Rule]", "\"\<11\>\""}], ",", " ", 
+         RowBox[{"\"\<T5B\>\"", "\[Rule]", "\"\<12\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"\"\<TB\>\"", "\[Rule]", "\"\<\>\""}]}], 
+        "\[IndentingNewLine]", "}"}]}]}], "\[IndentingNewLine]", "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"StringCount", "[", 
+         RowBox[{"result", ",", "\"\<T\>\""}], "]"}], ">", "0"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"matchFound", "=", "False"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"For", "[", 
+         RowBox[{
+          RowBox[{"i", "=", "1"}], ",", 
+          RowBox[{"i", "<=", 
+           RowBox[{"Length", "[", "subst", "]"}]}], ",", 
+          RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"pattern", " ", "=", " ", 
+            RowBox[{
+             RowBox[{"subst", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"replace", "=", 
+            RowBox[{
+             RowBox[{"subst", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"StringCount", "[", 
+               RowBox[{"result", ",", "pattern"}], "]"}], ">", "0"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"before", "=", "result"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"node", "=", "pattern"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"result", "=", 
+               RowBox[{"StringReplace", "[", 
+                RowBox[{"result", ",", " ", 
+                 RowBox[{"pattern", "\[Rule]", "replace"}]}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"AppendTo", "[", 
+               RowBox[{"route", ",", 
+                RowBox[{"{", 
+                 RowBox[{"before", ",", 
+                  RowBox[{"pattern", "\[Rule]", "replace"}], ",", " ", 
+                  "result"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"matchFound", "=", "True"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"i", "=", 
+               RowBox[{
+                RowBox[{"Length", "[", "subst", "]"}], "+", "1"}]}]}]}], 
+            "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"!", "matchFound"}], ",", 
+          RowBox[{"Break", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"count", "=", 
+         RowBox[{"count", "+", "1"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"count", ">", 
+           RowBox[{"4", "*", 
+            RowBox[{"StringLength", "[", "start", "]"}]}]}], ",", 
+          RowBox[{"Break", "[", "]"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "route", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.5188933638016877`*^9, 3.5188933902912025`*^9}, {
+  3.5188934670345926`*^9, 3.518893491677002*^9}, {3.5188935386676893`*^9, 
+  3.5188937707279625`*^9}, {3.518893803737851*^9, 3.5188939973579254`*^9}, {
+  3.5188940518550425`*^9, 3.5188941192058945`*^9}, {3.5188942738087373`*^9, 
+  3.518894279353054*^9}, {3.518894328087842*^9, 3.518894343300712*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MyGraph2", "[", "\"\<TS102221E\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.5188934045880203`*^9, 3.518893421690999*^9}, 
+   3.5188935826882076`*^9, {3.518893723687272*^9, 3.518893726184415*^9}, {
+   3.5188940308178387`*^9, 3.518894039207319*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"TS102221E\"\>", ",", 
+     RowBox[{"\<\"S1\"\>", "\[Rule]", "\<\"2S\"\>"}], 
+     ",", "\<\"T2S02221E\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"T2S02221E\"\>", ",", 
+     RowBox[{"\<\"S0\"\>", "\[Rule]", "\<\"0S\"\>"}], 
+     ",", "\<\"T20S2221E\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"T20S2221E\"\>", ",", 
+     RowBox[{"\<\"S2\"\>", "\[Rule]", "\<\"4S\"\>"}], 
+     ",", "\<\"T204S221E\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"T204S221E\"\>", ",", 
+     RowBox[{"\<\"S2\"\>", "\[Rule]", "\<\"4S\"\>"}], 
+     ",", "\<\"T2044S21E\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"T2044S21E\"\>", ",", 
+     RowBox[{"\<\"S2\"\>", "\[Rule]", "\<\"4S\"\>"}], 
+     ",", "\<\"T20444S1E\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"T20444S1E\"\>", ",", 
+     RowBox[{"\<\"S1\"\>", "\[Rule]", "\<\"2S\"\>"}], 
+     ",", "\<\"T204442SE\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"T204442SE\"\>", ",", 
+     RowBox[{"\<\"SE\"\>", "\[Rule]", "\<\"B\"\>"}], 
+     ",", "\<\"T204442B\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"T204442B\"\>", ",", 
+     RowBox[{"\<\"2B\"\>", "\[Rule]", "\<\"B2\"\>"}], 
+     ",", "\<\"T20444B2\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"T20444B2\"\>", ",", 
+     RowBox[{"\<\"44B\"\>", "\[Rule]", "\<\"5B1\"\>"}], 
+     ",", "\<\"T2045B12\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"T2045B12\"\>", ",", 
+     RowBox[{"\<\"45B\"\>", "\[Rule]", "\<\"5B2\"\>"}], 
+     ",", "\<\"T205B212\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"T205B212\"\>", ",", 
+     RowBox[{"\<\"05B\"\>", "\[Rule]", "\<\"B12\"\>"}], 
+     ",", "\<\"T2B12212\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"T2B12212\"\>", ",", 
+     RowBox[{"\<\"2B\"\>", "\[Rule]", "\<\"B2\"\>"}], 
+     ",", "\<\"TB212212\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"TB212212\"\>", ",", 
+     RowBox[{"\<\"TB\"\>", "\[Rule]", "\<\"\"\>"}], ",", "\<\"212212\"\>"}], 
+    "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.518893792462206*^9, 3.5188939106859674`*^9, {3.5188940221023407`*^9, 
+   3.518894040052367*^9}, 3.518894125221238*^9, 3.5188942821872163`*^9, 
+   3.518894348454007*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<S1\>\"", "\[Rule]", "\"\<2S\>\""}], ",", 
+     "\"\<T2S0122E\>\""}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<S0\>\"", "\[Rule]", "\"\<0S\>\""}], ",", 
+     "\"\<T20S122E\>\""}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<S1\>\"", "\[Rule]", "\"\<2S\>\""}], ",", 
+     "\"\<T202S22E\>\""}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<S2\>\"", "\[Rule]", "\"\<4S\>\""}], ",", 
+     "\"\<T2024S2E\>\""}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<S2\>\"", "\[Rule]", "\"\<4S\>\""}], ",", 
+     "\"\<T20244SE\>\""}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<SE\>\"", "\[Rule]", "\"\<B\>\""}], ",", "\"\<T20244B\>\""}],
+     "}"}]}], "}"}]], "Input",
+ CellChangeTimes->{3.5188937763432837`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\<\"S1\"\>", "\[Rule]", "\<\"2S\"\>"}], 
+     ",", "\<\"T2S0122E\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\<\"S0\"\>", "\[Rule]", "\<\"0S\"\>"}], 
+     ",", "\<\"T20S122E\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\<\"S1\"\>", "\[Rule]", "\<\"2S\"\>"}], 
+     ",", "\<\"T202S22E\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\<\"S2\"\>", "\[Rule]", "\<\"4S\"\>"}], 
+     ",", "\<\"T2024S2E\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\<\"S2\"\>", "\[Rule]", "\<\"4S\"\>"}], 
+     ",", "\<\"T20244SE\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\<\"SE\"\>", "\[Rule]", "\<\"B\"\>"}], ",", "\<\"T20244B\"\>"}],
+     "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.5188937763812857`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{",", "\[IndentingNewLine]", 
+  RowBox[{"\"\<02B\>\"", "->", "\"\<B02\>\""}], ",", 
+  RowBox[{"\"\<12B\>\"", "->", "\"\<B12\>\""}], ",", 
+  RowBox[{"\"\<22B\>\"", "->", "\"\<B22\>\""}], ",", 
+  RowBox[{"\"\<32B\>\"", "->", "\"\<3B2\>\""}], ",", 
+  RowBox[{"\"\<42B\>\"", "->", "\"\<4B2\>\""}], ",", 
+  RowBox[{"\"\<52B\>\"", "->", "\"\<5B2\>\""}], ",", "\[IndentingNewLine]", 
+  RowBox[{"\"\<03B\>\"", "\[Rule]", "\"\<B10\>\""}], ",", 
+  RowBox[{"\"\<13B\>\"", "\[Rule]", "\"\<B20\>\""}], ",", " ", 
+  RowBox[{"\"\<23B\>\"", "\[Rule]", "\"\<3B0\>\""}], ",", 
+  RowBox[{"\"\<33B\>\"", "\[Rule]", "\"\<4B2\>\""}], ",", 
+  RowBox[{"\"\<43B\>\"", "\[Rule]", "\"\<5B0\>\""}], ",", 
+  "\[IndentingNewLine]", 
+  RowBox[{"\"\<04B\>\"", "\[Rule]", "\"\<B11\>\""}], ",", " ", 
+  RowBox[{"\"\<14B\>\"", "\[Rule]", "\"\<B21\>\""}], ",", 
+  RowBox[{"\"\<24B\>\"", "\[Rule]", "\"\<3B1\>\""}], ",", 
+  RowBox[{"\"\<34B\>\"", "\[Rule]", "\"\<4B1\>\""}], ",", 
+  RowBox[{"\"\<44B\>\"", "\[Rule]", "\"\<5B1\>\""}], ",", 
+  "\[IndentingNewLine]", 
+  RowBox[{"\"\<45B\>\"", "\[Rule]", "\"\<5B2\>\""}], ",", 
+  RowBox[{"\"\<05B\>\"", "\[Rule]", "\"\<B12\>\""}], ",", 
+  RowBox[{"\"\<25B\>\"", "->", "\"\<3B2\>\""}], ",", 
+  RowBox[{"\"\<35B\>\"", "\[Rule]", "\"\<5B0\>\""}], ",", 
+  RowBox[{"\"\<15B\>\"", "\[Rule]", "\"\<B22\>\""}], ",", 
+  "\[IndentingNewLine]", 
+  RowBox[{"\"\<0B\>\"", "\[Rule]", "\"\<B0\>\""}], ",", " ", 
+  RowBox[{"\"\<T3B\>\"", "\[Rule]", "\"\<10\>\""}], ",", " ", 
+  RowBox[{"\"\<T2B\>\"", "\[Rule]", "\"\<2\>\""}], ",", 
+  RowBox[{"\"\<T4B\>\"", "\[Rule]", "\"\<11\>\""}], ",", 
+  RowBox[{"\"\<T1B\>\"", "->", "\"\<1\>\""}], ",", 
+  RowBox[{"\"\<T5B\>\"", "\[Rule]", "\"\<12\>\""}], ",", 
+  "\[IndentingNewLine]", 
+  RowBox[{"\"\<TB2\>\"", "\[Rule]", "\"\<2\>\""}], ",", " ", 
+  RowBox[{"\"\<TB1\>\"", "\[Rule]", "\"\<1\>\""}]}]], "Input"]
+},
+WindowSize->{1904, 945},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (January 30, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 6173, 125, 652, "Input"],
+Cell[CellGroupData[{
+Cell[6743, 149, 271, 4, 31, "Input"],
+Cell[7017, 155, 2274, 58, 50, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9328, 218, 873, 27, 31, InheritFromParent],
+Cell[10204, 247, 874, 27, 30, "Output"]
+}, Open  ]],
+Cell[11093, 277, 1867, 34, 172, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
