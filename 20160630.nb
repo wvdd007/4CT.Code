@@ -1,0 +1,2056 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     76214,       2047]
+NotebookOptionsPosition[     69563,       1844]
+NotebookOutlinePosition[     69904,       1859]
+CellTagsIndexPosition[     69861,       1856]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"allReplaced", "=", 
+   RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Flatten", "[", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"withRelations6", "[", "key", "]"}], "[", 
+            "\"\<relations\>\"", "]"}], "/.", "baseGraphAxioma6"}], ")"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"key", ",", 
+           RowBox[{"Keys", "[", "withRelations6", "]"}]}], "}"}]}], "]"}], 
+       "]"}], "//", "DeleteDuplicates"}], ",", "\[IndentingNewLine]", "key"}],
+     "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.676292047817027*^9, 3.676292094211337*^9}, 
+   3.676313510171853*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Keys", "::", "invrl"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The argument \[NoBreak]\\!\\(Keys[withRelations6]\\)\
+\[NoBreak] is not a valid Association or a list of rules. \\!\\(\\*ButtonBox[\
+\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Keys\\\", ButtonNote -> \
+\\\"Keys::invrl\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676404438173314*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Table", "::", "iterb"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Iterator \[NoBreak]\\!\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\[NoBreak] does not have appropriate \
+bounds. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/iterb\\\", ButtonNote -> \
+\\\"Table::iterb\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044382854347`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Table", "::", "iterb"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Iterator \[NoBreak]\\!\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\[NoBreak] does not have appropriate \
+bounds. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/iterb\\\", ButtonNote -> \
+\\\"Table::iterb\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044383259697`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "allReplaced", "]"}]], "Input",
+ CellChangeTimes->{{3.676316277100211*^9, 3.6763162819366264`*^9}}],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{3.6764044383638954`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DoMuch", "[", 
+   RowBox[{"startEqs_", ",", 
+    RowBox[{"blockSize_:", "1000"}]}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"l", "=", 
+       RowBox[{"Length", "[", "startEqs", "]"}]}], ",", 
+      RowBox[{"block", "=", "1"}], ",", " ", "start", ",", " ", "end", ",", 
+      " ", "current", ",", "relevant", ",", "theseVars", ",", 
+      RowBox[{"hop", "=", "blockSize"}], ",", 
+      RowBox[{"allSols", "=", 
+       RowBox[{"{", "}"}]}], ",", " ", "currentSol", ",", 
+      RowBox[{"allLength", "=", "0"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Quiet", "[", "\[IndentingNewLine]", 
+        RowBox[{"For", "[", 
+         RowBox[{
+          RowBox[{"start", "=", "1"}], ",", 
+          RowBox[{"start", "\[LessEqual]", "l"}], ",", 
+          RowBox[{"start", "+=", "hop"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"end", "=", 
+            RowBox[{"start", "+", "hop", "-", "1"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"end", ">", "l"}], ",", 
+             RowBox[{"end", "=", "l"}]}], "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"current", "=", 
+            RowBox[{"Take", "[", 
+             RowBox[{"startEqs", ",", 
+              RowBox[{"{", 
+               RowBox[{"start", ",", "end"}], "}"}]}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"theseVars", "=", 
+            RowBox[{"DeleteDuplicates", "[", 
+             RowBox[{"Flatten", "[", 
+              RowBox[{"Map", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"ListofVars", "[", "#", "]"}], "&"}], ",", 
+                "current"}], "]"}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"relevant", "=", 
+            RowBox[{"Intersection", "[", 
+             RowBox[{"allGraphVariables6", ",", " ", "theseVars"}], "]"}]}], 
+           ";", "\[IndentingNewLine]", 
+           RowBox[{"currentSol", "=", 
+            RowBox[{"First", "[", 
+             RowBox[{"Solve", "[", 
+              RowBox[{"current", ",", "relevant"}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"allLength", "+=", 
+            RowBox[{"Length", "[", "currentSol", "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"allSols", ",", "currentSol"}], "]"}]}]}], 
+         "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"start", ",", "end", ",", 
+         RowBox[{"N", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"start", "/", "l"}], "*", "100"}], ",", "2"}], "]"}], ",",
+          "allLength", ",", "l"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Put", "[", 
+      RowBox[{"allSols", ",", "\"\<d:\\\\20160603.m\>\""}], "]"}], ";", 
+     "\[IndentingNewLine]", "allSols"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6762921750928206`*^9, 3.676292180359951*^9}, {
+  3.676292239074507*^9, 3.676292283109178*^9}, {3.676292320847887*^9, 
+  3.6762923884004354`*^9}, {3.6762925610165997`*^9, 3.676292618518965*^9}, {
+  3.6762926766823263`*^9, 3.676292757485026*^9}, {3.6762928355375457`*^9, 
+  3.676292847575551*^9}, {3.6762929533868833`*^9, 3.6762929814491773`*^9}, {
+  3.6762930221921854`*^9, 3.6762931238475842`*^9}, {3.6762931812201405`*^9, 
+  3.67629321240741*^9}, {3.6762932779291325`*^9, 3.676293374543751*^9}, {
+  3.6762934297621803`*^9, 3.676293453753174*^9}, {3.6762934999947586`*^9, 
+  3.6762935436214046`*^9}, {3.676293680488327*^9, 3.6762936912769194`*^9}, {
+  3.6762937215082245`*^9, 3.676293730586625*^9}, {3.6763019430979924`*^9, 
+  3.6763019649918575`*^9}, {3.676302024233773*^9, 3.676302044021864*^9}, {
+  3.676346294369114*^9, 3.6763463258125906`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doMutch1", "=", 
+   RowBox[{"DoMuch", "[", "allReplaced", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.67629228530377*^9, 3.676292296007123*^9}, {
+   3.6763019752897916`*^9, 3.6763019885120263`*^9}, 3.676302105168567*^9, 
+   3.676313512639654*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"allReplaced2", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"#", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "==", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", 
+     RowBox[{"Flatten", "[", "doMutch1", "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6763021173082056`*^9, 3.676302166330701*^9}, 
+   3.6763135142341805`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "allReplaced2", "]"}]], "Input",
+ CellChangeTimes->{{3.6763021933516426`*^9, 3.6763022002417445`*^9}}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{3.6763043801522574`*^9, 3.6763161264975777`*^9, 
+  3.676404438503627*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doMutch2", "=", 
+   RowBox[{"DoMuch", "[", "allReplaced2", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.676302183369204*^9, 3.676302187804137*^9}, 
+   3.6763135171021404`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"allReplaced3", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"#", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "==", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", 
+     RowBox[{"Flatten", "[", "doMutch2", "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6763027623981905`*^9, 3.676302766460181*^9}, 
+   3.676313519681223*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
+\[NoBreak]\\!\\(First[\\(\\({}\\)\\)]\\)\[NoBreak] does not exist. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/partw\\\", \
+ButtonNote -> \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676404438753606*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "allReplaced3", "]"}]], "Input",
+ CellChangeTimes->{3.6763027717850513`*^9}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{3.6763066775580163`*^9, 3.676318091384505*^9, 
+  3.6764044388716264`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doMutch3", "=", 
+   RowBox[{"DoMuch", "[", "allReplaced3", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6763027818285527`*^9, 3.6763027855567517`*^9}, 
+   3.676313521983902*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"allReplaced4", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"#", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "==", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", 
+     RowBox[{"Flatten", "[", "doMutch3", "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.67630455393382*^9, 3.6763045584072475`*^9}, 
+   3.67631352374445*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doMutch4", "=", 
+   RowBox[{"DoMuch", "[", "allReplaced4", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.676304567401888*^9, 3.6763045700498667`*^9}, 
+   3.676313525956225*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"solved4", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"Flatten", "[", "doMutch4", "]"}], ",", 
+     RowBox[{
+      RowBox[{"NotASingleX", "[", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}], "&"}]}], "]"}]}], ";", 
+  RowBox[{"Length", "[", "solved4", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6763078214967384`*^9, 3.676307853525157*^9}, {
+  3.6763102891078415`*^9, 3.676310313216527*^9}, {3.676310455980461*^9, 
+  3.676310460014151*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.676310351502305*^9, 3.676310602472394*^9, 
+  3.676321245081499*^9, 3.676404439059641*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"allReplaced5", "=", 
+   RowBox[{"DeleteDuplicates", "[", 
+    RowBox[{
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "==", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", 
+       RowBox[{"Flatten", "[", "doMutch4", "]"}]}], "]"}], "/.", "solved4"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.676309736341133*^9, 3.6763097410738792`*^9}, {
+   3.6763106238294277`*^9, 3.6763106413530273`*^9}, 3.6763135293236723`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "allReplaced5", "]"}]], "Input",
+ CellChangeTimes->{3.6763106559239893`*^9}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.6763116071440544`*^9, 3.676321954011406*^9, 
+  3.676404439078641*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"doMutch5", "=", 
+  RowBox[{"DoMuch", "[", "allReplaced5", "]"}]}]], "Input",
+ CellChangeTimes->{{3.676312799767335*^9, 3.676312804497306*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{3.67631340975737*^9, 3.6763363388095465`*^9, 
+  3.6764044391783395`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"solved5", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"Flatten", "[", "doMutch5", "]"}], ",", 
+     RowBox[{
+      RowBox[{"NotASingleX", "[", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}], "&"}]}], "]"}]}], ";", 
+  RowBox[{"Length", "[", "solved5", "]"}]}]], "Input",
+ CellChangeTimes->{{3.676312813423917*^9, 3.676312823306385*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.6763364944413443`*^9, 3.676404439189352*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Take", "[", 
+  RowBox[{"solved4", ",", "5"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6763433404898195`*^9, 3.676343341610974*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Take", "::", "take"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot take positions \[NoBreak]\\!\\(1\\)\[NoBreak] \
+through \[NoBreak]\\!\\(5\\)\[NoBreak] in \[NoBreak]\\!\\({}\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Take/take\\\", \
+ButtonNote -> \\\"Take::take\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044392308435`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Take", "[", 
+  RowBox[{
+   RowBox[{"{", "}"}], ",", "5"}], "]"}]], "Output",
+ CellChangeTimes->{3.676343341942791*^9, 3.676404439233344*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Take", "[", 
+  RowBox[{"solved5", ",", "5"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6763433238595095`*^9, 3.6763433308591986`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Take", "::", "take"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot take positions \[NoBreak]\\!\\(1\\)\[NoBreak] \
+through \[NoBreak]\\!\\(5\\)\[NoBreak] in \[NoBreak]\\!\\({}\\)\[NoBreak]. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Take/take\\\", \
+ButtonNote -> \\\"Take::take\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676404439256858*^9}],
+
+Cell[BoxData[
+ RowBox[{"Take", "[", 
+  RowBox[{
+   RowBox[{"{", "}"}], ",", "5"}], "]"}]], "Output",
+ CellChangeTimes->{3.6763433317169657`*^9, 3.6764044392588587`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"allReplaced6", "=", 
+   RowBox[{"DeleteDuplicates", "[", 
+    RowBox[{
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "==", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", 
+       RowBox[{"Flatten", "[", "doMutch5", "]"}]}], "]"}], "/.", "solved5"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6763433588830643`*^9, 3.676343370910318*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doMutch6", "=", 
+   RowBox[{"DoMuch", "[", 
+    RowBox[{"allReplaced6", ",", "100"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6763433833733215`*^9, 3.6763433892825713`*^9}, {
+   3.6763463344592323`*^9, 3.6763463354848757`*^9}, 3.67634744183946*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"solved6", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"Flatten", "[", "doMutch6", "]"}], ",", 
+     RowBox[{
+      RowBox[{"NotASingleX", "[", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}], "&"}]}], "]"}]}], ";", 
+  RowBox[{"Length", "[", "solved6", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6763465228670993`*^9, 3.6763465339261036`*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.6763476858185987`*^9, 3.676404439365865*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"allReplaced7", "=", 
+   RowBox[{"DeleteDuplicates", "[", 
+    RowBox[{
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "==", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", 
+       RowBox[{"Flatten", "[", "doMutch6", "]"}]}], "]"}], "/.", "solved6"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6763477337009277`*^9, 3.676347775256457*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doMutch7", "=", 
+   RowBox[{"DoMuch", "[", 
+    RowBox[{"allReplaced7", ",", "100"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.676347760939637*^9, 3.676347787264737*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"solved7", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"Flatten", "[", "doMutch7", "]"}], ",", 
+     RowBox[{
+      RowBox[{"NotASingleX", "[", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}], "&"}]}], "]"}]}], ";", 
+  RowBox[{"Length", "[", "solved7", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6763503140064545`*^9, 3.676350324503743*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.6763505191171603`*^9, 3.676404439472887*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"allReplaced8", "=", 
+   RowBox[{"DeleteDuplicates", "[", 
+    RowBox[{
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "==", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", 
+       RowBox[{"Flatten", "[", "doMutch7", "]"}]}], "]"}], "/.", "solved7"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.676351709136661*^9, 3.676351718284415*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doMutch8", "=", 
+   RowBox[{"DoMuch", "[", 
+    RowBox[{"allReplaced8", ",", "100"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.676351728595747*^9, 3.6763517322769775`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"solved8", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"Flatten", "[", "doMutch8", "]"}], ",", 
+     RowBox[{
+      RowBox[{"NotASingleX", "[", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}], "&"}]}], "]"}]}], ";", 
+  RowBox[{"Length", "[", "solved8", "]"}]}]], "Input",
+ CellChangeTimes->{{3.676355671930839*^9, 3.676355683393527*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.676355953950369*^9, 3.6764044395808935`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"allReplaced9", "=", 
+   RowBox[{"DeleteDuplicates", "[", 
+    RowBox[{
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "==", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", 
+       RowBox[{"Flatten", "[", "doMutch8", "]"}]}], "]"}], "/.", "solved8"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6763604378334446`*^9, 3.676360446438325*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doMutch9", "=", 
+   RowBox[{"DoMuch", "[", 
+    RowBox[{"allReplaced9", ",", "100"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6763604559372673`*^9, 3.6763604612672586`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"solved9", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"Flatten", "[", "doMutch9", "]"}], ",", 
+     RowBox[{
+      RowBox[{"NotASingleX", "[", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}], "&"}]}], "]"}]}], ";", 
+  RowBox[{"Length", "[", "solved9", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6763604748687162`*^9, 3.676360485317927*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.6763624681842394`*^9, 3.676404439686885*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"allReplaced10", "=", 
+   RowBox[{"DeleteDuplicates", "[", 
+    RowBox[{
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "==", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", 
+       RowBox[{"Flatten", "[", "doMutch9", "]"}]}], "]"}], "/.", "solved9"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6763630435391097`*^9, 3.676363079492131*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doMutch10", "=", 
+   RowBox[{"DoMuch", "[", 
+    RowBox[{"allReplaced10", ",", "100"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.676363633955472*^9, 3.676363638152348*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"solved10", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"Flatten", "[", "doMutch10", "]"}], ",", 
+     RowBox[{
+      RowBox[{"NotASingleX", "[", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}], "&"}]}], "]"}]}], ";", 
+  RowBox[{"Length", "[", "solved10", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6763637279441605`*^9, 3.6763637363481207`*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.676365732748578*^9, 3.6764044398419285`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"allReplaced11", "=", 
+   RowBox[{"RandomSample", "[", 
+    RowBox[{"DeleteDuplicates", "[", 
+     RowBox[{
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "==", 
+          RowBox[{"#", "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", 
+        RowBox[{"Flatten", "[", "doMutch10", "]"}]}], "]"}], "/.", 
+      "solved10"}], "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6763668230468216`*^9, 3.67636684741221*^9}, 
+   3.676367777752695*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"doMutch11", "=", 
+  RowBox[{"DoMuch", "[", 
+   RowBox[{"allReplaced11", ",", "100"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6763668617045836`*^9, 3.6763668639898453`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{3.6763679003915997`*^9, 3.676404439938922*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"solved11", "=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{"Flatten", "[", "doMutch11", "]"}], ",", 
+     RowBox[{
+      RowBox[{"NotASingleX", "[", 
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}], "&"}]}], "]"}]}], ";", 
+  RowBox[{"Length", "[", "solved11", "]"}]}]], "Input",
+ CellChangeTimes->{{3.676366875244671*^9, 3.676366890658924*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.676404439949921*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.676364045076857*^9, 3.676364045611213*^9}, 
+   3.6763668202577434`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DoMuch", "[", 
+   RowBox[{"startEqs_", ",", 
+    RowBox[{"blockSize_:", "1000"}]}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"l", "=", 
+       RowBox[{"Length", "[", "startEqs", "]"}]}], ",", 
+      RowBox[{"block", "=", "1"}], ",", " ", "start", ",", " ", "end", ",", 
+      " ", "current", ",", "relevant", ",", "theseVars", ",", 
+      RowBox[{"hop", "=", "blockSize"}], ",", 
+      RowBox[{"allSols", "=", 
+       RowBox[{"{", "}"}]}], ",", " ", "currentSol", ",", 
+      RowBox[{"allLength", "=", "0"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Quiet", "[", "\[IndentingNewLine]", 
+        RowBox[{"For", "[", 
+         RowBox[{
+          RowBox[{"start", "=", "1"}], ",", 
+          RowBox[{"start", "\[LessEqual]", "l"}], ",", 
+          RowBox[{"start", "+=", "hop"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"end", "=", 
+            RowBox[{"start", "+", "hop", "-", "1"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"end", ">", "l"}], ",", 
+             RowBox[{"end", "=", "l"}]}], "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"current", "=", 
+            RowBox[{"Take", "[", 
+             RowBox[{"startEqs", ",", 
+              RowBox[{"{", 
+               RowBox[{"start", ",", "end"}], "}"}]}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"theseVars", "=", 
+            RowBox[{"DeleteDuplicates", "[", 
+             RowBox[{"Flatten", "[", 
+              RowBox[{"Map", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"ListofVars", "[", "#", "]"}], "&"}], ",", 
+                "current"}], "]"}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"relevant", "=", 
+            RowBox[{"Intersection", "[", 
+             RowBox[{"allGraphVariables6", ",", " ", "theseVars"}], "]"}]}], 
+           ";", "\[IndentingNewLine]", 
+           RowBox[{"currentSol", "=", 
+            RowBox[{"First", "[", 
+             RowBox[{"Solve", "[", 
+              RowBox[{"current", ",", "relevant"}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"allLength", "+=", 
+            RowBox[{"Length", "[", "currentSol", "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"allSols", ",", "currentSol"}], "]"}]}]}], 
+         "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"start", ",", "end", ",", 
+         RowBox[{"N", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"start", "/", "l"}], "*", "100"}], ",", "2"}], "]"}], ",",
+          "allLength", ",", "l"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]",
+      "allSols"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{3.676367823643114*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SolveMany", "[", 
+   RowBox[{"startSet_", ",", "startSols_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"allRep", ",", "doMutch", ",", " ", 
+      RowBox[{"allSols", "=", 
+       RowBox[{"{", "}"}]}], ",", " ", "solved", ",", " ", "iteration"}], 
+     "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"allSols", "=", "startSols"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"allRep", "=", "startSet"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"iteration", "=", "1"}], ",", 
+       RowBox[{"iteration", "<", "20"}], ",", 
+       RowBox[{"iteration", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Print", "[", 
+         RowBox[{"iteration", ",", " ", "\"\< replacing \>\"", ",", " ", 
+          RowBox[{"Length", "[", "allRep", "]"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"allRep", "=", " ", 
+         RowBox[{"allRep", "/.", "allSols"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{"iteration", ",", " ", "\"\< doing much \>\"", ",", " ", 
+          RowBox[{"Length", "[", "allRep", "]"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"doMutch", "=", 
+         RowBox[{"DoMuch", "[", 
+          RowBox[{"allRep", ",", "500"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{"iteration", ",", " ", "\"\< solving \>\""}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"solved", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{
+           RowBox[{"Flatten", "[", "doMutch", "]"}], ",", 
+           RowBox[{
+            RowBox[{"NotASingleX", "[", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], "]"}], "&"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"allRep", "=", 
+         RowBox[{"RandomSample", "[", 
+          RowBox[{"DeleteDuplicates", "[", 
+           RowBox[{
+            RowBox[{"Map", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], "==", 
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", 
+              RowBox[{"Flatten", "[", "doMutch", "]"}]}], "]"}], "/.", 
+            "solved"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Put", "[", 
+         RowBox[{"solved", ",", 
+          RowBox[{"\"\<d:\\\\20160701-\>\"", "<>", 
+           RowBox[{"ToString", "[", "iteration", "]"}], "<>", 
+           "\"\<.m\>\""}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{"iteration", ",", " ", "\"\< solved \>\"", ",", " ", 
+          RowBox[{"Length", "[", "solved", "]"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"allSols", ",", "solved"}], "]"}]}]}], "\[IndentingNewLine]",
+       "]"}], ";", "\[IndentingNewLine]", "allSols"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.676367850852523*^9, 3.6763681845136957`*^9}, {
+  3.6763682195886917`*^9, 3.6763682522939844`*^9}, {3.6763686771110973`*^9, 
+  3.6763686938103247`*^9}, {3.6763688996824713`*^9, 3.676368932527334*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SolveMany", "[", 
+  RowBox[{"allReplaced", ",", 
+   RowBox[{"{", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6763681892414083`*^9, 3.676368201957467*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "2"}],
+  SequenceForm[1, " replacing ", 2],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404439991922*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", "2"}],
+  SequenceForm[1, " doing much ", 2],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044399949327`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"1", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[1, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044400339265`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Keys", "::", "invrl"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The argument \[NoBreak]\\!\\(Keys[withRelations6]\\)\
+\[NoBreak] is not a valid Association or a list of rules. \\!\\(\\*ButtonBox[\
+\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Keys\\\", ButtonNote -> \
+\\\"Keys::invrl\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.67640444007193*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"SymbolName", "::", "sym"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Argument \[NoBreak]\\!\\(Keys[withRelations6]\\)\[NoBreak] \
+at position \[NoBreak]\\!\\(1\\)\[NoBreak] is expected to be a symbol. \\!\\(\
+\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/sym\\\", \
+ButtonNote -> \\\"SymbolName::sym\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044401149297`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"StringTake", "::", "strse"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"String or list of strings expected at position \
+\[NoBreak]\\!\\(1\\)\[NoBreak] in \
+\[NoBreak]\\!\\(StringTake[\\(\\(\\(\\(SymbolName[\\(\\(Keys[withRelations6]\\\
+)\\)]\\)\\), 1\\)\\)]\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\
+\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/strse\\\", ButtonNote -> \
+\\\"StringTake::strse\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044401549644`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"ReplaceAll", "::", "reps"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\({\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[key]\\)\
+\\)[\\\"relations\\\"]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \
+\\(\\({key, \\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)}\\)\[NoBreak] \
+is neither a list of replacement rules nor a valid dispatch table, and so \
+cannot be used for replacing. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/ReplaceAll/reps\\\", ButtonNote -> \
+\\\"ReplaceAll::reps\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044401769648`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"ReplaceAll", "::", "reps"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\({\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[key]\\)\
+\\)[\\\"relations\\\"]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \
+\\(\\({key, \\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)}\\)\[NoBreak] \
+is neither a list of replacement rules nor a valid dispatch table, and so \
+cannot be used for replacing. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/ReplaceAll/reps\\\", ButtonNote -> \
+\\\"ReplaceAll::reps\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044401979637`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"RandomSample", "::", "lrwl"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The set of items to sample from, \
+\[NoBreak]\\!\\(\\(\\({\\(\\((\\(\\(\\(\\(withRelations6[key]\\)\\)[\\\"\
+relations\\\"]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6)\\)\\) \[Equal] \
+\\(\\({key, \\(\\(Keys[withRelations6]\\)\\)}\\)\\)}\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[key]\\)\\)[\\\"\
+relations\\\"]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \\(\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)}\\)\\)\\)\[NoBreak], should \
+be a non-empty list or a rule weights -> choices. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/RandomSample\\\", ButtonNote -> \
+\\\"RandomSample::lrwl\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044402560043`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[1, " solved ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044402589855`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "2", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[2, " replacing ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044402589855`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"ReplaceAll", "::", "reps"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], \
+"\<\"\[NoBreak]\\!\\({\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[key]\\)\
+\\)[\\\"relations\\\"]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \
+\\(\\({key, \\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)}\\)\[NoBreak] \
+is neither a list of replacement rules nor a valid dispatch table, and so \
+cannot be used for replacing. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/ReplaceAll/reps\\\", ButtonNote -> \
+\\\"ReplaceAll::reps\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676404440276987*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\(ReplaceAll :: reps\\), \\\"MessageName\\\"]\\)\
+\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676404440300003*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "2", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[2, " doing much ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044403019986`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"2", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[2, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404440346998*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Table", "::", "iterb"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Iterator \[NoBreak]\\!\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\[NoBreak] does not have appropriate \
+bounds. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/iterb\\\", ButtonNote -> \
+\\\"Table::iterb\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676404440367997*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"SymbolName", "::", "sym"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Argument \
+\[NoBreak]\\!\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[key]\\)\\)[\\\"\
+relations\\\"]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \\(\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)\[NoBreak] at position \
+\[NoBreak]\\!\\(1\\)\[NoBreak] is expected to be a symbol. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/sym\\\", \
+ButtonNote -> \\\"SymbolName::sym\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044404069977`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"StringTake", "::", "strse"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"String or list of strings expected at position \
+\[NoBreak]\\!\\(1\\)\[NoBreak] in \
+\[NoBreak]\\!\\(StringTake[\\(\\(\\(\\(SymbolName[\\(\\(Table[\\(\\(\\(\\(\\(\
+\\(\\(\\(withRelations6[key]\\)\\)[\\\"relations\\\"]\\)\\)/.\[VeryThinSpace] \
+baseGraphAxioma6\\)\\), \\(\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)\\)]\\)\\), 1\\)\\)]\\)\
+\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/strse\\\", ButtonNote -> \
+\\\"StringTake::strse\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044404455338`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"RandomSample", "::", "lrwl"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The set of items to sample from, \
+\[NoBreak]\\!\\(\\(\\({\\(\\(RandomSample[\\(\\(\\(\\({\\(\\(ReplaceAll[\\(\\(\
+\[LeftSkeleton] 2 \[RightSkeleton]\\)\\)]\\)\\) \[Equal] \\(\\({\\(\
+\[LeftSkeleton] 2 \[RightSkeleton]\\)}\\)\\)}\\)\\)/.\[VeryThinSpace] \\(\\({\
+\\(Table[\\(\\(\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\({\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)}\\)\\)\\)\\)]\\)}\\)\\)\\)\\)]\\)\\) \[Equal] \
+\\(\\({\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[key]\\)\\)[\\\"\
+relations\\\"]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \\(\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)}\\)\\)}\\)\\)/.\
+\[VeryThinSpace] \
+\\(\\({\\(\\(RandomSample[\\(\\(\\(\\({\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] \
+2 \[RightSkeleton]\\)\\)]\\)\\) \[Equal] \\(\\({\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)}\\)\\)}\\)\\)/.\[VeryThinSpace] \\(\\({\\(Table[\\(\\(\\(\
+\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \[RightSkeleton]\\)\\)]\\)\\), \
+\\(\\({\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)}\\)\\)\\)\\)]\\)}\\)\\)\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[key]\\)\\)[\\\"\
+relations\\\"]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \\(\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)}\\)\\)}\\)\\)\\)\[NoBreak], \
+should be a non-empty list or a rule weights -> choices. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/RandomSample\\\", ButtonNote -> \
+\\\"RandomSample::lrwl\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044404995375`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "2", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[2, " solved ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404440501535*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "3", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[3, " replacing ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044405025597`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "3", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", "2"}],
+  SequenceForm[3, " doing much ", 2],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404440504532*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"3", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[3, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404440542039*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Table", "::", "iterb"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Iterator \[NoBreak]\\!\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\[NoBreak] does not have appropriate \
+bounds. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/iterb\\\", ButtonNote -> \
+\\\"Table::iterb\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044405620403`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"SymbolName", "::", "sym"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Argument \
+\[NoBreak]\\!\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[key]\\)\\)[\\\"\
+relations\\\"]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \\(\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)\[NoBreak] at position \
+\[NoBreak]\\!\\(1\\)\[NoBreak] is expected to be a symbol. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/sym\\\", \
+ButtonNote -> \\\"SymbolName::sym\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044406030583`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\(SymbolName :: sym\\), \\\"MessageName\\\"]\\)\
+\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044406225824`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"StringTake", "::", "strse"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"String or list of strings expected at position \
+\[NoBreak]\\!\\(1\\)\[NoBreak] in \
+\[NoBreak]\\!\\(StringTake[\\(\\(\\(\\(SymbolName[\\(\\(Table[\\(\\(\\(\\(\\(\
+\\(\\(\\(withRelations6[key]\\)\\)[\\\"relations\\\"]\\)\\)/.\[VeryThinSpace] \
+baseGraphAxioma6\\)\\), \\(\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)\\)]\\)\\), 1\\)\\)]\\)\
+\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/strse\\\", ButtonNote -> \
+\\\"StringTake::strse\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676404440659089*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\(StringTake :: strse\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.67640444068009*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"RandomSample", "::", "lrwl"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The set of items to sample from, \
+\[NoBreak]\\!\\(\\(\\({\\(\\(\\(\\(RandomSample[\\(\\(\\(\\({\\(\\(\
+RandomSample[\\(\\(\[LeftSkeleton] 1 \[RightSkeleton]\\)\\)]\\)\\) \[Equal] \
+\\(\\({\\(\[LeftSkeleton] 1 \[RightSkeleton]\\)}\\)\\)}\\)\\)/.\
+\[VeryThinSpace] \\(\\({\\(\\(RandomSample[\\(\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)\\)]\\)\\)/.\[VeryThinSpace] \\(\\({\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)}\\)\\)}\\)\\)\\)\\)]\\)\\) \[Equal] \
+\\(\\({\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[key]\\)\\)[\\\"\
+relations\\\"]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \\(\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(\\(\\({\\(\\(RandomSample[\\(\\(\[LeftSkeleton]\
+ 1 \[RightSkeleton]\\)\\)]\\)\\) \[Equal] \\(\\({\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)}\\)\\)}\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(RandomSample[\\(\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)\\)]\\)\\)/.\[VeryThinSpace] \\(\\({\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)}\\)\\)}\\)\\)\\)\\)]\\)\\) \[Equal] \
+\\(\\({\\(\\(RandomSample[\\(\\(\\(\\({\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)}\\)\\)/.\[VeryThinSpace] \\(\\({\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)}\\)\\)\\)\\)]\\)\\)/.\[VeryThinSpace] \\(\\({\\(Table[\\(\
+\\(\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \[RightSkeleton]\\)\\)]\\)\\), \
+\\(\\({\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)}\\)\\)\\)\\)]\\)}\\)\\)}\\)\\)\\)\\)}\\)\\)/.\
+\[VeryThinSpace] \
+\\(\\({\\(\\(\\(\\(RandomSample[\\(\\(\\(\\({\\(\\(RandomSample[\\(\\(\
+\[LeftSkeleton] 1 \[RightSkeleton]\\)\\)]\\)\\) \[Equal] \\(\\({\\(\
+\[LeftSkeleton] 1 \[RightSkeleton]\\)}\\)\\)}\\)\\)/.\[VeryThinSpace] \\(\\({\
+\\(\\(RandomSample[\\(\\(\[LeftSkeleton] 1 \[RightSkeleton]\\)\\)]\\)\\)/.\
+\[VeryThinSpace] \\(\\({\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)}\\)\\)}\\)\\)\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[key]\\)\\)[\\\"\
+relations\\\"]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \\(\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\\)\\)\\)]\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(\\(\\({\\(\\(RandomSample[\\(\\(\[LeftSkeleton]\
+ 1 \[RightSkeleton]\\)\\)]\\)\\) \[Equal] \\(\\({\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)}\\)\\)}\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(RandomSample[\\(\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)\\)]\\)\\)/.\[VeryThinSpace] \\(\\({\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)}\\)\\)}\\)\\)\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(RandomSample[\\(\\(\\(\\({\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)}\\)\\)/.\[VeryThinSpace] \\(\\({\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)}\\)\\)\\)\\)]\\)\\)/.\[VeryThinSpace] \\(\\({\\(Table[\\(\
+\\(\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \[RightSkeleton]\\)\\)]\\)\\), \
+\\(\\({\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)}\\)\\)\\)\\)]\\)}\\)\\)}\\)\\)\\)\\)}\\)\\)\\)\[NoBreak], \
+should be a non-empty list or a rule weights -> choices. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/RandomSample\\\", ButtonNote -> \
+\\\"RandomSample::lrwl\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676404440737129*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\(RandomSample :: lrwl\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676404440757125*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "3", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "2"}],
+  SequenceForm[3, " solved ", 2],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404440767111*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "4", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[4, " replacing ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404440768111*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "4", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", "3"}],
+  SequenceForm[4, " doing much ", 3],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404440770125*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"4", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[4, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044408091288`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Table", "::", "iterb"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Iterator \[NoBreak]\\!\\({key, \
+\\(\\(Keys[withRelations6]\\)\\)}\\)\[NoBreak] does not have appropriate \
+bounds. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/iterb\\\", ButtonNote -> \
+\\\"Table::iterb\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676404440829621*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Table :: \
+iterb\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044408501263`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "4", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "3"}],
+  SequenceForm[4, " solved ", 3],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404440890128*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "5", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[5, " replacing ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404440891127*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "5", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", "4"}],
+  SequenceForm[5, " doing much ", 4],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044408931284`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"5", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[5, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044409751587`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "5", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "4"}],
+  SequenceForm[5, " solved ", 4],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404441371193*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "6", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[6, " replacing ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404441372192*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "6", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", "5"}],
+  SequenceForm[6, " doing much ", 5],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404441373191*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"6", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[6, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404442092306*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "6", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "5"}],
+  SequenceForm[6, " solved ", 5],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404442311326*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "7", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[7, " replacing ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044423123264`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "7", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm[7, " doing much ", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404442313325*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"7", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[7, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044469828367`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "7", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "0"}],
+  SequenceForm[7, " solved ", 0],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044469838543`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "8", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "0"}],
+  SequenceForm[8, " replacing ", 0],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044469848375`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "8", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", "7"}],
+  SequenceForm[8, " doing much ", 7],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044469858513`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"8", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[8, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404447718062*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "8", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm[8, " solved ", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044479900837`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "9", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[9, " replacing ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044479910836`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "9", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", "8"}],
+  SequenceForm[9, " doing much ", 8],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044479921026`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"9", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[9, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404455491436*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
+\[NoBreak]\\!\\(RandomSample[\\(\\(\\(\\({False, False, False, False, False, \
+False}\\)\\)/.\[VeryThinSpace] \\(\\({\\(\\(\\(\\({}\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[\\(\\(\[LeftSkeleton] \
+1 \[RightSkeleton]\\)\\)]\\)\\)[\\(\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)\\)]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \
+\\(\\({key, \\(\\(Keys[\\(\\(\[LeftSkeleton] 1 \[RightSkeleton]\\)\\)]\\)\\)}\
+\\)\\)\\)\\)]\\)}\\)\\)\\)\\), \\(\\(\\(\\({}\\)\\)/.\[VeryThinSpace] \\(\\({\
+\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \\(\\({\\(Table[\\(\\(\
+\[LeftSkeleton] 2 \[RightSkeleton]\\)\\)]\\)}\\)\\)}\\)\\)\\)\\), \\(\\(\
+\[LeftSkeleton] 3 \[RightSkeleton]\\)\\), \\(\\(\\(\\({}\\)\\)/.\
+\[VeryThinSpace] \\(\\({\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\
+\[LeftSkeleton] 2 \[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(Table[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)}\\)\\)\\)\\)}\\)\\)\\)\\)}\\)\\)\\)\\)]\\)\
+\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
+\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.67640445564824*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
+\[NoBreak]\\!\\(RandomSample[\\(\\(\\(\\({False, False, False, False, False, \
+False}\\)\\)/.\[VeryThinSpace] \\(\\({\\(\\(\\(\\({}\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[\\(\\(\[LeftSkeleton] \
+1 \[RightSkeleton]\\)\\)]\\)\\)[\\(\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)\\)]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \
+\\(\\({key, \\(\\(Keys[\\(\\(\[LeftSkeleton] 1 \[RightSkeleton]\\)\\)]\\)\\)}\
+\\)\\)\\)\\)]\\)}\\)\\)\\)\\), \\(\\(\\(\\({}\\)\\)/.\[VeryThinSpace] \\(\\({\
+\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \\(\\({\\(Table[\\(\\(\
+\[LeftSkeleton] 2 \[RightSkeleton]\\)\\)]\\)}\\)\\)}\\)\\)\\)\\), \\(\\(\
+\[LeftSkeleton] 3 \[RightSkeleton]\\)\\), \\(\\(\\(\\({}\\)\\)/.\
+\[VeryThinSpace] \\(\\({\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\
+\[LeftSkeleton] 2 \[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(Table[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)}\\)\\)\\)\\)}\\)\\)\\)\\)}\\)\\)\\)\\)]\\)\
+\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
+\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044558167725`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
+\[NoBreak]\\!\\(RandomSample[\\(\\(\\(\\({False, False, False, False, False, \
+False}\\)\\)/.\[VeryThinSpace] \\(\\({\\(\\(\\(\\({}\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(Table[\\(\\(\\(\\(\\(\\(\\(\\(withRelations6[\\(\\(\[LeftSkeleton] \
+1 \[RightSkeleton]\\)\\)]\\)\\)[\\(\\(\[LeftSkeleton] 1 \
+\[RightSkeleton]\\)\\)]\\)\\)/.\[VeryThinSpace] baseGraphAxioma6\\)\\), \
+\\(\\({key, \\(\\(Keys[\\(\\(\[LeftSkeleton] 1 \[RightSkeleton]\\)\\)]\\)\\)}\
+\\)\\)\\)\\)]\\)}\\)\\)\\)\\), \\(\\(\\(\\({}\\)\\)/.\[VeryThinSpace] \\(\\({\
+\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \\(\\({\\(Table[\\(\\(\
+\[LeftSkeleton] 2 \[RightSkeleton]\\)\\)]\\)}\\)\\)}\\)\\)\\)\\), \\(\\(\
+\[LeftSkeleton] 3 \[RightSkeleton]\\)\\), \\(\\(\\(\\({}\\)\\)/.\
+\[VeryThinSpace] \\(\\({\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\
+\[LeftSkeleton] 2 \[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(Table[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)}\\)\\)\\)\\), \
+\\(\\(\\(\\(RandomSample[\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)]\\)\\)/.\[VeryThinSpace] \
+\\(\\({\\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\), \\(\\(ReplaceAll[\\(\\(\[LeftSkeleton] 2 \
+\[RightSkeleton]\\)\\)]\\)\\)}\\)\\)\\)\\)}\\)\\)\\)\\)}\\)\\)\\)\\)]\\)\
+\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
+\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044559878206`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
+partw\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6764044560098186`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "9", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "8"}],
+  SequenceForm[9, " solved ", 8],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404458705556*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "10", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[10, " replacing ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404458707568*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "10", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", 
+   "9"}],
+  SequenceForm[10, " doing much ", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404458709554*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"10", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[10, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404474305374*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "10", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "0"}],
+  SequenceForm[10, " solved ", 0],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044743203926`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "11", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "0"}],
+  SequenceForm[11, " replacing ", 0],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044743213873`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "11", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", 
+   "10"}],
+  SequenceForm[11, " doing much ", 10],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044743233743`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"11", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[11, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764044834734993`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "11", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "8"}],
+  SequenceForm[11, " solved ", 8],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404486764358*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "12", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm[12, " replacing ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404486765358*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "12", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", 
+   "11"}],
+  SequenceForm[12, " doing much ", 11],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404486766359*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"12", "\[InvisibleSpace]", "\<\" solving \"\>"}],
+  SequenceForm[12, " solving "],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.67640450222735*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "12", "\[InvisibleSpace]", "\<\" solved \"\>", "\[InvisibleSpace]", "0"}],
+  SequenceForm[12, " solved ", 0],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764045022283506`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "13", "\[InvisibleSpace]", "\<\" replacing \"\>", "\[InvisibleSpace]", "0"}],
+  SequenceForm[13, " replacing ", 0],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.6764045022303505`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "13", "\[InvisibleSpace]", "\<\" doing much \"\>", "\[InvisibleSpace]", 
+   "12"}],
+  SequenceForm[13, " doing much ", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6763682711249027`*^9, 3.6763689720810924`*^9, 
+  3.676404502231351*^9}]
+}, Open  ]],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellChangeTimes->{3.6764045022753596`*^9}]
+}, Open  ]]
+},
+WindowSize->{1520, 771},
+WindowMargins->{{-6, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.2 for Microsoft Windows (64-bit) (July 7, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 758, 21, 72, "Input"],
+Cell[1341, 45, 471, 10, 21, "Message"],
+Cell[1815, 57, 496, 11, 21, "Message"],
+Cell[2314, 70, 496, 11, 21, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2847, 86, 137, 2, 31, "Input"],
+Cell[2987, 90, 72, 1, 31, "Output"]
+}, Open  ]],
+Cell[3074, 94, 4034, 87, 372, "Input"],
+Cell[7111, 183, 285, 6, 31, "Input"],
+Cell[7399, 191, 447, 13, 31, "Input"],
+Cell[CellGroupData[{
+Cell[7871, 208, 140, 2, 31, "Input"],
+Cell[8014, 212, 121, 2, 31, "Output"]
+}, Open  ]],
+Cell[8150, 217, 213, 5, 31, "Input"],
+Cell[CellGroupData[{
+Cell[8388, 226, 445, 13, 31, "Input"],
+Cell[8836, 241, 484, 10, 21, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9357, 256, 114, 2, 31, "Input"],
+Cell[9474, 260, 121, 2, 31, "Output"]
+}, Open  ]],
+Cell[9610, 265, 215, 5, 31, "Input"],
+Cell[9828, 272, 443, 13, 31, "Input"],
+Cell[10274, 287, 213, 5, 31, "Input"],
+Cell[CellGroupData[{
+Cell[10512, 296, 513, 13, 31, "Input"],
+Cell[11028, 311, 139, 2, 31, "Output"]
+}, Open  ]],
+Cell[11182, 316, 596, 16, 31, "Input"],
+Cell[CellGroupData[{
+Cell[11803, 336, 114, 2, 31, "Input"],
+Cell[11920, 340, 119, 2, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12076, 347, 166, 3, 31, "Input"],
+Cell[12245, 352, 137, 3, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12419, 360, 411, 11, 31, "Input"],
+Cell[12833, 373, 94, 1, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12964, 379, 154, 3, 31, "Input"],
+Cell[13121, 384, 502, 10, 21, "Message"],
+Cell[13626, 396, 164, 4, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13827, 405, 156, 3, 31, "Input"],
+Cell[13986, 410, 500, 10, 21, "Message"],
+Cell[14489, 422, 168, 4, 31, "Output"]
+}, Open  ]],
+Cell[14672, 429, 518, 15, 31, "Input"],
+Cell[15193, 446, 291, 6, 31, "Input"],
+Cell[CellGroupData[{
+Cell[15509, 456, 415, 11, 31, "Input"],
+Cell[15927, 469, 94, 1, 31, "Output"]
+}, Open  ]],
+Cell[16036, 473, 518, 15, 31, "Input"],
+Cell[16557, 490, 212, 5, 31, "Input"],
+Cell[CellGroupData[{
+Cell[16794, 499, 413, 11, 31, "Input"],
+Cell[17210, 512, 94, 1, 31, "Output"]
+}, Open  ]],
+Cell[17319, 516, 516, 15, 31, "Input"],
+Cell[17838, 533, 214, 5, 31, "Input"],
+Cell[CellGroupData[{
+Cell[18077, 542, 411, 11, 31, "Input"],
+Cell[18491, 555, 94, 1, 31, "Output"]
+}, Open  ]],
+Cell[18600, 559, 518, 15, 31, "Input"],
+Cell[19121, 576, 216, 5, 31, "Input"],
+Cell[CellGroupData[{
+Cell[19362, 585, 413, 11, 31, "Input"],
+Cell[19778, 598, 94, 1, 31, "Output"]
+}, Open  ]],
+Cell[19887, 602, 519, 15, 31, "Input"],
+Cell[20409, 619, 214, 5, 31, "Input"],
+Cell[CellGroupData[{
+Cell[20648, 628, 418, 11, 31, "Input"],
+Cell[21069, 641, 94, 1, 31, "Output"]
+}, Open  ]],
+Cell[21178, 645, 599, 17, 31, "Input"],
+Cell[CellGroupData[{
+Cell[21802, 666, 198, 4, 31, "Input"],
+Cell[22003, 672, 111, 2, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22151, 679, 414, 11, 31, "Input"],
+Cell[22568, 692, 70, 1, 31, "Output"]
+}, Open  ]],
+Cell[22653, 696, 120, 2, 31, "Input"],
+Cell[22776, 700, 3078, 73, 352, "Input"],
+Cell[25857, 775, 3331, 74, 352, "Input"],
+Cell[CellGroupData[{
+Cell[29213, 853, 182, 4, 31, "Input"],
+Cell[CellGroupData[{
+Cell[29420, 861, 283, 7, 23, "Print"],
+Cell[29706, 870, 287, 7, 23, "Print"],
+Cell[29996, 879, 249, 6, 23, "Print"]
+}, Open  ]],
+Cell[30260, 888, 470, 10, 21, "Message"],
+Cell[30733, 900, 516, 10, 21, "Message"],
+Cell[31252, 912, 591, 12, 21, "Message"],
+Cell[31846, 926, 723, 14, 21, "Message"],
+Cell[32572, 942, 723, 14, 21, "Message"],
+Cell[33298, 958, 924, 16, 39, "Message"],
+Cell[CellGroupData[{
+Cell[34247, 978, 279, 7, 23, "Print"],
+Cell[34529, 987, 285, 7, 23, "Print"]
+}, Open  ]],
+Cell[34829, 997, 721, 14, 21, "Message"],
+Cell[35553, 1013, 533, 11, 21, "Message"],
+Cell[CellGroupData[{
+Cell[36111, 1028, 287, 7, 23, "Print"],
+Cell[36401, 1037, 247, 6, 23, "Print"]
+}, Open  ]],
+Cell[36663, 1046, 494, 11, 21, "Message"],
+Cell[37160, 1059, 683, 13, 21, "Message"],
+Cell[37846, 1074, 758, 15, 21, "Message"],
+Cell[38607, 1091, 1762, 29, 39, "Message"],
+Cell[CellGroupData[{
+Cell[40394, 1124, 277, 7, 23, "Print"],
+Cell[40674, 1133, 285, 7, 23, "Print"],
+Cell[40962, 1142, 285, 7, 23, "Print"],
+Cell[41250, 1151, 247, 6, 23, "Print"]
+}, Open  ]],
+Cell[41512, 1160, 496, 11, 21, "Message"],
+Cell[42011, 1173, 683, 13, 21, "Message"],
+Cell[42697, 1188, 534, 11, 21, "Message"],
+Cell[43234, 1201, 756, 15, 21, "Message"],
+Cell[43993, 1218, 533, 11, 21, "Message"],
+Cell[44529, 1231, 3339, 53, 90, "Message"],
+Cell[47871, 1286, 535, 11, 21, "Message"],
+Cell[CellGroupData[{
+Cell[48431, 1301, 277, 7, 23, "Print"],
+Cell[48711, 1310, 283, 7, 23, "Print"],
+Cell[48997, 1319, 285, 7, 23, "Print"],
+Cell[49285, 1328, 249, 6, 23, "Print"]
+}, Open  ]],
+Cell[49549, 1337, 494, 11, 21, "Message"],
+Cell[50046, 1350, 531, 11, 21, "Message"],
+Cell[CellGroupData[{
+Cell[50602, 1365, 277, 7, 23, "Print"],
+Cell[50882, 1374, 283, 7, 23, "Print"],
+Cell[51168, 1383, 287, 7, 23, "Print"],
+Cell[51458, 1392, 249, 6, 23, "Print"],
+Cell[51710, 1400, 277, 7, 23, "Print"],
+Cell[51990, 1409, 283, 7, 23, "Print"],
+Cell[52276, 1418, 285, 7, 23, "Print"],
+Cell[52564, 1427, 247, 6, 23, "Print"],
+Cell[52814, 1435, 277, 7, 23, "Print"],
+Cell[53094, 1444, 285, 7, 23, "Print"],
+Cell[53382, 1453, 285, 7, 23, "Print"],
+Cell[53670, 1462, 249, 6, 23, "Print"],
+Cell[53922, 1470, 279, 7, 23, "Print"],
+Cell[54204, 1479, 285, 7, 23, "Print"],
+Cell[54492, 1488, 287, 7, 23, "Print"],
+Cell[54782, 1497, 247, 6, 23, "Print"],
+Cell[55032, 1505, 279, 7, 23, "Print"],
+Cell[55314, 1514, 285, 7, 23, "Print"],
+Cell[55602, 1523, 287, 7, 23, "Print"],
+Cell[55892, 1532, 247, 6, 23, "Print"]
+}, Open  ]],
+Cell[56154, 1541, 2835, 47, 56, "Message"],
+Cell[58992, 1590, 2838, 47, 56, "Message"],
+Cell[61833, 1639, 2838, 47, 56, "Message"],
+Cell[64674, 1688, 530, 11, 21, "Message"],
+Cell[CellGroupData[{
+Cell[65229, 1703, 277, 7, 23, "Print"],
+Cell[65509, 1712, 285, 7, 23, "Print"],
+Cell[65797, 1721, 291, 8, 23, "Print"],
+Cell[66091, 1731, 249, 6, 23, "Print"],
+Cell[66343, 1739, 281, 7, 23, "Print"],
+Cell[66627, 1748, 287, 7, 23, "Print"],
+Cell[66917, 1757, 295, 8, 23, "Print"],
+Cell[67215, 1767, 251, 6, 23, "Print"],
+Cell[67469, 1775, 279, 7, 23, "Print"],
+Cell[67751, 1784, 285, 7, 23, "Print"],
+Cell[68039, 1793, 293, 8, 23, "Print"],
+Cell[68335, 1803, 248, 6, 23, "Print"],
+Cell[68586, 1811, 281, 7, 23, "Print"],
+Cell[68870, 1820, 287, 7, 23, "Print"],
+Cell[69160, 1829, 293, 8, 23, "Print"]
+}, Open  ]],
+Cell[69468, 1840, 79, 1, 31, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

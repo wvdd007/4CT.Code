@@ -1,0 +1,612 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23797,        603]
+NotebookOptionsPosition[     22612,        564]
+NotebookOutlinePosition[     22952,        579]
+CellTagsIndexPosition[     22909,        576]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"allReplaced", "=", 
+    RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"withRelations6", "[", "key", "]"}], "[", 
+             "\"\<relations\>\"", "]"}], "/.", "baseGraphAxioma6"}], ")"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"key", ",", 
+            RowBox[{"Keys", "[", "withRelations6", "]"}]}], "}"}]}], "]"}], 
+        "]"}], "//", "DeleteDuplicates"}], ",", "\[IndentingNewLine]", 
+      "key"}], "]"}]}], ";", 
+   RowBox[{"Length", "[", "allReplaced", "]"}]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.676292047817027*^9, 3.676292094211337*^9}, 
+   3.676313510171853*^9, {3.676523057442258*^9, 3.676523072545854*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.676364045076857*^9, 3.676364045611213*^9}, 
+   3.6763668202577434`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DoMuch", "[", 
+   RowBox[{"startEqs_", ",", 
+    RowBox[{"blockSize_:", "1000"}]}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"l", "=", 
+       RowBox[{"Length", "[", "startEqs", "]"}]}], ",", 
+      RowBox[{"block", "=", "1"}], ",", " ", "start", ",", " ", "end", ",", 
+      " ", "current", ",", "relevant", ",", "theseVars", ",", 
+      RowBox[{"hop", "=", "blockSize"}], ",", 
+      RowBox[{"allSols", "=", 
+       RowBox[{"{", "}"}]}], ",", " ", "currentSol", ",", 
+      RowBox[{"allLength", "=", "0"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Quiet", "[", "\[IndentingNewLine]", 
+        RowBox[{"For", "[", 
+         RowBox[{
+          RowBox[{"start", "=", "1"}], ",", 
+          RowBox[{"start", "\[LessEqual]", "l"}], ",", 
+          RowBox[{"start", "+=", "hop"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"end", "=", 
+            RowBox[{"start", "+", "hop", "-", "1"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"end", ">", "l"}], ",", 
+             RowBox[{"end", "=", "l"}]}], "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"current", "=", 
+            RowBox[{"Take", "[", 
+             RowBox[{"startEqs", ",", 
+              RowBox[{"{", 
+               RowBox[{"start", ",", "end"}], "}"}]}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"theseVars", "=", 
+            RowBox[{"DeleteDuplicates", "[", 
+             RowBox[{"Flatten", "[", 
+              RowBox[{"Map", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"ListofVars", "[", "#", "]"}], "&"}], ",", 
+                "current"}], "]"}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"relevant", "=", 
+            RowBox[{"Intersection", "[", 
+             RowBox[{"allGraphVariables6", ",", " ", "theseVars"}], "]"}]}], 
+           ";", "\[IndentingNewLine]", 
+           RowBox[{"currentSol", "=", 
+            RowBox[{"First", "[", 
+             RowBox[{"Solve", "[", 
+              RowBox[{"current", ",", "relevant"}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"allLength", "+=", 
+            RowBox[{"Length", "[", "currentSol", "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"allSols", ",", "currentSol"}], "]"}]}]}], 
+         "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"start", ",", "end", ",", 
+         RowBox[{"N", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"start", "/", "l"}], "*", "100"}], ",", "4"}], "]"}], ",",
+          "allLength", ",", "l"}], "}"}]}], "]"}], ";", "\[IndentingNewLine]",
+      "allSols"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{3.676367823643114*^9, 3.6764384009789305`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SolveMany", "[", 
+   RowBox[{"startSet_", ",", "startSols_", ",", " ", 
+    RowBox[{"startSize_:", "500"}], ",", " ", 
+    RowBox[{"startIteration_:", "7"}]}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"allRep", ",", "doMutch", ",", " ", 
+      RowBox[{"allSols", "=", 
+       RowBox[{"{", "}"}]}], ",", " ", "solved", ",", " ", "iteration", ",", 
+      "flattened", ",", " ", 
+      RowBox[{"blockSize", "=", "startSize"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"allSols", "=", "startSols"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"allRep", "=", "startSet"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"iteration", "=", "startIteration"}], ",", 
+       RowBox[{"iteration", "<", "20"}], ",", 
+       RowBox[{"iteration", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Print", "[", 
+         RowBox[{
+         "iteration", ",", " ", 
+          "\"\<> ---------------- starting iteration ------------- with \
+blockSize \>\"", " ", ",", " ", "blockSize"}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"iteration", "!=", "startIteration"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Print", "[", 
+            RowBox[{"iteration", ",", " ", "\"\<> replacing \>\"", ",", " ", 
+             RowBox[{"Length", "[", "allSols", "]"}], ",", " ", 
+             "\"\< vars in \>\"", ",", " ", 
+             RowBox[{"Length", "[", "allRep", "]"}], ",", " ", 
+             "\"\< equations \>\"", " ", ",", " ", "Now"}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Print", "[", 
+            RowBox[{"Timing", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"allRep", "=", 
+               RowBox[{"allRep", "/.", "allSols"}]}], ";"}], 
+             "\[IndentingNewLine]", "]"}], "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Print", "[", 
+            RowBox[{"iteration", ",", " ", "\"\<> simplify \>\"", ",", " ", 
+             RowBox[{"Length", "[", "allRep", "]"}], ",", " ", 
+             "\"\< equations \>\"", ",", "Now"}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Print", "[", 
+            RowBox[{"Timing", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"allRep", "=", 
+               RowBox[{"Map", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Simplify", "[", "#", "]"}], "&"}], ",", " ", 
+                 "allRep"}], "]"}]}], ";", "\[IndentingNewLine]", 
+              RowBox[{"allRep", "=", 
+               RowBox[{"DeleteDuplicates", "[", "allRep", "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"allRep", "=", 
+               RowBox[{"Select", "[", 
+                RowBox[{"allRep", ",", 
+                 RowBox[{
+                  RowBox[{"!", 
+                   RowBox[{"TrueQ", "[", "#", "]"}]}], "&"}]}], "]"}]}], 
+              ";"}], "\[IndentingNewLine]", "]"}], "]"}]}]}], 
+         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{
+         "iteration", ",", " ", "\"\<> doing much with \>\"", ",", " ", 
+          RowBox[{"Length", "[", "allRep", "]"}], ",", " ", 
+          "\"\< equations \>\"", ",", "Now"}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{"Timing", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"doMutch", "=", 
+            RowBox[{"DoMuch", "[", 
+             RowBox[{"allRep", ",", "blockSize"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"flattened", "=", 
+            RowBox[{"Flatten", "[", "doMutch", "]"}]}], ";"}], 
+          "\[IndentingNewLine]", "]"}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{"iteration", ",", " ", "\"\<> solving \>\"", ",", " ", 
+          RowBox[{"Length", "[", "flattened", "]"}], " ", ",", "\"\<  \>\"", 
+          ",", " ", "Now"}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{"Timing", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"solved", "=", 
+            RowBox[{"Select", "[", 
+             RowBox[{"flattened", ",", 
+              RowBox[{
+               RowBox[{"NotASingleX", "[", 
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], "]"}], "&"}]}], "]"}]}], 
+           ";"}], "\[IndentingNewLine]", "]"}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"allRep", "=", 
+         RowBox[{"RandomSample", "[", 
+          RowBox[{"DeleteDuplicates", "[", 
+           RowBox[{
+            RowBox[{"Map", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], "==", 
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}]}], "&"}], ",", "flattened"}], 
+             "]"}], "/.", "solved"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{
+         "iteration", ",", " ", "\"\<> new variables solved: \>\"", ",", " ", 
+          RowBox[{"Length", "[", "solved", "]"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"allSols", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{"allSols", ",", "solved"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Put", "[", 
+         RowBox[{"solved", ",", 
+          RowBox[{"\"\<d:\\\\DoMutch\\\\solved-\>\"", "<>", 
+           RowBox[{"ToString", "[", "iteration", "]"}], "<>", 
+           "\"\<.m\>\""}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Put", "[", 
+         RowBox[{"allRep", ",", 
+          RowBox[{"\"\<d:\\\\DoMutch\\\\allRep-\>\"", "<>", 
+           RowBox[{"ToString", "[", "iteration", "]"}], "<>", 
+           "\"\<.m\>\""}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Put", "[", 
+         RowBox[{"allSols", ",", 
+          RowBox[{"\"\<d:\\\\DoMutch\\\\allSols-\>\"", "<>", 
+           RowBox[{"ToString", "[", "iteration", "]"}], "<>", 
+           "\"\<.m\>\""}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{
+         "iteration", ",", " ", "\"\<> total variables solved: \>\"", ",", 
+          " ", 
+          RowBox[{"Length", "[", "allSols", "]"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"blockSize", "=", 
+         RowBox[{"IntegerPart", "[", 
+          RowBox[{"blockSize", "*", 
+           RowBox[{"3", "/", "2"}]}], "]"}]}]}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", "allSols"}]}], "\[IndentingNewLine]",
+    "]"}]}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGCQAmIQfc89ulY25bWjUYHAchA94VrRahAdlNG5HkTL9C1+
+AqL13u18BqLPXStlkAPSb+5PYAHRFnuOxikB6dWrQ7JBNMcSW399IH1kelwA
+iF5jmpUDom/c/ZMPoqcYSxvZA+kChuVgWm49SxSIFjt7JQ1ER08/kwOifQ7f
+ywXRYbyzS0D04qc/SkE0w4TfNSB6w/ybdSB6n8T+bhCdInRnCogWabowB0Qb
+dG5cCqJ/2Ju9AtHfktvegOgrO0r/gOgMq4P/QbReFYOiA0jdcVEw/aEmRRNE
+88g+MAfR92w6zd1B/hGxdQLRVqkX3L2AdFE8uyeILvg1RzIYSH8/tUseRKc3
+zFAF0T0mKeog+mmB3KlQIM05Y+F5EN2k3i2bCaT7KiTkQbTLzjNWIPqe92Mb
+EM2cVfSyDki37b8GpgHL2cb6
+  "]],
+
+Cell[BoxData[
+ RowBox[{"Put", "[", 
+  RowBox[{
+  "allGraphVariables6", ",", 
+   "\"\<d:\\\\DoMutch\\\\allGraphVariables6.m\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.6765342477503085`*^9, 3.676534266677291*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"startSols", "=", 
+   RowBox[{"Get", "[", "\"\<d:\\\\DoMutch\\\\allSols-6.m\>\"", "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.6765226851335797`*^9, 3.676522715885498*^9}, 
+   3.676534299254304*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"startRep", "=", 
+   RowBox[{"Get", "[", "\"\<d:\\\\DoMutch\\\\allRep-6.m\>\"", "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.676523026766962*^9, 3.6765230483900423`*^9}, 
+   3.6765343003363023`*^9, 3.6765538148550863`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SolveMany", "[", 
+  RowBox[{"startRep", ",", "startSols", ",", "5000", ",", "7"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6765227240701036`*^9, 3.6765227270969253`*^9}, {
+   3.6765229881499577`*^9, 3.676522988729961*^9}, 3.6765230516600275`*^9, {
+   3.676567882579444*^9, 3.6765678834305754`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "7", "\[InvisibleSpace]", "\<\"> ---------------- starting iteration \
+------------- with blockSize \"\>", "\[InvisibleSpace]", "5000"}],
+  SequenceForm[
+  7, "> ---------------- starting iteration ------------- with blockSize ", 
+   5000],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.6764534058523765`*^9, 3.676483098349861*^9, {3.6764831748418493`*^9, 
+   3.6764832014026546`*^9}, 3.676567902427184*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "7", "\[InvisibleSpace]", "\<\"> doing much with \"\>", "\[InvisibleSpace]",
+    "276135", "\[InvisibleSpace]", "\<\" equations \"\>", "\[InvisibleSpace]", 
+   TemplateBox[{RowBox[{"\"Sun 3 Jul 2016 22:51:42\"", 
+       StyleBox[
+        RowBox[{"\"GMT+\"", "\[InvisibleSpace]", "2.`"}], FontColor -> 
+        GrayLevel[0.5]]}],RowBox[{"DateObject", "[", 
+       RowBox[{
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "7", ",", "3"}], "}"}], ",", 
+         RowBox[{"TimeObject", "[", 
+           RowBox[{
+             RowBox[{"{", 
+               RowBox[{"22", ",", "51", ",", "42.4041882`"}], "}"}], ",", 
+             RowBox[{"TimeZone", "\[Rule]", "2.`"}]}], "]"}], ",", 
+         RowBox[{"TimeZone", "\[Rule]", "2.`"}]}], "]"}]},
+    "DateObject",
+    Editable->False]}],
+  SequenceForm[7, "> doing much with ", 276135, " equations ", 
+   DateObject[{2016, 7, 3}, 
+    TimeObject[{22, 51, 42.4041882}, TimeZone -> 2.], TimeZone -> 2.]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.6764534058523765`*^9, 3.676483098349861*^9, {3.6764831748418493`*^9, 
+   3.6764832014026546`*^9}, 3.676567902471191*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"7990.78125`", ",", "Null"}], "}"}]], "Print",
+ CellChangeTimes->{
+  3.6764534058523765`*^9, 3.676483098349861*^9, {3.6764831748418493`*^9, 
+   3.6764832014026546`*^9}, 3.676576353936732*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "7", "\[InvisibleSpace]", "\<\"> solving \"\>", "\[InvisibleSpace]", 
+   "276133", "\[InvisibleSpace]", "\<\"  \"\>", "\[InvisibleSpace]", 
+   TemplateBox[{RowBox[{"\"Mon 4 Jul 2016 01:12:33\"", 
+       StyleBox[
+        RowBox[{"\"GMT+\"", "\[InvisibleSpace]", "2.`"}], FontColor -> 
+        GrayLevel[0.5]]}],RowBox[{"DateObject", "[", 
+       RowBox[{
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "7", ",", "4"}], "}"}], ",", 
+         RowBox[{"TimeObject", "[", 
+           RowBox[{
+             RowBox[{"{", 
+               RowBox[{"1", ",", "12", ",", "33.9357268`"}], "}"}], ",", 
+             RowBox[{"TimeZone", "\[Rule]", "2.`"}]}], "]"}], ",", 
+         RowBox[{"TimeZone", "\[Rule]", "2.`"}]}], "]"}]},
+    "DateObject",
+    Editable->False]}],
+  SequenceForm[7, "> solving ", 276133, "  ", 
+   DateObject[{2016, 7, 4}, 
+    TimeObject[{1, 12, 33.9357268}, TimeZone -> 2.], TimeZone -> 2.]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.6764534058523765`*^9, 3.676483098349861*^9, {3.6764831748418493`*^9, 
+   3.6764832014026546`*^9}, 3.6765763539437284`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"305.90625`", ",", "Null"}], "}"}]], "Print",
+ CellChangeTimes->{
+  3.6764534058523765`*^9, 3.676483098349861*^9, {3.6764831748418493`*^9, 
+   3.6764832014026546`*^9}, 3.6765766603228602`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "7", "\[InvisibleSpace]", "\<\"> new variables solved: \"\>", 
+   "\[InvisibleSpace]", "0"}],
+  SequenceForm[7, "> new variables solved: ", 0],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.6764534058523765`*^9, 3.676483098349861*^9, {3.6764831748418493`*^9, 
+   3.6764832014026546`*^9}, 3.6765766673187194`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "7", "\[InvisibleSpace]", "\<\"> total variables solved: \"\>", 
+   "\[InvisibleSpace]", "465"}],
+  SequenceForm[7, "> total variables solved: ", 465],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.6764534058523765`*^9, 3.676483098349861*^9, {3.6764831748418493`*^9, 
+   3.6764832014026546`*^9}, 3.676576707521881*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "8", "\[InvisibleSpace]", "\<\"> ---------------- starting iteration \
+------------- with blockSize \"\>", "\[InvisibleSpace]", "7500"}],
+  SequenceForm[
+  8, "> ---------------- starting iteration ------------- with blockSize ", 
+   7500],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.6764534058523765`*^9, 3.676483098349861*^9, {3.6764831748418493`*^9, 
+   3.6764832014026546`*^9}, 3.6765767075228806`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "8", "\[InvisibleSpace]", "\<\"> replacing \"\>", "\[InvisibleSpace]", 
+   "465", "\[InvisibleSpace]", "\<\" vars in \"\>", "\[InvisibleSpace]", 
+   "275988", "\[InvisibleSpace]", "\<\" equations \"\>", "\[InvisibleSpace]", 
+   TemplateBox[{RowBox[{"\"Mon 4 Jul 2016 01:18:27\"", 
+       StyleBox[
+        RowBox[{"\"GMT+\"", "\[InvisibleSpace]", "2.`"}], FontColor -> 
+        GrayLevel[0.5]]}],RowBox[{"DateObject", "[", 
+       RowBox[{
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "7", ",", "4"}], "}"}], ",", 
+         RowBox[{"TimeObject", "[", 
+           RowBox[{
+             RowBox[{"{", 
+               RowBox[{"1", ",", "18", ",", "27.521881`"}], "}"}], ",", 
+             RowBox[{"TimeZone", "\[Rule]", "2.`"}]}], "]"}], ",", 
+         RowBox[{"TimeZone", "\[Rule]", "2.`"}]}], "]"}]},
+    "DateObject",
+    Editable->False]}],
+  SequenceForm[8, "> replacing ", 465, " vars in ", 275988, " equations ", 
+   DateObject[{2016, 7, 4}, 
+    TimeObject[{1, 18, 27.521881}, TimeZone -> 2.], TimeZone -> 2.]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.6764534058523765`*^9, 3.676483098349861*^9, {3.6764831748418493`*^9, 
+   3.6764832014026546`*^9}, 3.6765767075278797`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1224.8125`", ",", "Null"}], "}"}]], "Print",
+ CellChangeTimes->{
+  3.6764534058523765`*^9, 3.676483098349861*^9, {3.6764831748418493`*^9, 
+   3.6764832014026546`*^9}, 3.676577932554016*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "8", "\[InvisibleSpace]", "\<\"> simplify \"\>", "\[InvisibleSpace]", 
+   "275988", "\[InvisibleSpace]", "\<\" equations \"\>", "\[InvisibleSpace]", 
+   TemplateBox[{RowBox[{"\"Mon 4 Jul 2016 01:38:52\"", 
+       StyleBox[
+        RowBox[{"\"GMT+\"", "\[InvisibleSpace]", "2.`"}], FontColor -> 
+        GrayLevel[0.5]]}],RowBox[{"DateObject", "[", 
+       RowBox[{
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "7", ",", "4"}], "}"}], ",", 
+         RowBox[{"TimeObject", "[", 
+           RowBox[{
+             RowBox[{"{", 
+               RowBox[{"1", ",", "38", ",", "52.5530154`"}], "}"}], ",", 
+             RowBox[{"TimeZone", "\[Rule]", "2.`"}]}], "]"}], ",", 
+         RowBox[{"TimeZone", "\[Rule]", "2.`"}]}], "]"}]},
+    "DateObject",
+    Editable->False]}],
+  SequenceForm[8, "> simplify ", 275988, " equations ", 
+   DateObject[{2016, 7, 4}, 
+    TimeObject[{1, 38, 52.5530154}, TimeZone -> 2.], TimeZone -> 2.]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.6764534058523765`*^9, 3.676483098349861*^9, {3.6764831748418493`*^9, 
+   3.6764832014026546`*^9}, 3.6765779325590167`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Simplify", "::", "time"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Time spent on a transformation exceeded \
+\[NoBreak]\\!\\(300.`\\)\[NoBreak] seconds, and the transformation was \
+aborted. Increasing the value of TimeConstraint option may improve the result \
+of simplification. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\
+\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/Simplify/time\\\", ButtonNote -> \
+\\\"Simplify::time\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6765978147104816`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Simplify", "::", "time"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Time spent on a transformation exceeded \
+\[NoBreak]\\!\\(300.`\\)\[NoBreak] seconds, and the transformation was \
+aborted. Increasing the value of TimeConstraint option may improve the result \
+of simplification. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\
+\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/Simplify/time\\\", ButtonNote -> \
+\\\"Simplify::time\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676598256673741*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Simplify", "::", "time"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Time spent on a transformation exceeded \
+\[NoBreak]\\!\\(300.`\\)\[NoBreak] seconds, and the transformation was \
+aborted. Increasing the value of TimeConstraint option may improve the result \
+of simplification. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\
+\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/Simplify/time\\\", ButtonNote -> \
+\\\"Simplify::time\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6765987294067554`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Simplify \
+:: time\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.676598729729848*^9}]
+}, Open  ]]
+},
+WindowSize->{766, 772},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.2 for Microsoft Windows (64-bit) (July 7, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 897, 23, 112, "Input"],
+Cell[1458, 45, 120, 2, 31, "Input"],
+Cell[1581, 49, 3102, 73, 392, "Input"],
+Cell[4686, 124, 7365, 164, 872, "Input"],
+Cell[12054, 290, 215, 5, 31, "Input"],
+Cell[12272, 297, 238, 6, 31, "Input"],
+Cell[12513, 305, 262, 6, 31, "Input"],
+Cell[CellGroupData[{
+Cell[12800, 315, 324, 6, 31, "Input"],
+Cell[CellGroupData[{
+Cell[13149, 325, 462, 11, 23, "Print"],
+Cell[13614, 338, 1171, 26, 33, "Print"],
+Cell[14788, 366, 230, 5, 23, "Print"],
+Cell[15021, 373, 1137, 26, 33, "Print"],
+Cell[16161, 401, 231, 5, 23, "Print"],
+Cell[16395, 408, 367, 9, 23, "Print"],
+Cell[16765, 419, 373, 9, 23, "Print"],
+Cell[17141, 430, 464, 11, 23, "Print"],
+Cell[17608, 443, 1249, 27, 33, "Print"],
+Cell[18860, 472, 229, 5, 23, "Print"],
+Cell[19092, 479, 1157, 26, 33, "Print"]
+}, Open  ]],
+Cell[20264, 508, 598, 12, 56, "Message"],
+Cell[20865, 522, 596, 12, 56, "Message"],
+Cell[21464, 536, 598, 12, 56, "Message"],
+Cell[22065, 550, 531, 11, 21, "Message"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

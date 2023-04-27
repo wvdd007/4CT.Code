@@ -1,0 +1,1322 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     54558,       1314]
+NotebookOptionsPosition[     49765,       1188]
+NotebookOutlinePosition[     50107,       1203]
+CellTagsIndexPosition[     50064,       1200]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Calculating the least possible colofour", "Section",
+ CellChangeTimes->{{3.7212366375428143`*^9, 
+  3.7212366477839737`*^9}},ExpressionUUID->"7dcd33d8-eb2f-47b0-9178-\
+32f32b1e403f"],
+
+Cell["\<\
+Due to the various relations we have we can assign a minimal value to the \
+colofour.  This is done through the following methods\
+\>", "Text",
+ CellChangeTimes->{{3.721236649874303*^9, 3.721236682859806*^9}, 
+   3.7212442173263865`*^9},ExpressionUUID->"7bfac7f4-57e5-40ea-a78a-\
+4640da274f9f"],
+
+Cell[CellGroupData[{
+
+Cell["First we initialize the values", "Subsection",
+ CellChangeTimes->{{3.7212367101019716`*^9, 
+  3.721236743293497*^9}},ExpressionUUID->"6345eb48-7ba7-4e37-8476-\
+de549c6a8d74"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"allGraphs6", "[", 
+       RowBox[{"k", ",", "\"\<atleast\>\""}], "]"}], "=", "0"}], ";", 
+     RowBox[{
+      RowBox[{"allGraphs6", "[", 
+       RowBox[{"k", ",", "\"\<atleastwhy\>\""}], "]"}], "=", 
+      "\"\<All graphs are at least zero\>\""}], ";"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", 
+      RowBox[{"Keys", "[", "allGraphs6", "]"}]}], "}"}]}], "]"}], 
+  ";"}]], "Input",
+ CellChangeTimes->{
+  3.721236836176257*^9, {3.7219370112437043`*^9, 3.7219370586653175`*^9}, {
+   3.7239558094457984`*^9, 3.7239558110602117`*^9}, {3.745572885724921*^9, 
+   3.745572885729951*^9}},ExpressionUUID->"f20efcfb-76f0-4245-b540-\
+6684fbd9c62d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"done", "=", "0"}], ";", 
+  RowBox[{"Monitor", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"allGraphs6", "[", 
+          RowBox[{"k", ",", "\"\<comp\>\""}], "]"}], "===", "Greater"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"done", "++"}], ";", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"allGraphs6", "[", 
+           RowBox[{"k", ",", "\"\<atleast\>\""}], "]"}], "=", "1"}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"allGraphs6", "[", 
+           RowBox[{"k", ",", "\"\<atleastwhy\>\""}], "]"}], "=", 
+          "\"\<Comp is 'greater'.\>\""}], ";"}]}], "\[IndentingNewLine]", 
+       "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", 
+        RowBox[{"Keys", "[", "allGraphs6", "]"}]}], "}"}]}], "]"}], ",", 
+    "done"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.7219370408927097`*^9, 3.72193709683828*^9}, {
+  3.7455728857369747`*^9, 3.74557288574397*^9}, {3.745572922055935*^9, 
+  3.7455729671611032`*^9}},ExpressionUUID->"227f6e74-93f1-4d66-95ad-\
+345363bcf2af"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Now we propagate", "Section",
+ CellChangeTimes->{{3.745574491962302*^9, 
+  3.7455744981029596`*^9}},ExpressionUUID->"aec6d8c8-07f5-4401-9cd3-\
+b8916c1be599"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PropagateComp6", "[", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "leftKey", ",", "rightKey", ",", "left", ",", "right", ",", "current", 
+      ",", 
+      RowBox[{"changed", "=", "0"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Table", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"current", " ", "=", " ", 
+           RowBox[{"allGraphs6", "[", "k", "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Table", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"leftKey", "=", 
+              RowBox[{"children", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"rightKey", "=", 
+              RowBox[{"children", "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"left", "=", 
+              RowBox[{"allGraphs6", "[", "leftKey", "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"right", "=", 
+              RowBox[{"allGraphs6", "[", "rightKey", "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "===", 
+                 "GreaterEqual"}], " ", "&&", " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "===", 
+                  "Greater"}], ")"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<compwhy\>\"", "]"}], "=", 
+                 RowBox[{"\"\<The relation holds \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "k", "]"}], "<>", " ", "\"\<(\>\"",
+                   "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "]"}], "<>",
+                   " ", "\"\<)== \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "leftKey", "]"}], "<>", 
+                  "\"\<(\>\"", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  " ", "\"\<) + \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "rightKey", "]"}], "<>", " ", 
+                  "\[IndentingNewLine]", "\"\< (\>\"", " ", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  "\"\<) (greater propagated from left)\>\""}]}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "=", 
+                 "Greater"}], ";", "\[IndentingNewLine]", 
+                RowBox[{"Print", "[", 
+                 RowBox[{"current", "[", "\"\<compwhy\>\"", "]"}], "]"}], ";",
+                 "\[IndentingNewLine]", 
+                RowBox[{"changed", "++"}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"allGraphs6", "[", "k", "]"}], "=", "current"}], 
+                ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+             "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "===", 
+                 "GreaterEqual"}], " ", "&&", " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "===", 
+                  "Greater"}], ")"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<compwhy\>\"", "]"}], "=", 
+                 RowBox[{"\"\<The relation holds \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "k", "]"}], "<>", " ", "\"\<(\>\"",
+                   "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "]"}], "<>",
+                   " ", "\"\<)== \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "leftKey", "]"}], "<>", 
+                  "\"\<(\>\"", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  " ", "\"\<) + \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "rightKey", "]"}], "<>", " ", 
+                  "\[IndentingNewLine]", "\"\< (\>\"", " ", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  "\"\<) (greater propagated from right)\>\""}]}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "=", 
+                 "Greater"}], ";", "\[IndentingNewLine]", 
+                RowBox[{"Print", "[", 
+                 RowBox[{"current", "[", "\"\<compwhy\>\"", "]"}], "]"}], ";",
+                 "\[IndentingNewLine]", 
+                RowBox[{"changed", "++"}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"allGraphs6", "[", "k", "]"}], "=", "current"}], 
+                ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+             "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "===", 
+                 "GreaterEqual"}], " ", "&&", " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "===", 
+                   "Equal"}], "&&", 
+                  RowBox[{
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "===", 
+                   "Equal"}]}], ")"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<compwhy\>\"", "]"}], "=", 
+                 RowBox[{"\"\<The relation holds \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "k", "]"}], "<>", " ", "\"\<(\>\"",
+                   "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "]"}], "<>",
+                   " ", "\"\<)== \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "leftKey", "]"}], "<>", 
+                  "\"\<(\>\"", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  " ", "\"\<) + \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "rightKey", "]"}], "<>", " ", 
+                  "\[IndentingNewLine]", "\"\< (\>\"", " ", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  "\"\<) (zero propagated)\>\""}]}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "=", 
+                 "Equal"}], ";", "\[IndentingNewLine]", 
+                RowBox[{"Print", "[", 
+                 RowBox[{"current", "[", "\"\<compwhy\>\"", "]"}], "]"}], ";",
+                 "\[IndentingNewLine]", 
+                RowBox[{"changed", "++"}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"allGraphs6", "[", "k", "]"}], "=", "current"}], 
+                ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "===", 
+                 "GreaterEqual"}], " ", "&&", " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "===", 
+                   "Equal"}], "&&", 
+                  RowBox[{
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "===", 
+                   "Greater"}]}], ")"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<compwhy\>\"", "]"}], "=", 
+                 RowBox[{"\"\<The relation holds \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "k", "]"}], "<>", " ", "\"\<(\>\"",
+                   "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "]"}], "<>",
+                   " ", "\"\<)== \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "leftKey", "]"}], "<>", 
+                  "\"\<(\>\"", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  " ", "\"\<) + \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "rightKey", "]"}], "<>", " ", 
+                  "\[IndentingNewLine]", "\"\< (\>\"", " ", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  "\"\<) (Greater (right) and zero (left) \
+propagated)\>\""}]}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "=", 
+                 "Greater"}], ";", "\[IndentingNewLine]", 
+                RowBox[{"Print", "[", 
+                 RowBox[{"current", "[", "\"\<compwhy\>\"", "]"}], "]"}], ";",
+                 "\[IndentingNewLine]", 
+                RowBox[{"changed", "++"}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"allGraphs6", "[", "k", "]"}], "=", "current"}], 
+                ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+             "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "===", 
+                 "GreaterEqual"}], " ", "&&", " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "===", 
+                   "Greater"}], "&&", 
+                  RowBox[{
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "===", 
+                   "Equal"}]}], ")"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<compwhy\>\"", "]"}], "=", 
+                 RowBox[{"\"\<The relation holds \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "k", "]"}], "<>", " ", "\"\<(\>\"",
+                   "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "]"}], "<>",
+                   " ", "\"\<)== \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "leftKey", "]"}], "<>", 
+                  "\"\<(\>\"", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  " ", "\"\<) + \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "rightKey", "]"}], "<>", " ", 
+                  "\[IndentingNewLine]", "\"\< (\>\"", " ", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  "\"\<) (Zero (right) and Greater (left) \
+propagated)\>\""}]}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "=", 
+                 "Greater"}], ";", "\[IndentingNewLine]", 
+                RowBox[{"Print", "[", 
+                 RowBox[{"current", "[", "\"\<compwhy\>\"", "]"}], "]"}], ";",
+                 "\[IndentingNewLine]", 
+                RowBox[{"changed", "++"}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"allGraphs6", "[", "k", "]"}], "=", "current"}], 
+                ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+             "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "===", 
+                 "Greater"}], " ", "&&", " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "===", 
+                   "GreaterEqual"}], "&&", 
+                  RowBox[{
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "===", 
+                   "Equal"}]}], ")"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"left", "[", "\"\<compwhy\>\"", "]"}], "=", 
+                 RowBox[{"\"\<The down relation holds \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "k", "]"}], "<>", " ", "\"\<(\>\"",
+                   "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "]"}], "<>",
+                   " ", "\"\<)== \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "leftKey", "]"}], "<>", 
+                  "\"\<(\>\"", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  " ", "\"\<) + \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "rightKey", "]"}], "<>", " ", 
+                  "\[IndentingNewLine]", "\"\< (\>\"", " ", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  "\"\<) (Greater(parent) and zero(right) pushed down to \
+left)\>\""}]}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "=", "Greater"}],
+                 ";", "\[IndentingNewLine]", 
+                RowBox[{"Print", "[", 
+                 RowBox[{"left", "[", "\"\<compwhy\>\"", "]"}], "]"}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"changed", "++"}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"allGraphs6", "[", 
+                  RowBox[{"children", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], "]"}], "=", "left"}], 
+                ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+             "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "===", 
+                 "Greater"}], " ", "&&", " ", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "===", 
+                   "Equal"}], "&&", 
+                  RowBox[{
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "===", 
+                   "GreaterEqual"}]}], ")"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"right", "[", "\"\<compwhy\>\"", "]"}], "=", 
+                 RowBox[{"\"\<The down relation holds \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "k", "]"}], "<>", " ", "\"\<(\>\"",
+                   "<>", " ", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "]"}], "<>",
+                   " ", "\"\<) == \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "leftKey", "]"}], "<>", 
+                  "\"\<(\>\"", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  " ", "\"\<) + \>\"", "<>", " ", 
+                  RowBox[{"ToString", "[", "rightKey", "]"}], "<>", " ", 
+                  "\"\< (\>\"", " ", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "]"}], "<>", 
+                  "\"\<) (Greater(parent) and zero(left) pushed down to \
+right)\>\""}]}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "=", 
+                 "Greater"}], ";", "\[IndentingNewLine]", 
+                RowBox[{"Print", "[", 
+                 RowBox[{"right", "[", "\"\<compwhy\>\"", "]"}], "]"}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"changed", "++"}], ";", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"allGraphs6", "[", 
+                  RowBox[{"children", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}], "]"}], "=", "right"}], 
+                ";"}]}], "\[IndentingNewLine]", "]"}]}], 
+            "\[IndentingNewLine]", ",", 
+            RowBox[{"{", 
+             RowBox[{"children", ",", 
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{"k", ",", "\"\<children\>\""}], "]"}]}], "}"}]}], 
+           "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"k", ",", 
+           RowBox[{"Keys", "[", "allGraphs6", "]"}]}], "}"}]}], "]"}], ",", 
+       "\[IndentingNewLine]", "k"}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", "changed"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.74557456732265*^9, 
+  3.745574575162204*^9}},ExpressionUUID->"d334a07c-c600-4151-9713-\
+a6b713921d10"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"PropagateComp6", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.745574590801634*^9, 
+  3.7455745910343475`*^9}},ExpressionUUID->"e505a0aa-93ab-48bb-8e94-\
+fd0f3a25f313"],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{
+  3.745574599410028*^9},ExpressionUUID->"3a1b39f0-0b9c-4ba6-954b-\
+050a9830b178"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["k dkk", "Section",
+ CellChangeTimes->{{3.7455745407614536`*^9, 
+  3.745574544067544*^9}},ExpressionUUID->"7add2088-8247-4c51-9b36-\
+59c551d7c951"],
+
+Cell[CellGroupData[{
+
+Cell["Then we Propagate the values", "Subsection",
+ CellChangeTimes->{{3.7212367101019716`*^9, 
+  3.7212367642586775`*^9}},ExpressionUUID->"96e434d4-446e-43bb-b47d-\
+753da4c2a095"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PropagateAtLeast6", "[", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "newValue", ",", "current", ",", "left", ",", "right", ",", "new", ",", 
+      RowBox[{"changes", "=", "0"}], ",", 
+      RowBox[{"result", "=", 
+       RowBox[{"{", "}"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Table", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"current", "=", 
+           RowBox[{"allGraphs6", "[", 
+            RowBox[{"k", ",", "\"\<atleast\>\""}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"left", "=", 
+           RowBox[{"allGraphs6", "[", 
+            RowBox[{
+             RowBox[{"c", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<atleast\>\""}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"right", "=", 
+           RowBox[{"allGraphs6", "[", 
+            RowBox[{
+             RowBox[{"c", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<atleast\>\""}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"new", "=", 
+           RowBox[{"Max", "[", 
+            RowBox[{"current", ",", 
+             RowBox[{"left", "+", "right"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"new", "\[NotEqual]", "current"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{
+              RowBox[{"Print", "[", 
+               RowBox[{
+               "\"\<Changing \>\"", " ", ",", "k", " ", ",", " ", 
+                "\"\< From \>\"", " ", ",", " ", "current", " ", ",", " ", 
+                "\"\< To \>\"", ",", "new"}], "]"}], ";"}], "*)"}], 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{"k", ",", "\"\<atleast\>\""}], "]"}], "=", "new"}], 
+             ";", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{"k", ",", "\"\<atleastwhy\>\""}], "]"}], "=", 
+              RowBox[{"\"\<Propagate from relation \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", "c", "]"}], " ", "<>", 
+               "\"\< with values \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"{", 
+                 RowBox[{"left", ",", "right"}], "}"}], "]"}]}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"changes", "++"}], ";", "\[IndentingNewLine]", 
+             RowBox[{"result", "=", 
+              RowBox[{"Append", "[", 
+               RowBox[{"result", ",", "k"}], "]"}]}]}]}], 
+           "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"c", ",", 
+           RowBox[{"allGraphs6", "[", 
+            RowBox[{"k", ",", "\"\<children\>\""}], "]"}]}], "}"}]}], 
+        "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", 
+         RowBox[{"Keys", "[", "allGraphs6", "]"}]}], "}"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"changes", ",", "result"}], "}"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.7212367803663063`*^9, 3.721236788107789*^9}, {
+   3.7219371023246017`*^9, 3.7219371802521915`*^9}, {3.7219372800993967`*^9, 
+   3.721937317356023*^9}, {3.7277932701212854`*^9, 3.7277932978465157`*^9}, {
+   3.7455728857510104`*^9, 3.7455728857700386`*^9}, 
+   3.7455729815657454`*^9},ExpressionUUID->"90e6ca85-42ea-425e-b682-\
+15534ed7e961"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"PropagateAtLeast6", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.7212367943791065`*^9, 3.721236822096607*^9}, {
+   3.721236875495701*^9, 3.7212368824698277`*^9}, {3.7455729894598455`*^9, 
+   3.7455730084636784`*^9}, 
+   3.7455925796450734`*^9},ExpressionUUID->"1090027b-62f5-4223-a049-\
+a8e51f3065fc"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", 
+   RowBox[{"{", "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.7455730228841915`*^9, 
+  3.7455925827166805`*^9},ExpressionUUID->"3fbe9936-4dfe-4d66-96a8-\
+9b542a063d44"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", 
+  RowBox[{"PropagateAtLeast6", "[", "]"}], "]"}]], "Input",ExpressionUUID->\
+"4dec92a7-508b-4f96-a492-24a091041fed"],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{
+  3.74557303449207*^9},ExpressionUUID->"9a4dc2fb-e577-4f9d-91e2-dc16ed9cabcf"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", 
+  RowBox[{"PropagateAtLeast6", "[", "]"}], "]"}]], "Input",ExpressionUUID->\
+"3e8e54ee-b21e-4134-8f60-dc463787f7f2"],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{
+  3.745573042804265*^9},ExpressionUUID->"f82a6b74-daab-4194-a99a-\
+c6d9024a73f0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", 
+  RowBox[{"PropagateAtLeast6", "[", "]"}], "]"}]], "Input",ExpressionUUID->\
+"46495ceb-a1a3-471a-9f65-892d8a3fc93b"],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{
+  3.7455730493139105`*^9},ExpressionUUID->"b5bc9382-b2a4-4749-b6dd-\
+ba361e2ff591"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Keys", "[", 
+  RowBox[{"allGraphs6", "[", "0", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.745573088197356*^9, 3.7455730937269707`*^9}, {
+  3.7455737921017065`*^9, 
+  3.745573796885311*^9}},ExpressionUUID->"89de03b4-a74e-4109-8a26-\
+cb626659ec2a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"signature\"\>", ",", "\<\"matrix\"\>", ",", "\<\"graph\"\>", 
+   ",", "\<\"vertexsets\"\>", ",", "\<\"vertices\"\>", ",", "\<\"edges\"\>", 
+   ",", "\<\"relations\"\>", ",", "\<\"links\"\>", ",", "\<\"parents\"\>", 
+   ",", "\<\"children\"\>", ",", "\<\"comp\"\>", ",", "\<\"compwhy\"\>", 
+   ",", "\<\"colofour\"\>", ",", "\<\"colortable\"\>", 
+   ",", "\<\"colofourrealnull\"\>", ",", "\<\"colofournull\"\>", 
+   ",", "\<\"colofourgenerator\"\>", ",", "\<\"atleast\"\>", 
+   ",", "\<\"atleastwhy\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.745573797929942*^9},ExpressionUUID->"25bdd270-e54e-4f0f-bec3-\
+d99f1a42eb62"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Tally", "[", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"allGraphs6", "[", 
+     RowBox[{"k", ",", "\"\<comp\>\""}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", 
+      RowBox[{"Keys", "[", "allGraphs6", "]"}]}], "}"}]}], "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.7455738142595825`*^9, 
+  3.7455738501360583`*^9}},ExpressionUUID->"74e1a276-8398-474b-b71d-\
+906bcc91e2b5"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"Greater", ",", "39372"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"GreaterEqual", ",", "13512"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"Equal", ",", "187"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.745573838622554*^9, 
+  3.745573851659441*^9}},ExpressionUUID->"b1e78c5b-1e97-43b3-95c0-\
+0eea60350c26"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"PropagateAtLeast6", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.745573052137374*^9, 
+  3.745573057148695*^9}},ExpressionUUID->"1d59b8f9-12f8-47ac-8555-\
+e8477ab0f5dd"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", 
+   RowBox[{"{", "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.745573061267885*^9},ExpressionUUID->"26f5411f-5e57-4048-b1b3-\
+f776dd2d6031"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Sort", "[", 
+  RowBox[{"Tally", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"allGraphs6", "[", 
+      RowBox[{"k", ",", "\"\<comp\>\""}], "]"}], "\[IndentingNewLine]", ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "allGraphs6AtomKeys"}], "}"}]}], "]"}], "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.721289396749992*^9, 3.72128941804138*^9}, {
+  3.745572888064947*^9, 
+  3.745572888068946*^9}},ExpressionUUID->"d6d823c8-22ed-42ec-8e9e-\
+dc45b0002eec"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"Equal", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"Greater", ",", "21"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"GreaterEqual", ",", "30"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.7212893985729165`*^9, 3.7212894185376997`*^9}, 
+   3.721329363618905*^9, 3.721330129816082*^9, 3.721852300279959*^9, 
+   3.721854940938407*^9, 3.7219124454399357`*^9, 3.7219183133031483`*^9, 
+   3.721937195780818*^9, 3.721937226736051*^9, 3.721937298134906*^9, 
+   3.7219373410351996`*^9, 3.722094140860938*^9, 3.7221022116872396`*^9, 
+   3.7221025652306595`*^9, 3.722311585270019*^9, 3.7233063527570133`*^9, 
+   3.7233276337568502`*^9, 3.7233689087595587`*^9, 3.7234668047185445`*^9, 
+   3.723669216654928*^9, 3.7238043158316693`*^9, 3.723910053468502*^9, 
+   3.7241740957662315`*^9, 3.724185773928028*^9, 3.724186714126567*^9, 
+   3.724506522685172*^9, 3.724573650216942*^9, 3.7245778752760534`*^9, 
+   3.7247370257157245`*^9, 3.7248781659116125`*^9, 3.72503556813865*^9, 
+   3.725401230859558*^9, 3.725530213955717*^9, 3.7256389265348496`*^9, 
+   3.7256530654772954`*^9, 3.7258013543367214`*^9, 3.726418321537859*^9, 
+   3.7265452627788453`*^9, 3.7266831172447076`*^9, 3.726684141780322*^9, 
+   3.726689104968813*^9, 3.7266895546085176`*^9, 3.726691533321326*^9, 
+   3.72669318512879*^9, 3.7266968935344267`*^9, 3.7269290004581223`*^9, 
+   3.7272637734077673`*^9, 3.727334364484782*^9, 3.7273738239632454`*^9, 
+   3.7276157788267803`*^9, 3.727713020072321*^9, 3.727714569667302*^9, 
+   3.7277948173541203`*^9, 3.7278857127143517`*^9, 3.728248035344509*^9, 
+   3.728317818706065*^9, 3.728554629720989*^9, 3.728564017012141*^9, 
+   3.7286182004372387`*^9, 3.7286624180466614`*^9, 3.729244182618704*^9, 
+   3.7294324349171233`*^9, 3.730133354079368*^9, 3.7303950617530327`*^9, 
+   3.730605568485587*^9, 3.730669280630026*^9, 3.730987034036776*^9, 
+   3.7310824882871666`*^9, 3.7315194388348236`*^9, 3.732437444164242*^9, 
+   3.7325491833650174`*^9, 3.7327293524185424`*^9, 3.7328852330688896`*^9, 
+   3.7329701140282445`*^9, 3.733107586984816*^9, 3.7332447701882696`*^9, 
+   3.7336915776030493`*^9, 3.733752795936123*^9, 3.734267049093828*^9, 
+   3.734834014386237*^9, 3.7381360178327312`*^9, 3.7382483876407967`*^9, 
+   3.7387738217672644`*^9, 3.738941587619931*^9, 3.7391846602883863`*^9, 
+   3.7392616296845927`*^9, 3.7396361860780044`*^9, 3.7406395217892914`*^9, 
+   3.7411986320204287`*^9, 3.741381534940757*^9, 3.741486993056978*^9, 
+   3.74156311005328*^9, 3.741596476217404*^9, 3.7417162405649586`*^9, 
+   3.741972816879184*^9, 3.742006204258168*^9, 3.7421069252123947`*^9, 
+   3.742129436856073*^9, 3.7424552928610163`*^9, 3.7425515781478653`*^9, 
+   3.743004935527614*^9, 3.74306708111534*^9, 3.7430922534467583`*^9, 
+   3.7432469167615905`*^9, 3.743312327791458*^9, 3.743517262150817*^9, 
+   3.7437110164218407`*^9, 3.743792344635257*^9, 3.7439422941950493`*^9, 
+   3.7440288156526976`*^9, 3.74412646882336*^9, 3.7442733120760403`*^9, 
+   3.7442824978590364`*^9, 3.744344647289065*^9, 3.744355055251412*^9, 
+   3.744566639331192*^9, 3.744604593166506*^9, 3.7446428837181096`*^9, 
+   3.744743947434765*^9, 3.744820596752565*^9, 3.7448945019891057`*^9, 
+   3.744987829852169*^9, 3.7450297702522507`*^9, 3.7450721190905123`*^9, 
+   3.74532535919709*^9, 3.7453331970200796`*^9, 3.745498268724127*^9, 
+   3.7455109791334734`*^9},ExpressionUUID->"2b7eb55e-7509-43c8-bfb8-\
+a1454fa41b57"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Sort", "[", 
+  RowBox[{"Tally", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"allGraphs6", "[", 
+      RowBox[{"k", ",", "\"\<atleast\>\""}], "]"}], "\[IndentingNewLine]", 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", 
+       RowBox[{"Keys", "[", "allGraphs6", "]"}]}], "}"}]}], "]"}], "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.7212411926021395`*^9, 3.721241203856408*^9}, {
+  3.7212890187464423`*^9, 3.721289026228199*^9}, {3.745572888073964*^9, 
+  3.7455728880769515`*^9}},ExpressionUUID->"f7330f9f-f263-436d-a488-\
+e92eb4675dbb"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "201"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "286"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "376"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "261"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "206"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"6", ",", "106"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"6", ",", "180"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"7", ",", "36"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"8", ",", "70"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"9", ",", "36"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10", ",", "66"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"11", ",", "10"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"12", ",", "26"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"13", ",", "16"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"16", ",", "16"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"16", ",", "16"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"18", ",", "6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"21", ",", "6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"24", ",", "6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"34", ",", "1"}], "}"}]}], "}"}]], "Input",
+ CellChangeTimes->{{3.7455728880829673`*^9, 
+  3.745572888121668*^9}},ExpressionUUID->"cd79ae5f-3f8f-40da-a002-\
+3017bd55d3d0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ShowGraph6Least", "[", 
+   RowBox[{"k_", ",", 
+    RowBox[{"prop_:", "\"\<atleast\>\""}]}], "]"}], ":=", 
+  RowBox[{"Labeled", "[", 
+   RowBox[{
+    RowBox[{"Tooltip", "[", 
+     RowBox[{
+      RowBox[{"ShowGraph", "[", 
+       RowBox[{"allGraphs6", ",", "k"}], "]"}], ",", 
+      RowBox[{"allGraphs6", "[", 
+       RowBox[{"k", ",", 
+        RowBox[{"prop", " ", "<>", "\"\<why\>\""}]}], "]"}]}], "]"}], ",", 
+    RowBox[{"Style", "[", 
+     RowBox[{
+      RowBox[{"allGraphs6", "[", 
+       RowBox[{"k", ",", "prop"}], "]"}], ",", "Blue"}], "]"}], ",", "Top"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.7213305302420588`*^9, 3.7213305315311165`*^9}, 
+   3.721937222084179*^9, {3.727265122556497*^9, 3.7272651856854286`*^9}, {
+   3.745572888134709*^9, 
+   3.7455728881417212`*^9}},ExpressionUUID->"0b5e86a5-6a88-4896-9886-\
+ba3c4c985ddd"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Propagate again", "Section",
+ CellChangeTimes->{{3.745574781085352*^9, 
+  3.7455747900686536`*^9}},ExpressionUUID->"c5d7898a-52b2-4b4a-b6b5-\
+5c805005f395"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PropagateAtLeast2", "[", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"newValue", ",", "current", ",", "left", ",", "right", ",", 
+      RowBox[{"changes", "=", "0"}], ",", 
+      RowBox[{"result", "=", 
+       RowBox[{"{", "}"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Table", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"current", "=", 
+           RowBox[{"allGraphs6", "[", "k", "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"left", "=", 
+           RowBox[{"allGraphs6", "[", 
+            RowBox[{"c", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"right", "=", 
+           RowBox[{"allGraphs6", "[", 
+            RowBox[{"c", "[", 
+             RowBox[{"[", "2", "]"}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "===", "Equal"}], 
+             " ", "&&", " ", 
+             RowBox[{
+              RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "=!=", "Equal"}], 
+             " ", "&&", 
+             RowBox[{
+              RowBox[{"current", "[", "\"\<atleast\>\"", "]"}], "\[NotEqual]", 
+              RowBox[{"right", "[", "\"\<atleast\>\"", "]"}]}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{"k", ",", "\"\<atleastwhy\>\""}], "]"}], "=", 
+              RowBox[{"\"\<Propagate from relation \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", "c", "]"}], " ", "<>", 
+               "\"\< with values \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"left", "[", "\"\<atleast\>\"", "]"}], ",", 
+                  RowBox[{"right", "[", "\"\<atleast\>\"", "]"}]}], "}"}], 
+                "]"}], "<>", "\"\< and comp \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"left", "[", "\"\<comp\>\"", "]"}], ",", 
+                  RowBox[{"right", "[", "\"\<comp\>\"", "]"}]}], "}"}], "]"}],
+                "<>", "\"\< (from right)\>\""}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{"k", ",", "\"\<atleast\>\""}], "]"}], "=", 
+              RowBox[{"Max", "[", 
+               RowBox[{
+                RowBox[{"current", "[", "\"\<atleast\>\"", "]"}], ",", 
+                RowBox[{
+                 RowBox[{"left", "[", "\"\<atleast\>\"", "]"}], "+", 
+                 RowBox[{"right", "[", "\"\<atleast\>\"", "]"}]}]}], "]"}]}], 
+             ";", "\[IndentingNewLine]", 
+             RowBox[{"Print", "[", 
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{"k", ",", "\"\<atleastwhy\>\""}], "]"}], "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{"k", ",", "\"\<atleast\>\""}], "]"}], "=", 
+              RowBox[{"right", "[", "\"\<atleast\>\"", "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"changes", "++"}]}]}], "\[IndentingNewLine]", "]"}], ";",
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "===", "Equal"}], 
+             " ", "&&", " ", 
+             RowBox[{
+              RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "=!=", "Equal"}], 
+             " ", "&&", 
+             RowBox[{
+              RowBox[{"current", "[", "\"\<atleast\>\"", "]"}], "\[NotEqual]", 
+              RowBox[{"left", "[", "\"\<atleast\>\"", "]"}]}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{"k", ",", "\"\<atleastwhy\>\""}], "]"}], "=", 
+              RowBox[{"\"\<Propagate from relation \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", "c", "]"}], " ", "<>", 
+               "\"\< with values \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"left", "[", "\"\<atleast\>\"", "]"}], ",", 
+                  RowBox[{"right", "[", "\"\<atleast\>\"", "]"}]}], "}"}], 
+                "]"}], "<>", "\"\< and comp \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"left", "[", "\"\<comp\>\"", "]"}], ",", 
+                  RowBox[{"right", "[", "\"\<comp\>\"", "]"}]}], "}"}], "]"}],
+                "<>", "\"\< (from left)\>\""}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{"k", ",", "\"\<atleast\>\""}], "]"}], "=", 
+              RowBox[{"Max", "[", 
+               RowBox[{
+                RowBox[{"current", "[", "\"\<atleast\>\"", "]"}], ",", 
+                RowBox[{
+                 RowBox[{"left", "[", "\"\<atleast\>\"", "]"}], "+", 
+                 RowBox[{"right", "[", "\"\<atleast\>\"", "]"}]}]}], "]"}]}], 
+             ";", "\[IndentingNewLine]", 
+             RowBox[{"Print", "[", 
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{"k", ",", "\"\<atleastwhy\>\""}], "]"}], "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{"k", ",", "\"\<atleast\>\""}], "]"}], "=", 
+              RowBox[{"left", "[", "\"\<atleast\>\"", "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"changes", "++"}]}]}], "\[IndentingNewLine]", "]"}], ";",
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "===", 
+              "Greater"}], " ", "&&", "  ", 
+             RowBox[{
+              RowBox[{"right", "[", "\"\<comp\>\"", "]"}], "===", "Equal"}], 
+             " ", "&&", 
+             RowBox[{
+              RowBox[{"current", "[", "\"\<atleast\>\"", "]"}], ">", 
+              RowBox[{"left", "[", "\"\<atleast\>\"", "]"}]}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{
+                RowBox[{"c", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<atleastwhy\>\""}], 
+               "]"}], "=", 
+              RowBox[{"\"\<Propagate from relation \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", "c", "]"}], " ", "<>", 
+               "\"\< with values \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"left", "[", "\"\<atleast\>\"", "]"}], ",", 
+                  RowBox[{"right", "[", "\"\<atleast\>\"", "]"}]}], "}"}], 
+                "]"}], "<>", "\"\< and comp \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"left", "[", "\"\<comp\>\"", "]"}], ",", 
+                  RowBox[{"right", "[", "\"\<comp\>\"", "]"}]}], "}"}], "]"}],
+                "<>", "\"\< (from parent to left)\>\""}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{
+                RowBox[{"c", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<atleast\>\""}], 
+               "]"}], "=", 
+              RowBox[{"current", "[", "\"\<atleast\>\"", "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Print", "[", 
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{
+                RowBox[{"c", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<atleastwhy\>\""}], 
+               "]"}], "]"}], ";", "\[IndentingNewLine]", 
+             RowBox[{"changes", "++"}]}]}], "\[IndentingNewLine]", "]"}], ";",
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"current", "[", "\"\<comp\>\"", "]"}], "===", 
+              "Greater"}], " ", "&&", " ", 
+             RowBox[{
+              RowBox[{"left", "[", "\"\<comp\>\"", "]"}], "===", "Equal"}], 
+             "  ", "&&", 
+             RowBox[{
+              RowBox[{"current", "[", "\"\<atleast\>\"", "]"}], ">", 
+              RowBox[{"right", "[", "\"\<atleast\>\"", "]"}]}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{
+                RowBox[{"c", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<atleastwhy\>\""}], 
+               "]"}], "=", 
+              RowBox[{"\"\<Propagate from relation \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", "c", "]"}], " ", "<>", 
+               "\"\< with values \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"left", "[", "\"\<atleast\>\"", "]"}], ",", 
+                  RowBox[{"right", "[", "\"\<atleast\>\"", "]"}]}], "}"}], 
+                "]"}], "<>", "\"\< and comp \>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"left", "[", "\"\<comp\>\"", "]"}], ",", 
+                  RowBox[{"right", "[", "\"\<comp\>\"", "]"}]}], "}"}], "]"}],
+                "<>", "\"\< (from parent to right)\>\""}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{
+                RowBox[{"c", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<atleast\>\""}], 
+               "]"}], "=", 
+              RowBox[{"current", "[", "\"\<atleast\>\"", "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Print", "[", 
+              RowBox[{"allGraphs6", "[", 
+               RowBox[{
+                RowBox[{"c", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<atleastwhy\>\""}], 
+               "]"}], "]"}], ";", "\[IndentingNewLine]", 
+             RowBox[{"changes", "++"}]}]}], "\[IndentingNewLine]", "]"}], 
+          ";"}], "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"c", ",", 
+           RowBox[{"allGraphs6", "[", 
+            RowBox[{"k", ",", "\"\<children\>\""}], "]"}]}], "}"}]}], 
+        "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", 
+         RowBox[{"Keys", "[", "allGraphs6", "]"}]}], "}"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"changes", ",", "result"}], "}"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.745574799646265*^9, 
+  3.745574799725086*^9}},ExpressionUUID->"45d798d7-6eed-47ab-b48e-\
+8d5cbfce45fb"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"PropagateAtLeast2", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.745574811094762*^9, 
+  3.7455748113183384`*^9}},ExpressionUUID->"f0bd0a8c-f5aa-47ea-9a50-\
+9657d58790d2"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", 
+   RowBox[{"{", "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.7455748154731793`*^9},ExpressionUUID->"cad36207-e84f-42e0-b6ab-\
+e9dde68a4d1a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"allGraphs6", "[", 
+  RowBox[{"alfaKey", ",", "\"\<atleast\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.7455925928444057`*^9, 
+  3.7455926273846292`*^9}},ExpressionUUID->"1d16d28b-35cb-4db5-9599-\
+e8c3f4620e22"],
+
+Cell[BoxData["3"], "Output",
+ CellChangeTimes->{{3.7455926058508215`*^9, 
+  3.745592628117993*^9}},ExpressionUUID->"f12e7b84-93d6-42f7-ab32-\
+8b8c4148b497"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"allGraphs5", "[", 
+  RowBox[{"alfaKey", ",", "\"\<atleast\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.7455926162710314`*^9, 
+  3.745592623065888*^9}},ExpressionUUID->"3d572e9d-7ce0-4934-bf2b-\
+8fd10d3fcbd7"],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{{3.745592617037738*^9, 
+  3.7455926234401765`*^9}},ExpressionUUID->"2ee521ae-b203-4edd-b24c-\
+3095c718e06d"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1104, 685},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (April 18, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 188, 3, 70, "Section", "ExpressionUUID" -> \
+"7dcd33d8-eb2f-47b0-9178-32f32b1e403f"],
+Cell[771, 27, 304, 6, 30, "Text", "ExpressionUUID" -> \
+"7bfac7f4-57e5-40ea-a78a-4640da274f9f"],
+Cell[CellGroupData[{
+Cell[1100, 37, 180, 3, 49, "Subsection", "ExpressionUUID" -> \
+"6345eb48-7ba7-4e37-8476-de549c6a8d74"],
+Cell[1283, 42, 747, 20, 30, "Input", "ExpressionUUID" -> \
+"f20efcfb-76f0-4245-b540-6684fbd9c62d"],
+Cell[2033, 64, 1189, 31, 107, "Input", "ExpressionUUID" -> \
+"227f6e74-93f1-4d66-95ad-345363bcf2af"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3271, 101, 163, 3, 70, "Section", "ExpressionUUID" -> \
+"aec6d8c8-07f5-4401-9cd3-b8916c1be599"],
+Cell[3437, 106, 18015, 359, 1608, "Input", "ExpressionUUID" -> \
+"d334a07c-c600-4151-9713-a6b713921d10"],
+Cell[CellGroupData[{
+Cell[21477, 469, 190, 4, 30, "Input", "ExpressionUUID" -> \
+"e505a0aa-93ab-48bb-8e94-fd0f3a25f313"],
+Cell[21670, 475, 130, 3, 30, "Output", "ExpressionUUID" -> \
+"3a1b39f0-0b9c-4ba6-954b-050a9830b178"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21849, 484, 152, 3, 70, "Section", "ExpressionUUID" -> \
+"7add2088-8247-4c51-9b36-59c551d7c951"],
+Cell[CellGroupData[{
+Cell[22026, 491, 180, 3, 49, "Subsection", "ExpressionUUID" -> \
+"96e434d4-446e-43bb-b47d-753da4c2a095"],
+Cell[22209, 496, 3772, 87, 392, "Input", "ExpressionUUID" -> \
+"90e6ca85-42ea-425e-b682-15534ed7e961"],
+Cell[CellGroupData[{
+Cell[26006, 587, 324, 6, 30, "Input", "ExpressionUUID" -> \
+"1090027b-62f5-4223-a049-a8e51f3065fc"],
+Cell[26333, 595, 220, 6, 87, "Output", "ExpressionUUID" -> \
+"3fbe9936-4dfe-4d66-96a8-9b542a063d44"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26590, 606, 155, 3, 30, "Input", "ExpressionUUID" -> \
+"4dec92a7-508b-4f96-a492-24a091041fed"],
+Cell[26748, 611, 127, 2, 30, "Output", "ExpressionUUID" -> \
+"9a4dc2fb-e577-4f9d-91e2-dc16ed9cabcf"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26912, 618, 155, 3, 30, "Input", "ExpressionUUID" -> \
+"3e8e54ee-b21e-4134-8f60-dc463787f7f2"],
+Cell[27070, 623, 130, 3, 30, "Output", "ExpressionUUID" -> \
+"f82a6b74-daab-4194-a99a-c6d9024a73f0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27237, 631, 155, 3, 30, "Input", "ExpressionUUID" -> \
+"46495ceb-a1a3-471a-9f65-892d8a3fc93b"],
+Cell[27395, 636, 132, 3, 30, "Output", "ExpressionUUID" -> \
+"b5bc9382-b2a4-4749-b6dd-ba361e2ff591"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27564, 644, 273, 6, 30, "Input", "ExpressionUUID" -> \
+"89de03b4-a74e-4109-8a26-cb626659ec2a"],
+Cell[27840, 652, 669, 12, 50, "Output", "ExpressionUUID" -> \
+"25bdd270-e54e-4f0f-bec3-d99f1a42eb62"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28546, 669, 418, 12, 30, "Input", "ExpressionUUID" -> \
+"74e1a276-8398-474b-b71d-906bcc91e2b5"],
+Cell[28967, 683, 387, 11, 30, "Output", "ExpressionUUID" -> \
+"b1e78c5b-1e97-43b3-95c0-0eea60350c26"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29391, 699, 191, 4, 30, "Input", "ExpressionUUID" -> \
+"1d59b8f9-12f8-47ac-8555-e8477ab0f5dd"],
+Cell[29585, 705, 194, 6, 30, "Output", "ExpressionUUID" -> \
+"26f5411f-5e57-4048-b1b3-f776dd2d6031"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29816, 716, 495, 13, 50, "Input", "ExpressionUUID" -> \
+"d6d823c8-22ed-42ec-8e9e-dc45b0002eec"],
+Cell[30314, 731, 3468, 53, 30, "Output", "ExpressionUUID" -> \
+"2b7eb55e-7509-43c8-bfb8-a1454fa41b57"]
+}, Open  ]],
+Cell[33797, 787, 585, 15, 50, "Input", "ExpressionUUID" -> \
+"f7330f9f-f263-436d-a488-e92eb4675dbb"],
+Cell[34385, 804, 1393, 45, 50, InheritFromParent, "ExpressionUUID" -> \
+"cd79ae5f-3f8f-40da-a002-3017bd55d3d0"],
+Cell[35781, 851, 878, 23, 50, "Input", "ExpressionUUID" -> \
+"0b5e86a5-6a88-4896-9886-ba3c4c985ddd"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36708, 880, 162, 3, 70, "Section", "ExpressionUUID" -> \
+"c5d7898a-52b2-4b4a-b6b5-5c805005f395"],
+Cell[36873, 885, 11585, 253, 924, "Input", "ExpressionUUID" -> \
+"45d798d7-6eed-47ab-b48e-8d5cbfce45fb"],
+Cell[CellGroupData[{
+Cell[48483, 1142, 193, 4, 30, "Input", "ExpressionUUID" -> \
+"f0bd0a8c-f5aa-47ea-9a50-9657d58790d2"],
+Cell[48679, 1148, 196, 6, 30, "Output", "ExpressionUUID" -> \
+"cad36207-e84f-42e0-b6ab-e9dde68a4d1a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48912, 1159, 236, 5, 30, "Input", "ExpressionUUID" -> \
+"1d16d28b-35cb-4db5-9599-e8c3f4620e22"],
+Cell[49151, 1166, 156, 3, 30, "Output", "ExpressionUUID" -> \
+"f12e7b84-93d6-42f7-ab32-8b8c4148b497"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49344, 1174, 234, 5, 30, "Input", "ExpressionUUID" -> \
+"3d572e9d-7ce0-4934-bf2b-8fd10d3fcbd7"],
+Cell[49581, 1181, 156, 3, 30, "Output", "ExpressionUUID" -> \
+"2ee521ae-b203-4edd-b24c-3095c718e06d"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

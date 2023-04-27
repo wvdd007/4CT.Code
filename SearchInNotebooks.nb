@@ -1,0 +1,1901 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     82093,       1893]
+NotebookOptionsPosition[     72984,       1701]
+NotebookOutlinePosition[     73326,       1716]
+CellTagsIndexPosition[     73283,       1713]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"findInNBFile", "::", "cntconv"}], "=", 
+   "\"\<Failed to extract plain text from `1`\>\""}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"findInNBFile", "[", 
+   RowBox[{"NBFilePath_String", ",", "stringPattern_", ",", 
+    RowBox[{"resPerFile_Integer:", " ", "5"}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"NB", ",", "NBText", ",", "NBlines", ",", "matches"}], "}"}], 
+    ",", 
+    RowBox[{
+     RowBox[{"NB", "=", 
+      RowBox[{"Get", "[", "NBFilePath", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"NB", "=", 
+      RowBox[{"Notebook", "[", 
+       RowBox[{
+        RowBox[{"First", "@", "NB"}], ",", 
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"FilterRules", "[", 
+           RowBox[{
+            RowBox[{"List", "@@", 
+             RowBox[{"Rest", "[", "NB", "]"}]}], ",", 
+            RowBox[{"Except", "[", 
+             RowBox[{"DynamicUpdating", "|", "NotebookDynamicExpression"}], 
+             "]"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"DynamicUpdating", "\[Rule]", "False"}], ",", 
+            RowBox[{"NotebookDynamicExpression", "\[Rule]", "Null"}]}], 
+           "}"}]}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"NBText", "=", 
+      RowBox[{"FrontEndExecute", "[", 
+       RowBox[{"FrontEnd`ExportPacket", "[", 
+        RowBox[{"NB", ",", "\"\<PlainText\>\""}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"TrueQ", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Head", "[", "NBText", "]"}], "===", "List"}], "&&", 
+         RowBox[{
+          RowBox[{"Head", "[", 
+           RowBox[{"First", "@", "NBText"}], "]"}], "===", "String"}]}], 
+        "]"}], ",", 
+       RowBox[{
+        RowBox[{"NBlines", "=", 
+         RowBox[{"StringSplit", "[", 
+          RowBox[{
+           RowBox[{"First", "@", "NBText"}], ",", "\"\<\\n\>\""}], "]"}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"matches", "=", 
+         RowBox[{"Flatten", "@", 
+          RowBox[{"Position", "[", 
+           RowBox[{
+            RowBox[{"StringMatchQ", "[", 
+             RowBox[{"NBlines", ",", "stringPattern"}], "]"}], ",", "True"}], 
+           "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"matches", "=!=", 
+           RowBox[{"{", "}"}]}], ",", 
+          RowBox[{"Print", "[", 
+           RowBox[{
+            RowBox[{"Length", "[", "matches", "]"}], ",", 
+            "\"\< matches on: \>\"", ",", "NBFilePath"}], "]"}]}], "]"}], ";",
+         "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"NBFilePath", ",", 
+          RowBox[{"Length", "[", "matches", "]"}], ",", 
+          RowBox[{"StringJoin", "@", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Length", "[", "matches", "]"}], ">", "resPerFile"}], 
+             ",", 
+             RowBox[{"NBlines", "[", 
+              RowBox[{"[", 
+               RowBox[{"Take", "[", 
+                RowBox[{"matches", ",", "resPerFile"}], "]"}], "]"}], "]"}], 
+             ",", 
+             RowBox[{"NBlines", "[", 
+              RowBox[{"[", "matches", "]"}], "]"}]}], "]"}]}]}], "}"}]}], ",", 
+       RowBox[{
+        RowBox[{"Message", "[", 
+         RowBox[{
+          RowBox[{"findInNBFile", "::", "cntconv"}], ",", "NBFilePath"}], 
+         "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"NBFilePath", ",", "$Failed", ","}], "}"}]}]}], "]"}]}]}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{{3.681137586425269*^9, 
+  3.68113758643233*^9}},ExpressionUUID->"c6f0f0cf-650a-4be0-a5b3-\
+7d116609cf5a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"notebooks", "=", 
+   RowBox[{"Sort", "[", 
+    RowBox[{"FileNames", "[", 
+     RowBox[{
+     "\"\<*.nb\>\"", ",", 
+      "\"\<D:\\\\Users\\\\alfredo\\\\Google\\\\Math\>\""}], "]"}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{"Length", "[", "notebooks", "]"}], "\n", 
+ RowBox[{
+  RowBox[{"Total", "[", 
+   RowBox[{"FileByteCount", "/@", "notebooks"}], "]"}], "/", 
+  RowBox[{"1024.", "^", "2"}]}]}], "Input",
+ CellChangeTimes->{{3.681137606840152*^9, 3.6811376068492002`*^9}, {
+  3.6811376476285887`*^9, 3.6811376527077394`*^9}, {3.697981094699315*^9, 
+  3.6979810990042343`*^9}},ExpressionUUID->"54930d7a-480e-4b95-b324-\
+fed1cb2ccc2f"],
+
+Cell[BoxData["927"], "Output",
+ CellChangeTimes->{3.681137654982827*^9, 3.681364769659379*^9, 
+  3.6819282339476156`*^9, 3.683390869513747*^9, 3.6833950078326597`*^9, 
+  3.683548111144774*^9, 3.683558001231146*^9, 3.685243539437608*^9, 
+  3.6892711801455946`*^9, 3.6979811018195677`*^9, 3.6980430661194754`*^9, 
+  3.7095653169840536`*^9, 
+  3.717938003451544*^9},ExpressionUUID->"49dc4f3b-e73f-4f9f-95c9-\
+1f75e9ffe9a7"],
+
+Cell[BoxData["2907.5672845840454`"], "Output",
+ CellChangeTimes->{3.681137654982827*^9, 3.681364769659379*^9, 
+  3.6819282339476156`*^9, 3.683390869513747*^9, 3.6833950078326597`*^9, 
+  3.683548111144774*^9, 3.683558001231146*^9, 3.685243539437608*^9, 
+  3.6892711801455946`*^9, 3.6979811018195677`*^9, 3.6980430661194754`*^9, 
+  3.7095653169840536`*^9, 
+  3.7179380047504964`*^9},ExpressionUUID->"1d7a456b-684d-4ab2-817e-\
+b3cca5cb4d1a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"startTime", "=", 
+    RowBox[{"AbsoluteTime", "[", "]"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Monitor", "[", 
+    RowBox[{
+     RowBox[{"Select", "[", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"findInNBFile", "[", 
+          RowBox[{"nb", ",", "\"\<*StirlingS1*\>\""}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"nb", ",", "notebooks"}], "}"}]}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"TrueQ", "[", 
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], ">", "0"}], "]"}], "&"}]}], "]"}], 
+     ",", 
+     RowBox[{"{", "nb", "}"}]}], "]"}], "//", 
+   RowBox[{
+    RowBox[{"Grid", "[", 
+     RowBox[{"#", ",", 
+      RowBox[{"Alignment", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"Left", ",", "Top"}], "}"}]}], ",", 
+      RowBox[{"Dividers", "\[Rule]", "All"}]}], "]"}], "&"}]}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{"DateString", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"AbsoluteTime", "[", "]"}], "-", "startTime"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Hour\>\"", ",", "\"\<:\>\"", ",", "\"\<Minute\>\"", ",", "\"\<:\>\"",
+      ",", "\"\<Second\>\""}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6811376748639946`*^9, 3.6811376748670025`*^9}, 
+   3.681137716784381*^9, 3.681139944978591*^9, {3.6813647634720755`*^9, 
+   3.6813647640684333`*^9}, 3.6819282298076067`*^9, {3.683390863803856*^9, 
+   3.6833908664975386`*^9}, 3.6833950037719364`*^9, {3.6835480450443153`*^9, 
+   3.6835480462513466`*^9}, 3.6835568886843805`*^9, 3.6852435366621895`*^9, {
+   3.6892711387552614`*^9, 3.6892711446925316`*^9}, {3.69798105546461*^9, 
+   3.697981056606493*^9}, {3.6980430528083572`*^9, 3.6980430605087385`*^9}, 
+   3.709565310102545*^9, {3.7179379945592527`*^9, 
+   3.717937999396118*^9}},ExpressionUUID->"af48fb67-eb2f-4f97-86c8-\
+755fdae9a366"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\20161204 - compute mobius \
+through partition formula.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\20161204 - compute mobius through \
+partition formula.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179392816214314`*^9},ExpressionUUID->"bc48297c-e884-4ae0-8a38-\
+b99bab210ee0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "4", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\20171009 Last symbol \
+standing.nb\"\>"}],
+  SequenceForm[
+  4, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\20171009 Last symbol standing.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939649646554*^9},ExpressionUUID->"1a469bb2-a38b-4ca1-8e00-\
+3db0d840cf49"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\20171023 \
+intersections.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\20171023 intersections.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179396531894712`*^9},ExpressionUUID->"e20cdebc-1297-4410-95a6-\
+c83c48b43ca6"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs001.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs001.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179396962858543`*^9},ExpressionUUID->"a7cc908b-8734-486f-945b-\
+1b3b61779b71"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs002.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs002.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939698207963*^9},ExpressionUUID->"740d7740-b8b2-4459-a33a-\
+5c4db0ed9e65"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs003.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs003.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179397001576653`*^9},ExpressionUUID->"d70ebd1f-15b0-41db-bd71-\
+8d2b1073fa35"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs004.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs004.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179397021730323`*^9},ExpressionUUID->"04306079-8a69-40ac-bc65-\
+4dcaf941fe04"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs005.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs005.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939704166627*^9},ExpressionUUID->"e0f45521-b5ff-4c27-a75a-\
+cd4d9c5da536"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs006.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs006.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179397062235947`*^9},ExpressionUUID->"04c29522-9ab1-44cb-b83c-\
+0da46e3b65d9"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs007.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs007.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179397084650755`*^9},ExpressionUUID->"0abe3994-9d8e-41c1-bc0a-\
+0171cd25b5b1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs008.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs008.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939710838383*^9},ExpressionUUID->"08815b72-413c-448f-8f00-\
+dd1a098d9479"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs009.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs009.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939713184143*^9},ExpressionUUID->"c54e7339-73c5-4fb1-9d07-\
+f55aa8e811e2"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs010.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs010.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939715718402*^9},ExpressionUUID->"9e465dbf-f795-471c-8fee-\
+83ed7fd0e4b0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs011.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs011.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939717957371*^9},ExpressionUUID->"3cac7548-0683-4132-adbb-\
+5f13f8dfda03"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs012.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs012.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939720422925*^9},ExpressionUUID->"397d1cb3-6b21-4ddf-95f3-\
+76f3903555f1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs013.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs013.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939722745098*^9},ExpressionUUID->"4c2761b5-cd09-4112-9220-\
+0734f2858230"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs014[Conflict].nb\"\>"}\
+],
+  SequenceForm[
+  1, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\AllDefs014[Conflict].nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179397254663305`*^9},ExpressionUUID->"1a0a0ce5-5e56-4cd4-acc5-\
+1c49ea3e3a8c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs014.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs014.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179397278361435`*^9},ExpressionUUID->"7076f9fd-51e8-487f-9058-\
+ef82cf0dd9bb"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs015.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs015.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179397305358095`*^9},ExpressionUUID->"146825d8-438c-42f0-8bd5-\
+44104bcb68ea"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs016.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs016.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179397333564205`*^9},ExpressionUUID->"4f154cc6-35bc-49c3-97c6-\
+f0bce9ff44de"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs017.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs017.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939735650046*^9},ExpressionUUID->"61488ed4-5b05-4aba-b0ac-\
+6e44d54be4a4"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs018.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs018.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939738117103*^9},ExpressionUUID->"2c33a569-045f-46e8-b556-\
+d8c153f293ac"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs019[Conflict].nb\"\>"}\
+],
+  SequenceForm[
+  1, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\AllDefs019[Conflict].nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939740595224*^9},ExpressionUUID->"9e9e9f9c-ef6b-4ae6-a4fc-\
+028ac16d5aba"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs019.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs019.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179397428587418`*^9},ExpressionUUID->"ab306f75-419f-4942-ace5-\
+bdac2c54833b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs020.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs020.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179397452871976`*^9},ExpressionUUID->"9c92f0c6-d9a1-4157-bdca-\
+03c1d9b6b8ec"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs021.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs021.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717939747793915*^9},ExpressionUUID->"98be4dac-d539-420e-ac76-\
+9a6fac968190"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs022.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs022.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.71793975023614*^9},ExpressionUUID->"709b3436-8693-4760-af9d-75977ba5ff33"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs023.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs023.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179397526907845`*^9},ExpressionUUID->"b155d750-9b22-426a-b612-\
+30a17b1de964"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\BipartiteGraphs.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\BipartiteGraphs.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179398364509068`*^9},ExpressionUUID->"6f500325-f4b3-4f3d-bce0-\
+22e77c050177"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "9", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\COuntingDamage.nb\"\>"}],
+  SequenceForm[
+  9, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\COuntingDamage.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179400659241266`*^9},ExpressionUUID->"dad2c075-a505-48e1-8eda-\
+e1f7da930e48"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "31", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\DammageFormula002.nb\"\>"}],
+  SequenceForm[
+  31, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\DammageFormula002.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179400765171947`*^9},ExpressionUUID->"980dde17-cf79-4c6f-a45c-\
+aff047107b0a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "7", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\DammageFormula003.nb\"\>"}],
+  SequenceForm[
+  7, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\DammageFormula003.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179400785429993`*^9},ExpressionUUID->"ced07112-ff83-4d8b-93ab-\
+d71a7cc1d19c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "2", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\DammageFormula.nb\"\>"}],
+  SequenceForm[
+  2, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\DammageFormula.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717940079114558*^9},ExpressionUUID->"1d0c8b32-79d7-47e3-a084-\
+566d59617282"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "2", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\DammageFormula-temp.nb\"\>"}],
+  SequenceForm[
+  2, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\DammageFormula-temp.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179400797463665`*^9},ExpressionUUID->"a057993b-1c81-4e4b-93ef-\
+090ac11b37ca"]
+}, Open  ]],
+
+Cell["\<\
+Syntax::sntx: Invalid syntax in or before \"\"}\"}]], \"Output\",\" (line 80 \
+of \"D:\\Users\\alfredo\\Google\\Math\\DoublePentagon-copy.nb\").
+                                               ^\
+\>", "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.7179401845645647`*^9},ExpressionUUID->"80adf125-ed42-456f-b7e5-\
+082c55d8c000"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "First","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"First\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,503,72,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.7179401846287565`*^9},ExpressionUUID->"11f38c3f-5fd2-4561-a75a-\
+b31111c04790"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Rest","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Rest\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,503,73,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.7179401848102703`*^9},ExpressionUUID->"6f7a9064-308b-4f82-9ef2-\
+6c7a424ecae6"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FilterRules","rep",
+   "\"\\!\\(\\*RowBox[{\\\"Null\\\"}]\\) is not a valid replacement rule.\"",
+   2,503,74,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717940184989781*^9},ExpressionUUID->"968af481-215c-4dc5-ba07-\
+e3c2fbc9d9f7"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Join","heads",
+   "\"Heads \\!\\(\\*RowBox[{\\\"FilterRules\\\"}]\\) and \\!\\(\\*RowBox[{\\\
+\"List\\\"}]\\) at positions \\!\\(\\*RowBox[{\\\"1\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"2\\\"}]\\) are expected to be the same.\"",2,503,75,
+   27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717940185183036*^9},ExpressionUUID->"ab951abf-3fe5-466b-8dea-\
+108fc456823a"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "findInNBFile","cntconv",
+   "\"Failed to extract plain text from \\!\\(\\*RowBox[{\\\"\\\\\\\"D:\\\\\\\
+\\\\\\\\\\Users\\\\\\\\\\\\\\\\alfredo\\\\\\\\\\\\\\\\Google\\\\\\\\\\\\\\\\\
+Math\\\\\\\\\\\\\\\\DoublePentagon-copy.nb\\\\\\\"\\\"}]\\)\"",2,503,76,
+   27528309164131491196,"Local","Global`findInNBFile"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717940185380582*^9},ExpressionUUID->"006ce13e-b097-4182-8a98-\
+425b6a009ea9"],
+
+Cell["\<\
+Syntax::sntx: Invalid syntax in or before \"}]}], \"\[IndentingNewLine]\", \
+\"]\"}]}]], \"Input\",\"
+                                              ^
+     (line 5353 of \
+\"D:\\Users\\alfredo\\Google\\Math\\GenerateAllGraphs012.nb\").\
+\>", "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717940954333131*^9},ExpressionUUID->"c0b3f827-a06e-4f20-8960-\
+2459952afd94"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "First","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"First\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,503,77,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717940954361207*^9},ExpressionUUID->"57c54d90-701d-4dfd-a1e1-\
+6510c73e8550"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Rest","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Rest\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,503,78,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717940954554609*^9},ExpressionUUID->"319a4693-0bee-497c-96dd-\
+1e4ba8c7ea04"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FilterRules","rep",
+   "\"\\!\\(\\*RowBox[{\\\"Null\\\"}]\\) is not a valid replacement rule.\"",
+   2,503,79,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717940954732606*^9},ExpressionUUID->"daa6df9d-56e9-4c07-84ed-\
+68ade0399bd8"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Join","heads",
+   "\"Heads \\!\\(\\*RowBox[{\\\"FilterRules\\\"}]\\) and \\!\\(\\*RowBox[{\\\
+\"List\\\"}]\\) at positions \\!\\(\\*RowBox[{\\\"1\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"2\\\"}]\\) are expected to be the same.\"",2,503,80,
+   27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717940954926124*^9},ExpressionUUID->"a916978c-13b8-44a1-b472-\
+2ecc8ed3e93f"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "findInNBFile","cntconv",
+   "\"Failed to extract plain text from \\!\\(\\*RowBox[{\\\"\\\\\\\"D:\\\\\\\
+\\\\\\\\\\Users\\\\\\\\\\\\\\\\alfredo\\\\\\\\\\\\\\\\Google\\\\\\\\\\\\\\\\\
+Math\\\\\\\\\\\\\\\\GenerateAllGraphs012.nb\\\\\\\"\\\"}]\\)\"",2,503,81,
+   27528309164131491196,"Local","Global`findInNBFile"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717940955110139*^9},ExpressionUUID->"d6705226-5788-4b33-b189-\
+20581ffea9dd"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs001.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs001.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717941080277518*^9},ExpressionUUID->"fe5731c5-66c7-4313-bc2e-\
+2cf92ef3f2cc"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs002.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs002.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179410812310038`*^9},ExpressionUUID->"66b6931d-9605-47e2-b770-\
+093fd33c73a7"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs003.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs003.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.71794108234595*^9},ExpressionUUID->"75deadf4-6404-4613-86f6-8142144ccd0f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs004.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs004.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717941083409657*^9},ExpressionUUID->"4975026c-6529-4510-b603-\
+608f34d1a949"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs005.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs005.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717941084487852*^9},ExpressionUUID->"4b4c8606-f3c4-49c0-b2d7-\
+204a21b92448"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs006.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs006.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179410856408386`*^9},ExpressionUUID->"6dcf3f6e-1cd8-44f8-aff5-\
+691c92d34d4c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs007.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs007.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179410867913632`*^9},ExpressionUUID->"0e8afb18-9181-4328-a132-\
+8cbb8f6f1286"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs008.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs008.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179410879516277`*^9},ExpressionUUID->"a82fdfaf-c331-42b4-ab8c-\
+f9a1dc0e0c41"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs009.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs009.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179410891551676`*^9},ExpressionUUID->"a3e0ea07-bb26-42c9-a459-\
+6cf038e4d807"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "2", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs010.nb\"\>"}],
+  SequenceForm[
+  2, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs010.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179410904012957`*^9},ExpressionUUID->"843ac420-dc3f-4fe1-9d3b-\
+f0dfc34b0160"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs011.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs011.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179410916438637`*^9},ExpressionUUID->"c34f5fdb-6cc4-4f4e-b219-\
+724ba23c7fbc"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs012.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs012.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717941092883398*^9},ExpressionUUID->"9610da8b-218f-47d7-a017-\
+41d4a7160e74"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs014 (1).nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs014 (1).nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717941094242208*^9},ExpressionUUID->"16a83266-b251-43e2-82ab-\
+d0288b9d8ae4"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs014.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\GraphDefs014.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179410954852448`*^9},ExpressionUUID->"71de3a30-3c4a-4af9-93de-\
+7a7a291351ad"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\MinimalChromialValues.nb\"\>\
+"}],
+  SequenceForm[
+  1, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\MinimalChromialValues.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717941288976102*^9},ExpressionUUID->"e819a683-6a41-47b8-9a15-\
+9aeb28d0a6dc"]
+}, Open  ]],
+
+Cell["\<\
+Syntax::sntx: Invalid syntax in or before \"]]\" (line 211 of \
+\"D:\\Users\\alfredo\\Google\\Math\\sIXNodesCompleteGeneration004.nb\").
+                                            ^\
+\>", "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717943246982981*^9},ExpressionUUID->"70af657d-3674-43db-8d72-\
+a9c4a393a262"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "First","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"First\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,503,82,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.7179432469990244`*^9},ExpressionUUID->"64083c54-177d-4392-abb6-\
+e4e9ac57fb5b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"First\\\", \\\"::\\\", \
+\\\"normal\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,503,83,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.7179432471861143`*^9},ExpressionUUID->"2866d1ae-9ff8-455b-8ff2-\
+77f11e86e400"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Rest","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Rest\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,503,84,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.7179432473460474`*^9},ExpressionUUID->"054077f1-d1fb-4b1a-b0a9-\
+8c4677489b04"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Rest\\\", \\\"::\\\", \
+\\\"normal\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,503,85,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717943247492948*^9},ExpressionUUID->"c1462124-39cd-4d59-a340-\
+f8c1074aad65"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FilterRules","rep",
+   "\"\\!\\(\\*RowBox[{\\\"Null\\\"}]\\) is not a valid replacement rule.\"",
+   2,503,86,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.7179432477095346`*^9},ExpressionUUID->"46cc8366-7c5a-4b87-80c3-\
+56f34bda0439"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"FilterRules\\\", \\\"::\
+\\\", \\\"rep\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,503,87,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.7179432478559237`*^9},ExpressionUUID->"05c432cf-525b-4ec3-a357-\
+bc728e64a7c5"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Join","heads",
+   "\"Heads \\!\\(\\*RowBox[{\\\"FilterRules\\\"}]\\) and \\!\\(\\*RowBox[{\\\
+\"List\\\"}]\\) at positions \\!\\(\\*RowBox[{\\\"1\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"2\\\"}]\\) are expected to be the same.\"",2,503,88,
+   27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.717943247994792*^9},ExpressionUUID->"383bdf64-9229-408f-a692-\
+5142d18a0a45"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Join\\\", \\\"::\\\", \
+\\\"heads\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,503,89,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.7179432481381745`*^9},ExpressionUUID->"212df559-40ff-42f6-82a9-\
+a3d4868c2ae9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "findInNBFile","cntconv",
+   "\"Failed to extract plain text from \\!\\(\\*RowBox[{\\\"\\\\\\\"D:\\\\\\\
+\\\\\\\\\\Users\\\\\\\\\\\\\\\\alfredo\\\\\\\\\\\\\\\\Google\\\\\\\\\\\\\\\\\
+Math\\\\\\\\\\\\\\\\sIXNodesCompleteGeneration004.nb\\\\\\\"\\\"}]\\)\"",2,
+   503,90,27528309164131491196,"Local","Global`findInNBFile"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.7179432482860756`*^9},ExpressionUUID->"54cab3e4-ee14-483f-9d3d-\
+bc9dbf4fdc1e"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"findInNBFile\\\", \
+\\\"::\\\", \\\"cntconv\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"",2,503,91,27528309164131491196,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68355906744529*^9, 3.6852445450254507`*^9, 
+  3.689272161054372*^9, 3.69798223349723*^9, 3.6980443367173615`*^9, 
+  3.709566549024891*^9, 
+  3.7179432484640613`*^9},ExpressionUUID->"12f70df1-f7e1-43bd-a0fe-\
+2f103a4df6b7"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\StirlingMatrices.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\StirlingMatrices.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179439935656323`*^9},ExpressionUUID->"19953770-0f20-40fd-a27c-\
+e04e82ad23a3"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "5", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\\
+UmblradProductMinus4Experiments.nb\"\>"}],
+  SequenceForm[
+  5, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\UmblradProductMinus4Experiments.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717944183290269*^9},ExpressionUUID->"ca5a6459-db54-4b29-a202-\
+939943b6ae16"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\UmbralFrom4To5Matrices002.nb\
+\"\>"}],
+  SequenceForm[
+  1, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\UmbralFrom4To5Matrices002.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717944184556635*^9},ExpressionUUID->"446856e1-dc3a-457a-b2b7-\
+6e2d11b7f932"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\UmbralFrom4To5Matrices \
+(1).nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\UmbralFrom4To5Matrices (1).nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179441854750886`*^9},ExpressionUUID->"3932bbb6-422f-43a8-aae7-\
+f5e9f064e883"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "3", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\UmbralFrom4To5Matrices.nb\"\>\
+"}],
+  SequenceForm[
+  3, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\UmbralFrom4To5Matrices.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.717944186376974*^9},ExpressionUUID->"acf3c5df-3289-41d6-8a29-\
+364c95fee43f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\VerifyMatrices.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\VerifyMatrices.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6833916105782547`*^9, 3.6833950087998877`*^9, 
+  3.683548139935073*^9, 3.683557835207258*^9, 3.683558891951928*^9, 
+  3.6852435443827734`*^9, 3.68927193980071*^9, 3.6979811064142737`*^9, 
+  3.698044122372404*^9, 3.70956619344693*^9, 
+  3.7179442546138954`*^9},ExpressionUUID->"e2e6ee08-a68b-493f-9cc2-\
+5820115c6d72"]
+}, Open  ]],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\20161204 - compute \
+mobius through partition formula.nb\"\>", 
+     "1", "\<\"Sum[(k-1)!*StirlingS1[n,k],{k,1,n}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\20171009 Last symbol \
+standing.nb\"\>", 
+     "4", "\<\"Sum[StirlingS2[n-x,k]*StirlingS1[4,4-x],{x,0,3}]\\rTable[\
+StirlingS1[4,4-x],{x,0,3}]\\rTable[Sum[StirlingS2[n-x,k]*StirlingS1[4,4-x],{x,\
+0,3}],{n,4,20},{k,2,20}]//TableForm\\rTable[Sum[StirlingS2[n-x,k]*StirlingS1[\
+5,5-x],{x,0,5-1}],{n,5,20},{k,2,20}]//TableForm\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\20171023 \
+intersections.nb\"\>", 
+     "1", "\<\"MatrixForm[Table[PadRight[Table[Style[StirlingS1[n,k],If[n==4||\
+k==4,{Bold,Red,20},Black]],{k,1,n}],max],{n,1,max}],TableHeadings->{Range[max]\
+,Range[max]}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs001.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs002.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs003.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs004.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs005.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs006.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs007.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs008.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs009.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs010.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs011.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs012.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs013.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs014[Conflict].nb\
+\"\>", "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs014.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs015.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs016.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs017.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs018.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs019[Conflict].nb\
+\"\>", "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs019.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs020.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs021.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs022.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs023.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\BipartiteGraphs.nb\"\>",
+      "1", "\<\"TableForm[Table[PadRight[Table[StirlingS1[n,k],{k,1,n}],max],{\
+n,1,max}],\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\COuntingDamage.nb\"\>", 
+     "9", "\<\"With[{k=5},FullSimplify[Sum[( \
+StirlingS1[5,5-i]StirlingS2[n-i,n-k]),{i,0,4}]]]==5^n\\rTable[Sum[( \
+StirlingS1[5,5-i]StirlingS2[n-i,n-k]),{i,0,4}],{k,0,n}],\\rn=6},Table[Sum[( \
+StirlingS1[5,5-i]StirlingS2[n-i,n-k]),{i,0,5}],{k,0,n}]]//Total\\rTable[Sum[( \
+StirlingS1[5,5-i]StirlingS2[n+1-i,n-k]),{i,0,4}],{k,0,n}]\\r\\\\*\
+UnderoverscriptBox[\\\\(\\\\[Sum]\\\\), \\\\(i = 0\\\\), \
+\\\\(4\\\\)]\\\\(StirlingS1[5, 5 - i]\\\\ StirlingS2[n + 1 - i, n - k]\\\\)\\\
+\\),{k,0,n}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\DammageFormula002.nb\"\>\
+", "31", "\<\"colors->Sum[StirlingS1[colors,colors-i]*StirlingS2[n-i,n-k],{i,\
+colors-1,0,-1}],\\rStyle[TraditionalForm[Sum[( \
+StirlingS1[5,5-i]StirlingS2[n-i,n-k]),{i,0,4}]],40]\\rReverse[Table[Sum[\
+StirlingS1[ToString[colors],colors-i]*StirlingS2[ToString[n-i],n-k],{i,0,\
+colors-1}],{k,0,n}]],\\r2\\tStirlingS1[2,1] StirlingS2[1,0]+StirlingS1[2,2] \
+StirlingS2[2,0]\\tStirlingS1[2,1] StirlingS2[1,1]+StirlingS1[2,2] \
+StirlingS2[2,1]\\tStirlingS1[2,1] StirlingS2[1,2]+StirlingS1[2,2] \
+StirlingS2[2,2]\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\r3\\tStirlingS1[2,1] \
+StirlingS2[2,0]+StirlingS1[2,2] StirlingS2[3,0]\\tStirlingS1[2,1] \
+StirlingS2[2,1]+StirlingS1[2,2] StirlingS2[3,1]\\tStirlingS1[2,1] \
+StirlingS2[2,2]+StirlingS1[2,2] StirlingS2[3,2]\\tStirlingS1[2,1] \
+StirlingS2[2,3]+StirlingS1[2,2] StirlingS2[3,3]\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\
+\\t\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\DammageFormula003.nb\"\>\
+", "7", "\<\"MakeBoxes[StirlingS1[n_,k_],StandardForm]:=RowBox[{\\\"[\\\",\
+GridBox[{{ToString[TraditionalForm[n]]},{ToString[TraditionalForm[k]]}},\
+AutoDelete->False,GridBoxItemSize->{\\\"Columns\\\"->{{Automatic}},\\\"Rows\\\
+\"->{{Automatic}}}],\\\"]\\\"}]\\rSum[StirlingS1[colors,colors-i]*StirlingS2[\
+n-i,n-k],{i,colors-1,0,-1}]\\rcolors->{Sum[StirlingS1[colors,colors-i]*\
+StirlingS2[n-i,n-k],{i,colors-1,0,-1}],With[{n=10,k=5},Sum[StirlingS1[colors,\
+colors-i]*StirlingS2[n-i,n-k],{i,colors-1,0,-1}]]},\\rStyle[Reverse[Sum[( \
+StirlingS1[5,5-i]StirlingS2[n-i,n-k]),{i,0,4}]],30]\\rReverse[Table[Framed[\
+Sum[ToString[StirlingS1[colors,colors-i]]*StirlingS2[ToString[n-i],n-k],{i,0,\
+colors-1}]],{k,0,n}]],\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\DammageFormula.nb\"\>", 
+     "2", "\<\"Style[TraditionalForm[Sum[( \
+StirlingS1[5,5-i]StirlingS2[n-i,n-k]),{i,0,4}]],40]\\rReverse[Table[Sum[( \
+StirlingS1[colors,colors-i]StirlingS2[n-i,n-k]),{i,0,colors-1}],{k,0,n}]],\\r\
+\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\DammageFormula-temp.nb\"\
+\>", "2", "\<\"Style[TraditionalForm[Sum[( \
+StirlingS1[5,5-i]StirlingS2[n-i,n-k]),{i,0,4}]],40]\\rReverse[Table[Sum[( \
+StirlingS1[colors,colors-i]StirlingS2[n-i,n-k]),{i,0,colors-1}],{k,0,n}]]]},\\\
+r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs001.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs002.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs003.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs004.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs005.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs006.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs007.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs008.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs009.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs010.nb\"\>", 
+     "2", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r        RowBox[{\\\"StirlingS1\\\", \\\"[\\\", \\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs011.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs012.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs014 \
+(1).nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\GraphDefs014.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\MinimalChromialValues.\
+nb\"\>", "1", "\<\"MakeBoxes[StirlingS1[n_,k_],StandardForm]:=RowBox[{\\\"[\\\
+\",GridBox[{{n},{k}},AutoDelete->False,GridBoxItemSize->{\\\"Columns\\\"->{{\
+Automatic}},\\\"Rows\\\"->{{Automatic}}}],\\\"]\\\"}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\StirlingMatrices.nb\"\>\
+", "1", "\<\"ConvMat[length_]:=Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[\
+i-1,j-1]]],{i,1,length},{j,1,length}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\\
+UmblradProductMinus4Experiments.nb\"\>", 
+     "5", "\<\"a4[n_,m_]:=Sum[StirlingS1[4,4-j]*StirlingS2[n+4-j,m+4],{j,0,\
+Min[4,n-m]}];Table[a4[n,m],{n,0,10},{m,0,n}]//TableForm\\ra[n_,m_]:=Sum[\
+StirlingS1[5,5-j]*StirlingS2[n+5-j,m+5],{j,0,Min[5,n-m]}];Table[a[n,m],{n,0,\
+10},{m,0,n}]//TableForm\\rRestrictedCoeff[n_,m_,size_,dim_]:=Sum[StirlingS1[\
+size,size-j]*StirlingS2[n+size-j,m+size],{j,0,Min[size,n-m]}];Table[\\\
+rTraditionalForm[Sum[StirlingS1[size,size-j]*StirlingS2[n+size-j,m+size],{j,0,\
+Min[size,n-m]}]/.size->4]\\r\\\"StirlingS1\\\"]\\\\ \\\\*\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\\
+UmbralFrom4To5Matrices002.nb\"\>", 
+     "1", "\<\"RestrictedCoeff[n_,m_,size_]:=Sum[StirlingS1[size,size-j]*\
+StirlingS2[n+size-j,m+size],{j,0,Min[size,n-m]}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\UmbralFrom4To5Matrices \
+(1).nb\"\>", 
+     "1", "\<\"RestrictedCoeff[n_,m_,size_]:=Sum[StirlingS1[size,size-j]*\
+StirlingS2[n+size-j,m+size],{j,0,Min[size,n-m]}]\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\UmbralFrom4To5Matrices.\
+nb\"\>", "3", \
+"\<\"RestrictedCoeff[n_,m_,size_]:=Sum[StirlingS1[size,size-j]*StirlingS2[n+\
+size-j,m+size],{j,0,Min[size,n-m]}]\\rTraditionalForm[Sum[StirlingS1[size,\
+size-j]*StirlingS2[n+size-j,m+size],{j,0,Min[size,n-m]}]]\\r\\\"StirlingS1\\\"\
+]\\\\ \\\\*\\r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\VerifyMatrices.nb\"\>", 
+     "1", "\<\"FromCompleteToNormal[length_]:= \
+Table[If[i==j==1,1,If[i==1||j==1,0,StirlingS1[i-1,j-1]]],{i,1,length},{j,1,\
+length}]\\r\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Top}}},
+   GridBoxDividers->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{3.6811441738514547`*^9, 3.681365194342145*^9, 
+  3.681928865588789*^9, 3.683393498320695*^9, 3.68339738803028*^9, 
+  3.6835506529177938`*^9, 3.68355789159892*^9, 3.6835606362891836`*^9, 
+  3.685246110556686*^9, 3.6892737730103283`*^9, 3.6979840619770813`*^9, 
+  3.698046159178194*^9, 3.7095685925243874`*^9, 
+  3.717944391104664*^9},ExpressionUUID->"f32a0e4a-4eec-499b-af1e-\
+94b50fe60be8"],
+
+Cell[BoxData["\<\"01:46:25\"\>"], "Output",
+ CellChangeTimes->{3.6811441738514547`*^9, 3.681365194342145*^9, 
+  3.681928865588789*^9, 3.683393498320695*^9, 3.68339738803028*^9, 
+  3.6835506529177938`*^9, 3.68355789159892*^9, 3.6835606362891836`*^9, 
+  3.685246110556686*^9, 3.6892737730103283`*^9, 3.6979840619770813`*^9, 
+  3.698046159178194*^9, 3.7095685925243874`*^9, 
+  3.7179443911688347`*^9},ExpressionUUID->"cb9ae451-e922-48cc-847f-\
+b6bd0296e4b4"]
+}, Open  ]]
+},
+WindowSize->{1104, 741},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (April 18, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3766, 98, 222, "Input", "ExpressionUUID" -> \
+"c6f0f0cf-650a-4be0-a5b3-7d116609cf5a"],
+Cell[CellGroupData[{
+Cell[4349, 122, 664, 17, 69, "Input", "ExpressionUUID" -> \
+"54930d7a-480e-4b95-b324-fed1cb2ccc2f"],
+Cell[5016, 141, 420, 7, 30, "Output", "ExpressionUUID" -> \
+"49dc4f3b-e73f-4f9f-95c9-1f75e9ffe9a7"],
+Cell[5439, 150, 438, 7, 30, "Output", "ExpressionUUID" -> \
+"1d7a456b-684d-4ab2-817e-b3cca5cb4d1a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5914, 162, 1950, 50, 126, "Input", "ExpressionUUID" -> \
+"af48fb67-eb2f-4f97-86c8-755fdae9a366"],
+Cell[CellGroupData[{
+Cell[7889, 216, 744, 17, 22, "Print", "ExpressionUUID" -> \
+"bc48297c-e884-4ae0-8a38-b99bab210ee0"],
+Cell[8636, 235, 696, 16, 22, "Print", "ExpressionUUID" -> \
+"1a469bb2-a38b-4ca1-8e00-3db0d840cf49"],
+Cell[9335, 253, 684, 16, 22, "Print", "ExpressionUUID" -> \
+"e20cdebc-1297-4410-95a6-c83c48b43ca6"],
+Cell[10022, 271, 654, 14, 22, "Print", "ExpressionUUID" -> \
+"a7cc908b-8734-486f-945b-1b3b61779b71"],
+Cell[10679, 287, 652, 14, 22, "Print", "ExpressionUUID" -> \
+"740d7740-b8b2-4459-a33a-5c4db0ed9e65"],
+Cell[11334, 303, 654, 14, 22, "Print", "ExpressionUUID" -> \
+"d70ebd1f-15b0-41db-bd71-8d2b1073fa35"],
+Cell[11991, 319, 654, 14, 22, "Print", "ExpressionUUID" -> \
+"04306079-8a69-40ac-bc65-4dcaf941fe04"],
+Cell[12648, 335, 652, 14, 22, "Print", "ExpressionUUID" -> \
+"e0f45521-b5ff-4c27-a75a-cd4d9c5da536"],
+Cell[13303, 351, 654, 14, 22, "Print", "ExpressionUUID" -> \
+"04c29522-9ab1-44cb-b83c-0da46e3b65d9"],
+Cell[13960, 367, 654, 14, 22, "Print", "ExpressionUUID" -> \
+"0abe3994-9d8e-41c1-bc0a-0171cd25b5b1"],
+Cell[14617, 383, 652, 14, 22, "Print", "ExpressionUUID" -> \
+"08815b72-413c-448f-8f00-dd1a098d9479"],
+Cell[15272, 399, 652, 14, 22, "Print", "ExpressionUUID" -> \
+"c54e7339-73c5-4fb1-9d07-f55aa8e811e2"],
+Cell[15927, 415, 652, 14, 22, "Print", "ExpressionUUID" -> \
+"9e465dbf-f795-471c-8fee-83ed7fd0e4b0"],
+Cell[16582, 431, 652, 14, 22, "Print", "ExpressionUUID" -> \
+"3cac7548-0683-4132-adbb-5f13f8dfda03"],
+Cell[17237, 447, 652, 14, 22, "Print", "ExpressionUUID" -> \
+"397d1cb3-6b21-4ddf-95f3-76f3903555f1"],
+Cell[17892, 463, 652, 14, 22, "Print", "ExpressionUUID" -> \
+"4c2761b5-cd09-4112-9220-0734f2858230"],
+Cell[18547, 479, 680, 16, 22, "Print", "ExpressionUUID" -> \
+"1a0a0ce5-5e56-4cd4-acc5-1c49ea3e3a8c"],
+Cell[19230, 497, 654, 14, 22, "Print", "ExpressionUUID" -> \
+"7076f9fd-51e8-487f-9058-ef82cf0dd9bb"],
+Cell[19887, 513, 654, 14, 22, "Print", "ExpressionUUID" -> \
+"146825d8-438c-42f0-8bd5-44104bcb68ea"],
+Cell[20544, 529, 654, 14, 22, "Print", "ExpressionUUID" -> \
+"4f154cc6-35bc-49c3-97c6-f0bce9ff44de"],
+Cell[21201, 545, 652, 14, 22, "Print", "ExpressionUUID" -> \
+"61488ed4-5b05-4aba-b0ac-6e44d54be4a4"],
+Cell[21856, 561, 652, 14, 22, "Print", "ExpressionUUID" -> \
+"2c33a569-045f-46e8-b556-d8c153f293ac"],
+Cell[22511, 577, 678, 16, 22, "Print", "ExpressionUUID" -> \
+"9e9e9f9c-ef6b-4ae6-a4fc-028ac16d5aba"],
+Cell[23192, 595, 654, 14, 22, "Print", "ExpressionUUID" -> \
+"ab306f75-419f-4942-ace5-bdac2c54833b"],
+Cell[23849, 611, 654, 14, 22, "Print", "ExpressionUUID" -> \
+"9c92f0c6-d9a1-4157-bdca-03c1d9b6b8ec"],
+Cell[24506, 627, 652, 14, 22, "Print", "ExpressionUUID" -> \
+"98be4dac-d539-420e-ac76-9a6fac968190"],
+Cell[25161, 643, 649, 13, 22, "Print", "ExpressionUUID" -> \
+"709b3436-8693-4760-af9d-75977ba5ff33"],
+Cell[25813, 658, 654, 14, 22, "Print", "ExpressionUUID" -> \
+"b155d750-9b22-426a-b612-30a17b1de964"],
+Cell[26470, 674, 664, 14, 22, "Print", "ExpressionUUID" -> \
+"6f500325-f4b3-4f3d-bce0-22e77c050177"],
+Cell[27137, 690, 662, 14, 22, "Print", "ExpressionUUID" -> \
+"dad2c075-a505-48e1-8eda-e1f7da930e48"],
+Cell[27802, 706, 674, 15, 22, "Print", "ExpressionUUID" -> \
+"980dde17-cf79-4c6f-a45c-aff047107b0a"],
+Cell[28479, 723, 672, 15, 22, "Print", "ExpressionUUID" -> \
+"ced07112-ff83-4d8b-93ab-d71a7cc1d19c"],
+Cell[29154, 740, 660, 14, 22, "Print", "ExpressionUUID" -> \
+"1d0c8b32-79d7-47e3-a084-566d59617282"],
+Cell[29817, 756, 676, 15, 22, "Print", "ExpressionUUID" -> \
+"a057993b-1c81-4e4b-93ef-090ac11b37ca"]
+}, Open  ]],
+Cell[30508, 774, 471, 9, 35, "Message", "ExpressionUUID" -> \
+"80adf125-ed42-456f-b7e5-082c55d8c000"],
+Cell[30982, 785, 536, 11, 23, "Message", "ExpressionUUID" -> \
+"11f38c3f-5fd2-4561-a75a-b31111c04790"],
+Cell[31521, 798, 534, 11, 23, "Message", "ExpressionUUID" -> \
+"6f7a9064-308b-4f82-9ef2-6c7a424ecae6"],
+Cell[32058, 811, 455, 10, 21, "Message", "ExpressionUUID" -> \
+"968af481-215c-4dc5-ba07-e3c2fbc9d9f7"],
+Cell[32516, 823, 583, 12, 21, "Message", "ExpressionUUID" -> \
+"ab951abf-3fe5-466b-8dea-108fc456823a"],
+Cell[33102, 837, 626, 12, 21, "Message", "ExpressionUUID" -> \
+"006ce13e-b097-4182-8a98-425b6a009ea9"],
+Cell[33731, 851, 510, 11, 63, "Message", "ExpressionUUID" -> \
+"c0b3f827-a06e-4f20-8960-2459952afd94"],
+Cell[34244, 864, 534, 11, 23, "Message", "ExpressionUUID" -> \
+"57c54d90-701d-4dfd-a1e1-6510c73e8550"],
+Cell[34781, 877, 532, 11, 23, "Message", "ExpressionUUID" -> \
+"319a4693-0bee-497c-96dd-1e4ba8c7ea04"],
+Cell[35316, 890, 455, 10, 21, "Message", "ExpressionUUID" -> \
+"daa6df9d-56e9-4c07-84ed-68ade0399bd8"],
+Cell[35774, 902, 583, 12, 21, "Message", "ExpressionUUID" -> \
+"a916978c-13b8-44a1-b472-2ecc8ed3e93f"],
+Cell[36360, 916, 627, 12, 21, "Message", "ExpressionUUID" -> \
+"d6705226-5788-4b33-b189-20581ffea9dd"],
+Cell[CellGroupData[{
+Cell[37012, 932, 656, 14, 22, "Print", "ExpressionUUID" -> \
+"fe5731c5-66c7-4313-bc2e-2cf92ef3f2cc"],
+Cell[37671, 948, 658, 14, 22, "Print", "ExpressionUUID" -> \
+"66b6931d-9605-47e2-b770-093fd33c73a7"],
+Cell[38332, 964, 653, 13, 22, "Print", "ExpressionUUID" -> \
+"75deadf4-6404-4613-86f6-8142144ccd0f"],
+Cell[38988, 979, 656, 14, 22, "Print", "ExpressionUUID" -> \
+"4975026c-6529-4510-b603-608f34d1a949"],
+Cell[39647, 995, 656, 14, 22, "Print", "ExpressionUUID" -> \
+"4b4c8606-f3c4-49c0-b2d7-204a21b92448"],
+Cell[40306, 1011, 658, 14, 22, "Print", "ExpressionUUID" -> \
+"6dcf3f6e-1cd8-44f8-aff5-691c92d34d4c"],
+Cell[40967, 1027, 658, 14, 22, "Print", "ExpressionUUID" -> \
+"0e8afb18-9181-4328-a132-8cbb8f6f1286"],
+Cell[41628, 1043, 658, 14, 22, "Print", "ExpressionUUID" -> \
+"a82fdfaf-c331-42b4-ab8c-f9a1dc0e0c41"],
+Cell[42289, 1059, 658, 14, 22, "Print", "ExpressionUUID" -> \
+"a3e0ea07-bb26-42c9-a459-6cf038e4d807"],
+Cell[42950, 1075, 658, 14, 22, "Print", "ExpressionUUID" -> \
+"843ac420-dc3f-4fe1-9d3b-f0dfc34b0160"],
+Cell[43611, 1091, 658, 14, 22, "Print", "ExpressionUUID" -> \
+"c34f5fdb-6cc4-4f4e-b219-724ba23c7fbc"],
+Cell[44272, 1107, 656, 14, 22, "Print", "ExpressionUUID" -> \
+"9610da8b-218f-47d7-a017-41d4a7160e74"],
+Cell[44931, 1123, 664, 14, 22, "Print", "ExpressionUUID" -> \
+"16a83266-b251-43e2-82ab-d0288b9d8ae4"],
+Cell[45598, 1139, 658, 14, 22, "Print", "ExpressionUUID" -> \
+"71de3a30-3c4a-4af9-93de-7a7a291351ad"],
+Cell[46259, 1155, 680, 16, 22, "Print", "ExpressionUUID" -> \
+"e819a683-6a41-47b8-9a15-9aeb28d0a6dc"]
+}, Open  ]],
+Cell[46954, 1174, 458, 9, 35, "Message", "ExpressionUUID" -> \
+"70af657d-3674-43db-8d72-a9c4a393a262"],
+Cell[47415, 1185, 536, 11, 23, "Message", "ExpressionUUID" -> \
+"64083c54-177d-4392-abb6-e4e9ac57fb5b"],
+Cell[47954, 1198, 543, 11, 21, "Message", "ExpressionUUID" -> \
+"2866d1ae-9ff8-455b-8ff2-77f11e86e400"],
+Cell[48500, 1211, 534, 11, 23, "Message", "ExpressionUUID" -> \
+"054077f1-d1fb-4b1a-b0a9-8c4677489b04"],
+Cell[49037, 1224, 540, 11, 21, "Message", "ExpressionUUID" -> \
+"c1462124-39cd-4d59-a340-f8c1074aad65"],
+Cell[49580, 1237, 457, 10, 21, "Message", "ExpressionUUID" -> \
+"46cc8366-7c5a-4b87-80c3-56f34bda0439"],
+Cell[50040, 1249, 546, 11, 21, "Message", "ExpressionUUID" -> \
+"05c432cf-525b-4ec3-a357-bc728e64a7c5"],
+Cell[50589, 1262, 583, 12, 21, "Message", "ExpressionUUID" -> \
+"383bdf64-9229-408f-a692-5142d18a0a45"],
+Cell[51175, 1276, 541, 11, 21, "Message", "ExpressionUUID" -> \
+"212df559-40ff-42f6-82a9-a3d4868c2ae9"],
+Cell[51719, 1289, 638, 12, 21, "Message", "ExpressionUUID" -> \
+"54cab3e4-ee14-483f-9d3d-bc9dbf4fdc1e"],
+Cell[52360, 1303, 551, 11, 21, "Message", "ExpressionUUID" -> \
+"12f70df1-f7e1-43bd-a0fe-2f103a4df6b7"],
+Cell[CellGroupData[{
+Cell[52936, 1318, 666, 14, 22, "Print", "ExpressionUUID" -> \
+"19953770-0f20-40fd-a27c-e04e82ad23a3"],
+Cell[53605, 1334, 700, 16, 22, "Print", "ExpressionUUID" -> \
+"ca5a6459-db54-4b29-a202-939943b6ae16"],
+Cell[54308, 1352, 688, 16, 22, "Print", "ExpressionUUID" -> \
+"446856e1-dc3a-457a-b2b7-6e2d11b7f932"],
+Cell[54999, 1370, 692, 16, 22, "Print", "ExpressionUUID" -> \
+"3932bbb6-422f-43a8-aae7-f5e9f064e883"],
+Cell[55694, 1388, 682, 16, 22, "Print", "ExpressionUUID" -> \
+"acf3c5df-3289-41d6-8a29-364c95fee43f"],
+Cell[56379, 1406, 662, 14, 22, "Print", "ExpressionUUID" -> \
+"e2e6ee08-a68b-493f-9cc2-5820115c6d72"]
+}, Open  ]],
+Cell[57056, 1423, 15454, 266, 5108, "Output", "ExpressionUUID" -> \
+"f32a0e4a-4eec-499b-af1e-94b50fe60be8"],
+Cell[72513, 1691, 455, 7, 30, "Output", "ExpressionUUID" -> \
+"cb9ae451-e922-48cc-847f-b6bd0296e4b4"]
+}, Open  ]]
+}
+]
+*)
+

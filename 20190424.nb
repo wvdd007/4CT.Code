@@ -1,0 +1,1558 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     61538,       1548]
+NotebookOptionsPosition[     59786,       1510]
+NotebookOutlinePosition[     60127,       1525]
+CellTagsIndexPosition[     60084,       1522]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["As always some code", "Section",
+ CellChangeTimes->{{3.7646435323084216`*^9, 
+  3.764643537261389*^9}},ExpressionUUID->"ccd0f928-2abf-41bc-be2e-\
+2b0a85e332c1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SolutionMatrix", "[", "g_", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"mat", ",", "size", ",", " ", "ordered"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"size", "=", 
+      RowBox[{"VertexCount", "[", "g", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"ordered", "=", 
+      RowBox[{"Range", "[", 
+       RowBox[{"VertexCount", "[", "g", "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"mat", "=", 
+      RowBox[{"Table", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Table", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"row", "\[Equal]", "col"}], ",", "2", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"EdgeQ", "[", 
+               RowBox[{"g", ",", 
+                RowBox[{"row", "<->", "col"}]}], "]"}], ",", "1", ",", "0"}], 
+             "]"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"col", ",", "ordered"}], "}"}]}], "\[IndentingNewLine]", 
+         "]"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"row", ",", "ordered"}], "}"}]}], "\[IndentingNewLine]", 
+       "]"}]}], ";", "\[IndentingNewLine]", "mat"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.7646135720106964`*^9, 3.764613737448101*^9}, {
+  3.764613778752003*^9, 3.76461379197585*^9}, {3.7651111919848323`*^9, 
+  3.765111203396912*^9}},
+ CellLabel->
+  "In[519]:=",ExpressionUUID->"049c8c79-9236-4c05-99bd-227df90bbb69"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DrawSolutionMatrix", "[", "g_", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"mat", "=", 
+       RowBox[{"SolutionMatrix", "[", "g", "]"}]}], ",", "  ", "labels", ",", 
+      " ", "size", ",", "  ", "start", ",", "newBucket"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"size", "=", 
+      RowBox[{"VertexCount", "[", "g", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"labels", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"k", ",", 
+          RowBox[{"Block", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"res", "=", 
+              RowBox[{"Style", "[", 
+               RowBox[{"k", ",", "Bold"}], "]"}]}], "}"}], ",", 
+            "\[IndentingNewLine]", "res"}], "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "size"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"start", "=", "1"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Column", "[", "\[IndentingNewLine]", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"Graph", "[", 
+          RowBox[{"g", ",", 
+           RowBox[{"ImageSize", "\[Rule]", "500"}], ",", 
+           RowBox[{"VertexStyle", "\[Rule]", "colors"}]}], "]"}], 
+         "\[IndentingNewLine]", ","}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"MatrixPlot", "[", 
+        RowBox[{
+         RowBox[{"Take", " ", "[", " ", 
+          RowBox[{"mat", ",", "5"}], "]"}], ",", 
+         RowBox[{"Mesh", "\[Rule]", "All"}], ",", " ", 
+         RowBox[{"ImageSize", "\[Rule]", "500"}], ",", 
+         RowBox[{"FrameTicks", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"labels", ",", "labels", ",", "labels", ",", "labels"}], 
+           "}"}]}]}], "]"}], "\[IndentingNewLine]", "}"}], 
+      "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQBWIQfWDm47A8njeON3l+JoLoSZO50kB00AufKhCdZi/e
+DKK9GN60g2iP3XUTQLSLXOE0EH1vzaPZIHqGYfR8EL3D8OgSED3vn9oGEH0g
+5/8FEJ3xufIiiHasPnIdRHva8T4C0Y8Szz4D0fJXTF6C6Iik+V9BtJ3L5+8g
+uqrb+B+IPic4EUxrBBwSyAfSHLmzJcA0Y+rlGiCd9awSTLto6twD0fM5bMA0
+k1rxJxC96k0TmM5oNRBO5H3j6Oq9VBREizkukQPRcdUBSiA6i9daA0RbTirW
+BtEcC9/og+h0gcmGIHrd0mxTEN0gVwummxgKrUH0tikTbUA0ABvZlfA=
+  "],
+ CellLabel->
+  "In[525]:=",ExpressionUUID->"9e9e8d2a-c606-4c22-846f-784bd7ca2687"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DrawSolutionMatrix", "[", 
+   RowBox[{"g_", ",", "merges_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"mat", "=", 
+       RowBox[{"SolutionMatrix", "[", "g", "]"}]}], ",", "  ", "labels", ",", 
+      " ", "size", ",", "  ", "start", ",", "newBucket"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"size", "=", 
+      RowBox[{"VertexCount", "[", "g", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"labels", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"k", ",", 
+          RowBox[{"Block", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"res", "=", 
+              RowBox[{"Style", "[", 
+               RowBox[{"k", ",", "Bold"}], "]"}]}], "}"}], ",", 
+            "\[IndentingNewLine]", "res"}], "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "size"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"start", "=", "1"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Table", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"mat", "[", 
+            RowBox[{"[", 
+             RowBox[{"v", ",", 
+              RowBox[{"m", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}], "=", 
+           RowBox[{"Max", "[", 
+            RowBox[{
+             RowBox[{"mat", "[", 
+              RowBox[{"[", 
+               RowBox[{"v", ",", 
+                RowBox[{"m", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}], ",", 
+             RowBox[{"mat", "[", 
+              RowBox[{"[", 
+               RowBox[{"v", ",", 
+                RowBox[{"m", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}]}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"mat", "[", 
+            RowBox[{"[", 
+             RowBox[{
+              RowBox[{"m", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], ",", "v"}], "]"}], "]"}], "=", 
+           RowBox[{"mat", "[", 
+            RowBox[{"[", 
+             RowBox[{"v", ",", 
+              RowBox[{"m", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"mat", "[", 
+            RowBox[{"[", 
+             RowBox[{
+              RowBox[{"m", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], ",", "v"}], "]"}], "]"}], "=", 
+           RowBox[{"mat", "[", 
+            RowBox[{"[", 
+             RowBox[{
+              RowBox[{"m", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], ",", "v"}], "]"}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"mat", "[", 
+            RowBox[{"[", 
+             RowBox[{"v", ",", 
+              RowBox[{"m", "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}], "=", 
+           RowBox[{"mat", "[", 
+            RowBox[{"[", 
+             RowBox[{
+              RowBox[{"m", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], ",", "v"}], "]"}], "]"}]}], 
+          ";"}], "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"v", ",", "size"}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+       "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"m", ",", "merges"}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"Column", "[", "\[IndentingNewLine]", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"Graph", "[", 
+          RowBox[{"g", ",", 
+           RowBox[{"ImageSize", "\[Rule]", "500"}], ",", 
+           RowBox[{"VertexStyle", "\[Rule]", "colors"}]}], "]"}], 
+         "\[IndentingNewLine]", ","}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"MatrixPlot", "[", 
+        RowBox[{"mat", ",", 
+         RowBox[{"Mesh", "\[Rule]", "All"}], ",", " ", 
+         RowBox[{"ImageSize", "\[Rule]", "500"}], ",", 
+         RowBox[{"FrameTicks", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"labels", ",", "labels", ",", "labels", ",", "labels"}], 
+           "}"}]}]}], "]"}], "\[IndentingNewLine]", "}"}], 
+      "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.7651113618616095`*^9, 3.7651114711955976`*^9}, {
+  3.765111570997759*^9, 3.7651117309552093`*^9}, {3.76511176192904*^9, 
+  3.765111763500097*^9}, {3.7651124614827127`*^9, 3.765112461959708*^9}, {
+  3.76511250844344*^9, 3.765112533632552*^9}, {3.765112632477891*^9, 
+  3.76511265800989*^9}},
+ CellLabel->
+  "In[549]:=",ExpressionUUID->"c68c65e2-3895-4b66-803e-2e644da24970"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DrawSolutionMatrix", "[", 
+  RowBox[{"plantri8", ",", 
+   RowBox[{"{", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{3.765111491290883*^9},
+ CellLabel->
+  "In[545]:=",ExpressionUUID->"20fb5b1a-49ca-48d5-a243-756f20baf711"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     GraphicsBox[{RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGAQhGIQu+8lp7dNwhv7OJfbhqXTn9q3Bgc2yQues8clzgAG
+HyimaW3+QLmHXHMeVomsc394C8qHAdr5a6Did6DcQ4gmNvwH2p20cs9Axxel
+4T9Q4vSOb1rRtCp/SKWHS3om1V+DJfxpTQ/W/IUe/qS6h1rqBzod0ooeqPQ/
+WNMbrfxFrnpK0z+13D9Y0yet/UXv8B+o8KF2uFHL/YMl/VPL/KFGExv+1Eon
+tDaHWuEy2PpftKYHW7tooMofeoc7se6klTkDXd7Sqvwf6u2coVL/Drb0Rqq9
+Iy390zqc6RVu1DJnpIT/YCtXcakHAK8Jibc=
+        "], {{0, 0}, {17, 17}}, {0, 1}], {
+        {GrayLevel[
+          NCache[-1 + GoldenRatio, 0.6180339887498949]], 
+         StyleBox[
+          LineBox[{{{0, 17}, {17, 17}}, {{0, 16}, {17, 16}}, {{0, 15}, {17, 
+           15}}, {{0, 14}, {17, 14}}, {{0, 13}, {17, 13}}, {{0, 12}, {17, 
+           12}}, {{0, 11}, {17, 11}}, {{0, 10}, {17, 10}}, {{0, 9}, {17, 
+           9}}, {{0, 8}, {17, 8}}, {{0, 7}, {17, 7}}, {{0, 6}, {17, 6}}, {{0, 
+           5}, {17, 5}}, {{0, 4}, {17, 4}}, {{0, 3}, {17, 3}}, {{0, 2}, {17, 
+           2}}, {{0, 1}, {17, 1}}, {{0, 0}, {17, 0}}}],
+          Antialiasing->False]}, 
+        {GrayLevel[
+          NCache[-1 + GoldenRatio, 0.6180339887498949]], 
+         StyleBox[
+          LineBox[{{{0, 0}, {0, 17}}, {{1, 0}, {1, 17}}, {{2, 0}, {2, 17}}, {{
+           3, 0}, {3, 17}}, {{4, 0}, {4, 17}}, {{5, 0}, {5, 17}}, {{6, 0}, {6,
+            17}}, {{7, 0}, {7, 17}}, {{8, 0}, {8, 17}}, {{9, 0}, {9, 17}}, {{
+           10, 0}, {10, 17}}, {{11, 0}, {11, 17}}, {{12, 0}, {12, 17}}, {{13, 
+           0}, {13, 17}}, {{14, 0}, {14, 17}}, {{15, 0}, {15, 17}}, {{16, 
+           0}, {16, 17}}, {{17, 0}, {17, 17}}}],
+          Antialiasing->False]}}},
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{{{16.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          0.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}, {{16.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          0.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}}, {{{0.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          16.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}, {{0.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          16.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], TraditionalForm]}}}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->500,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultGraphicsInteraction" -> {
+         "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+          "Effects" -> {
+           "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+            "Droplines" -> {
+             "freeformCursorMode" -> True, 
+              "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Output",
+ CellChangeTimes->{3.7651114921359177`*^9, 3.7651124655159197`*^9},
+ CellLabel->
+  "Out[545]=",ExpressionUUID->"19af1ea0-dc28-4129-8439-d98e37148c5b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DrawSolutionMatrix", "[", 
+  RowBox[{"plantri8", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"2", ",", "4"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "5"}], "}"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7651112270640793`*^9, 3.7651112342541285`*^9}, {
+  3.7651114765336676`*^9, 3.7651114827028217`*^9}, {3.765111769774466*^9, 
+  3.7651117719055867`*^9}},
+ CellLabel->
+  "In[550]:=",ExpressionUUID->"fa1731ec-791a-45a8-8e5a-e28872908236"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     GraphicsBox[{RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGAQhGIQu+8lp7dNwhv7OJfbhqXTn9q3Bgc2yQues8clzgAG
+HzBoWqunNU0t95BrzsMqkXXuD29B+TBAvPnUEqd1eA6Ue2gd/vRyJ63cM9Dx
+NVjS/2BNn7SmiQ1/WtPUqkcGW/wSMn+whD+t6cGav9DDf6DaP8O13TVQ6X+w
+pjda+Ytc9ZSmf2q5f6Da4QPVjhqo8Kd1eFIrfOhVTg6W9E+r+BvsNLHhT+v0
+MNjqU3rll8HS/hxs7XN6lef0bn9Sy5zB2o6lVfgPVPhQix6s/evR/DKaX0Zi
+fqFWeA62cKNWeFI7nIk1BwBbj0Jk
+        "], {{0, 0}, {17, 17}}, {0, 1}], {
+        {GrayLevel[
+          NCache[-1 + GoldenRatio, 0.6180339887498949]], 
+         StyleBox[
+          LineBox[{{{0, 17}, {17, 17}}, {{0, 16}, {17, 16}}, {{0, 15}, {17, 
+           15}}, {{0, 14}, {17, 14}}, {{0, 13}, {17, 13}}, {{0, 12}, {17, 
+           12}}, {{0, 11}, {17, 11}}, {{0, 10}, {17, 10}}, {{0, 9}, {17, 
+           9}}, {{0, 8}, {17, 8}}, {{0, 7}, {17, 7}}, {{0, 6}, {17, 6}}, {{0, 
+           5}, {17, 5}}, {{0, 4}, {17, 4}}, {{0, 3}, {17, 3}}, {{0, 2}, {17, 
+           2}}, {{0, 1}, {17, 1}}, {{0, 0}, {17, 0}}}],
+          Antialiasing->False]}, 
+        {GrayLevel[
+          NCache[-1 + GoldenRatio, 0.6180339887498949]], 
+         StyleBox[
+          LineBox[{{{0, 0}, {0, 17}}, {{1, 0}, {1, 17}}, {{2, 0}, {2, 17}}, {{
+           3, 0}, {3, 17}}, {{4, 0}, {4, 17}}, {{5, 0}, {5, 17}}, {{6, 0}, {6,
+            17}}, {{7, 0}, {7, 17}}, {{8, 0}, {8, 17}}, {{9, 0}, {9, 17}}, {{
+           10, 0}, {10, 17}}, {{11, 0}, {11, 17}}, {{12, 0}, {12, 17}}, {{13, 
+           0}, {13, 17}}, {{14, 0}, {14, 17}}, {{15, 0}, {15, 17}}, {{16, 
+           0}, {16, 17}}, {{17, 0}, {17, 17}}}],
+          Antialiasing->False]}}},
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{{{16.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          0.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}, {{16.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          0.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}}, {{{0.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          16.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}, {{0.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          16.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], TraditionalForm]}}}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->500,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultGraphicsInteraction" -> {
+         "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+          "Effects" -> {
+           "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+            "Droplines" -> {
+             "freeformCursorMode" -> True, 
+              "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Output",
+ CellChangeTimes->{
+  3.765110989806673*^9, {3.765111041156003*^9, 3.7651110653221016`*^9}, 
+   3.7651111433556514`*^9, {3.765111222469083*^9, 3.7651112726504035`*^9}, 
+   3.7651114836768293`*^9, 3.7651116031086216`*^9, {3.765111650472404*^9, 
+   3.7651116693674946`*^9}, 3.7651117364625297`*^9, {3.765111766925296*^9, 
+   3.765111772818645*^9}, 3.7651124692881327`*^9, 3.7651125393167734`*^9, 
+   3.7651126623640604`*^9},
+ CellLabel->
+  "Out[550]=",ExpressionUUID->"7e956da5-6bca-4ffd-805b-8afcce7bb908"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DrawSolutionMatrix", "[", 
+  RowBox[{"plantri8", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "4"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "5"}], "}"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{3.765112722705453*^9},
+ CellLabel->
+  "In[551]:=",ExpressionUUID->"6b1f9ae9-e453-414e-8127-68bd1bfa273a"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     GraphicsBox[{RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGAQhGIQu+8lp7dNwhv7OJfbhqXTn9q3Bgc2yQues8clzgAG
+HzBoWqunNU0t95BrzsMqkXXuD29B+bjjhVR7qRW/1AqHgXIPqeFPqr+oFT6D
+zRx6xRel4T9Q4uT6d7DRxIY/remBKvcGqjwcbOFPa3qw5i9a1b+0DofBls7J
+DR9apf/BFg609he56ilN/9Ry/0D1IwaqHTVQ4U/r8Bls5dhgC//BFr8DTRMb
+/gNVb5JqDrXCZaDSP7XcP1D+pbW91C5P6N3+pJY5A52PKC03qBX+gzV8KHUP
+vfrXo/llYMfbaVX/DvV2Dr3SyWg5Rlv3kCoOAFtFT/o=
+        "], {{0, 0}, {17, 17}}, {0, 1}], {
+        {GrayLevel[
+          NCache[-1 + GoldenRatio, 0.6180339887498949]], 
+         StyleBox[
+          LineBox[{{{0, 17}, {17, 17}}, {{0, 16}, {17, 16}}, {{0, 15}, {17, 
+           15}}, {{0, 14}, {17, 14}}, {{0, 13}, {17, 13}}, {{0, 12}, {17, 
+           12}}, {{0, 11}, {17, 11}}, {{0, 10}, {17, 10}}, {{0, 9}, {17, 
+           9}}, {{0, 8}, {17, 8}}, {{0, 7}, {17, 7}}, {{0, 6}, {17, 6}}, {{0, 
+           5}, {17, 5}}, {{0, 4}, {17, 4}}, {{0, 3}, {17, 3}}, {{0, 2}, {17, 
+           2}}, {{0, 1}, {17, 1}}, {{0, 0}, {17, 0}}}],
+          Antialiasing->False]}, 
+        {GrayLevel[
+          NCache[-1 + GoldenRatio, 0.6180339887498949]], 
+         StyleBox[
+          LineBox[{{{0, 0}, {0, 17}}, {{1, 0}, {1, 17}}, {{2, 0}, {2, 17}}, {{
+           3, 0}, {3, 17}}, {{4, 0}, {4, 17}}, {{5, 0}, {5, 17}}, {{6, 0}, {6,
+            17}}, {{7, 0}, {7, 17}}, {{8, 0}, {8, 17}}, {{9, 0}, {9, 17}}, {{
+           10, 0}, {10, 17}}, {{11, 0}, {11, 17}}, {{12, 0}, {12, 17}}, {{13, 
+           0}, {13, 17}}, {{14, 0}, {14, 17}}, {{15, 0}, {15, 17}}, {{16, 
+           0}, {16, 17}}, {{17, 0}, {17, 17}}}],
+          Antialiasing->False]}}},
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{{{16.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          0.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}, {{16.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          0.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}}, {{{0.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          16.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}, {{0.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          16.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], TraditionalForm]}}}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->500,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultGraphicsInteraction" -> {
+         "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+          "Effects" -> {
+           "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+            "Droplines" -> {
+             "freeformCursorMode" -> True, 
+              "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Output",
+ CellChangeTimes->{3.765112723227437*^9},
+ CellLabel->
+  "Out[551]=",ExpressionUUID->"deb011cc-9356-4320-a1f9-e3ddd1db2d0e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DrawSolutionMatrix", "[", 
+  RowBox[{"plantri8", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "4"}], "}"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7651127714943514`*^9, 3.765112776356512*^9}},
+ CellLabel->
+  "In[552]:=",ExpressionUUID->"3691bd21-12c8-49e2-8a2d-80af3c9e878a"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     GraphicsBox[{RasterBox[CompressedData["
+1:eJxTTMoPSmVmYGAQhGIQu+8lp7dNwhv7OJfbhqXTn9q3Bgc2yQues8clzgAG
+HzBoUs0h1Xxa09RyD7nmPKwSWef+8BaUP3DxQuvwHKzpAT38SfUXrcON1u4Z
+6PiiNPwHSpxa8T7QNLHhT2t6uKRnUv01WMKf1vRgzV/E1r+k+muwhcNAhfNA
+pf/Bmt5o5S9y1VOa/qnl/oFqhw9UvTNQ4U/r8KRW+NArPQyW9E8t84caTWn/
+d6Dq38FWTlJr/IFa7qe1f2ltL67woXX9S+9wJ9adlJpDr/44qfE13MbfqBW/
+9ConB0v/a6DCf6iVb6P5hbruH61fqGMOtcQBP7EMDA==
+        "], {{0, 0}, {17, 17}}, {0, 1}], {
+        {GrayLevel[
+          NCache[-1 + GoldenRatio, 0.6180339887498949]], 
+         StyleBox[
+          LineBox[{{{0, 17}, {17, 17}}, {{0, 16}, {17, 16}}, {{0, 15}, {17, 
+           15}}, {{0, 14}, {17, 14}}, {{0, 13}, {17, 13}}, {{0, 12}, {17, 
+           12}}, {{0, 11}, {17, 11}}, {{0, 10}, {17, 10}}, {{0, 9}, {17, 
+           9}}, {{0, 8}, {17, 8}}, {{0, 7}, {17, 7}}, {{0, 6}, {17, 6}}, {{0, 
+           5}, {17, 5}}, {{0, 4}, {17, 4}}, {{0, 3}, {17, 3}}, {{0, 2}, {17, 
+           2}}, {{0, 1}, {17, 1}}, {{0, 0}, {17, 0}}}],
+          Antialiasing->False]}, 
+        {GrayLevel[
+          NCache[-1 + GoldenRatio, 0.6180339887498949]], 
+         StyleBox[
+          LineBox[{{{0, 0}, {0, 17}}, {{1, 0}, {1, 17}}, {{2, 0}, {2, 17}}, {{
+           3, 0}, {3, 17}}, {{4, 0}, {4, 17}}, {{5, 0}, {5, 17}}, {{6, 0}, {6,
+            17}}, {{7, 0}, {7, 17}}, {{8, 0}, {8, 17}}, {{9, 0}, {9, 17}}, {{
+           10, 0}, {10, 17}}, {{11, 0}, {11, 17}}, {{12, 0}, {12, 17}}, {{13, 
+           0}, {13, 17}}, {{14, 0}, {14, 17}}, {{15, 0}, {15, 17}}, {{16, 
+           0}, {16, 17}}, {{17, 0}, {17, 17}}}],
+          Antialiasing->False]}}},
+      Frame->True,
+      FrameLabel->{None, None},
+      FrameTicks->{{{{16.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          0.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}, {{16.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          0.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}}, {{{0.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          16.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], 
+            TraditionalForm]}}, {{0.5, 
+           FormBox[
+            StyleBox["1", Bold, StripOnInput -> False], TraditionalForm]}, {
+          1.5, 
+           FormBox[
+            StyleBox["2", Bold, StripOnInput -> False], TraditionalForm]}, {
+          2.5, 
+           FormBox[
+            StyleBox["3", Bold, StripOnInput -> False], TraditionalForm]}, {
+          3.5, 
+           FormBox[
+            StyleBox["4", Bold, StripOnInput -> False], TraditionalForm]}, {
+          4.5, 
+           FormBox[
+            StyleBox["5", Bold, StripOnInput -> False], TraditionalForm]}, {
+          5.5, 
+           FormBox[
+            StyleBox["6", Bold, StripOnInput -> False], TraditionalForm]}, {
+          6.5, 
+           FormBox[
+            StyleBox["7", Bold, StripOnInput -> False], TraditionalForm]}, {
+          7.5, 
+           FormBox[
+            StyleBox["8", Bold, StripOnInput -> False], TraditionalForm]}, {
+          8.5, 
+           FormBox[
+            StyleBox["9", Bold, StripOnInput -> False], TraditionalForm]}, {
+          9.5, 
+           FormBox[
+            StyleBox["10", Bold, StripOnInput -> False], TraditionalForm]}, {
+          10.5, 
+           FormBox[
+            StyleBox["11", Bold, StripOnInput -> False], TraditionalForm]}, {
+          11.5, 
+           FormBox[
+            StyleBox["12", Bold, StripOnInput -> False], TraditionalForm]}, {
+          12.5, 
+           FormBox[
+            StyleBox["13", Bold, StripOnInput -> False], TraditionalForm]}, {
+          13.5, 
+           FormBox[
+            StyleBox["14", Bold, StripOnInput -> False], TraditionalForm]}, {
+          14.5, 
+           FormBox[
+            StyleBox["15", Bold, StripOnInput -> False], TraditionalForm]}, {
+          15.5, 
+           FormBox[
+            StyleBox["16", Bold, StripOnInput -> False], TraditionalForm]}, {
+          16.5, 
+           FormBox[
+            StyleBox["17", Bold, StripOnInput -> False], TraditionalForm]}}}},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImageSize->500,
+      Method->{
+       "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+        "DefaultGraphicsInteraction" -> {
+         "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+          "Effects" -> {
+           "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+            "Droplines" -> {
+             "freeformCursorMode" -> True, 
+              "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+        "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+        "RangePadding" -> Scaled[0.05]}]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Output",
+ CellChangeTimes->{3.7651127768485255`*^9},
+ CellLabel->
+  "Out[552]=",ExpressionUUID->"70b9c4e6-33d3-4ce1-9ebd-e7d228b45b2b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graph", "[", 
+  RowBox[{
+   RowBox[{"VertexDelete", "[", 
+    RowBox[{"plantri8", ",", "14"}], "]"}], ",", 
+   RowBox[{"VertexLabels", "\[Rule]", "\"\<Name\>\""}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7651121837421513`*^9, 3.765112204672038*^9}},
+ CellLabel->
+  "In[543]:=",ExpressionUUID->"fa4dbf4f-72a4-47bc-9c3c-d43d7d6fd11e"],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{12, 13, 7, 15, 17, 6, 3, 8, 9, 10, 11, 1, 2, 4, 16, 5}, {
+      Null, {{1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {2, 6}, {2, 7}, {2, 8}, {
+       2, 3}, {3, 8}, {3, 9}, {3, 10}, {3, 4}, {4, 10}, {4, 11}, {4, 12}, {4, 
+       5}, {5, 12}, {5, 13}, {5, 6}, {6, 13}, {6, 7}, {7, 13}, {7, 14}, {7, 
+       8}, {8, 14}, {8, 9}, {9, 14}, {9, 15}, {9, 10}, {10, 15}, {10, 11}, {
+       11, 15}, {11, 16}, {11, 12}, {12, 16}, {12, 13}, {14, 16}, {14, 15}, {
+       15, 16}}}, {
+      GraphLayout -> {"Dimension" -> 2, "VertexLayout" -> "TutteEmbedding"}, 
+       VertexLabels -> {"Name"}}]]}, 
+    TagBox[GraphicsGroupBox[{
+       {Hue[0.6, 0.7, 0.5], Opacity[0.7], LineBox[CompressedData["
+1:eJxTTMoPSmVmYGDQAGImKE4Nvm+l9ePI/txpc/70tR6wt7inorjl5rT9oi2a
+TFb1N+3R5S0rysLTfmy11z6yf1u4/T4M+Z+sL/dxrz243zJYuSU7+MR+dHmt
+Domc8sm39z8pC7jdv2IJhnwUB/spB6Er+3t2F32a9PcahnvQ7UeXJ6Sfq2ue
+j2Xlqj0MYPABQ14rZ5XHlDcX7dvS8y+9Xn0Dwz50/6HLE9I/ofX6pIwNN+yb
+tRgXZIjtwpBvClvhO9/gmP2sjOgPYav37ke3Dz380OUJ6a+/7LLU02mHPZ96
+wFpettsY8rFRpSzK5x/tX/ll+uzyxy8x7EMPX3R5QvoZQl2E+fLf7fd+qW/+
+/thljPhCjx90eXT96OrRwx9dnpD+/yFgeftAqDy6eejxhy6Prh9dPXr8oMsT
+0l99q2aCkuAd+wWPvj7b9v04Rnyjxy+6PLp+dPXo8YcuT0h/HES//XKofnTz
+0MMfXR5dP3p4oNuPLo+uH109ujwAy7qJKw==
+         "]]}, 
+       {Hue[0.6, 0.2, 0.8], EdgeForm[{GrayLevel[0], Opacity[
+        0.7]}], {
+         DiskBox[{-0.163823393579743, 0.1290758832412168}, 
+          0.021812234931106983], 
+         InsetBox["12", 
+          Offset[{2, 2}, {-0.142011158648636, 0.15088811817232378}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{-0.02231484844489115, 0.39839029513501717}, 
+          0.021812234931106983], 
+         InsetBox["13", 
+          Offset[{2, 2}, {-0.000502613513784167, 0.4202025300661242}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0.08582152972528058, 0.11815403186462052}, 
+          0.021812234931106983], 
+         InsetBox["7", 
+          Offset[{2, 2}, {0.10763376465638756, 0.1399662667957275}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{-0.13809344121732162, -0.19004577590990282}, 
+          0.021812234931106983], 
+         InsetBox["15", 
+          Offset[{2, 2}, {-0.11628120628621463, -0.16823354097879584}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{-0.43087564045174764, -0.0403485255448979}, 
+          0.021812234931106983], 
+         InsetBox["17", 
+          Offset[{2, 2}, {-0.4090634055206407, -0.018536290613790918}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{-0.3136140797543071, 0.35922692944125667}, 
+          0.021812234931106983], 
+         InsetBox["6", 
+          Offset[{2, 2}, {-0.29180184482320015, 0.3810391643723636}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{-1.8369701987210297*^-16, 1.}, 0.021812234931106983], 
+         InsetBox["3", 
+          Offset[{2, 2}, {0.0218122349311068, 1.021812234931107}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0.2800646504999259, 0.38549323606786634}, 
+          0.021812234931106983], 
+         InsetBox["8", 
+          Offset[{2, 2}, {0.30187688543103286, 0.4073054709989733}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0.38576711978938594, 0.10190442949639515}, 
+          0.021812234931106983], 
+         InsetBox["9", 
+          Offset[{2, 2}, {0.4075793547204929, 0.12371666442750213}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0.1733588341891626, -0.1158956848916283}, 
+          0.021812234931106983], 
+         InsetBox["10", 
+          Offset[{2, 2}, {0.19517106912026957, -0.09408344996052131}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0.09476146969684683, -0.42224447178942703}, 
+          0.021812234931106983], 
+         InsetBox["11", 
+          Offset[{2, 2}, {0.11657370462795381, -0.4004322368583201}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{-0.587785252292473, -0.8090169943749476}, 
+          0.021812234931106983], 
+         InsetBox["1", 
+          Offset[{2, 2}, {-0.5659730173613661, -0.7872047594438406}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{-0.9510565162951536, 0.3090169943749472}, 
+          0.021812234931106983], 
+         InsetBox["2", 
+          Offset[{2, 2}, {-0.9292442813640467, 0.3308292293060542}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0.9510565162951535, 0.3090169943749475}, 
+          0.021812234931106983], 
+         InsetBox["4", 
+          Offset[{2, 2}, {0.9728687512262605, 0.3308292293060545}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0.43854583845260436, -0.187247145436932}, 
+          0.021812234931106983], 
+         InsetBox["16", 
+          Offset[{2, 2}, {0.4603580733837114, -0.165434910505825}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0.5877852522924731, -0.8090169943749473}, 
+          0.021812234931106983], 
+         InsetBox["5", 
+          Offset[{2, 2}, {0.6095974872235801, -0.7872047594438404}], 
+          ImageScaled[{0, 0}],
+          BaseStyle->"Graphics"]}}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False]],
+  DefaultBaseStyle->{
+   "NetworkGraphics", FrontEnd`GraphicsHighlightColor -> Hue[0.8, 1., 0.6]},
+  FormatType->TraditionalForm,
+  FrameTicks->None]], "Output",
+ CellChangeTimes->{{3.765112194605814*^9, 3.765112205329076*^9}},
+ CellLabel->
+  "Out[543]=",ExpressionUUID->"a5613ab0-a12e-4502-9584-eb371a08c55a"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1104, 741},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 166, 3, 67, "Section",ExpressionUUID->"ccd0f928-2abf-41bc-be2e-2b0a85e332c1"],
+Cell[749, 27, 1747, 42, 314, "Input",ExpressionUUID->"049c8c79-9236-4c05-99bd-227df90bbb69"],
+Cell[2499, 71, 2476, 60, 257, "Input",ExpressionUUID->"9e9e8d2a-c606-4c22-846f-784bd7ca2687"],
+Cell[4978, 133, 4796, 122, 480, "Input",ExpressionUUID->"c68c65e2-3895-4b66-803e-2e644da24970"],
+Cell[CellGroupData[{
+Cell[9799, 259, 245, 6, 28, "Input",ExpressionUUID->"20fb5b1a-49ca-48d5-a243-756f20baf711"],
+Cell[10047, 267, 10410, 258, 518, "Output",ExpressionUUID->"19af1ea0-dc28-4129-8439-d98e37148c5b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20494, 530, 513, 13, 28, "Input",ExpressionUUID->"fa1731ec-791a-45a8-8e5a-e28872908236"],
+Cell[21010, 545, 10757, 264, 518, "Output",ExpressionUUID->"7e956da5-6bca-4ffd-805b-8afcce7bb908"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31804, 814, 381, 11, 28, "Input",ExpressionUUID->"6b1f9ae9-e453-414e-8127-68bd1bfa273a"],
+Cell[32188, 827, 10392, 258, 518, "Output",ExpressionUUID->"deb011cc-9356-4320-a1f9-e3ddd1db2d0e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42617, 1090, 407, 11, 28, "Input",ExpressionUUID->"3691bd21-12c8-49e2-8a2d-80af3c9e878a"],
+Cell[43027, 1103, 10394, 258, 551, "Output",ExpressionUUID->"70b9c4e6-33d3-4ce1-9ebd-e7d228b45b2b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53458, 1366, 357, 8, 28, "Input",ExpressionUUID->"fa4dbf4f-72a4-47bc-9c3c-d43d7d6fd11e"],
+Cell[53818, 1376, 5940, 130, 367, "Output",ExpressionUUID->"a5613ab0-a12e-4502-9584-eb371a08c55a"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

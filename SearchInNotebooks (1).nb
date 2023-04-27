@@ -1,0 +1,605 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     22798,        597]
+NotebookOptionsPosition[     19211,        515]
+NotebookOutlinePosition[     19554,        530]
+CellTagsIndexPosition[     19511,        527]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"findInNBFile", "::", "cntconv"}], "=", 
+   "\"\<Failed to extract plain text from `1`\>\""}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"findInNBFile", "[", 
+   RowBox[{"NBFilePath_String", ",", "stringPattern_", ",", 
+    RowBox[{"resPerFile_Integer:", " ", "5"}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"NB", ",", "NBText", ",", "NBlines", ",", "matches"}], "}"}], 
+    ",", 
+    RowBox[{
+     RowBox[{"NB", "=", 
+      RowBox[{"Get", "[", "NBFilePath", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"NB", "=", 
+      RowBox[{"Notebook", "[", 
+       RowBox[{
+        RowBox[{"First", "@", "NB"}], ",", 
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"FilterRules", "[", 
+           RowBox[{
+            RowBox[{"List", "@@", 
+             RowBox[{"Rest", "[", "NB", "]"}]}], ",", 
+            RowBox[{"Except", "[", 
+             RowBox[{"DynamicUpdating", "|", "NotebookDynamicExpression"}], 
+             "]"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"DynamicUpdating", "\[Rule]", "False"}], ",", 
+            RowBox[{"NotebookDynamicExpression", "\[Rule]", "Null"}]}], 
+           "}"}]}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"NBText", "=", 
+      RowBox[{"FrontEndExecute", "[", 
+       RowBox[{"FrontEnd`ExportPacket", "[", 
+        RowBox[{"NB", ",", "\"\<PlainText\>\""}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"TrueQ", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Head", "[", "NBText", "]"}], "===", "List"}], "&&", 
+         RowBox[{
+          RowBox[{"Head", "[", 
+           RowBox[{"First", "@", "NBText"}], "]"}], "===", "String"}]}], 
+        "]"}], ",", 
+       RowBox[{
+        RowBox[{"NBlines", "=", 
+         RowBox[{"StringSplit", "[", 
+          RowBox[{
+           RowBox[{"First", "@", "NBText"}], ",", "\"\<\\n\>\""}], "]"}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"matches", "=", 
+         RowBox[{"Flatten", "@", 
+          RowBox[{"Position", "[", 
+           RowBox[{
+            RowBox[{"StringMatchQ", "[", 
+             RowBox[{"NBlines", ",", "stringPattern"}], "]"}], ",", "True"}], 
+           "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"matches", "=!=", 
+           RowBox[{"{", "}"}]}], ",", 
+          RowBox[{"Print", "[", 
+           RowBox[{
+            RowBox[{"Length", "[", "matches", "]"}], ",", 
+            "\"\< matches on: \>\"", ",", "NBFilePath"}], "]"}]}], "]"}], ";",
+         "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"NBFilePath", ",", 
+          RowBox[{"Length", "[", "matches", "]"}], ",", 
+          RowBox[{"StringJoin", "@", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Length", "[", "matches", "]"}], ">", "resPerFile"}], 
+             ",", 
+             RowBox[{"NBlines", "[", 
+              RowBox[{"[", 
+               RowBox[{"Take", "[", 
+                RowBox[{"matches", ",", "resPerFile"}], "]"}], "]"}], "]"}], 
+             ",", 
+             RowBox[{"NBlines", "[", 
+              RowBox[{"[", "matches", "]"}], "]"}]}], "]"}]}]}], "}"}]}], ",", 
+       RowBox[{
+        RowBox[{"Message", "[", 
+         RowBox[{
+          RowBox[{"findInNBFile", "::", "cntconv"}], ",", "NBFilePath"}], 
+         "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"NBFilePath", ",", "$Failed", ","}], "}"}]}]}], "]"}]}]}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{{3.681137586425269*^9, 
+  3.68113758643233*^9}},ExpressionUUID->"35a8b516-9b50-4248-8d64-\
+a2c9c2b99978"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"notebooks", "=", 
+   RowBox[{"FileNames", "[", 
+    RowBox[{
+    "\"\<*.nb\>\"", ",", "\"\<D:\\\\Users\\\\alfredo\\\\Google\\\\Math\>\""}],
+     "]"}]}], ";"}], "\n", 
+ RowBox[{"Length", "[", "notebooks", "]"}], "\n", 
+ RowBox[{
+  RowBox[{"Total", "[", 
+   RowBox[{"FileByteCount", "/@", "notebooks"}], "]"}], "/", 
+  RowBox[{"1024.", "^", "2"}]}]}], "Input",
+ CellChangeTimes->{{3.681137606840152*^9, 3.6811376068492002`*^9}, {
+  3.6811376476285887`*^9, 
+  3.6811376527077394`*^9}},ExpressionUUID->"0275dddf-0ffd-43b4-9c35-\
+ca1c8e28cf0a"],
+
+Cell[BoxData["1152"], "Output",
+ CellChangeTimes->{3.681137654982827*^9, 3.681364769659379*^9, 
+  3.6819282339476156`*^9, 3.725736501827711*^9, 
+  3.7419738912985196`*^9},ExpressionUUID->"c2515b22-2eae-477b-bcc8-\
+72b47c15e43c"],
+
+Cell[BoxData["4791.028861999512`"], "Output",
+ CellChangeTimes->{3.681137654982827*^9, 3.681364769659379*^9, 
+  3.6819282339476156`*^9, 3.725736501827711*^9, 
+  3.7419738950840225`*^9},ExpressionUUID->"b80cef42-0d6f-4e38-b46a-\
+01c98be33f2d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"startTime", "=", 
+    RowBox[{"AbsoluteTime", "[", "]"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Monitor", "[", 
+    RowBox[{
+     RowBox[{"Select", "[", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"findInNBFile", "[", 
+          RowBox[{"nb", ",", "\"\<*FromPointer*\>\""}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"nb", ",", "notebooks"}], "}"}]}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"TrueQ", "[", 
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], ">", "0"}], "]"}], "&"}]}], "]"}], 
+     ",", 
+     RowBox[{"{", "nb", "}"}]}], "]"}], "//", 
+   RowBox[{
+    RowBox[{"Grid", "[", 
+     RowBox[{"#", ",", 
+      RowBox[{"Alignment", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"Left", ",", "Top"}], "}"}]}], ",", 
+      RowBox[{"Dividers", "\[Rule]", "All"}]}], "]"}], "&"}]}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{"DateString", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"AbsoluteTime", "[", "]"}], "-", "startTime"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Hour\>\"", ",", "\"\<:\>\"", ",", "\"\<Minute\>\"", ",", "\"\<:\>\"",
+      ",", "\"\<Second\>\""}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6811376748639946`*^9, 3.6811376748670025`*^9}, 
+   3.681137716784381*^9, 3.681139944978591*^9, {3.6813647634720755`*^9, 
+   3.6813647640684333`*^9}, 3.6819282298076067`*^9, {3.725736496884108*^9, 
+   3.725736497469431*^9}, 
+   3.7419738878417845`*^9},ExpressionUUID->"29ab8857-0921-4b82-97a0-\
+52cc0146d8bb"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "4", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\20180727 Meet of \
+partitions.nb\"\>"}],
+  SequenceForm[
+  4, " matches on: ", 
+   "D:\\Users\\alfredo\\Google\\Math\\20180727 Meet of partitions.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.725736523567148*^9, 
+  3.741976944467434*^9},ExpressionUUID->"81fc117d-85a5-4dae-854b-\
+8892402fa11e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "1", "\[InvisibleSpace]", "\<\" matches on: \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs43.nb\"\>"}],
+  SequenceForm[
+  1, " matches on: ", "D:\\Users\\alfredo\\Google\\Math\\AllDefs43.nb"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.725736523567148*^9, 
+  3.7419769894784307`*^9},ExpressionUUID->"84e3775a-2eff-4604-acc7-\
+d530c7c25fd0"]
+}, Open  ]],
+
+Cell["\<\
+Syntax::sntx: Invalid syntax in or before \"\"}\"}]], \"Output\",\" (line 80 \
+of \"D:\\Users\\alfredo\\Google\\Math\\DoublePentagon-copy.nb\").
+                                               ^\
+\>", "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741977143121808*^9},ExpressionUUID->"c7a963ab-63bb-4ac0-9487-\
+932fc5c5821f"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "First","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"First\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,466,20,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741977143141862*^9},ExpressionUUID->"7acf132e-5734-4c4d-bb17-\
+4cc145b27f37"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Rest","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Rest\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,466,21,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741977143182995*^9},ExpressionUUID->"714e23e7-885f-45af-b03f-\
+8eb51c829182"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FilterRules","rep",
+   "\"\\!\\(\\*RowBox[{\\\"Null\\\"}]\\) is not a valid replacement rule.\"",
+   2,466,22,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741977143215045*^9},ExpressionUUID->"ccedf397-9016-473e-adc9-\
+7b1ac3201efa"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Join","heads",
+   "\"Heads \\!\\(\\*RowBox[{\\\"FilterRules\\\"}]\\) and \\!\\(\\*RowBox[{\\\
+\"List\\\"}]\\) at positions \\!\\(\\*RowBox[{\\\"1\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"2\\\"}]\\) are expected to be the same.\"",2,466,23,
+   27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741977143255123*^9},ExpressionUUID->"56665d6d-dd77-4dde-ac83-\
+fd6f551d364f"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "findInNBFile","cntconv",
+   "\"Failed to extract plain text from \\!\\(\\*RowBox[{\\\"\\\\\\\"D:\\\\\\\
+\\\\\\\\\\Users\\\\\\\\\\\\\\\\alfredo\\\\\\\\\\\\\\\\Google\\\\\\\\\\\\\\\\\
+Math\\\\\\\\\\\\\\\\DoublePentagon-copy.nb\\\\\\\"\\\"}]\\)\"",2,466,24,
+   27686303129800298242,"Local","Global`findInNBFile"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741977143312276*^9},ExpressionUUID->"92a91e50-6e5f-41fc-8e48-\
+f8e27f82e760"],
+
+Cell["\<\
+Syntax::sntx: Invalid syntax in or before \"}]}], \"\[IndentingNewLine]\", \
+\"]\"}]}]], \"Input\",\" (line 5353 of \
+\"D:\\Users\\alfredo\\Google\\Math\\GenerateAllGraphs012.nb\").
+                                              ^\
+\>", "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.7419774268299885`*^9},ExpressionUUID->"1a6afab6-b77a-43a6-818e-\
+3aac7c812f57"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "First","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"First\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,466,25,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741977426846051*^9},ExpressionUUID->"56040cc2-a450-44c5-bacc-\
+6232ee18a46f"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Rest","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Rest\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,466,26,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.7419774268931575`*^9},ExpressionUUID->"e5a65442-64e3-4250-b988-\
+0a8a13739446"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FilterRules","rep",
+   "\"\\!\\(\\*RowBox[{\\\"Null\\\"}]\\) is not a valid replacement rule.\"",
+   2,466,27,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.7419774269313526`*^9},ExpressionUUID->"36f46acc-60d5-4f86-8801-\
+fe8f07419ef9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Join","heads",
+   "\"Heads \\!\\(\\*RowBox[{\\\"FilterRules\\\"}]\\) and \\!\\(\\*RowBox[{\\\
+\"List\\\"}]\\) at positions \\!\\(\\*RowBox[{\\\"1\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"2\\\"}]\\) are expected to be the same.\"",2,466,28,
+   27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.7419774269725256`*^9},ExpressionUUID->"34ad1d62-c358-48fa-99c0-\
+abcc74951edc"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "findInNBFile","cntconv",
+   "\"Failed to extract plain text from \\!\\(\\*RowBox[{\\\"\\\\\\\"D:\\\\\\\
+\\\\\\\\\\Users\\\\\\\\\\\\\\\\alfredo\\\\\\\\\\\\\\\\Google\\\\\\\\\\\\\\\\\
+Math\\\\\\\\\\\\\\\\GenerateAllGraphs012.nb\\\\\\\"\\\"}]\\)\"",2,466,29,
+   27686303129800298242,"Local","Global`findInNBFile"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741977427018181*^9},ExpressionUUID->"b0971b0c-7138-4af5-9e72-\
+835b64f3a4e2"],
+
+Cell["\<\
+Syntax::sntx: Invalid syntax in or before \"]]\" (line 211 of \
+\"D:\\Users\\alfredo\\Google\\Math\\sIXNodesCompleteGeneration004.nb\").
+                                            ^\
+\>", "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.7419783231302624`*^9},ExpressionUUID->"42ea66bc-514c-424e-87ee-\
+c4c322648a61"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "First","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"First\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,466,30,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741978323138297*^9},ExpressionUUID->"db91464f-7974-4c58-bfbd-\
+c77c7690c27a"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"First\\\", \\\"::\\\", \
+\\\"normal\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,466,31,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.7419783231769457`*^9},ExpressionUUID->"3d13f536-4bf4-409c-8ba0-\
+cbcb4f040f7b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Rest","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Rest\\\", \\\"[\\\", \
+\\\"Null\\\", \\\"]\\\"}]\\).\"",2,466,32,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.7419783232215853`*^9},ExpressionUUID->"abe8c2d0-db75-4416-812f-\
+4d7f02b9c9d9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Rest\\\", \\\"::\\\", \
+\\\"normal\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,466,33,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741978323261688*^9},ExpressionUUID->"fefe8579-c975-4247-a292-\
+578079e7bb72"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "FilterRules","rep",
+   "\"\\!\\(\\*RowBox[{\\\"Null\\\"}]\\) is not a valid replacement rule.\"",
+   2,466,34,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741978323305485*^9},ExpressionUUID->"a477188f-dbf2-47ad-8907-\
+6afbc78146e3"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"FilterRules\\\", \\\"::\
+\\\", \\\"rep\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,466,35,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.7419783233475904`*^9},ExpressionUUID->"dfed9bff-4dfc-45f1-832e-\
+a0436fafe97d"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Join","heads",
+   "\"Heads \\!\\(\\*RowBox[{\\\"FilterRules\\\"}]\\) and \\!\\(\\*RowBox[{\\\
+\"List\\\"}]\\) at positions \\!\\(\\*RowBox[{\\\"1\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"2\\\"}]\\) are expected to be the same.\"",2,466,36,
+   27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741978323386211*^9},ExpressionUUID->"d2740b58-1f38-4a23-9ddf-\
+7be29ddd5c43"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Join\\\", \\\"::\\\", \
+\\\"heads\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,466,37,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741978323429883*^9},ExpressionUUID->"d0eaac57-f6fc-4435-ac89-\
+d372b7470bb9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "findInNBFile","cntconv",
+   "\"Failed to extract plain text from \\!\\(\\*RowBox[{\\\"\\\\\\\"D:\\\\\\\
+\\\\\\\\\\Users\\\\\\\\\\\\\\\\alfredo\\\\\\\\\\\\\\\\Google\\\\\\\\\\\\\\\\\
+Math\\\\\\\\\\\\\\\\sIXNodesCompleteGeneration004.nb\\\\\\\"\\\"}]\\)\"",2,
+   466,38,27686303129800298242,"Local","Global`findInNBFile"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741978323477518*^9},ExpressionUUID->"14dd7709-f075-48aa-ab9b-\
+e4c897ce9c31"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"findInNBFile\\\", \
+\\\"::\\\", \\\"cntconv\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"",2,466,39,27686303129800298242,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7257378835855446`*^9, 
+  3.741978323534489*^9},ExpressionUUID->"be9e9035-18d0-4bf1-aaa7-\
+8501c7b7ea1d"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\20180727 Meet of \
+partitions.nb\"\>", 
+     "4", "\<\"FromPointer[pointer_]:=Block[{result=Table[{},{i,Length[\
+DeleteDuplicates[pointer]]}],map=Association[],k,c},\\rFromPointer[{1,2,3,1,5,\
+5,2}]\\rFromPointer[MeetL[setp7,PointerNotation[{{1,3},{2,7},{4},{5,6}}],\
+PointerNotation[{{1,4},{2,7},{3},{5,6}}]]]\\rMyDistance[part1_,part2_]:=With[{\
+m=FromPointer[MeetL[setp7,PointerNotation[part1],PointerNotation[part2]]]},\\\
+r\"\>"},
+    {"\<\"D:\\\\Users\\\\alfredo\\\\Google\\\\Math\\\\AllDefs43.nb\"\>", 
+     "1", "\<\"MeetDistance[poset_,part1_,part2_]:=With[{m=FromPointer[\
+MeetForPartitions[poset,part1,part2]]},\\r\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Top}}},
+   GridBoxDividers->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{3.6811441738514547`*^9, 3.681365194342145*^9, 
+  3.681928865588789*^9, 3.7257401181087203`*^9, 
+  3.741978815453599*^9},ExpressionUUID->"122f65cc-e053-4588-808b-\
+f79d8a4184fd"],
+
+Cell[BoxData["\<\"01:22:00\"\>"], "Output",
+ CellChangeTimes->{3.6811441738514547`*^9, 3.681365194342145*^9, 
+  3.681928865588789*^9, 3.7257401181087203`*^9, 
+  3.741978815459693*^9},ExpressionUUID->"7cc8e298-1aa9-4f72-981b-\
+69c3f404402e"]
+}, Open  ]]
+},
+WindowSize->{1536, 781},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (April 18, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3766, 98, 184, "Input", "ExpressionUUID" -> \
+"35a8b516-9b50-4248-8d64-a2c9c2b99978"],
+Cell[CellGroupData[{
+Cell[4349, 122, 576, 15, 69, "Input", "ExpressionUUID" -> \
+"0275dddf-0ffd-43b4-9c35-ca1c8e28cf0a"],
+Cell[4928, 139, 228, 4, 30, "Output", "ExpressionUUID" -> \
+"c2515b22-2eae-477b-bcc8-72b47c15e43c"],
+Cell[5159, 145, 242, 4, 63, "Output", "ExpressionUUID" -> \
+"b80cef42-0d6f-4e38-b46a-01c98be33f2d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5438, 154, 1620, 46, 107, "Input", "ExpressionUUID" -> \
+"29ab8857-0921-4b82-97a0-52cc0146d8bb"],
+Cell[CellGroupData[{
+Cell[7083, 204, 479, 13, 22, "Print", "ExpressionUUID" -> \
+"81fc117d-85a5-4dae-854b-8892402fa11e"],
+Cell[7565, 219, 439, 11, 22, "Print", "ExpressionUUID" -> \
+"84e3775a-2eff-4604-acc7-d530c7c25fd0"]
+}, Open  ]],
+Cell[8019, 233, 353, 7, 35, "Message", "ExpressionUUID" -> \
+"c7a963ab-63bb-4ac0-9487-932fc5c5821f"],
+Cell[8375, 242, 418, 9, 23, "Message", "ExpressionUUID" -> \
+"7acf132e-5734-4c4d-bb17-4cc145b27f37"],
+Cell[8796, 253, 416, 9, 23, "Message", "ExpressionUUID" -> \
+"714e23e7-885f-45af-b03f-8eb51c829182"],
+Cell[9215, 264, 339, 8, 21, "Message", "ExpressionUUID" -> \
+"ccedf397-9016-473e-adc9-7b1ac3201efa"],
+Cell[9557, 274, 467, 10, 21, "Message", "ExpressionUUID" -> \
+"56665d6d-dd77-4dde-ac83-fd6f551d364f"],
+Cell[10027, 286, 510, 10, 21, "Message", "ExpressionUUID" -> \
+"92a91e50-6e5f-41fc-8e48-f8e27f82e760"],
+Cell[10540, 298, 391, 8, 49, "Message", "ExpressionUUID" -> \
+"1a6afab6-b77a-43a6-818e-3aac7c812f57"],
+Cell[10934, 308, 418, 9, 23, "Message", "ExpressionUUID" -> \
+"56040cc2-a450-44c5-bacc-6232ee18a46f"],
+Cell[11355, 319, 418, 9, 23, "Message", "ExpressionUUID" -> \
+"e5a65442-64e3-4250-b988-0a8a13739446"],
+Cell[11776, 330, 341, 8, 21, "Message", "ExpressionUUID" -> \
+"36f46acc-60d5-4f86-8801-fe8f07419ef9"],
+Cell[12120, 340, 469, 10, 21, "Message", "ExpressionUUID" -> \
+"34ad1d62-c358-48fa-99c0-abcc74951edc"],
+Cell[12592, 352, 511, 10, 21, "Message", "ExpressionUUID" -> \
+"b0971b0c-7138-4af5-9e72-835b64f3a4e2"],
+Cell[13106, 364, 344, 7, 35, "Message", "ExpressionUUID" -> \
+"42ea66bc-514c-424e-87ee-c4c322648a61"],
+Cell[13453, 373, 418, 9, 23, "Message", "ExpressionUUID" -> \
+"db91464f-7974-4c58-bfbd-c77c7690c27a"],
+Cell[13874, 384, 427, 9, 21, "Message", "ExpressionUUID" -> \
+"3d13f536-4bf4-409c-8ba0-cbcb4f040f7b"],
+Cell[14304, 395, 418, 9, 23, "Message", "ExpressionUUID" -> \
+"abe8c2d0-db75-4416-812f-4d7f02b9c9d9"],
+Cell[14725, 406, 424, 9, 21, "Message", "ExpressionUUID" -> \
+"fefe8579-c975-4247-a292-578079e7bb72"],
+Cell[15152, 417, 339, 8, 21, "Message", "ExpressionUUID" -> \
+"a477188f-dbf2-47ad-8907-6afbc78146e3"],
+Cell[15494, 427, 430, 9, 21, "Message", "ExpressionUUID" -> \
+"dfed9bff-4dfc-45f1-832e-a0436fafe97d"],
+Cell[15927, 438, 467, 10, 21, "Message", "ExpressionUUID" -> \
+"d2740b58-1f38-4a23-9ddf-7be29ddd5c43"],
+Cell[16397, 450, 423, 9, 21, "Message", "ExpressionUUID" -> \
+"d0eaac57-f6fc-4435-ac89-d372b7470bb9"],
+Cell[16823, 461, 520, 10, 21, "Message", "ExpressionUUID" -> \
+"14dd7709-f075-48aa-ab9b-e4c897ce9c31"],
+Cell[17346, 473, 433, 9, 21, "Message", "ExpressionUUID" -> \
+"be9e9035-18d0-4bf1-aaa7-8501c7b7ea1d"],
+Cell[17782, 484, 1170, 22, 157, "Output", "ExpressionUUID" -> \
+"122f65cc-e053-4588-808b-f79d8a4184fd"],
+Cell[18955, 508, 240, 4, 30, "Output", "ExpressionUUID" -> \
+"7cc8e298-1aa9-4f72-981b-69c3f404402e"]
+}, Open  ]]
+}
+]
+*)
+

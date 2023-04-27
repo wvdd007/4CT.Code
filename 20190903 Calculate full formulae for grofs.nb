@@ -1,0 +1,4572 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    177237,       4564]
+NotebookOptionsPosition[    161859,       4314]
+NotebookOutlinePosition[    162202,       4329]
+CellTagsIndexPosition[    162159,       4326]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["First we start with code", "Section",
+ CellChangeTimes->{{3.776514624966911*^9, 
+  3.7765146317323275`*^9}},ExpressionUUID->"14d4e8bd-8dff-4123-befb-\
+4a1aa2f70974"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DefineOrLoad2", "[", 
+   RowBox[{"symbol_", ",", "op_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"fileName", "=", 
+       RowBox[{
+       "\"\<d:\\\\saved\\\\symbols\\\\\>\"", "<>", " ", "symbol", "<>", 
+        "\"\<.m\>\""}]}], ",", "result"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"FileExistsQ", "[", "fileName", "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"result", "=", 
+        RowBox[{"Get", "[", "fileName", "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"result", "=", 
+         RowBox[{"op", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Put", "[", 
+         RowBox[{"result", ",", "fileName"}], "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", "result"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.7765154800599775`*^9, 3.776515485645072*^9}, {
+   3.776516559060829*^9, 3.776516653348261*^9}, 3.776522143243512*^9, {
+   3.7765226030696163`*^9, 3.77652261779547*^9}},
+ CellLabel->
+  "In[539]:=",ExpressionUUID->"3ba5d56d-caa3-4087-a0ca-da7e7bec3094"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SaveSymbol", "[", 
+   RowBox[{"name_", ",", "value_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"fileName", "=", 
+       RowBox[{
+       "\"\<d:\\\\saved\\\\symbols\\\\\>\"", "<>", " ", "name", "<>", 
+        "\"\<.m\>\""}]}], ",", "result"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"PrintTemporary", "[", 
+      RowBox[{"\"\<Saving \>\"", "<>", " ", "fileName"}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Put", "[", 
+      RowBox[{"value", ",", "fileName"}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.7766893128657737`*^9, 3.7766893614915733`*^9}, {
+  3.7766895722056756`*^9, 3.776689599676302*^9}},
+ CellLabel->
+  "In[590]:=",ExpressionUUID->"debf9506-7661-4c38-9feb-26c2af9afcbf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ByCount", "=", 
+   RowBox[{"DefineOrLoad2", "[", 
+    RowBox[{"\"\<ByCount\>\"", ",", 
+     RowBox[{
+      RowBox[{"Block", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"result", "=", 
+           RowBox[{"Association", "[", "]"}]}], ",", 
+          RowBox[{"max", "=", "398438"}], ",", "n"}], "}"}], ",", 
+        RowBox[{
+         RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"For", "[", 
+            RowBox[{
+             RowBox[{"n", "=", "1"}], ",", 
+             RowBox[{"n", "<=", "max"}], ",", 
+             RowBox[{"n", "++"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"g", "=", 
+                 RowBox[{"ReadGrof", "[", "n", "]"}]}], "}"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"With", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"count", "=", 
+                   RowBox[{"VertexCount", "[", "g", "]"}]}], "}"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{"KeyExistsQ", "[", 
+                    RowBox[{"result", ",", "count"}], "]"}], ",", 
+                   RowBox[{
+                    RowBox[{"result", "[", "count", "]"}], "=", 
+                    RowBox[{"Append", "[", 
+                    RowBox[{
+                    RowBox[{"result", "[", "count", "]"}], ",", "n"}], 
+                    "]"}]}], ",", 
+                   RowBox[{
+                    RowBox[{"result", "[", "count", "]"}], "=", 
+                    RowBox[{"{", "n", "}"}]}]}], "]"}]}], 
+                "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+              "]"}]}], "\[IndentingNewLine]", "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"ProgressIndicator", "[", 
+              RowBox[{"n", ",", 
+               RowBox[{"{", 
+                RowBox[{"1", ",", "max"}], "}"}]}], "]"}], ",", 
+             RowBox[{"Round", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"n", "/", "max"}], "*", "100"}], ",", ".001"}], 
+              "]"}]}], "}"}]}], "]"}], ";", "\[IndentingNewLine]", 
+         "result"}]}], "\[IndentingNewLine]", "]"}], "&"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";", 
+  RowBox[{"Length", "[", "ByCount", "]"}]}]], "Input",
+ CellChangeTimes->{{3.774335538187448*^9, 3.7743356576373863`*^9}, {
+   3.7743356953351164`*^9, 3.7743357361453133`*^9}, {3.7743372425215*^9, 
+   3.7743372428697433`*^9}, {3.7743426793441677`*^9, 3.7743426813770227`*^9}, 
+   3.77445195741241*^9, {3.776169357442465*^9, 3.7761693636807165`*^9}, {
+   3.776169487329133*^9, 3.77616948882847*^9}, {3.776170082088285*^9, 
+   3.776170149332344*^9}, {3.776172187753975*^9, 3.7761722130939093`*^9}, {
+   3.7761731987751913`*^9, 3.7761732226567736`*^9}, {3.7761736875536346`*^9, 
+   3.7761737239348335`*^9}, {3.776173756605822*^9, 3.7761737990514693`*^9}, {
+   3.7761841946053934`*^9, 3.776184240900978*^9}, {3.77618647312179*^9, 
+   3.776186475105785*^9}, {3.7761907308668795`*^9, 3.7761907400236053`*^9}, 
+   3.7764347307078047`*^9, {3.776515494099408*^9, 3.776515498531468*^9}},
+ CellLabel->
+  "In[540]:=",ExpressionUUID->"3710f387-9bb6-4783-8247-f37ccc710c18"],
+
+Cell[BoxData["11"], "Output",
+ CellChangeTimes->{3.776525943832066*^9, 3.7765366710144567`*^9, 
+  3.7765409300011597`*^9},
+ CellLabel->
+  "Out[540]=",ExpressionUUID->"979c2449-dbec-487c-8aca-5f6f84301fd5"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FindFullFormula", "[", "g_", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"FindFullFormula", "[", 
+     RowBox[{"g", ",", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", "v", "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"v", ",", 
+          RowBox[{"VertexList", "[", "g", "]"}]}], "}"}]}], "]"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.7063620784895306`*^9, 3.7063621033566446`*^9}, {
+   3.711570871084709*^9, 3.7115708805838294`*^9}, {3.7115709332135115`*^9, 
+   3.711570946347534*^9}, 3.7765222512886257`*^9},
+ CellLabel->
+  "In[541]:=",ExpressionUUID->"8f9a57fd-871e-48c2-a15d-145b8ea28fec"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FindFullFormula", "[", 
+   RowBox[{"g_", ",", "v_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"edge", ",", "pos1", ",", "pos2", ",", "v2", ",", 
+      RowBox[{"result", "=", 
+       RowBox[{"{", "}"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"CompleteGraphQ", "[", "g", "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"result", "=", 
+        RowBox[{"{", 
+         RowBox[{"SetsToSymbol2", "[", 
+          RowBox[{"Sort", "[", 
+           RowBox[{
+            RowBox[{"Map", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Sort", "[", "#", "]"}], "&"}], ",", "v"}], "]"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#1", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "<", 
+              RowBox[{"#2", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], "&"}]}], "]"}], "]"}], 
+         "}"}]}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"edge", "=", 
+         RowBox[{"First", "[", 
+          RowBox[{"EdgeList", "[", 
+           RowBox[{"GraphComplement", "[", "g", "]"}], "]"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"MemberQ", "[", 
+             RowBox[{
+              RowBox[{"v", "[", 
+               RowBox[{"[", "k", "]"}], "]"}], ",", 
+              RowBox[{"edge", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], "]"}], ",", 
+            RowBox[{"pos1", "=", "k"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"k", ",", 
+            RowBox[{"Length", "[", "v", "]"}]}], "}"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"MemberQ", "[", 
+             RowBox[{
+              RowBox[{"v", "[", 
+               RowBox[{"[", "k", "]"}], "]"}], ",", 
+              RowBox[{"edge", "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}], "]"}], ",", 
+            RowBox[{"pos2", "=", "k"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"k", ",", 
+            RowBox[{"Length", "[", "v", "]"}]}], "}"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"v2", "=", "v"}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"v2", "[", 
+          RowBox[{"[", "pos1", "]"}], "]"}], "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{
+           RowBox[{"v2", "[", 
+            RowBox[{"[", "pos1", "]"}], "]"}], ",", 
+           RowBox[{"v2", "[", 
+            RowBox[{"[", "pos2", "]"}], "]"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"v2", "=", 
+         RowBox[{"Delete", "[", 
+          RowBox[{"v2", ",", "pos2"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"result", "=", 
+         RowBox[{"Join", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"FindFullFormula", "[", 
+            RowBox[{
+             RowBox[{"EdgeAdd", "[", 
+              RowBox[{"g", ",", "edge"}], "]"}], ",", "v"}], "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"FindFullFormula", "[", 
+            RowBox[{
+             RowBox[{"VertexContract", "[", 
+              RowBox[{"g", ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"edge", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], ",", 
+                 RowBox[{"edge", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], "}"}]}], "]"}], ",", 
+             "v2"}], "]"}]}], "\[IndentingNewLine]", "]"}]}]}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", "result", "]"}], ">", "formulaDepth"}], ",", 
+       RowBox[{"formulaDepth", "=", 
+        RowBox[{"Length", "[", "result", "]"}]}]}], "]"}], ";", 
+     "\[IndentingNewLine]", "result"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.710167039609064*^9, 3.710167095821632*^9}, 
+   3.7101675452350607`*^9, {3.711566310758187*^9, 3.7115663666114445`*^9}, 
+   3.7115688351830935`*^9, {3.711570893069907*^9, 3.711570928550038*^9}, 
+   3.744459663786933*^9},
+ CellLabel->
+  "In[542]:=",ExpressionUUID->"776dda85-84d4-4293-8915-2ed1faad7436"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CalcFormulaeForGrof", "[", "n_", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", 
+    RowBox[{"DefineOrLoad2", "[", 
+     RowBox[{
+      RowBox[{"\"\<\\\\GrofFormulae\\\\\>\"", "<>", 
+       RowBox[{"ToString", "[", "n", "]"}]}], ",", 
+      RowBox[{
+       RowBox[{"FindFullFormula", "[", 
+        RowBox[{"ReadGrof", "[", "n", "]"}], "]"}], "&"}]}], "]"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.776514851641128*^9, 3.7765148840597267`*^9}, {
+   3.776514920242049*^9, 3.7765149562289515`*^9}, 3.7765155029113874`*^9},
+ CellLabel->
+  "In[543]:=",ExpressionUUID->"a7b2f83f-6cbd-464b-86d5-26ddd87ec1db"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CalcFormulaeForSet", "[", "keys_", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "n", ",", " ", "pos", ",", " ", "current", ",", " ", "length", ",", 
+      "block", ",", "blockMax", ",", "blockResult", ",", " ", "some", ",", 
+      RowBox[{"blockSize", "=", 
+       RowBox[{"$KernelCount", "*", "10"}]}], ",", 
+      RowBox[{"currentTime", "=", "\"\<unknown\>\""}], ",", " ", 
+      RowBox[{"totalTime", "=", "0"}], ",", " ", "started", ",", "ending"}], 
+     "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"some", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"length", "=", 
+      RowBox[{"Length", "[", "keys", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"PrintTemporary", "[", 
+      RowBox[{"{", 
+       RowBox[{"length", ",", " ", "\"\<items to go\>\""}], "}"}], "]"}], ";",
+      "\[IndentingNewLine]", 
+     RowBox[{"started", "=", 
+      RowBox[{"DateObject", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"pos", "=", "1"}], ",", 
+         RowBox[{"pos", "<=", "length"}], ",", 
+         RowBox[{"pos", "+=", "blockSize"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"blockMax", "=", 
+           RowBox[{"Min", "[", 
+            RowBox[{
+             RowBox[{"pos", "+", "blockSize", "-", "1"}], ",", "length"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"block", "=", 
+           RowBox[{"Take", "[", 
+            RowBox[{"keys", ",", 
+             RowBox[{"{", 
+              RowBox[{"pos", ",", "blockMax"}], "}"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"currentTime", "=", 
+           RowBox[{"First", "[", 
+            RowBox[{"AbsoluteTiming", "[", "\[IndentingNewLine]", 
+             RowBox[{"blockResult", "=", 
+              RowBox[{"ParallelTable", "[", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"CalcFormulaeForGrof", "[", "n", "]"}], 
+                "\[IndentingNewLine]", ",", 
+                RowBox[{"{", 
+                 RowBox[{"n", ",", "block"}], "}"}]}], "]"}]}], 
+             "\[IndentingNewLine]", "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"totalTime", "+=", "currentTime"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"ending", "=", 
+           RowBox[{"DatePlus", "[", 
+            RowBox[{"started", ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"totalTime", "/", "pos"}], ")"}], "*", "length"}], 
+               ",", "\"\<Second\>\""}], "}"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"current", " ", "=", 
+           RowBox[{"DeleteDuplicates", "[", 
+            RowBox[{"Flatten", "[", 
+             RowBox[{"blockResult", ",", "1"}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"some", "=", 
+           RowBox[{"DeleteDuplicates", "[", 
+            RowBox[{"Join", "[", 
+             RowBox[{"some", ",", "current"}], "]"}], "]"}]}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"ProgressIndicator", "[", 
+          RowBox[{"pos", ",", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "length"}], "}"}]}], "]"}], ",", 
+         RowBox[{"Round", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"pos", "/", "length"}], ")"}], "*", "100"}], ",", 
+           ".001"}], "]"}], ",", "pos", ",", "length", ",", " ", 
+         "currentTime", ",", " ", "totalTime", ",", " ", "ending"}], "}"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", "some"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.7743434021735992`*^9, 3.774343419641325*^9}, {
+   3.774344484289523*^9, 3.7743444898796387`*^9}, {3.7761074697315855`*^9, 
+   3.7761074701081657`*^9}, 3.7761906670584784`*^9, {3.7761907620308857`*^9, 
+   3.776190832830636*^9}, {3.7761914993864417`*^9, 3.7761917082390966`*^9}, {
+   3.7761917933466234`*^9, 3.7761918439547844`*^9}, {3.7761918947602763`*^9, 
+   3.7761918955515795`*^9}, {3.776191943817479*^9, 3.776191995048042*^9}, {
+   3.7761920639729943`*^9, 3.7761920706109657`*^9}, 3.776192139284545*^9, {
+   3.776228828030795*^9, 3.7762290860847445`*^9}, {3.776229171570833*^9, 
+   3.776229173338951*^9}, {3.7762292277682652`*^9, 3.77622934702239*^9}, {
+   3.7762293787983985`*^9, 3.7762295040741076`*^9}, {3.776237884190631*^9, 
+   3.7762380590417995`*^9}, {3.776238125063818*^9, 3.7762381729013214`*^9}, {
+   3.7762383059243546`*^9, 3.776238306494259*^9}, {3.776238547400544*^9, 
+   3.7762385656924148`*^9}, {3.7762386254634237`*^9, 3.7762386303444223`*^9}, 
+   3.7762387276828146`*^9, {3.7762390748532906`*^9, 3.7762390761722918`*^9}, {
+   3.7762391321313047`*^9, 3.776239133809513*^9}, {3.776239164732317*^9, 
+   3.7762391884645047`*^9}, {3.7762398306523743`*^9, 3.776239904216974*^9}, {
+   3.776239943110983*^9, 3.776239959818988*^9}, {3.7762400293022327`*^9, 
+   3.7762400802392473`*^9}, {3.7762402994340672`*^9, 
+   3.7762403429433565`*^9}, {3.7762403805633698`*^9, 3.7762404042733755`*^9}, 
+   3.776240502226451*^9, {3.7762405659953985`*^9, 3.7762405810685024`*^9}, {
+   3.7762407134507227`*^9, 3.7762407221687264`*^9}, 3.7763457854647512`*^9, {
+   3.7763469972119865`*^9, 3.776346998849511*^9}, {3.7763471375027466`*^9, 
+   3.7763471394431067`*^9}, 3.7763472864555173`*^9, {3.7763473356012044`*^9, 
+   3.7763473374776216`*^9}, 3.7764310692513685`*^9, {3.7765146372815437`*^9, 
+   3.7765146440577927`*^9}, {3.7765146925316525`*^9, 3.776514738671115*^9}, {
+   3.7765147963843083`*^9, 3.776514844747161*^9}, {3.776514907036827*^9, 
+   3.7765149099171457`*^9}, 3.776514959246999*^9, {3.776515083983782*^9, 
+   3.776515094960288*^9}, 3.7765153408226247`*^9, {3.7765220036962585`*^9, 
+   3.776522012949114*^9}, {3.7765386272641625`*^9, 3.776538630918168*^9}, 
+   3.7765394303189273`*^9, {3.77677928658714*^9, 3.776779287567684*^9}},
+ CellLabel->
+  "In[603]:=",ExpressionUUID->"964c84fb-3a7f-4703-b3ea-0e28c17ddebf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SymbolsByCount", "=", 
+  RowBox[{"DefineOrLoad2", "[", 
+   RowBox[{"\"\<SymbolsByCount\>\"", ",", 
+    RowBox[{
+     RowBox[{"Block", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"result", "=", 
+         RowBox[{"Association", "[", "]"}]}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"result", "[", "k", "]"}], "=", 
+           RowBox[{"CalcFormulaeForSet", "[", 
+            RowBox[{"ByCount", "[", "k", "]"}], "]"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"k", ",", "4", ",", "5"}], "}"}]}], "]"}], ";", 
+        "result"}]}], "]"}], "&"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7765155454785185`*^9, 3.7765155785935755`*^9}, {
+   3.776534418744484*^9, 3.776534419120778*^9}, {3.7766891839419518`*^9, 
+   3.7766892123372326`*^9}, {3.776689256856022*^9, 3.776689286615346*^9}, 
+   3.7766894617830706`*^9},
+ CellLabel->
+  "In[589]:=",ExpressionUUID->"49d1745b-b487-4ea2-80ea-052c4fbe57ab"],
+
+Cell[BoxData[
+ RowBox[{"\[LeftAssociation]", 
+  RowBox[{
+   RowBox[{"4", "\[Rule]", 
+    RowBox[{"{", "v1x2x3x4", "}"}]}], ",", 
+   RowBox[{"5", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"v1x2x3x4x5", ",", "v14x2x3x5"}], "}"}]}]}], 
+  "\[RightAssociation]"}]], "Output",
+ CellChangeTimes->{
+  3.7765165256573114`*^9, 3.7765191199806595`*^9, 3.7765349005771933`*^9, 
+   3.7765369455096397`*^9, 3.776540991765086*^9, 3.7765411610970592`*^9, 
+   3.7766894632533216`*^9, {3.776689544168312*^9, 3.7766895581051903`*^9}},
+ CellLabel->
+  "Out[589]=",ExpressionUUID->"10812a48-47db-4a85-b608-9273c704f016"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CloseKernels", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.776779267735876*^9, 3.776779273325981*^9}},
+ CellLabel->
+  "In[601]:=",ExpressionUUID->"675b162a-3adb-4e45-88a4-bb3d3c661ce0"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"9", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"10", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}], 
+   ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"11", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}], 
+   ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"13", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}], 
+   ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"14", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}], 
+   ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"15", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.7767792742745595`*^9},
+ CellLabel->
+  "Out[601]=",ExpressionUUID->"56742404-212f-42cb-9866-32b3122f7f63"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"LaunchKernels", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.776779276867035*^9, 3.776779279041461*^9}},
+ CellLabel->
+  "In[602]:=",ExpressionUUID->"4db64539-2915-44e8-b0f4-064a4ae6da64"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"16", ",", "\<\"local\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"17", ",", "\<\"local\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"18", ",", "\<\"local\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"19", ",", "\<\"local\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"20", ",", "\<\"local\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"21", ",", "\<\"local\"\>"}], "]"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.7767792843229947`*^9},
+ CellLabel->
+  "Out[602]=",ExpressionUUID->"dbda78e7-9ee1-4682-ab1b-6c539eff9629"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Table", "[", 
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"KeyExistsQ", "[", 
+       RowBox[{"SymbolsByCount", ",", "k"}], "]"}]}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"SymbolsByCount", "[", "k", "]"}], "=", 
+       RowBox[{"CalcFormulaeForSet", "[", 
+        RowBox[{"ByCount", "[", "k", "]"}], "]"}]}], ";", 
+      RowBox[{"SaveSymbol", "[", 
+       RowBox[{"\"\<SymbolsByCount\>\"", ",", "SymbolsByCount"}], "]"}]}]}], 
+    "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", "4", ",", "12"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.776689231947347*^9, 3.776689247963355*^9}, {
+  3.776689379711135*^9, 3.776689397825368*^9}, {3.776689510541603*^9, 
+  3.7766895326887674`*^9}, {3.7767791018865356`*^9, 3.7767791051779394`*^9}},
+ CellLabel->
+  "In[604]:=",ExpressionUUID->"30ca832e-df11-41fe-b857-910f72851adf"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", 
+   ",", "Null", ",", "Null", ",", "Null"}], "}"}]], "Output",
+ CellChangeTimes->{3.7766894829771557`*^9, 3.77668972987469*^9, 
+  3.7767792621582584`*^9, 3.7767827465681057`*^9},
+ CellLabel->
+  "Out[604]=",ExpressionUUID->"a74af4df-41dd-4eb6-9cb7-e4ad4bc0b62b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "SymbolsByCount", "]"}]], "Input",
+ CellChangeTimes->{{3.7766023330142136`*^9, 3.7766023402059126`*^9}},
+ CellLabel->
+  "In[587]:=",ExpressionUUID->"09d3c6ae-71d6-4997-9927-8544f24b6313"],
+
+Cell[BoxData["8"], "Output",
+ CellChangeTimes->{3.7766023410319896`*^9, 3.776689494517187*^9},
+ CellLabel->
+  "Out[587]=",ExpressionUUID->"42091476-d10e-49c4-be4a-76f5d05fac07"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"InspectLevel", "[", "k_", "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"all", ",", " ", 
+      RowBox[{"todo", "=", 
+       RowBox[{"SymbolsByCount", "[", "k", "]"}]}], ",", " ", "syms", ",", 
+      " ", "parts", ",", " ", 
+      RowBox[{"byRank", "=", 
+       RowBox[{"Association", "[", "]"}]}], ",", " ", "level", ",", "pos", 
+      ",", " ", "sym"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"byRank", "[", "rank", "]"}], "=", 
+        RowBox[{"{", "}"}]}], "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"rank", ",", "k"}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"pos", "=", "1"}], ",", 
+         RowBox[{"pos", "<=", 
+          RowBox[{"Length", "[", "todo", "]"}]}], ",", 
+         RowBox[{"pos", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"sym", "=", 
+           RowBox[{"todo", "[", 
+            RowBox[{"[", "pos", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          "\[IndentingNewLine]", 
+          RowBox[{"level", "=", 
+           RowBox[{"SymbolLevel", "[", "sym", "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"byRank", "[", "level", "]"}], "=", 
+           RowBox[{"Append", "[", 
+            RowBox[{
+             RowBox[{"byRank", "[", "level", "]"}], ",", "sym"}], "]"}]}]}]}],
+         "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"ProgressIndicator", "[", 
+        RowBox[{"pos", ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", 
+           RowBox[{"Length", "[", "todo", "]"}]}], "}"}]}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ParallelTable", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"all", "=", 
+           RowBox[{"IntegerPartitions", "[", 
+            RowBox[{"k", ",", 
+             RowBox[{"{", "rank", "}"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"syms", "=", 
+           RowBox[{"byRank", "[", "rank", "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"PrintTemporary", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Length", "[", "syms", "]"}], ",", "\"\< at rank\>\"", 
+             ",", " ", "rank"}], "}"}], "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"parts", "=", 
+           RowBox[{"DeleteDuplicates", "[", 
+            RowBox[{"Map", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"PartitionType", "[", 
+                RowBox[{"SymbolToSets", "[", "#", "]"}], "]"}], "&"}], ",", 
+              "syms"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Labeled", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Grid", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"Table", "[", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"MemberQ", "[", 
+                   RowBox[{"parts", ",", "row"}], "]"}], ",", 
+                  RowBox[{"Map", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"#", ",", 
+                    RowBox[{"Darker", "[", "Green", "]"}]}], "]"}], "&"}], 
+                    ",", "row"}], "]"}], ",", 
+                  RowBox[{"Map", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"#", ",", "Red"}], "]"}], "&"}], ",", "row"}], 
+                   "]"}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"row", ",", "all"}], "}"}]}], "\[IndentingNewLine]", 
+               "]"}], ",", "\[IndentingNewLine]", 
+              RowBox[{"Frame", "\[Rule]", "All"}]}], "\[IndentingNewLine]", 
+             "]"}], ",", "\[IndentingNewLine]", "rank"}], 
+           "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"rank", ",", "k"}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"rank", ",", "k"}], "}"}]}], "\[IndentingNewLine]", "]"}]}]}],
+    "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.7765191426502695`*^9, 3.7765191969037657`*^9}, {
+   3.7765192278933673`*^9, 3.7765192731157656`*^9}, {3.7765193064166913`*^9, 
+   3.7765193199148474`*^9}, {3.776519350246048*^9, 3.776519502731102*^9}, {
+   3.776519537223256*^9, 3.7765196414271975`*^9}, 3.7765196848770137`*^9, {
+   3.7765197254752665`*^9, 3.776519726523424*^9}, {3.7765368557013364`*^9, 
+   3.77653686677033*^9}, {3.776536923297641*^9, 3.7765369319706373`*^9}, 
+   3.7765370361815615`*^9, {3.7765371504810934`*^9, 3.776537170281108*^9}, {
+   3.7765372405472565`*^9, 3.77653724319226*^9}, {3.776539506335563*^9, 
+   3.776539658956811*^9}, {3.7765397138710485`*^9, 3.7765397185701284`*^9}, {
+   3.776539750672558*^9, 3.7765398034583335`*^9}, {3.7765399215405006`*^9, 
+   3.776539940770135*^9}, {3.776540705422858*^9, 3.7765407614261107`*^9}, {
+   3.776540861739837*^9, 3.776540907258641*^9}, 3.7765412314476223`*^9},
+ CellLabel->
+  "In[556]:=",ExpressionUUID->"c935270b-36fc-4029-9e67-f9e7641eb030"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Now the experiments", "Section",
+ CellChangeTimes->{{3.7765225847093706`*^9, 
+  3.776522590366126*^9}},ExpressionUUID->"7a5c8347-5e24-4551-a863-\
+9d5dce874a69"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Keys", "[", "ByCount", "]"}]], "Input",
+ CellChangeTimes->{{3.7765150495901065`*^9, 3.7765150532525573`*^9}},
+ CellLabel->
+  "In[543]:=",ExpressionUUID->"5afcc667-4d8d-4b41-b491-e6f8ef2af694"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "4", ",", "5", ",", "6", ",", "7", ",", "8", ",", "9", ",", "10", ",", "11",
+    ",", "12", ",", "13", ",", "14"}], "}"}]], "Output",
+ CellChangeTimes->{3.776515054347703*^9},
+ CellLabel->
+  "Out[543]=",ExpressionUUID->"6e822f57-d215-4a83-aaa3-0e02869daeaf"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CalcFormulaeForSet", "[", 
+  RowBox[{"ByCount", "[", "4", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.776515057906884*^9, 3.7765150622281895`*^9}},
+ CellLabel->
+  "In[546]:=",ExpressionUUID->"b3ce5560-9576-4034-9333-b04dc9282905"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Loading \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"d:\\\\saved\\\\symbols\\\\\\\\GrofFormulae\\\\1.m\"\>"}],
+  SequenceForm["Loading ", "d:\\saved\\symbols\\\\GrofFormulae\\1.m"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.776515063815419*^9, 3.7765151005707083`*^9},
+ CellLabel->
+  "During evaluation of \
+In[546]:=",ExpressionUUID->"764bf710-f218-4ecc-8088-bb12c94e5e7e"],
+
+Cell[BoxData[
+ RowBox[{"{", "v1x2x3x4", "}"}]], "Output",
+ CellChangeTimes->{3.776515064167923*^9, 3.776515100867885*^9},
+ CellLabel->
+  "Out[546]=",ExpressionUUID->"ad0f21a8-eef6-4639-9cbd-14de88615441"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FindFullFormula", "[", 
+  RowBox[{"ReadGrof", "[", "2", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.776515279643471*^9, 3.776515295068632*^9}},
+ CellLabel->
+  "In[554]:=",ExpressionUUID->"00d55033-2b03-48f8-8b82-dde05fc1422a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"v1x2x3x4x5", ",", "v14x2x3x5"}], "}"}]], "Output",
+ CellChangeTimes->{3.776515298045815*^9},
+ CellLabel->
+  "Out[554]=",ExpressionUUID->"e9deb20a-7ed6-4c82-bc72-66ed597ddafa"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CalcFormulaeForSet", "[", 
+  RowBox[{"ByCount", "[", "5", "]"}], "]"}]], "Input",
+ CellChangeTimes->{3.776515121105053*^9},
+ CellLabel->
+  "In[547]:=",ExpressionUUID->"d5ae7d68-5075-42f2-8c31-29e4f88361b4"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Saved \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"d:\\\\saved\\\\symbols\\\\\\\\GrofFormulae\\\\2.m\"\>"}],
+  SequenceForm["Saved ", "d:\\saved\\symbols\\\\GrofFormulae\\2.m"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.77651512300194*^9},
+ CellLabel->
+  "During evaluation of \
+In[547]:=",ExpressionUUID->"52ede76b-aec4-41dc-98af-ff71b188f303"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"v1x2x3x4x5", ",", "v14x2x3x5"}], "}"}]], "Output",
+ CellChangeTimes->{3.7765151230334377`*^9},
+ CellLabel->
+  "Out[547]=",ExpressionUUID->"d47717a4-7996-4e7a-b06c-62531781b0dc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CalcFormulaeForSet", "[", 
+  RowBox[{"ByCount", "[", "6", "]"}], "]"}]], "Input",
+ CellChangeTimes->{3.77651513316189*^9},
+ CellLabel->
+  "In[548]:=",ExpressionUUID->"f51e72f1-61b5-42f0-96f0-5a3323c26671"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Saved \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"d:\\\\saved\\\\symbols\\\\\\\\GrofFormulae\\\\3.m\"\>"}],
+  SequenceForm["Saved ", "d:\\saved\\symbols\\\\GrofFormulae\\3.m"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7765151355223103`*^9},
+ CellLabel->
+  "During evaluation of \
+In[548]:=",ExpressionUUID->"0269a801-836f-47cd-ae43-8bc683f9737d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Saved \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"d:\\\\saved\\\\symbols\\\\\\\\GrofFormulae\\\\4.m\"\>"}],
+  SequenceForm["Saved ", "d:\\saved\\symbols\\\\GrofFormulae\\4.m"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7765151363349643`*^9},
+ CellLabel->
+  "During evaluation of \
+In[548]:=",ExpressionUUID->"48d289ef-818f-4853-8d1e-5d7ba239b885"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "v1x2x3x4x5x6", ",", "v1x24x3x5x6", ",", "v14x2x3x5x6", ",", "v16x2x3x4x5", 
+   ",", "v16x24x3x5", ",", "v1x2x36x4x5", ",", "v1x25x3x4x6", ",", 
+   "v1x25x36x4", ",", "v14x2x36x5", ",", "v14x25x3x6", ",", "v14x25x36"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.7765151364574633`*^9},
+ CellLabel->
+  "Out[548]=",ExpressionUUID->"52a6d84b-86f8-41e2-bc37-89e5b49ab4f4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CalcFormulaeForSet", "[", 
+  RowBox[{"ByCount", "[", "7", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.7765151547534676`*^9, 3.776515155534477*^9}, {
+   3.776515194797146*^9, 3.7765151962556553`*^9}, 3.7765166636214533`*^9},
+ CellLabel->
+  "In[565]:=",ExpressionUUID->"3cb08dca-bb4b-4361-b181-bb5438a6ebf4"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "v1x2x3x4x5x6x7", ",", "v1x2x3x47x5x6", ",", "v1x2x3x4x5x67", ",", 
+   "v1x24x3x5x6x7", ",", "v1x24x3x5x67", ",", "v14x2x3x5x6x7", ",", 
+   "v14x2x3x5x67", ",", "v16x2x3x4x5x7", ",", "v16x2x3x47x5", ",", 
+   "v16x24x3x5x7", ",", "v15x2x3x4x6x7", ",", "v15x2x3x47x6", ",", 
+   "v15x2x3x4x67", ",", "v15x24x3x6x7", ",", "v15x24x3x67", ",", 
+   "v1x2x37x4x5x6", ",", "v1x24x37x5x6", ",", "v1x25x3x4x6x7", ",", 
+   "v1x25x3x47x6", ",", "v1x25x37x4x6", ",", "v14x2x37x5x6", ",", 
+   "v14x25x3x6x7", ",", "v14x25x37x6", ",", "v16x2x37x4x5", ",", 
+   "v16x24x37x5", ",", "v16x25x3x4x7", ",", "v16x25x3x47", ",", "v16x25x37x4",
+    ",", "v1x2x35x4x6x7", ",", "v1x2x35x4x67", ",", "v1x24x35x6x7", ",", 
+   "v1x24x35x67", ",", "v1x27x3x4x5x6", ",", "v1x27x35x4x6", ",", 
+   "v14x2x35x6x7", ",", "v14x2x35x67", ",", "v14x27x3x5x6", ",", 
+   "v14x27x35x6", ",", "v16x2x35x4x7", ",", "v16x24x35x7", ",", 
+   "v16x27x3x4x5", ",", "v16x27x35x4", ",", "v1x26x3x4x5x7", ",", 
+   "v1x26x3x47x5", ",", "v14x26x3x5x7", ",", "v17x2x3x4x5x6", ",", 
+   "v147x2x3x5x6", ",", "v17x26x3x4x5", ",", "v147x26x3x5", ",", 
+   "v17x24x3x5x6", ",", "v1x2x3x4x57x6", ",", "v1x24x3x57x6", ",", 
+   "v14x2x3x57x6", ",", "v16x2x3x4x57", ",", "v16x24x3x57"}], "}"}]], "Output",
+ CellChangeTimes->{{3.776515166680308*^9, 3.7765151994531665`*^9}, 
+   3.7765166673279457`*^9},
+ CellLabel->
+  "Out[565]=",ExpressionUUID->"c72f1a3a-65fb-4e17-9300-168b2d152ca7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CalcFormulaeForSet", "[", 
+   RowBox[{"ByCount", "[", "8", "]"}], "]"}], "//", "Length"}]], "Input",
+ CellChangeTimes->{{3.776515188725122*^9, 3.7765151921472406`*^9}},
+ CellLabel->
+  "In[561]:=",ExpressionUUID->"1ef8ecdf-9812-49f2-b7bd-d131061542e3"],
+
+Cell[BoxData["328"], "Output",
+ CellChangeTimes->{3.7765152266708536`*^9, 3.776515517339157*^9},
+ CellLabel->
+  "Out[561]=",ExpressionUUID->"2cf8b6ab-c080-425b-97a3-8b9301f68a3d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"BellB", "[", "8", "]"}]], "Input",
+ CellChangeTimes->{{3.7765152320778*^9, 3.7765152345902605`*^9}},
+ CellLabel->
+  "In[553]:=",ExpressionUUID->"9e2b1e5e-14c0-430c-97ce-110705f17f35"],
+
+Cell[BoxData["4140"], "Output",
+ CellChangeTimes->{3.7765152356694202`*^9},
+ CellLabel->
+  "Out[553]=",ExpressionUUID->"ecb95ced-bddb-4336-9cb9-f5a42fefc8ee"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CalcFormulaeForSet", "[", 
+   RowBox[{"ByCount", "[", "9", "]"}], "]"}], "//", "Length"}]], "Input",
+ CellChangeTimes->{3.7765153147148647`*^9},
+ CellLabel->
+  "In[562]:=",ExpressionUUID->"fb6ec782-9e38-46d6-8e87-0d8839fe232a"],
+
+Cell[BoxData["2110"], "Output",
+ CellChangeTimes->{3.7765153340753465`*^9, 3.7765154523421926`*^9, 
+  3.7765155373926125`*^9},
+ CellLabel->
+  "Out[562]=",ExpressionUUID->"dd09fd90-bcda-4c97-b68c-b6cf8e0c13e2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CalcFormulaeForSet", "[", 
+   RowBox[{"ByCount", "[", "10", "]"}], "]"}], "//", "Length"}]], "Input",
+ CellChangeTimes->{{3.7765166815432863`*^9, 3.7765166820638695`*^9}},
+ CellLabel->
+  "In[566]:=",ExpressionUUID->"99c8daaf-e214-4c42-8bd7-c42f315354e1"],
+
+Cell[BoxData["16570"], "Output",
+ CellChangeTimes->{3.776517777440672*^9},
+ CellLabel->
+  "Out[566]=",ExpressionUUID->"4161acfd-5689-4c98-a37e-40f204a51140"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CalcFormulaeForSet", "[", 
+  RowBox[{"ByCount", "[", "4", "]"}], "]"}]], "Input",
+ CellChangeTimes->{3.7765410027904654`*^9},
+ CellLabel->
+  "In[547]:=",ExpressionUUID->"4f5eb7b9-cab2-484d-9789-a9b2b164eb3b"],
+
+Cell[BoxData[
+ RowBox[{"{", "v1x2x3x4", "}"}]], "Output",
+ CellChangeTimes->{3.776541003837714*^9},
+ CellLabel->
+  "Out[547]=",ExpressionUUID->"aab1ee20-f8e5-416a-b99e-460a9c732533"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CalcFormulaeForSet", "[", 
+   RowBox[{"ByCount", "[", "11", "]"}], "]"}], "//", "Length"}]], "Input",
+ CellChangeTimes->{{3.776522027038496*^9, 3.7765220272643814`*^9}},
+ CellLabel->
+  "In[546]:=",ExpressionUUID->"4c3abc50-4bd6-44c7-a0e7-96e33668fd23"],
+
+Cell[BoxData["135500"], "Output",
+ CellChangeTimes->{3.7765221302379246`*^9, 3.776522282786318*^9, 
+  3.7765223199959464`*^9, 3.776534802329317*^9},
+ CellLabel->
+  "Out[546]=",ExpressionUUID->"18181bb9-436f-4f59-aec4-d13271b5e52f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"BellB", "[", "11", "]"}]], "Input",
+ CellChangeTimes->{{3.7765352451704845`*^9, 3.7765352500401154`*^9}},
+ CellLabel->
+  "In[550]:=",ExpressionUUID->"05010f97-40ee-4ca6-be05-e0ff3cdd0f27"],
+
+Cell[BoxData["678570"], "Output",
+ CellChangeTimes->{3.7765352508684487`*^9},
+ CellLabel->
+  "Out[550]=",ExpressionUUID->"fe3181ad-4eb8-444f-b823-3d45e984c133"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"BellB", "[", "3", "]"}]], "Input",
+ CellChangeTimes->{{3.776535422152562*^9, 3.7765354246354585`*^9}},
+ CellLabel->
+  "In[558]:=",ExpressionUUID->"8d95ac97-2a8d-431c-8de6-9a0040419203"],
+
+Cell[BoxData["5"], "Output",
+ CellChangeTimes->{3.7765354608202267`*^9},
+ CellLabel->
+  "Out[558]=",ExpressionUUID->"5949109a-6bee-4ebd-a55a-19b27f4c8b08"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Length", "[", 
+      RowBox[{"CalcFormulaeForSet", "[", 
+       RowBox[{"ByCount", "[", "k", "]"}], "]"}], "]"}], "/", 
+     RowBox[{"BellB", "[", "k", "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", "4", ",", "12"}], "}"}]}], "]"}], "//", 
+  "ListPlot"}]], "Input",
+ CellChangeTimes->{{3.776535261062048*^9, 3.776535380776816*^9}, {
+  3.7765354718666444`*^9, 3.776535472414695*^9}, {3.7767857412557487`*^9, 
+  3.7767857415379605`*^9}},ExpressionUUID->"e0744e17-036f-43ab-a53f-\
+c4fa137a080e"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
+      AbsoluteThickness[1.6], 
+     PointBox[{{1., 0.06666666666666667}, {2., 0.038461538461538464`}, {3., 
+      0.054187192118226604`}, {4., 0.06271379703534778}, {5., 
+      0.07922705314009662}, {6., 0.09977774625242351}, {7., 
+      0.14287561974563484`}, {8., 0.19968463091501246`}}]}, {
+     {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+      0.012833333333333334`], AbsoluteThickness[1.6]}, {}}, {
+     {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+      0.012833333333333334`], AbsoluteThickness[1.6]}, {}}}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{
+   "OptimizePlotMarkers" -> True, 
+    "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0., 8.}, {0, 0.19968463091501246`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.776535292093354*^9, 3.776535368308378*^9}, 
+   3.776535460228423*^9, 3.776535554240884*^9},
+ CellLabel->
+  "Out[559]=",ExpressionUUID->"3cb05623-486c-41b3-b749-faa32741cbd7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CalcFormulaeForSet", "[", 
+   RowBox[{"ByCount", "[", "12", "]"}], "]"}], "//", "Length"}]], "Input",
+ CellChangeTimes->{{3.7765263853683004`*^9, 3.7765263867948155`*^9}},
+ CellLabel->
+  "In[599]:=",ExpressionUUID->"514b1c28-9ea4-49f2-9545-08eba3983654"],
+
+Cell[BoxData["1165374"], "Output",
+ CellChangeTimes->{3.776538533075207*^9, 3.7765394232219296`*^9, 
+  3.776539488286235*^9, 3.7766020860795794`*^9, 3.776689423654838*^9, 
+  3.7767673770744915`*^9},
+ CellLabel->
+  "Out[599]=",ExpressionUUID->"247ce2ba-97d3-48fe-9bcd-3ebd23f5f6d0"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CalcFormulaeForSet", "[", 
+   RowBox[{"ByCount", "[", "13", "]"}], "]"}], "//", "Length"}]], "Input",
+ CellChangeTimes->{{3.7765384945024834`*^9, 
+  3.776538494900673*^9}},ExpressionUUID->"f3e1ef3b-e25f-4872-b638-\
+a828e41640a6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CalcFormulaeForSet", "[", 
+   RowBox[{"ByCount", "[", "14", "]"}], "]"}], "//", "Length"}]], "Input",
+ CellChangeTimes->{{3.7765386581782494`*^9, 
+  3.7765386585825033`*^9}},ExpressionUUID->"8eadc016-01f3-455b-8de3-\
+1e1c379e881c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"IntegerPartitions", "[", 
+  RowBox[{"5", ",", 
+   RowBox[{"{", "2", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7765195088835497`*^9, 3.7765195278695145`*^9}},
+ CellLabel->
+  "In[575]:=",ExpressionUUID->"f0afecbd-e13b-4afa-93ff-b3e0908c7b5c"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"4", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "2"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.776519519206374*^9, 3.7765195287799315`*^9}},
+ CellLabel->
+  "Out[575]=",ExpressionUUID->"f45d89d2-16a2-49d2-9836-a70c4c5a2193"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Computations for various vertex counts", "Section",
+ CellChangeTimes->{{3.7765370001876554`*^9, 
+  3.7765370146657763`*^9}},ExpressionUUID->"49095e4b-60df-4efa-a369-\
+f533fb66da39"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7766026039694633`*^9, 3.7766026068758516`*^9}},
+ CellLabel->
+  "In[605]:=",ExpressionUUID->"a30392b4-af24-4943-bfd3-4b1c7c72833b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InspectLevel", "[", "4", "]"}]], "Input",
+ CellChangeTimes->{3.7766024262465563`*^9},
+ CellLabel->
+  "In[606]:=",ExpressionUUID->"eaa42369-8945-483f-a57e-9895eef8f3d9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "1"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785664812874*^9},
+ CellLabel->
+  "(kernel 21)",ExpressionUUID->"ab5f5d09-4142-41a9-8085-4e519ebfb367"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "2"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785665008113*^9},
+ CellLabel->
+  "(kernel 20)",ExpressionUUID->"d2d865bf-2644-40ee-bb55-fc86f6db74a8"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "3"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856650301237`*^9},
+ CellLabel->
+  "(kernel 19)",ExpressionUUID->"f39614f1-8aef-42d1-b16c-a6a1a72e9e3e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\" at rank\"\>", ",", "4"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856651781607`*^9},
+ CellLabel->
+  "(kernel 18)",ExpressionUUID->"a4231425-29e3-4fc3-abcb-8eea0aa9a381"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"1"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"2"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"3"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"4"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )]}], "}"}]], "Output",
+ CellChangeTimes->{3.7766025774010415`*^9, 3.7767856655692577`*^9},
+ CellLabel->
+  "Out[606]=",ExpressionUUID->"d0240f78-666e-4973-8fb6-0b15c286585e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InspectLevel", "[", "5", "]"}]], "Input",
+ CellChangeTimes->{{3.7765193244341173`*^9, 3.776519337029458*^9}},
+ CellLabel->
+  "In[607]:=",ExpressionUUID->"993895b7-5a27-4946-be67-77825ef3bb37"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "1"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856675751925`*^9},
+ CellLabel->
+  "(kernel 21)",ExpressionUUID->"75c87773-aa2f-4e56-be44-0e2260822468"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "2"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856677602386`*^9},
+ CellLabel->
+  "(kernel 20)",ExpressionUUID->"cd512dfc-cab6-43a9-a94e-ceb5c295fd79"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "3"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856679272738`*^9},
+ CellLabel->
+  "(kernel 19)",ExpressionUUID->"12c0dcb2-a838-447e-b0e7-696b564c9244"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\" at rank\"\>", ",", "4"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856680843105`*^9},
+ CellLabel->
+  "(kernel 18)",ExpressionUUID->"8bf55d1f-e514-421b-8ebe-e6345d079250"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\" at rank\"\>", ",", "5"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856682493505`*^9},
+ CellLabel->
+  "(kernel 17)",ExpressionUUID->"33520a68-ac5d-4f30-a43c-36393214c8e3"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"1"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"2"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"3"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"4"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"5"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )]}], "}"}]], "Output",
+ CellChangeTimes->{{3.7765193307791367`*^9, 3.7765193377729044`*^9}, 
+   3.776519385971511*^9, {3.7765196587376566`*^9, 3.776519688565466*^9}, {
+   3.776519731607575*^9, 3.7765197443258553`*^9}, 3.7765369638616486`*^9, 
+   3.7765371820832443`*^9, 3.776537251754261*^9, 3.7765396806502237`*^9, {
+   3.7765397783865547`*^9, 3.7765398169395657`*^9}, 3.776541173036919*^9, 
+   3.776541251952058*^9, 3.7766023584796715`*^9, 3.776785668704587*^9},
+ CellLabel->
+  "Out[607]=",ExpressionUUID->"2c22dd1a-fe07-4c8e-84ca-0d1414f32cda"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InspectLevel", "[", "6", "]"}]], "Input",
+ CellChangeTimes->{3.7765197005252233`*^9},
+ CellLabel->
+  "In[608]:=",ExpressionUUID->"1eded708-d365-4a40-9341-b79dd6371ed2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "1"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785670351265*^9},
+ CellLabel->
+  "(kernel 21)",ExpressionUUID->"143da382-e163-44b4-9d9f-44bc061f87b0"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "2"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856705193267`*^9},
+ CellLabel->
+  "(kernel 20)",ExpressionUUID->"1a45ac3a-788a-40b0-b350-e32bebe3ada2"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\" at rank\"\>", ",", "3"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785670664487*^9},
+ CellLabel->
+  "(kernel 19)",ExpressionUUID->"849111b2-5325-4b38-b2ea-c49571e79f79"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"4", ",", "\<\" at rank\"\>", ",", "4"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785670680487*^9},
+ CellLabel->
+  "(kernel 18)",ExpressionUUID->"bb71f794-6de3-44b4-b740-0871d3d0409d"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"5", ",", "\<\" at rank\"\>", ",", "5"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856708506565`*^9},
+ CellLabel->
+  "(kernel 17)",ExpressionUUID->"d5015b5c-1ef6-40db-9519-0a103eab005e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\" at rank\"\>", ",", "6"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785671033799*^9},
+ CellLabel->
+  "(kernel 16)",ExpressionUUID->"f1744053-1ea3-46ae-a8e4-2f9b2f9aa62e"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"1"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"2"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"3"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"4"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"5"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"6"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )]}], "}"}]], "Output",
+ CellChangeTimes->{3.7765197013577943`*^9, 3.7765197450255365`*^9, 
+  3.776536964621644*^9, 3.7765371851371107`*^9, 3.7765372548178835`*^9, 
+  3.77653981882964*^9, 3.776541175382453*^9, 3.7765412545980644`*^9, 
+  3.776602362493052*^9, 3.776785671651336*^9},
+ CellLabel->
+  "Out[608]=",ExpressionUUID->"e5190468-7d1c-4d4b-a9d5-9b94c06bd2dc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InspectLevel", "[", "7", "]"}]], "Input",
+ CellChangeTimes->{3.7765197122060113`*^9},
+ CellLabel->
+  "In[609]:=",ExpressionUUID->"3d49a36f-a1ac-42d5-a02f-846b5ec0fdf9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "1"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785673552002*^9},
+ CellLabel->
+  "(kernel 21)",ExpressionUUID->"0f916f41-c8ff-4be7-a957-c55759440571"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "3"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785673703498*^9},
+ CellLabel->
+  "(kernel 20)",ExpressionUUID->"c914de5a-f648-4997-9474-e5566a5fddde"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"12", ",", "\<\" at rank\"\>", ",", "4"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785673839495*^9},
+ CellLabel->
+  "(kernel 19)",ExpressionUUID->"1905c8e8-a2f2-4908-9e71-6e8847ffbb24"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"29", ",", "\<\" at rank\"\>", ",", "5"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856739915066`*^9},
+ CellLabel->
+  "(kernel 18)",ExpressionUUID->"7440303a-56eb-449a-a526-edef859734c7"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"13", ",", "\<\" at rank\"\>", ",", "6"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856741455708`*^9},
+ CellLabel->
+  "(kernel 17)",ExpressionUUID->"775c3685-14c2-457e-8cc7-79be6e6de0a4"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\" at rank\"\>", ",", "7"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856743089085`*^9},
+ CellLabel->
+  "(kernel 16)",ExpressionUUID->"bac5eb65-f8ca-4476-ba92-4750dde14a9d"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "2"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856744661036`*^9},
+ CellLabel->
+  "(kernel 21)",ExpressionUUID->"0d91d1f1-45f7-4ff4-9999-5eda94628db6"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["7", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"1"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"2"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"3"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"4"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"5"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"6"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"7"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )]}], "}"}]], "Output",
+ CellChangeTimes->{3.7765197131222396`*^9, 3.776519745336281*^9, 
+  3.7765369652656465`*^9, 3.7765371882902083`*^9, 3.776537258654883*^9, 
+  3.7765398210295362`*^9, 3.7765411778509374`*^9, 3.7765412569240723`*^9, 
+  3.776602367646549*^9, 3.776785675074606*^9},
+ CellLabel->
+  "Out[609]=",ExpressionUUID->"7c3f62b3-2d01-4dfc-94ed-fcd7f76f9c70"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InspectLevel", "[", "8", "]"}]], "Input",
+ CellChangeTimes->{3.7765197539697037`*^9},
+ CellLabel->
+  "In[610]:=",ExpressionUUID->"00f76d2b-e08b-4018-9047-d5326d7210e5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "1"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785676246233*^9},
+ CellLabel->
+  "(kernel 21)",ExpressionUUID->"772b80f1-70af-42a6-abfd-d9c99858ec8f"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\" at rank\"\>", ",", "3"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856764094076`*^9},
+ CellLabel->
+  "(kernel 20)",ExpressionUUID->"718ded4d-13ad-490d-94b3-37c2a4b67e71"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"149", ",", "\<\" at rank\"\>", ",", "5"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785676546481*^9},
+ CellLabel->
+  "(kernel 19)",ExpressionUUID->"16126417-fabc-4add-ae30-2b93ffc04df8"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"120", ",", "\<\" at rank\"\>", ",", "6"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856766784077`*^9},
+ CellLabel->
+  "(kernel 18)",ExpressionUUID->"576dd1c5-c295-44fc-85d6-e6d84f31d088"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"24", ",", "\<\" at rank\"\>", ",", "7"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856768017035`*^9},
+ CellLabel->
+  "(kernel 17)",ExpressionUUID->"ccc09919-5f96-4cf7-aea1-2ef079f5af54"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\" at rank\"\>", ",", "8"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856769616175`*^9},
+ CellLabel->
+  "(kernel 16)",ExpressionUUID->"8d5ef0d2-125c-4577-ab07-2c0106d1e994"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "2"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856771069503`*^9},
+ CellLabel->
+  "(kernel 21)",ExpressionUUID->"a62dc6ad-3223-40ff-847e-858cfacdb63d"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"33", ",", "\<\" at rank\"\>", ",", "4"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856772464185`*^9},
+ CellLabel->
+  "(kernel 20)",ExpressionUUID->"564767a2-c2db-4c25-9cba-033f2b72574d"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["8", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"1"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["7", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"2"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"3"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"4"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"5"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"6"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"7"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"8"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )]}], "}"}]], "Output",
+ CellChangeTimes->{3.7765197552096643`*^9, 3.7765369661506443`*^9, 
+  3.776537191524908*^9, 3.7765372632688913`*^9, 3.776539824309903*^9, 
+  3.776541180496933*^9, 3.776541260128066*^9, 3.7766023732690897`*^9, 
+  3.776785677663139*^9},
+ CellLabel->
+  "Out[610]=",ExpressionUUID->"91b18ecf-15be-4631-b48a-980436e29078"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InspectLevel", "[", "9", "]"}]], "Input",
+ CellChangeTimes->{3.7765197726948566`*^9},
+ CellLabel->
+  "In[611]:=",ExpressionUUID->"c774f6e4-4fa0-47dd-bc99-2519042ecc0e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "1"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785679057517*^9},
+ CellLabel->
+  "(kernel 21)",ExpressionUUID->"bdf5427d-60fa-4540-abc2-61c8b446f289"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\" at rank\"\>", ",", "3"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785679158126*^9},
+ CellLabel->
+  "(kernel 20)",ExpressionUUID->"c31e319c-c41c-40d3-94a8-2d27fbad276a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"772", ",", "\<\" at rank\"\>", ",", "5"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856792017207`*^9},
+ CellLabel->
+  "(kernel 19)",ExpressionUUID->"0f3d09b2-695d-4191-b73d-3518eb2ec8de"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"294", ",", "\<\" at rank\"\>", ",", "7"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785679243718*^9},
+ CellLabel->
+  "(kernel 18)",ExpressionUUID->"faad2224-285f-4dfa-87d0-13196568ad12"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"32", ",", "\<\" at rank\"\>", ",", "8"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785679283363*^9},
+ CellLabel->
+  "(kernel 17)",ExpressionUUID->"0426cf5f-d9e3-42bf-8864-21f30849d1f6"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\" at rank\"\>", ",", "9"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856793233194`*^9},
+ CellLabel->
+  "(kernel 16)",ExpressionUUID->"527e8699-e813-4b1c-b9dd-e2dcf589b3d0"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "2"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856793627973`*^9},
+ CellLabel->
+  "(kernel 21)",ExpressionUUID->"c14a4190-4bb2-4b0d-a43e-3a5ffbb49c01"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"123", ",", "\<\" at rank\"\>", ",", "4"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856793843117`*^9},
+ CellLabel->
+  "(kernel 20)",ExpressionUUID->"7cd627e6-64ac-4255-8c05-24e0f0c73c63"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"887", ",", "\<\" at rank\"\>", ",", "6"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785679422346*^9},
+ CellLabel->
+  "(kernel 19)",ExpressionUUID->"10b6016a-0439-46d6-8112-94fa153dcfa9"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["9", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"1"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["8", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["7", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"2"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["7", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"3"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"4"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"5"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"6"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"7"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"8"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"9"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )]}], "}"}]], "Output",
+ CellChangeTimes->{3.7765197766061945`*^9, 3.776536967623646*^9, 
+  3.776537205840257*^9, 3.776537268237162*^9, 3.776539826622582*^9, 
+  3.7765411830621357`*^9, 3.7765412635480614`*^9, 3.7766023793786783`*^9, 
+  3.776785679577137*^9},
+ CellLabel->
+  "Out[611]=",ExpressionUUID->"b6976727-3675-41d0-8a0c-90f0e0e324dc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InspectLevel", "[", "10", "]"}]], "Input",
+ CellChangeTimes->{{3.7765197870957403`*^9, 3.776519787368004*^9}},
+ CellLabel->
+  "In[612]:=",ExpressionUUID->"bc397a4a-a5c0-40e5-83fb-25800beeb2ca"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "1"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856991437006`*^9},
+ CellLabel->
+  "(kernel 21)",ExpressionUUID->"5c33bc1d-42c8-46a3-952d-e5cdffdfe2d6"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2", ",", "\<\" at rank\"\>", ",", "3"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856993923736`*^9},
+ CellLabel->
+  "(kernel 20)",ExpressionUUID->"31be4215-769c-45d2-9029-17c5af601059"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"4640", ",", "\<\" at rank\"\>", ",", "5"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767856996957674`*^9},
+ CellLabel->
+  "(kernel 19)",ExpressionUUID->"ac2a03b2-2c2d-48de-a4b4-f467800af80d"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"3462", ",", "\<\" at rank\"\>", ",", "7"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785699728769*^9},
+ CellLabel->
+  "(kernel 18)",ExpressionUUID->"3739e248-a902-44ef-95cd-e09c107b9726"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"42", ",", "\<\" at rank\"\>", ",", "9"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.77678569996541*^9},
+ CellLabel->
+  "(kernel 17)",ExpressionUUID->"7c0709b5-94c5-43f5-b968-0f36ecdaafe3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\" at rank\"\>", ",", "10"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.7767857001646366`*^9},
+ CellLabel->
+  "(kernel 16)",ExpressionUUID->"755a2264-f4b9-4718-b167-621defa41239"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "\<\" at rank\"\>", ",", "2"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785700338831*^9},
+ CellLabel->
+  "(kernel 21)",ExpressionUUID->"62ae8db5-ec09-449a-8e61-ba1912526cef"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"477", ",", "\<\" at rank\"\>", ",", "4"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785700398011*^9},
+ CellLabel->
+  "(kernel 20)",ExpressionUUID->"0dedf167-0ff7-4181-9fdb-2b908c6453a6"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"7338", ",", "\<\" at rank\"\>", ",", "6"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785700556667*^9},
+ CellLabel->
+  "(kernel 19)",ExpressionUUID->"0a656ac7-1694-4110-be4f-ac08fb3f8558"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"608", ",", "\<\" at rank\"\>", ",", "8"}], "}"}]], "Print",
+ ShowCellLabel->True,
+ CellChangeTimes->{3.776785700682804*^9},
+ CellLabel->
+  "(kernel 18)",ExpressionUUID->"2da1ea80-b455-4912-9c91-cb820c79b4c7"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["10", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"1"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["9", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["8", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["7", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"2"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["8", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["7", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["4", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"3"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["7", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"4"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["6", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[1, 0, 0], StripOnInput -> False]}, {
+         StyleBox["5", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"5"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["5", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"6"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["4", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"7"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["3", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}, {
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"8"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["2", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"9"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )], ",", 
+   TemplateBox[{TagBox[
+      GridBox[{{
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False], 
+         StyleBox["1", 
+          RGBColor[0, 
+           Rational[2, 3], 0], StripOnInput -> False]}}, AutoDelete -> False, 
+       GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"],"10"},
+    "Labeled",
+    DisplayFunction->(GridBox[{{
+        TagBox[
+         ItemBox[
+          PaneBox[
+           TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+           BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+         "SkipImageSizeLevel"]}, {
+        ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+      BaselinePosition -> {1, 1}]& ),
+    InterpretationFunction->(RowBox[{"Labeled", "[", 
+       RowBox[{#, ",", #2}], "]"}]& )]}], "}"}]], "Output",
+ CellChangeTimes->{3.77651979737512*^9, 3.7765369814127955`*^9, 
+  3.7765372191962585`*^9, 3.7765372830261126`*^9, 3.7765398480645504`*^9, 
+  3.7765399736492553`*^9, 3.776541185672513*^9, 3.776541295106084*^9, 
+  3.7766024185218153`*^9, 3.7767857011968145`*^9},
+ CellLabel->
+  "Out[612]=",ExpressionUUID->"a8024f62-726a-4704-9d8b-ff4651c5bc80"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InspectLevel", "[", "11", "]"}]], "Input",
+ CellChangeTimes->{{3.7765344399333663`*^9, 3.77653444013371*^9}},
+ CellLabel->
+  "In[613]:=",ExpressionUUID->"89f33474-18c2-4e44-a7fc-3afe6a09e932"],
+
+Cell[BoxData[
+ DynamicBox[ToBoxes[
+   ProgressIndicator[$CellContext`pos, {1, 
+     Length[$CellContext`todo]}], StandardForm],
+  Evaluator->"Local",
+  ImageSizeCache->{200., {5., 11.}}]], "PrintTemporary",
+ CellChangeTimes->{3.77678570197556*^9},
+ CellLabel->
+  "During evaluation of \
+In[613]:=",ExpressionUUID->"4b5902ea-b09a-45e7-9fd5-a0c3a94b9daa"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"InspectLevel", "[", "12", "]"}]], "Input",
+ CellChangeTimes->{{3.7767856599321823`*^9, 
+  3.776785660222269*^9}},ExpressionUUID->"5738574b-bc13-499a-b6f0-\
+d66561bc27c5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["other stuff", "Section",
+ CellChangeTimes->{{3.7765398931365333`*^9, 
+  3.776539896737496*^9}},ExpressionUUID->"91943c68-ddfd-4e7a-be68-\
+4f01eb43ae9a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["$KernelCount"], "Input",
+ CellChangeTimes->{{3.776538213319352*^9, 3.7765382133252335`*^9}},
+ CellLabel->
+  "In[566]:=",ExpressionUUID->"80962468-a048-4335-8b43-e41aa390d468"],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.776538214142309*^9, 3.776538581740776*^9, 
+  3.776602273257964*^9},
+ CellLabel->
+  "Out[566]=",ExpressionUUID->"8f10979f-0d04-4fcb-9f44-a6a1703e534b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"$KernelCount", "=", "8"}]], "Input",
+ CellChangeTimes->{{3.7765382178780355`*^9, 3.7765382187640247`*^9}},
+ CellLabel->
+  "In[573]:=",ExpressionUUID->"99bb0d5a-d7dc-4e7e-b31c-7f6b557a3d76"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Set","wrsym",
+   "\"Symbol \\!\\(\\*RowBox[{\\\"$KernelCount\\\"}]\\) is Protected.\"",2,
+   573,29,27912819845151095085,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.776538219903035*^9},
+ CellLabel->
+  "During evaluation of \
+In[573]:=",ExpressionUUID->"5de3668e-aba6-4713-b16a-2a6290a2838f"],
+
+Cell[BoxData["8"], "Output",
+ CellChangeTimes->{3.776538220336029*^9},
+ CellLabel->
+  "Out[573]=",ExpressionUUID->"f7faf7c4-90cf-464f-a97e-fab182e817ee"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"LaunchKernels", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.776538357317934*^9, 3.7765383594006624`*^9}, {
+  3.776538572448571*^9, 3.7765385726665716`*^9}},
+ CellLabel->
+  "In[575]:=",ExpressionUUID->"8c28e8ba-9361-480a-8eb9-515a35190e85"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "LaunchKernels","nodef",
+   "\"Some subkernels are already running. Not launching default kernels \
+again.\"",2,575,30,27912819845151095085,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.776538573856611*^9},
+ CellLabel->
+  "During evaluation of \
+In[575]:=",ExpressionUUID->"5abf433d-66d4-462f-8876-a2a656d48ee8"],
+
+Cell[BoxData["$Failed"], "Output",
+ CellChangeTimes->{3.7765385740232315`*^9},
+ CellLabel->
+  "Out[575]=",ExpressionUUID->"2c533f14-5aa8-4099-b84c-19d06a92b89d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CloseKernels", "[", "]"}]], "Input",
+ CellLabel->
+  "In[565]:=",ExpressionUUID->"e5731536-b5de-4f11-a0d6-43af2579e57c"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"1", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"2", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"3", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"4", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"5", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"6", ",", "\<\"local\"\>", ",", "\<\"<defunct>\"\>"}], "]"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.7765386015371037`*^9, 3.77660225898359*^9},
+ CellLabel->
+  "Out[565]=",ExpressionUUID->"d26b3053-19a3-4404-8ea3-011dbdf61539"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"LaunchKernels", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.7765386061261578`*^9, 3.7765386084216895`*^9}},
+ CellLabel->
+  "In[567]:=",ExpressionUUID->"8e8b1f01-7397-47df-89db-3d956074b52e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"9", ",", "\<\"local\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"10", ",", "\<\"local\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"11", ",", "\<\"local\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"12", ",", "\<\"local\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"13", ",", "\<\"local\"\>"}], "]"}], ",", 
+   RowBox[{"\<\"KernelObject\"\>", "[", 
+    RowBox[{"14", ",", "\<\"local\"\>"}], "]"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.7765386389402103`*^9, 3.776602312675257*^9},
+ CellLabel->
+  "Out[567]=",ExpressionUUID->"fc31a3a8-a4e1-4cf6-b243-62a246e6c77d"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1536, 781},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 171, 3, 67, "Section",ExpressionUUID->"14d4e8bd-8dff-4123-befb-4a1aa2f70974"],
+Cell[754, 27, 1232, 30, 162, "Input",ExpressionUUID->"3ba5d56d-caa3-4087-a0ca-da7e7bec3094"],
+Cell[1989, 59, 855, 22, 86, "Input",ExpressionUUID->"debf9506-7661-4c38-9feb-26c2af9afcbf"],
+Cell[CellGroupData[{
+Cell[2869, 85, 3399, 74, 238, "Input",ExpressionUUID->"3710f387-9bb6-4783-8247-f37ccc710c18"],
+Cell[6271, 161, 205, 4, 32, "Output",ExpressionUUID->"979c2449-dbec-487c-8aca-5f6f84301fd5"]
+}, Open  ]],
+Cell[6491, 168, 767, 19, 67, "Input",ExpressionUUID->"8f9a57fd-871e-48c2-a15d-145b8ea28fec"],
+Cell[7261, 189, 4452, 113, 352, "Input",ExpressionUUID->"776dda85-84d4-4293-8915-2ed1faad7436"],
+Cell[11716, 304, 677, 17, 28, "Input",ExpressionUUID->"a7b2f83f-6cbd-464b-86d5-26ddd87ec1db"],
+Cell[12396, 323, 6295, 124, 447, "Input",ExpressionUUID->"964c84fb-3a7f-4703-b3ea-0e28c17ddebf"],
+Cell[CellGroupData[{
+Cell[18716, 451, 1016, 25, 28, "Input",ExpressionUUID->"49d1745b-b487-4ea2-80ea-052c4fbe57ab"],
+Cell[19735, 478, 599, 14, 32, "Output",ExpressionUUID->"10812a48-47db-4a85-b608-9273c704f016"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20371, 497, 209, 4, 28, "Input",ExpressionUUID->"675b162a-3adb-4e45-88a4-bb3d3c661ce0"],
+Cell[20583, 503, 930, 22, 52, "Output",ExpressionUUID->"56742404-212f-42cb-9866-32b3122f7f63"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21550, 530, 210, 4, 28, "Input",ExpressionUUID->"4db64539-2915-44e8-b0f4-064a4ae6da64"],
+Cell[21763, 536, 756, 17, 32, "Output",ExpressionUUID->"dbda78e7-9ee1-4682-ab1b-6c539eff9629"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22556, 558, 895, 22, 28, "Input",ExpressionUUID->"30ca832e-df11-41fe-b857-910f72851adf"],
+Cell[23454, 582, 376, 8, 32, "Output",ExpressionUUID->"a74af4df-41dd-4eb6-9cb7-e4ad4bc0b62b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23867, 595, 225, 4, 28, "Input",ExpressionUUID->"09d3c6ae-71d6-4997-9927-8544f24b6313"],
+Cell[24095, 601, 177, 3, 32, "Output",ExpressionUUID->"42091476-d10e-49c4-be4a-76f5d05fac07"]
+}, Open  ]],
+Cell[24287, 607, 5605, 123, 637, "Input",ExpressionUUID->"c935270b-36fc-4029-9e67-f9e7641eb030"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29929, 735, 166, 3, 67, "Section",ExpressionUUID->"7a5c8347-5e24-4551-a863-9d5dce874a69"],
+Cell[CellGroupData[{
+Cell[30120, 742, 216, 4, 28, "Input",ExpressionUUID->"5afcc667-4d8d-4b41-b491-e6f8ef2af694"],
+Cell[30339, 748, 300, 7, 32, "Output",ExpressionUUID->"6e822f57-d215-4a83-aaa3-0e02869daeaf"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30676, 760, 256, 5, 28, "Input",ExpressionUUID->"b3ce5560-9576-4034-9333-b04dc9282905"],
+Cell[30935, 767, 426, 10, 22, "Print",ExpressionUUID->"764bf710-f218-4ecc-8088-bb12c94e5e7e"],
+Cell[31364, 779, 204, 4, 32, "Output",ExpressionUUID->"ad0f21a8-eef6-4639-9cbd-14de88615441"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31605, 788, 252, 5, 28, "Input",ExpressionUUID->"00d55033-2b03-48f8-8b82-dde05fc1422a"],
+Cell[31860, 795, 215, 5, 32, "Output",ExpressionUUID->"e9deb20a-7ed6-4c82-bc72-66ed597ddafa"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32112, 805, 230, 5, 28, "Input",ExpressionUUID->"d5ae7d68-5075-42f2-8c31-29e4f88361b4"],
+Cell[32345, 812, 397, 10, 22, "Print",ExpressionUUID->"52ede76b-aec4-41dc-98af-ff71b188f303"],
+Cell[32745, 824, 217, 5, 32, "Output",ExpressionUUID->"d47717a4-7996-4e7a-b06c-62531781b0dc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32999, 834, 229, 5, 28, "Input",ExpressionUUID->"f51e72f1-61b5-42f0-96f0-5a3323c26671"],
+Cell[CellGroupData[{
+Cell[33253, 843, 400, 10, 22, "Print",ExpressionUUID->"0269a801-836f-47cd-ae43-8bc683f9737d"],
+Cell[33656, 855, 400, 10, 22, "Print",ExpressionUUID->"48d289ef-818f-4853-8d1e-5d7ba239b885"]
+}, Open  ]],
+Cell[34071, 868, 409, 9, 32, "Output",ExpressionUUID->"52a6d84b-86f8-41e2-bc37-89e5b49ab4f4"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34517, 882, 332, 6, 28, "Input",ExpressionUUID->"3cb08dca-bb4b-4361-b181-bb5438a6ebf4"],
+Cell[34852, 890, 1461, 24, 90, "Output",ExpressionUUID->"c72f1a3a-65fb-4e17-9300-168b2d152ca7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36350, 919, 286, 6, 28, "Input",ExpressionUUID->"1ef8ecdf-9812-49f2-b7bd-d131061542e3"],
+Cell[36639, 927, 179, 3, 32, "Output",ExpressionUUID->"2cf8b6ab-c080-425b-97a3-8b9301f68a3d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36855, 935, 207, 4, 28, "Input",ExpressionUUID->"9e2b1e5e-14c0-430c-97ce-110705f17f35"],
+Cell[37065, 941, 158, 3, 32, "Output",ExpressionUUID->"ecb95ced-bddb-4336-9cb9-f5a42fefc8ee"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37260, 949, 262, 6, 28, "Input",ExpressionUUID->"fb6ec782-9e38-46d6-8e87-0d8839fe232a"],
+Cell[37525, 957, 209, 4, 32, "Output",ExpressionUUID->"dd09fd90-bcda-4c97-b68c-b6cf8e0c13e2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37771, 966, 289, 6, 28, "Input",ExpressionUUID->"99c8daaf-e214-4c42-8bd7-c42f315354e1"],
+Cell[38063, 974, 157, 3, 32, "Output",ExpressionUUID->"4161acfd-5689-4c98-a37e-40f204a51140"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38257, 982, 232, 5, 28, "Input",ExpressionUUID->"4f5eb7b9-cab2-484d-9789-a9b2b164eb3b"],
+Cell[38492, 989, 182, 4, 32, "Output",ExpressionUUID->"aab1ee20-f8e5-416a-b99e-460a9c732533"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38711, 998, 287, 6, 28, "Input",ExpressionUUID->"4c3abc50-4bd6-44c7-a0e7-96e33668fd23"],
+Cell[39001, 1006, 231, 4, 32, "Output",ExpressionUUID->"18181bb9-436f-4f59-aec4-d13271b5e52f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39269, 1015, 212, 4, 28, "Input",ExpressionUUID->"05010f97-40ee-4ca6-be05-e0ff3cdd0f27"],
+Cell[39484, 1021, 160, 3, 32, "Output",ExpressionUUID->"fe3181ad-4eb8-444f-b823-3d45e984c133"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39681, 1029, 209, 4, 28, "Input",ExpressionUUID->"8d95ac97-2a8d-431c-8de6-9a0040419203"],
+Cell[39893, 1035, 155, 3, 32, "Output",ExpressionUUID->"5949109a-6bee-4ebd-a55a-19b27f4c8b08"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40085, 1043, 589, 15, 28, "Input",ExpressionUUID->"e0744e17-036f-43ab-a53f-c4fa137a080e"],
+Cell[40677, 1060, 1808, 45, 241, "Output",ExpressionUUID->"3cb05623-486c-41b3-b749-faa32741cbd7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42522, 1110, 289, 6, 28, "Input",ExpressionUUID->"514b1c28-9ea4-49f2-9545-08eba3983654"],
+Cell[42814, 1118, 281, 5, 32, "Output",ExpressionUUID->"247ce2ba-97d3-48fe-9bcd-3ebd23f5f6d0"]
+}, Open  ]],
+Cell[43110, 1126, 264, 6, 28, "Input",ExpressionUUID->"f3e1ef3b-e25f-4872-b638-a828e41640a6"],
+Cell[43377, 1134, 266, 6, 28, "Input",ExpressionUUID->"8eadc016-01f3-455b-8de3-1e1c379e881c"],
+Cell[CellGroupData[{
+Cell[43668, 1144, 270, 6, 28, "Input",ExpressionUUID->"f0afecbd-e13b-4afa-93ff-b3e0908c7b5c"],
+Cell[43941, 1152, 322, 9, 32, "Output",ExpressionUUID->"f45d89d2-16a2-49d2-9836-a70c4c5a2193"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44312, 1167, 187, 3, 67, "Section",ExpressionUUID->"49095e4b-60df-4efa-a369-f533fb66da39"],
+Cell[44502, 1172, 179, 3, 28, "Input",ExpressionUUID->"a30392b4-af24-4943-bfd3-4b1c7c72833b"],
+Cell[CellGroupData[{
+Cell[44706, 1179, 192, 4, 28, "Input",ExpressionUUID->"eaa42369-8945-483f-a57e-9895eef8f3d9"],
+Cell[CellGroupData[{
+Cell[44923, 1187, 246, 6, 22, "Print",ExpressionUUID->"ab5f5d09-4142-41a9-8085-4e519ebfb367"],
+Cell[45172, 1195, 246, 6, 22, "Print",ExpressionUUID->"d2d865bf-2644-40ee-bb55-fc86f6db74a8"],
+Cell[45421, 1203, 248, 6, 22, "Print",ExpressionUUID->"f39614f1-8aef-42d1-b16c-a6a1a72e9e3e"],
+Cell[45672, 1211, 248, 6, 22, "Print",ExpressionUUID->"a4231425-29e3-4fc3-abcb-8eea0aa9a381"]
+}, Open  ]],
+Cell[45935, 1220, 4914, 117, 76, "Output",ExpressionUUID->"d0240f78-666e-4973-8fb6-0b15c286585e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50886, 1342, 216, 4, 28, "Input",ExpressionUUID->"993895b7-5a27-4946-be67-77825ef3bb37"],
+Cell[CellGroupData[{
+Cell[51127, 1350, 248, 6, 22, "Print",ExpressionUUID->"75c87773-aa2f-4e56-be44-0e2260822468"],
+Cell[51378, 1358, 248, 6, 22, "Print",ExpressionUUID->"cd512dfc-cab6-43a9-a94e-ceb5c295fd79"],
+Cell[51629, 1366, 248, 6, 22, "Print",ExpressionUUID->"12c0dcb2-a838-447e-b0e7-696b564c9244"],
+Cell[51880, 1374, 248, 6, 22, "Print",ExpressionUUID->"8bf55d1f-e514-421b-8ebe-e6345d079250"],
+Cell[52131, 1382, 248, 6, 22, "Print",ExpressionUUID->"33520a68-ac5d-4f30-a43c-36393214c8e3"]
+}, Open  ]],
+Cell[52394, 1391, 6957, 164, 76, "Output",ExpressionUUID->"2c22dd1a-fe07-4c8e-84ca-0d1414f32cda"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[59388, 1560, 192, 4, 28, "Input",ExpressionUUID->"1eded708-d365-4a40-9341-b79dd6371ed2"],
+Cell[CellGroupData[{
+Cell[59605, 1568, 246, 6, 22, "Print",ExpressionUUID->"143da382-e163-44b4-9d9f-44bc061f87b0"],
+Cell[59854, 1576, 248, 6, 22, "Print",ExpressionUUID->"1a45ac3a-788a-40b0-b350-e32bebe3ada2"],
+Cell[60105, 1584, 246, 6, 22, "Print",ExpressionUUID->"849111b2-5325-4b38-b2ea-c49571e79f79"],
+Cell[60354, 1592, 246, 6, 22, "Print",ExpressionUUID->"bb71f794-6de3-44b4-b740-0871d3d0409d"],
+Cell[60603, 1600, 248, 6, 22, "Print",ExpressionUUID->"d5015b5c-1ef6-40db-9519-0a103eab005e"],
+Cell[60854, 1608, 246, 6, 22, "Print",ExpressionUUID->"f1744053-1ea3-46ae-a8e4-2f9b2f9aa62e"]
+}, Open  ]],
+Cell[61115, 1617, 9092, 222, 94, "Output",ExpressionUUID->"e5190468-7d1c-4d4b-a9d5-9b94c06bd2dc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[70244, 1844, 192, 4, 28, "Input",ExpressionUUID->"3d49a36f-a1ac-42d5-a02f-846b5ec0fdf9"],
+Cell[CellGroupData[{
+Cell[70461, 1852, 246, 6, 22, "Print",ExpressionUUID->"0f916f41-c8ff-4be7-a957-c55759440571"],
+Cell[70710, 1860, 246, 6, 22, "Print",ExpressionUUID->"c914de5a-f648-4997-9474-e5566a5fddde"],
+Cell[70959, 1868, 247, 6, 22, "Print",ExpressionUUID->"1905c8e8-a2f2-4908-9e71-6e8847ffbb24"],
+Cell[71209, 1876, 249, 6, 22, "Print",ExpressionUUID->"7440303a-56eb-449a-a526-edef859734c7"],
+Cell[71461, 1884, 249, 6, 22, "Print",ExpressionUUID->"775c3685-14c2-457e-8cc7-79be6e6de0a4"],
+Cell[71713, 1892, 248, 6, 22, "Print",ExpressionUUID->"bac5eb65-f8ca-4476-ba92-4750dde14a9d"],
+Cell[71964, 1900, 248, 6, 22, "Print",ExpressionUUID->"0d91d1f1-45f7-4ff4-9999-5eda94628db6"]
+}, Open  ]],
+Cell[72227, 1909, 11826, 294, 112, "Output",ExpressionUUID->"7c3f62b3-2d01-4dfc-94ed-fcd7f76f9c70"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[84090, 2208, 192, 4, 28, "Input",ExpressionUUID->"00f76d2b-e08b-4018-9047-d5326d7210e5"],
+Cell[CellGroupData[{
+Cell[84307, 2216, 246, 6, 22, "Print",ExpressionUUID->"772b80f1-70af-42a6-abfd-d9c99858ec8f"],
+Cell[84556, 2224, 248, 6, 22, "Print",ExpressionUUID->"718ded4d-13ad-490d-94b3-37c2a4b67e71"],
+Cell[84807, 2232, 248, 6, 22, "Print",ExpressionUUID->"16126417-fabc-4add-ae30-2b93ffc04df8"],
+Cell[85058, 2240, 250, 6, 22, "Print",ExpressionUUID->"576dd1c5-c295-44fc-85d6-e6d84f31d088"],
+Cell[85311, 2248, 249, 6, 22, "Print",ExpressionUUID->"ccc09919-5f96-4cf7-aea1-2ef079f5af54"],
+Cell[85563, 2256, 248, 6, 22, "Print",ExpressionUUID->"8d5ef0d2-125c-4577-ab07-2c0106d1e994"],
+Cell[85814, 2264, 248, 6, 22, "Print",ExpressionUUID->"a62dc6ad-3223-40ff-847e-858cfacdb63d"],
+Cell[86065, 2272, 249, 6, 22, "Print",ExpressionUUID->"564767a2-c2db-4c25-9cba-033f2b72574d"]
+}, Open  ]],
+Cell[86329, 2281, 15876, 405, 130, "Output",ExpressionUUID->"91b18ecf-15be-4631-b48a-980436e29078"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[102242, 2691, 192, 4, 28, "Input",ExpressionUUID->"c774f6e4-4fa0-47dd-bc99-2519042ecc0e"],
+Cell[CellGroupData[{
+Cell[102459, 2699, 246, 6, 22, "Print",ExpressionUUID->"bdf5427d-60fa-4540-abc2-61c8b446f289"],
+Cell[102708, 2707, 246, 6, 22, "Print",ExpressionUUID->"c31e319c-c41c-40d3-94a8-2d27fbad276a"],
+Cell[102957, 2715, 250, 6, 22, "Print",ExpressionUUID->"0f3d09b2-695d-4191-b73d-3518eb2ec8de"],
+Cell[103210, 2723, 248, 6, 22, "Print",ExpressionUUID->"faad2224-285f-4dfa-87d0-13196568ad12"],
+Cell[103461, 2731, 247, 6, 22, "Print",ExpressionUUID->"0426cf5f-d9e3-42bf-8864-21f30849d1f6"],
+Cell[103711, 2739, 248, 6, 22, "Print",ExpressionUUID->"527e8699-e813-4b1c-b9dd-e2dcf589b3d0"],
+Cell[103962, 2747, 248, 6, 22, "Print",ExpressionUUID->"c14a4190-4bb2-4b0d-a43e-3a5ffbb49c01"],
+Cell[104213, 2755, 250, 6, 22, "Print",ExpressionUUID->"7cd627e6-64ac-4255-8c05-24e0f0c73c63"],
+Cell[104466, 2763, 248, 6, 22, "Print",ExpressionUUID->"10b6016a-0439-46d6-8112-94fa153dcfa9"]
+}, Open  ]],
+Cell[104729, 2772, 20859, 541, 166, "Output",ExpressionUUID->"b6976727-3675-41d0-8a0c-90f0e0e324dc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[125625, 3318, 217, 4, 28, "Input",ExpressionUUID->"bc397a4a-a5c0-40e5-83fb-25800beeb2ca"],
+Cell[CellGroupData[{
+Cell[125867, 3326, 248, 6, 22, "Print",ExpressionUUID->"5c33bc1d-42c8-46a3-952d-e5cdffdfe2d6"],
+Cell[126118, 3334, 248, 6, 22, "Print",ExpressionUUID->"31be4215-769c-45d2-9029-17c5af601059"],
+Cell[126369, 3342, 251, 6, 22, "Print",ExpressionUUID->"ac2a03b2-2c2d-48de-a4b4-f467800af80d"],
+Cell[126623, 3350, 249, 6, 22, "Print",ExpressionUUID->"3739e248-a902-44ef-95cd-e09c107b9726"],
+Cell[126875, 3358, 246, 6, 22, "Print",ExpressionUUID->"7c0709b5-94c5-43f5-b968-0f36ecdaafe3"],
+Cell[127124, 3366, 249, 6, 22, "Print",ExpressionUUID->"755a2264-f4b9-4718-b167-621defa41239"],
+Cell[127376, 3374, 246, 6, 22, "Print",ExpressionUUID->"62ae8db5-ec09-449a-8e61-ba1912526cef"],
+Cell[127625, 3382, 248, 6, 22, "Print",ExpressionUUID->"0dedf167-0ff7-4181-9fdb-2b908c6453a6"],
+Cell[127876, 3390, 249, 6, 22, "Print",ExpressionUUID->"0a656ac7-1694-4110-be4f-ac08fb3f8558"],
+Cell[128128, 3398, 248, 6, 22, "Print",ExpressionUUID->"2da1ea80-b455-4912-9c91-cb820c79b4c7"]
+}, Open  ]],
+Cell[128391, 3407, 28270, 748, 202, "Output",ExpressionUUID->"a8024f62-726a-4704-9d8b-ff4651c5bc80"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[156698, 4160, 216, 4, 28, "Input",ExpressionUUID->"89f33474-18c2-4e44-a7fc-3afe6a09e932"],
+Cell[156917, 4166, 353, 9, 25, "PrintTemporary",ExpressionUUID->"4b5902ea-b09a-45e7-9fd5-a0c3a94b9daa"]
+}, Open  ]],
+Cell[157285, 4178, 194, 4, 28, "Input",ExpressionUUID->"5738574b-bc13-499a-b6f0-d66561bc27c5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[157516, 4187, 158, 3, 67, "Section",ExpressionUUID->"91943c68-ddfd-4e7a-be68-4f01eb43ae9a"],
+Cell[CellGroupData[{
+Cell[157699, 4194, 189, 3, 28, "Input",ExpressionUUID->"80962468-a048-4335-8b43-e41aa390d468"],
+Cell[157891, 4199, 200, 4, 32, "Output",ExpressionUUID->"8f10979f-0d04-4fcb-9f44-a6a1703e534b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[158128, 4208, 213, 4, 28, "Input",ExpressionUUID->"99bb0d5a-d7dc-4e7e-b31c-7f6b557a3d76"],
+Cell[158344, 4214, 351, 9, 21, "Message",ExpressionUUID->"5de3668e-aba6-4713-b16a-2a6290a2838f"],
+Cell[158698, 4225, 153, 3, 32, "Output",ExpressionUUID->"f7faf7c4-90cf-464f-a97e-fab182e817ee"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[158888, 4233, 263, 5, 28, "Input",ExpressionUUID->"8c28e8ba-9361-480a-8eb9-515a35190e85"],
+Cell[159154, 4240, 369, 9, 21, "Message",ExpressionUUID->"5abf433d-66d4-462f-8876-a2a656d48ee8"],
+Cell[159526, 4251, 161, 3, 32, "Output",ExpressionUUID->"2c533f14-5aa8-4099-b84c-19d06a92b89d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[159724, 4259, 143, 3, 28, "Input",ExpressionUUID->"e5731536-b5de-4f11-a0d6-43af2579e57c"],
+Cell[159870, 4264, 930, 18, 52, "Output",ExpressionUUID->"d26b3053-19a3-4404-8ea3-011dbdf61539"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[160837, 4287, 214, 4, 28, "Input",ExpressionUUID->"8e8b1f01-7397-47df-89db-3d956074b52e"],
+Cell[161054, 4293, 777, 17, 32, "Output",ExpressionUUID->"fc31a3a8-a4e1-4cf6-b243-62a246e6c77d"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

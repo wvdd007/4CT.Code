@@ -1,0 +1,253 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9117,        244]
+NotebookOptionsPosition[      8539,        220]
+NotebookOutlinePosition[      8881,        235]
+CellTagsIndexPosition[      8838,        232]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Plantri", "[", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "nodeCount", ",", "vertex", ",", "g", ",", "next", ",", "result", ",", 
+      " ", "f", ",", " ", "header", ",", "m"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"result", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"f", "=", 
+      RowBox[{"OpenRead", "[", 
+       RowBox[{"\"\<d:\\\\triangulations_13.pl\>\"", ",", " ", 
+        RowBox[{"BinaryFormat", "\[Rule]", "True"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"header", "=", 
+      RowBox[{"BinaryRead", "[", 
+       RowBox[{"f", ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{"\"\<Byte\>\"", ",", 
+          RowBox[{"Range", "[", "15", "]"}]}], "]"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"m", "=", "1"}], ",", 
+         RowBox[{"m", "\[LessEqual]", "49566"}], ",", 
+         RowBox[{"m", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"nodeCount", "=", 
+           RowBox[{"BinaryRead", "[", 
+            RowBox[{"f", ",", "\"\<Byte\>\""}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"nodeCount", "\[Equal]", "EndOfFile"}], ",", 
+            RowBox[{
+             RowBox[{"Print", "[", "\"\<Jake\>\"", "]"}], ";", 
+             RowBox[{"Break", "[", "]"}]}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"g", "=", 
+           RowBox[{"Graph", "[", 
+            RowBox[{"{", "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"For", "[", 
+           RowBox[{
+            RowBox[{"vertex", "=", "1"}], ",", 
+            RowBox[{"vertex", "\[LessEqual]", "nodeCount"}], ",", 
+            RowBox[{"vertex", "++"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"g", "=", 
+             RowBox[{"VertexAdd", "[", 
+              RowBox[{"g", ",", "vertex"}], "]"}]}]}], "\[IndentingNewLine]", 
+           "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"For", "[", 
+           RowBox[{
+            RowBox[{"vertex", "=", "1"}], ",", 
+            RowBox[{"vertex", "\[LessEqual]", "nodeCount"}], ",", 
+            RowBox[{"vertex", "++"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"next", "=", 
+              RowBox[{"BinaryRead", "[", 
+               RowBox[{"f", ",", "\"\<Byte\>\""}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"While", "[", 
+              RowBox[{
+               RowBox[{"next", "\[NotEqual]", "0"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"Length", "[", 
+                    RowBox[{"EdgeList", "[", 
+                    RowBox[{"g", ",", 
+                    RowBox[{"vertex", "\[UndirectedEdge]", "next"}]}], "]"}], 
+                    "]"}], "==", "0"}], ",", "\[IndentingNewLine]", 
+                  RowBox[{"g", "=", 
+                   RowBox[{"EdgeAdd", "[", 
+                    RowBox[{"g", ",", 
+                    RowBox[{"vertex", "\[UndirectedEdge]", "next"}]}], 
+                    "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+                "\[IndentingNewLine]", 
+                RowBox[{"next", "=", 
+                 RowBox[{"BinaryRead", "[", 
+                  RowBox[{"f", ",", "\"\<Byte\>\""}], "]"}]}], ";"}]}], 
+              "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+           "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"result", ",", "g"}], "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", "m"}], 
+      "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Close", "[", "f", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "result", "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.651071049266687*^9, 3.6510713821372957`*^9}, {
+   3.6510714423699617`*^9, 3.651071502214445*^9}, {3.6510715513498974`*^9, 
+   3.65107155643998*^9}, {3.651071587850864*^9, 3.6510716968189125`*^9}, 
+   3.6510717379673667`*^9, {3.651072331402311*^9, 3.6510723915197997`*^9}, {
+   3.6510726098094645`*^9, 3.6510726112594004`*^9}, {3.6510728661844788`*^9, 
+   3.6510728788845205`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"all", "=", 
+   RowBox[{"Plantri", "[", "]"}]}], ";", 
+  RowBox[{"Length", "[", "all", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6510712094944534`*^9, 3.65107121265645*^9}, {
+  3.6510724030121226`*^9, 3.651072411801215*^9}}],
+
+Cell[BoxData["49566"], "Output",
+ CellChangeTimes->{{3.6510712137563543`*^9, 3.651071235932352*^9}, 
+   3.651071328144761*^9, {3.6510715073950467`*^9, 3.651071528397665*^9}, 
+   3.651071562138653*^9, 3.651071593056825*^9, 3.651071636041823*^9, {
+   3.6510716755987697`*^9, 3.6510717012679214`*^9}, 3.6510723234738483`*^9, {
+   3.6510723987410593`*^9, 3.651072444633483*^9}, 3.6510726314852057`*^9, 
+   3.6510731577961397`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Doit", "[", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"i", ",", "j", ",", " ", "g", ",", "h"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Monitor", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", 
+        RowBox[{"i", "<", 
+         RowBox[{"Length", "[", "all", "]"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"g", "=", 
+          RowBox[{"all", "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"For", "[", 
+          RowBox[{
+           RowBox[{"j", "=", 
+            RowBox[{"i", "+", "1"}]}], ",", 
+           RowBox[{"j", "<=", 
+            RowBox[{"Length", "[", "all", "]"}]}], ",", 
+           RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"h", "=", 
+             RowBox[{"all", "[", 
+              RowBox[{"[", "j", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"IsomorphicGraphQ", "[", 
+               RowBox[{"g", ",", "h"}], "]"}], ",", " ", 
+              RowBox[{
+               RowBox[{"Print", "[", 
+                RowBox[{"{", 
+                 RowBox[{"g", ",", "h"}], "}"}], "]"}], ";", 
+               RowBox[{"Break", "[", "]"}]}]}], "]"}]}]}], 
+          "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}], ",",
+       "\[IndentingNewLine]", 
+      RowBox[{"i", "\[UndirectedEdge]", "j"}]}], "\[IndentingNewLine]", 
+     "]"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6510724479306526`*^9, 3.651072601001354*^9}, {
+  3.6510726509746265`*^9, 3.651072780421217*^9}, {3.6510728193465323`*^9, 
+  3.6510728390277166`*^9}, {3.6510729119495244`*^9, 3.6510729183510933`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Doit", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.651072623775957*^9, 3.651072627323704*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "all", "]"}]], "Input"],
+
+Cell[BoxData["49566"], "Output",
+ CellChangeTimes->{3.6510727192849455`*^9, 3.6510731674172287`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mine", "=", 
+   RowBox[{"Monitor", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"ReadGraph", "[", 
+        RowBox[{"13", ",", "k"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", 
+         RowBox[{"Range", "[", "49555", "]"}]}], "}"}]}], "]"}], ",", "k"}], 
+    "]"}]}], ";", 
+  RowBox[{"Length", "[", "mine", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6510783275363936`*^9, 3.651078382709654*^9}}]
+},
+WindowSize->{1536, 781},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"10.2 for Microsoft Windows (64-bit) (July 7, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 4531, 102, 552, "Input"],
+Cell[CellGroupData[{
+Cell[5114, 126, 257, 6, 31, "Input"],
+Cell[5374, 134, 426, 6, 31, "Output"]
+}, Open  ]],
+Cell[5815, 143, 1918, 46, 252, "Input"],
+Cell[7736, 191, 118, 2, 31, "Input"],
+Cell[CellGroupData[{
+Cell[7879, 197, 61, 1, 31, "Input"],
+Cell[7943, 200, 100, 1, 31, "Output"]
+}, Open  ]],
+Cell[8058, 204, 477, 14, 31, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
